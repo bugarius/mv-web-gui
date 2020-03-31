@@ -8,7 +8,7 @@ const IngredientFormContainer = ({match: {params: {ingredientId}}, history, rend
 
     const {ingredient, actions: {setIngredient}} = useContext(IngredientContext);
     const {principal} = useContext(AuthContext);
-    const {setSchema, setCurrentSchema} = useValidationSchemaContext();
+    // const {setSchema, setCurrentSchema} = useValidationSchemaContext();
 
     const [loading, setLoading] = useState(ingredientId);
 
@@ -22,7 +22,7 @@ const IngredientFormContainer = ({match: {params: {ingredientId}}, history, rend
         IngredientService.get(ingredientId)
                 .then(res => {
                     setIngredient(res);
-                    setCurrentSchema({});
+                    // setCurrentSchema({});
                     setLoading(false);
                 })
                 .catch(res => {
@@ -30,7 +30,7 @@ const IngredientFormContainer = ({match: {params: {ingredientId}}, history, rend
                     error || history.push(`/error/${res.status}`);
                 });
         return setIngredient(null);
-    }, []);
+    }, [history, knownErrors, ingredientId, setIngredient]);
 
     const onSubmit = (e) => {
         e.preventDefault();
