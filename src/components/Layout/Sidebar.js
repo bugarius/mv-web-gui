@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withNamespaces, Trans } from 'react-i18next';
-import { Link, withRouter } from 'react-router-dom';
-import { Collapse, Badge } from 'reactstrap';
+import {Trans} from 'react-i18next';
+import {Link, withRouter} from 'react-router-dom';
+import {Badge, Collapse} from 'reactstrap';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as actions from '../../store/actions/actions';
 
 import SidebarRun from './Sidebar.run';

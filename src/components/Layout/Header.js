@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, ListGroup, ListGroupItem } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as actions from '../../store/actions/actions';
 
 import ToggleFullscreen from '../Common/ToggleFullscreen';
@@ -68,19 +68,19 @@ class Header extends Component {
                     <ul className="navbar-nav mr-auto flex-row">
                         <li className="nav-item">
                             { /* Button used to collapse the left sidebar. Only visible on tablet and desktops */ }
-                            <a href="" className="nav-link d-none d-md-block d-lg-block d-xl-block" onClick={ this.toggleCollapsed }>
+                            <div className="nav-link d-none d-md-block d-lg-block d-xl-block" onClick={ this.toggleCollapsed }>
                                 <em className="fas fa-bars"></em>
-                            </a>
+                            </div>
                             { /* Button to show/hide the sidebar on mobile. Visible on mobile only. */ }
-                            <a href=""  className="nav-link sidebar-toggle d-md-none" onClick={ this.toggleAside }>
+                            <div  className="nav-link sidebar-toggle d-md-none" onClick={ this.toggleAside }>
                                 <em className="fas fa-bars"></em>
-                            </a>
+                            </div>
                         </li>
                         { /* START User avatar toggle */ }
                         <li className="nav-item d-none d-md-block">
-                            <a  className="nav-link" onClick={ this.toggleUserblock }>
+                            <div  className="nav-link" onClick={ this.toggleUserblock }>
                                 <em className="icon-user"></em>
-                            </a>
+                            </div>
                         </li>
                         { /* END User avatar toggle */ }
                         { /* START lock screen */ }
@@ -96,9 +96,9 @@ class Header extends Component {
                     <ul className="navbar-nav flex-row">
                         { /* Search icon */ }
                         <li className="nav-item">
-                            <a className="nav-link" href="" data-search-open="">
+                            <div className="nav-link" data-search-open="">
                                 <em className="icon-magnifier"></em>
-                            </a>
+                            </div>
                         </li>
                         { /* Fullscreen (only desktops) */ }
                         <li className="nav-item d-none d-md-block">
@@ -114,47 +114,47 @@ class Header extends Component {
                             <DropdownMenu right className="dropdown-menu-right animated flipInX">
                                 <DropdownItem>
                                     { /* START list group */ }
-                                    <ListGroup>
-                                       <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>
-                                          <div className="media">
-                                             <div className="align-self-start mr-2">
-                                                <em className="fab fa-twitter fa-2x text-info"></em>
-                                             </div>
-                                             <div className="media-body">
-                                                <p className="m-0">New followers</p>
-                                                <p className="m-0 text-muted text-sm">1 new follower</p>
-                                             </div>
-                                          </div>
-                                       </ListGroupItem>
-                                       <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>
-                                          <div className="media">
-                                             <div className="align-self-start mr-2">
-                                                <em className="fa fa-envelope fa-2x text-warning"></em>
-                                             </div>
-                                             <div className="media-body">
-                                                <p className="m-0">New e-mails</p>
-                                                <p className="m-0 text-muted text-sm">You have 10 new emails</p>
-                                             </div>
-                                          </div>
-                                       </ListGroupItem>
-                                       <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>
-                                          <div className="media">
-                                             <div className="align-self-start mr-2">
-                                                <em className="fa fa-tasks fa-2x text-success"></em>
-                                             </div>
-                                             <div className="media-body">
-                                                <p className="m-0">Pending Tasks</p>
-                                                <p className="m-0 text-muted text-sm">11 pending task</p>
-                                             </div>
-                                          </div>
-                                       </ListGroupItem>
-                                       <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>
-                                          <span className="d-flex align-items-center">
-                                             <span className="text-sm">More notifications</span>
-                                             <span className="badge badge-danger ml-auto">14</span>
-                                          </span>
-                                       </ListGroupItem>
-                                    </ListGroup>
+                                    {/*<ListGroup>*/}
+                                    {/*   <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>*/}
+                                    {/*      <div className="media">*/}
+                                    {/*         <div className="align-self-start mr-2">*/}
+                                    {/*            <em className="fab fa-twitter fa-2x text-info"></em>*/}
+                                    {/*         </div>*/}
+                                    {/*         <div className="media-body">*/}
+                                    {/*            <p className="m-0">New followers</p>*/}
+                                    {/*            <p className="m-0 text-muted text-sm">1 new follower</p>*/}
+                                    {/*         </div>*/}
+                                    {/*      </div>*/}
+                                    {/*   </ListGroupItem>*/}
+                                    {/*   <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>*/}
+                                    {/*      <div className="media">*/}
+                                    {/*         <div className="align-self-start mr-2">*/}
+                                    {/*            <em className="fa fa-envelope fa-2x text-warning"></em>*/}
+                                    {/*         </div>*/}
+                                    {/*         <div className="media-body">*/}
+                                    {/*            <p className="m-0">New e-mails</p>*/}
+                                    {/*            <p className="m-0 text-muted text-sm">You have 10 new emails</p>*/}
+                                    {/*         </div>*/}
+                                    {/*      </div>*/}
+                                    {/*   </ListGroupItem>*/}
+                                    {/*   <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>*/}
+                                    {/*      <div className="media">*/}
+                                    {/*         <div className="align-self-start mr-2">*/}
+                                    {/*            <em className="fa fa-tasks fa-2x text-success"></em>*/}
+                                    {/*         </div>*/}
+                                    {/*         <div className="media-body">*/}
+                                    {/*            <p className="m-0">Pending Tasks</p>*/}
+                                    {/*            <p className="m-0 text-muted text-sm">11 pending task</p>*/}
+                                    {/*         </div>*/}
+                                    {/*      </div>*/}
+                                    {/*   </ListGroupItem>*/}
+                                    {/*   <ListGroupItem action tag="a" href="" onClick={e => e.preventDefault()}>*/}
+                                    {/*      <span className="d-flex align-items-center">*/}
+                                    {/*         <span className="text-sm">More notifications</span>*/}
+                                    {/*         <span className="badge badge-danger ml-auto">14</span>*/}
+                                    {/*      </span>*/}
+                                    {/*   </ListGroupItem>*/}
+                                    {/*</ListGroup>*/}
                                     { /* END list group */ }
                                 </DropdownItem>
                             </DropdownMenu>
@@ -163,9 +163,9 @@ class Header extends Component {
                         { /* END Alert menu */ }
                         { /* START Offsidebar button */ }
                         <li className="nav-item">
-                            <a className="nav-link" href="" onClick={this.toggleOffsidebar}>
+                            <div className="nav-link" onClick={this.toggleOffsidebar}>
                                 <em className="icon-notebook"></em>
-                            </a>
+                            </div>
                         </li>
                         { /* END Offsidebar menu */ }
                     </ul>

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {AuthContext} from "../../platform/AuthContext";
 
 const EntityListReceiver = ({history, render, service, listConverter, entityName}) => {
@@ -28,6 +28,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
                 })
                 .catch(handleError);
         return window.removeEventListener("resize", () => updateDimensions());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const updateDimensions = () => {

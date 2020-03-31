@@ -1,5 +1,5 @@
-import withRouter from "react-router/withRouter";
 import React, {Component} from 'react';
+import {withRouter} from "react-router-dom";
 
 class ListActions extends Component {
 

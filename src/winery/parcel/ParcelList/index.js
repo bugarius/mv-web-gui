@@ -1,7 +1,7 @@
 import React from "react";
 import EntityListReceiver from "../../common/EntityListReceiver";
 import SimpleParcelList from "./SimpleParcelList";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import ParcelService from "../service/ParcelService";
 import {FromApiConverter} from "../../../services/Converters";
 

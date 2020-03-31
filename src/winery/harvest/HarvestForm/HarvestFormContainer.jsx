@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {AuthContext} from "../../../platform/AuthContext";
-import {HarvestValidator, ParcelValidator} from "../../../services/Validators";
+import {HarvestValidator} from "../../../services/Validators";
 import {HarvestContext} from "../HarvestContext";
 import HarvestService from "../service/HarvestService";
 
@@ -10,7 +10,6 @@ const HarvestFormContainer = ({match: {params: {harvestId}}, history, render}) =
     const {principal} = useContext(AuthContext);
 
     const [loading, setLoading] = useState(harvestId);
-    const [error, setError] = useState(!harvestId && 'NoSuchParcelError');
     const [showErrors, setShowErrors] = useState(false);
 
     const updateGrapevineInHarvest = (value) => {
@@ -23,14 +22,13 @@ const HarvestFormContainer = ({match: {params: {harvestId}}, history, render}) =
                 .then(res => {
                     setHarvest(res);
                     setLoading(false);
-                    setError(!res && 'NoSuchParcelError')
                 })
                 .catch(res => {
                     const error = knownErrors[res.status];
-                    error && setError(error);
                     error || history.push(`/error/${res.status}`);
                 });
         return setHarvest(undefined);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [harvestId]);
 
     const knownErrors = {
@@ -39,8 +37,7 @@ const HarvestFormContainer = ({match: {params: {harvestId}}, history, render}) =
         403: 'ForbiddenError',
     };
 
-    const onSubmit = (e) =>
-    {
+    const onSubmit = (e) => {
         e.preventDefault();
         console.log('HarvestForm:onSubmit', e, harvest);
         setLoading(true);
@@ -53,7 +50,6 @@ const HarvestFormContainer = ({match: {params: {harvestId}}, history, render}) =
                     .then(handleSubmit)
                     .catch(res => {
                         const error = knownErrors[res.status];
-                        error && setError(error);
                         error || history.push(`/error/${res.status}`);
                     });
         }
@@ -68,7 +64,6 @@ const HarvestFormContainer = ({match: {params: {harvestId}}, history, render}) =
         setHarvest(harvest);
 
         setLoading(false);
-        setError(!harvest && 'NoSuchHarvestError');
         history.push(`${principal.realms[0]}/harvest/all`);
     };
 

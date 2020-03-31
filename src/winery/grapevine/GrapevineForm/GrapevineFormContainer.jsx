@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {GrapevineContext} from "../GrapevineContext";
 import {AuthContext} from "../../../platform/AuthContext";
 import {GrapevineValidator} from "../../../services/Validators";
@@ -10,7 +10,7 @@ const GrapevineFormContainer = ({match: {params: {grapevineId}}, history, render
     const {principal} = useContext(AuthContext);
 
     const [loading, setLoading] = useState(grapevineId);
-    const [error, setError] = useState(!grapevineId && 'NoSuchGrapevineError');
+    // eslint-disable-next-line no-unused-vars
     const [showErrors, setShowErrors] = useState(false);
 
     const knownErrors = {
@@ -29,21 +29,19 @@ const GrapevineFormContainer = ({match: {params: {grapevineId}}, history, render
                 .then(res => {
                     setGrapevine(res);
                     setLoading(false);
-                    setError(!res && 'NoSuchGrapevineError')
                 })
                 .catch(res => {
                     const error = knownErrors[res.status];
-                    error && setError(error);
                     error || history.push(`/error/${res.status}`);
                 });
         return setGrapevine(undefined);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [grapevineId]);
 
     const onSubmit = (e) => {
         e.preventDefault();
         console.log('GrapevineFormContainer:onSubmit', e, grapevine);
         setLoading(true);
-        setError(!GrapevineValidator.isValid(grapevine));
 
         if (GrapevineValidator.isValid(grapevine))
         {
@@ -52,7 +50,6 @@ const GrapevineFormContainer = ({match: {params: {grapevineId}}, history, render
                     .then(handleSubmit)
                     .catch(res => {
                         const error = knownErrors[res.status];
-                        error && setError(error);
                         error || history.push(`/error/${res.status}`);
                     });
         }
@@ -66,7 +63,6 @@ const GrapevineFormContainer = ({match: {params: {grapevineId}}, history, render
         console.log('GrapevineFormContainer::handleSubmit', grapevine);
         setGrapevine(grapevine);
         setLoading(false);
-        setError(!grapevine && 'NoSuchGrapevineError');
         history.push(`${principal.realms[0]}/grapevine/all`);
     };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import EntityListReceiver from "../../common/EntityListReceiver";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import {FromApiConverter} from "../../../services/Converters";
 import HarvestService from "../service/HarvestService";
 import SimpleHarvestList from "./SimpleHarvestList";

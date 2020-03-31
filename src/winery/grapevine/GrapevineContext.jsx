@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
 export const GrapevineContext = React.createContext();
 
@@ -6,9 +6,9 @@ const GrapevineProvider = ({children}) => {
 
   const [grapevine, setGrapevine] = useState(undefined);
 
-  const updateGrapevine = (key, value) => {
+  const updateGrapevine = useCallback((key, value) => {
     setGrapevine(parcel => ({...parcel, [key]: value}));
-  };
+  }, []);
 
   const providerValue = useMemo(() => ({grapevine, setGrapevine, updateGrapevine}), [grapevine, setGrapevine, updateGrapevine]);
 

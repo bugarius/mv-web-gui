@@ -4,7 +4,7 @@ import BoxService from "./service/BoxService";
 import {FromApiConverter} from "../../services/Converters";
 import {Trans} from "react-i18next";
 import {AuthContext} from "../../platform/AuthContext";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import Pagination from "../../common/pagination/Pagination";
 
 class BoxList extends Component {

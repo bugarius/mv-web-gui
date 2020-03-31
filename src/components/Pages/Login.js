@@ -87,9 +87,9 @@ class Login extends Component {
             <div className="block-center mt-4 wd-xl">
                 <div className="card card-flat">
                     <div className="card-header text-center bg-dark">
-                        <a href="">
+                        <div>
                             <img className="block-center rounded" src="img/logo.png" alt="Logo"/>
-                        </a>
+                        </div>
                     </div>
                     <div className="card-body">
                         <p className="text-center py-2">ZALOGUJ SIĘ ABY KONTYNUOWAĆ</p>

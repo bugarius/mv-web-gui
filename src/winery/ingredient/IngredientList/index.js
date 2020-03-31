@@ -1,6 +1,6 @@
 import React from "react";
 import EntityListReceiver from "../../common/EntityListReceiver";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import {FromApiConverter} from "../../../services/Converters";
 import SimpleIngredientList from "./SimpleIngredientList";
 import IngredientService from "../service/IngredientService";

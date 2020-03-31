@@ -1,6 +1,6 @@
 import React from "react";
 import EntityListReceiver from "../../common/EntityListReceiver";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import {FromApiConverter} from "../../../services/Converters";
 import SimpleGrapevineList from "./SimpleGrapevineList";
 import GrapevineService from "../service/GrapevineService";

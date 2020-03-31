@@ -10,7 +10,7 @@ class SidebarUserBlock extends Component {
         showUserBlock: false
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         if (newProps.showUserBlock !== this.props.showUserBlock) {
             this.setState({ showUserBlock: newProps.showUserBlock })
         }

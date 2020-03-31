@@ -17,7 +17,7 @@ const transformResponse = (res) => {
 const IngredientApi = {
 
   getList: (page, wineId) => {
-    const url = apiUrl + "/list" + "?p=" + page;
+    const url = apiUrl + "/list?p=" + page;
     console.log("IngredientApi::getList", url, wineId);
 
     return fetch(url, {

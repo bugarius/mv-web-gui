@@ -1,6 +1,6 @@
 import React from "react";
 import ParcelFormContainer from "./ParcelFromContainer";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import SimpleParcelForm from "./SimpleParcelForm";
 
 const ParcelForm = (props) => {

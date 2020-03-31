@@ -8,7 +8,7 @@ class PageNavigation extends Component {
         return(
                 <li className={"paginate_button page-item " + (direction === "left" ? "previous " : "next ") +
                 ((page === disableAtPage || pagination.totalPages < 2) ? " disabled" : "")}>
-                    <a onClick={onClick} className="page-link"><em className={"fa fa-caret-" + direction}/></a>
+                    <button onClick={onClick} className="page-link"><em className={"fa fa-caret-" + direction}/></button>
                 </li>
         )
     }

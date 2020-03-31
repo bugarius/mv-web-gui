@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import ParcelService from "../parcel/service/ParcelService";
 
 const ParcelsReceiver = ({history, render}) => {
@@ -17,6 +17,7 @@ const ParcelsReceiver = ({history, render}) => {
                 .catch(res => {
                     history.push(`/error/${res.status}`);
                 });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return render(parcels, loading);

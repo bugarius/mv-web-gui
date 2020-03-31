@@ -42,29 +42,31 @@ class Harvests extends Component {
     render()
     {
         const {value: selected, onChange, name, label, optional, disabled} = this.props;
-        const {showErrors, harvests} = this.state;
+        const {harvests} = this.state;
 
         const value = selected && selected.id ?
                 {value: selected.id, label: (selected.label || false ? selected.label : selected.name)}
                 : {value: "", label: "Wybierz"};
 
         return (
-                <><fieldset>
-                    <FormGroup row>
-                        <label className="col-md-2 col-form-label" htmlFor={name}>{label}
-                            <span className="text-danger" style={{display: optional === true ? 'none' : ''}}> *</span>
-                        </label>
-                        <div className="col-md-10">
-                            <Select name={name}
-                                    options={harvests}
-                                    onChange={onChange}
-                                    value={value || ""}
-                                    isDisabled={disabled}
-                                    placeholder={"Wybierz"}/>
-                            <span className="invalid-feedback">Field is required</span>
-                        </div>
-                    </FormGroup>
-                </fieldset>
+                <>
+                    <fieldset>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label" htmlFor={name}>{label}
+                                <span className="text-danger"
+                                      style={{display: optional === true ? 'none' : ''}}> *</span>
+                            </label>
+                            <div className="col-md-10">
+                                <Select name={name}
+                                        options={harvests}
+                                        onChange={onChange}
+                                        value={value || ""}
+                                        isDisabled={disabled}
+                                        placeholder={"Wybierz"}/>
+                                <span className="invalid-feedback">Field is required</span>
+                            </div>
+                        </FormGroup>
+                    </fieldset>
                 </>
         )
     }

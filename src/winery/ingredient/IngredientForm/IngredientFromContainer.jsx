@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {IngredientContext} from "../IngredientContext";
 import {AuthContext} from "../../../platform/AuthContext";
 import IngredientService from "../service/IngredientService";
-import {useValidationSchemaContext} from "../../validation/ValidationSchemaContext";
 
 const IngredientFormContainer = ({match: {params: {ingredientId}}, history, render}) => {
 
@@ -30,7 +29,8 @@ const IngredientFormContainer = ({match: {params: {ingredientId}}, history, rend
                     error || history.push(`/error/${res.status}`);
                 });
         return setIngredient(null);
-    }, [history, knownErrors, ingredientId, setIngredient]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ingredientId]);
 
     const onSubmit = (e) => {
         e.preventDefault();

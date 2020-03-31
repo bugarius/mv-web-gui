@@ -255,9 +255,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/05.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Juan Sims</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -270,9 +270,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/06.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Maureen Jenkins</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -285,9 +285,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/07.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Billie Dunn</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -300,9 +300,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/08.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Tomothy Roberts</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -320,9 +320,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/09.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Lawrence Robinson</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -335,9 +335,9 @@ class Offsidebar extends Component {
                                         <div className="media">
                                             <img className="align-self-center mr-3 rounded-circle thumb48" src="img/user/10.jpg" alt="User avatar" />
                                             <div className="media-body text-truncate">
-                                                <a href="">
+                                                <div>
                                                     <strong>Tyrone Owens</strong>
-                                                </a>
+                                                </div>
                                                 <br/>
                                                 <small className="text-muted">Designeer</small>
                                             </div>
@@ -349,9 +349,9 @@ class Offsidebar extends Component {
                                 </div>
                                 <div className="px-3 py-4 text-center">
                                     { /* Optional link to list more users */ }
-                                    <a className="btn btn-purple btn-sm" href="" title="See more contacts">
+                                    <button className="btn btn-purple btn-sm" title="See more contacts">
                                         <strong>Load more..</strong>
-                                    </a>
+                                    </button>
                                 </div>
                                 { /* Extra items */ }
                                 <div className="px-3 py-2">

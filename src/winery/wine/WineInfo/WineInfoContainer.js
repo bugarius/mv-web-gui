@@ -22,12 +22,14 @@ const WineInfo = ({match: {params: {wineId}}, history, render}) => {
                     console.log(res);
                 });
         return setWine({});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [wineId]);
 
     const edit = () => {
         history.push(`${principal.realms[0]}/wine/${wineId}/`);
     };
 
+    // eslint-disable-next-line no-unused-vars
     const onSubmit = (e) => {
         e.preventDefault();
         console.log('WineInfo:onSubmit', e, wine);

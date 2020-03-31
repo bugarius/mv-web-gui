@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import GrapevineService from "../grapevine/service/GrapevineService";
 
 const GrapevinesReceiver = ({history, render}) => {
@@ -17,6 +17,7 @@ const GrapevinesReceiver = ({history, render}) => {
                 .catch(res => {
                     history.push(`/error/${res.status}`);
                 });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return render(grapevines, loading);

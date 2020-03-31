@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {ParcelContext} from "../ParcelContext";
 import {AuthContext} from "../../../platform/AuthContext";
 import {ParcelValidator} from "../../../services/Validators";
@@ -10,7 +10,6 @@ const ParcelFormContainer = ({match: {params: {parcelId}}, history, render}) => 
     const {principal} = useContext(AuthContext);
 
     const [loading, setLoading] = useState(parcelId);
-    const [error, setError] = useState(!parcelId && 'NoSuchParcelError');
     const [showErrors, setShowErrors] = useState(false);
 
     const knownErrors = {
@@ -24,14 +23,13 @@ const ParcelFormContainer = ({match: {params: {parcelId}}, history, render}) => 
                 .then(res => {
                     setParcel(res);
                     setLoading(false);
-                    setError(!res && 'NoSuchParcelError')
                 })
                 .catch(res => {
                     const error = knownErrors[res.status];
-                    error && setError(error);
                     error || history.push(`/error/${res.status}`);
                 });
         return setParcel(undefined);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [parcelId]);
 
     const onSubmit = (e) => {
@@ -47,7 +45,6 @@ const ParcelFormContainer = ({match: {params: {parcelId}}, history, render}) => 
                     .then(handleSubmit)
                     .catch(res => {
                         const error = knownErrors[res.status];
-                        error && setError(error);
                         error || history.push(`/error/${res.status}`);
                     });
         }
@@ -61,7 +58,6 @@ const ParcelFormContainer = ({match: {params: {parcelId}}, history, render}) => 
         console.log('ParcelForm::handleSubmit', parcel);
         setParcel(parcel);
         setLoading(false);
-        setError(!parcel && 'NoSuchParcelError');
         history.push(`${principal.realms[0]}/parcel/all`);
     };
 

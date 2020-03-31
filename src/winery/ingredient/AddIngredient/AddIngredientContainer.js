@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useReducer, useState} from 'react';
+import {useCallback, useContext, useEffect, useMemo, useReducer, useState} from 'react';
 import IngredientService from "../service/IngredientService";
 import WineService from "../../wine/service/WineService";
 import {WineContext} from "../../wine/WineContext";
@@ -54,13 +54,14 @@ const AddIngredientContainer = ({setSelectedIngredient, render}) => {
                 .catch(res => {
                     console.log(res);
                 });
-    }, [type]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    const handleChange = (name, value) => {
+    const handleChange = useCallback((name, value) => {
         dispatch({type: name, value});
-    };
+    }, []);
 
-    const onSubmit = (e) => {
+    const onSubmit = useCallback((e) => {
         e.preventDefault();
         setLoading(true);
         WineService.putIngredient(wine.id, state)
@@ -74,14 +75,14 @@ const AddIngredientContainer = ({setSelectedIngredient, render}) => {
                     console.log(res);
                     setLoading(false);
                 });
-    };
+    }, [setLoading, wine, state, key, setWine]);
 
-    const setIngredient = (selected) => {
+    const setIngredient = useCallback((selected) => {
         handleChange('ingredientId', selected.value);
         setSelectedIngredient(selected.selected);
-    };
+    }, [handleChange, setSelectedIngredient]);
 
-    const setType = (selected) => {
+    const setType = useCallback((selected) => {
         handleChange('type', selected.value);
         setSelectedIngredient(selected.selected);
         if (ingredientId)
@@ -90,9 +91,9 @@ const AddIngredientContainer = ({setSelectedIngredient, render}) => {
             setSelectedIngredient(null);
             setIngredientKey(ingredientKey + 1);
         }
-    };
+    }, [handleChange, setSelectedIngredient, setIngredientKey, ingredientKey, ingredientId]);
 
-    const options = useMemo(() => ({types, ingredients}), [types, ingredients]);
+    const options = useMemo(() => ({types, ingredients}), [ingredients]);
     const keys = useMemo(() => ({ingredientKey, key}), [ingredientKey, key]);
     const actions = useMemo(() => ({
         handleChange,
