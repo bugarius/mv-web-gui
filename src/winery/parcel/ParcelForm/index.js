@@ -1,20 +1,15 @@
 import React from "react";
 import ParcelFormContainer from "./ParcelFromContainer";
-import {withRouter} from "react-router-dom";
 import SimpleParcelForm from "./SimpleParcelForm";
 
 const ParcelForm = (props) => {
 
     return (
-            <ParcelFormContainer {...props} render={(parcel, loading, onChange, onSubmit, showErrors) => (
-                    <SimpleParcelForm parcel={parcel}
-                                      loading={loading}
-                                      onChange={onChange}
-                                      onSubmit={onSubmit}
-                                      showErrors={showErrors}
+            <ParcelFormContainer {...props} render={(onSubmit) => (
+                    <SimpleParcelForm onSubmit={onSubmit}
                     />
             )}/>
     )
 };
 
-export default withRouter(ParcelForm);
+export default ParcelForm;

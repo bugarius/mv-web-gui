@@ -1,5 +1,5 @@
-import {useContext, useEffect, useState} from 'react';
-import {AuthContext} from "../../platform/AuthContext";
+import {useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
 
 const EntityListReceiver = ({history, render, service, listConverter, entityName}) => {
 
@@ -7,6 +7,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     const [pagination, setPagination] = useState({});
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
     const getLimit = () => {
         const limit = window.innerWidth / 150 - 2.5;
@@ -15,8 +16,6 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     };
 
     const [limit, setLimit] = useState(getLimit());
-
-    const {principal} = useContext(AuthContext);
 
     useEffect(() => {
         window.addEventListener("resize", () => updateDimensions());
@@ -62,11 +61,11 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     };
 
     const proceed = (entity) => {
-        history.push(`${principal.realms[0]}/${entityName}/${entity.id}/`);
+        history.push(`/mv/${entityName}/${entity.id}/`, {from: location.pathname});
     };
 
     const info = (entity) => {
-        history.push(`${principal.realms[0]}/${entityName}/${entity.id}/info`);
+        history.push(`/mv/${entityName}/${entity.id}/info`, {from: location.pathname});
     };
 
     const changePage = (e) => {
