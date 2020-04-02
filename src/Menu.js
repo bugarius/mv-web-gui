@@ -35,7 +35,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nową',
-                path: '/mv/grapevine/0',
+                path: {
+                    pathname: '/mv/grapevine/0',
+                    state: {
+                        from: '/mv/grapevine/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]

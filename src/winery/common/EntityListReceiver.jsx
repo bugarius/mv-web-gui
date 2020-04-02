@@ -19,7 +19,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
 
     useEffect(() => {
         window.addEventListener("resize", () => updateDimensions());
-        service.getList(page)
+        service.getAll(page)
                 .then((result) => {
                     setPagination(result);
                     setLoading(false);

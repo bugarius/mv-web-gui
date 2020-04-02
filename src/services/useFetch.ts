@@ -38,6 +38,10 @@ const useFetch = <T>(endpoint?: string) => {
         const url = `${endpoint}/all`;
         return customFetch(url, 'GET', null);
     };
+    const getAll = (page: number) => {
+        const url = `${endpoint}?${URI.buildQuery({p: page})}`;
+        return customFetch(url, 'GET', null);
+    };
     const post = (body: T) => {
         if (body === null)
         {
@@ -83,6 +87,6 @@ const useFetch = <T>(endpoint?: string) => {
         return customFetch(url, "DELETE", null);
     };
 
-    return {get, getList, post, put, del, getAllByParams, postFile, putFile};
+    return {get, getList, getAll, post, put, del, getAllByParams, postFile, putFile};
 };
 export default useFetch;

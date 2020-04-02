@@ -3,8 +3,8 @@ import useFetch from "./useFetch";
 const useCrudeApi = <T>(endpoint: string) => {
     const crudApi = useFetch<T>(endpoint);
 
-    const getAll = () => {
-        return crudApi.get();
+    const getAll = (page: number) => {
+        return crudApi.getAll(page);
     };
 
     const getList = () => {

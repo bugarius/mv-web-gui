@@ -45,7 +45,7 @@ const ParcelFormContainer = ({render}) => {
                 history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
             })
             .catch(res => {
-                history.push(`/error`);
+                history.push(`/mv/error`);
             });
     };
 
