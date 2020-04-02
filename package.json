@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "http-proxy-middleware": "^0.20.0",
     "@fortawesome/fontawesome-free": "5.5.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -40,7 +41,8 @@
     "urijs": "^1.19.2",
     "validator": "10.9.0",
     "weather-icons": "github:erikflowers/weather-icons",
-    "whirl": "github:themicon/whirl"
+    "whirl": "github:themicon/whirl",
+    "prop-types": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -68,19 +70,20 @@
     ]
   },
   "devDependencies": {
-    "acorn-dynamic-import": "3.0.0",
-    "imports-loader": "0.8.0",
-    "node-sass": "4.13.1",
-    "raw-loader": "0.5.1",
-    "sass-loader": "7.1.0",
-    "style-loader": "0.23.1",
-    "webpack-bundle-analyzer": "3.3.2",
+    "@types/urijs": "^1.19.7",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "acorn-dynamic-import": "3.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "prettier": "^1.19.1"
+    "imports-loader": "0.8.0",
+    "node-sass": "4.13.1",
+    "prettier": "^1.19.1",
+    "raw-loader": "0.5.1",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "webpack-bundle-analyzer": "3.3.2"
   }
 }

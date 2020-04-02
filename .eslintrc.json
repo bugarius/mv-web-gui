@@ -1,0 +1,47 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "jsx": true,
+        "useJSXTextNode": true
+    },
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended"
+    ],
+    "plugins": ["@typescript-eslint", "react-hooks"],
+    "rules": {
+        "no-console": "off",
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+                "message": "Unexpected property on console object was called"
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/prefer-optional-chain": "error",
+        "@typescript-eslint/unbound-method": "off",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/no-extra-non-null-assertion": ["error"],
+        "member-access": "off",
+        "ordered-imports": "off",
+        "quotemark": "off",
+        "semicolon": "off",
+        "jsx-no-lambda": "off"
+    }
+}
