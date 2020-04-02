@@ -28,24 +28,18 @@ const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, pagi
     };
 
     const buildRow = (grapevine) => {
-        const id = grapevine && grapevine.id;
-        const name = grapevine && grapevine.name;
-        const numberOfPlants = grapevine && grapevine.numberOfPlants;
-        const area = grapevine && grapevine.area;
-        const yearOfPlanting = grapevine && grapevine.yearOfPlanting;
-        const grapeColor = grapevine && grapevine.grapeColor;
-        const fields = [<td style={{textAlign: 'center'}} key={1}>{id}</td>,
-            <td style={{textAlign: 'center'}} key={2}>{name}</td>,
-            <td style={{textAlign: 'center'}} key={3}>{numberOfPlants}</td>,
-            <td style={{textAlign: 'center'}} key={4}>{area}</td>,
-            <td style={{textAlign: 'center'}} key={5}>{yearOfPlanting}</td>,
-            <td style={{textAlign: 'center'}} key={6}><Trans i18nKey={FromApiConverter.convertGrapeColor(grapeColor)}/>
+        const fields = [<td style={{textAlign: 'center'}} key={1}>{grapevine?.id}</td>,
+            <td style={{textAlign: 'center'}} key={2}>{grapevine?.name}</td>,
+            <td style={{textAlign: 'center'}} key={3}>{grapevine?.numberOfPlants}</td>,
+            <td style={{textAlign: 'center'}} key={4}>{grapevine?.area}</td>,
+            <td style={{textAlign: 'center'}} key={5}>{grapevine?.yearOfPlanting}</td>,
+            <td style={{textAlign: 'center'}} key={6}><Trans i18nKey={FromApiConverter.convertGrapeColor(grapevine?.grapeColor)}/>
             </td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={grapevine}
                              actions={{remove: remove, proceed: proceed, info: info}}/>
-            </td>]
-        return <tr key={grapevine.id}>
+            </td>];
+        return <tr key={grapevine?.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}
         </tr>
     };
