@@ -165,8 +165,8 @@ const getAvatarUrl = (avatar) =>
 
 const convertPrincipalFromApi = (principal) =>
 {
-  principal.avatarUrl = getAvatarUrl(principal.avatar) || '/images/fa-user-solid.png';
-  principal.hasAccess = (path) => (principal.realms.find(r => r.startsWith(path)));
+  principal.avatarUrl = getAvatarUrl(principal.avatar) || 'img/user/02.jpg';
+  principal.hasAccess = (path) => (principal.realms?.find(r => r.startsWith(path)));
   principal.lock = false;
 
   return principal;
@@ -177,7 +177,7 @@ const convertUserFromApi = (user, account) =>
   user.id = '' + user.id;
   user.created = (user.created && convertDateTimeFromApi(user.created)) || '';
   user.lastLogin = (user.lastLogin && convertDateTimeFromApi(user.lastLogin)) || '';
-  user.avatarUrl = getAvatarUrl(user.avatar) || '/images/fa-user-regular.png';
+  user.avatarUrl = getAvatarUrl(user.avatar) || 'img/user/02.jpg';
   user.account = account;
   user.permissions = (user.roles || []).includes('SUPERUSER') ? [{value: 'SUPERUSER', label: 'wszystkie uzgodnienia'}] : [];
 
