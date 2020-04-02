@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import {AuthContext} from "./AuthContext";
 import {AuthService} from "./AuthService";
@@ -6,76 +6,54 @@ import Login from "../components/Pages/Login";
 import WelcomeApp from "../welcome/WelcomeApp";
 import Lock from "../components/Pages/Lock";
 import WineryApp from "../winery/WineryApp";
+import * as PropTypes from 'prop-types';
+import log from 'loglevel';
 
-class AppRouting extends Component {
+const AppRouting = ({location: {pathname}, history}) => {
 
-  static contextType = AuthContext;
+    const [error, setError] = useState('');
+    const {principal, setPrincipal, lock} = useContext(AuthContext);
 
-  constructor(props)
-  {
-    super(props);
-    this.state = {};
-  }
+    const redirectToLogin = () => {
+        return <Redirect to={{
+            pathname: "/welcome/login",
+            state: {
+                referrer: pathname
+            },
+        }}/>
+    };
 
-  redirectToLogin = () => {
-    const {location: {pathname}} = this.props;
-
-    return <Redirect to={{
-      pathname: "/welcome/login",
-      state: {
-        referrer: pathname
-      },
-    }}/>
-  };
-
-  handleError = (res) => {
-    this.setState(() => ({
-      error: res
-    }));
-    this.props.history.push(`/error`);
-  };
-
-  componentDidMount()
-  {
-    const {setPrincipal} = this.context;
-
-    console.log('AuthProvider::componentDidMount');
-    AuthService.getUserInfo()
-      .then(setPrincipal)
-      .catch(this.handleError);
-  }
-
-  render()
-  {
-    const {location} = this.props;
-    const {principal} = this.context;
-    const {error} = this.state;
-
-    console.log('AppRouting::render', location, error, principal);
+    useEffect(() => {
+        if (principal !== null) return;
+        log.debug('AppRouting::render', error, principal);
+        AuthService.getUserInfo()
+                .then((principal) => setPrincipal(principal))
+                .catch((error) => {
+                    setError(error);
+                    history.push(`/error`);
+                });
+    });
 
     return (error || principal) ?
       <Switch>
         <Route exact path={'/'}>
-          {principal && principal.login && principal.lock !== true ? <Redirect to={principal.realms[0]}/> : <Redirect to={'/welcome/login'}/>}
+          {principal?.login && !lock ? <Redirect to={principal.realms[0]}/> : <Redirect to={'/welcome/login'}/>}
         </Route>
-        principal && principal.login && principal.lock === true && <Route path="/welcome/login" component={Login}/>
+        <Route path="/welcome/login" component={Login}/>
         <Route path="/lock" component={Lock}/>
         <Route path="/welcome">
-          {principal && principal.login ? <Redirect to={principal.realms[0]}/> : <WelcomeApp/>}
+          {principal?.login ? <Redirect to={principal.realms[0]}/> : <WelcomeApp/>}
         </Route>
-        {/*<Route path="/">*/}
-        {/*  {principal && principal.login && principal.lock !== true? <Routes/> : this.redirectToLogin()}*/}
-        {/*</Route>*/}
-        {/*<Route path="/myaccount">*/}
-        {/*  {principal && principal.login ? <MyAccountApp/> : this.redirectToLogin()}*/}
-        {/*</Route>*/}
         <Route path="/mv">
-          {principal && principal.login ? <WineryApp/> : this.redirectToLogin()}
+          {principal?.login ? <WineryApp/> : redirectToLogin()}
         </Route>
-        {/*<Route component={ErrorPage}/>*/}
       </Switch> : <></>
 
-  }
-}
+};
+
+AppRouting.propTypes = {
+    location: PropTypes.object,
+    history: PropTypes.object
+};
 
 export default withRouter(AppRouting);
