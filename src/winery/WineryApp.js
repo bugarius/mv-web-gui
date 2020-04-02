@@ -16,6 +16,7 @@ import Lock from "../components/Pages/Lock";
 import NotFound from "../components/Pages/NotFound";
 import Error500 from "../components/Pages/Error500";
 import Maintenance from "../components/Pages/Maintenance";
+import ErrorApp from "../error/ErrorApp";
 
 const waitFor = Tag => props => <Tag {...props}/>;
 
@@ -87,6 +88,8 @@ const Routes = ({location}) => {
                                         {/*Ingredients*/}
                                         <Route path="/mv/ingredient" component={waitFor(IngredientApp)}/>
 
+                                        {/*Error*/}
+                                        <Route path="/mv/error" component={waitFor(ErrorApp)}/>
                                     </Switch>
                                 </Suspense>
                             </div>

@@ -14,7 +14,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nową',
-                path: '/mv/parcel/0',
+                path: {
+                    pathname: '/mv/parcel/0',
+                    state: {
+                        from: '/mv/parcel/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
