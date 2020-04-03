@@ -78,12 +78,12 @@ const useFetch = <T>(endpoint?: string) => {
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", body);
     };
-    const del = (id: number) => {
+    const del = (id: number, page?: number) => {
         if (!id)
         {
             throw new Error("to make a delete you must provide the id");
         }
-        const url = `${endpoint}/${id}`;
+        const url = `${endpoint}/${id}?${URI.buildQuery({p: page})}`;
         return customFetch(url, "DELETE", null);
     };
 

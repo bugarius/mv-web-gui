@@ -56,7 +56,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: '/mv/harvest/0',
+                path: {
+                    pathname: '/mv/harvest/0',
+                    state: {
+                        from: '/mv/harvest/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]

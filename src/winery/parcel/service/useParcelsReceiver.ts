@@ -3,20 +3,21 @@ import {useEffect, useState} from "react";
 import {Service, StatusType} from "../../../services/types/Service";
 import {Parcel} from "../types/Parcel";
 import {ResponseError} from "../../../error/ResponseError";
-import {ParcelOption} from "../types/ParcelOption";
+import {SelectOption} from "../../../services/types/SelectOption";
 
-const useParcelReceiver = (value?) => {
+const useParcelsReceiver = (value?) => {
 
     const service = useParcelService();
     const [result, setResult] = useState<Service<Parcel[]>>({
         status: StatusType.loading
     });
-    const [options, setOptions] = useState<ParcelOption[]>([]);
+    const [options, setOptions] = useState<SelectOption[]>([]);
+    const [selected, setSelected] = useState<SelectOption[]>([]);
 
     useEffect(() => {
         if (value)
         {
-            setOptions(value?.map((p) => ({value: p.id, label: (p.label || false ? p.label : p.registrationNumber + " - " + p.district)})));
+            setSelected(value?.map((p) => ({value: p.id, label: (p.label || false ? p.label : p.registrationNumber + " - " + p.district)})));
             return;
         }
         if (!result?.payload) {
@@ -29,8 +30,8 @@ const useParcelReceiver = (value?) => {
         }
     }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return {result, options};
+    return {result, options, selected};
 };
 
 
-export default useParcelReceiver;
+export default useParcelsReceiver;

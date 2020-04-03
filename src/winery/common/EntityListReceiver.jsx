@@ -45,7 +45,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
                 setPage(page - 1);
             }
 
-            service.delete(entity, page - fixLastInPage)
+            service.del(entity.id, page - fixLastInPage)
                     .then((result) => {
                         setPagination(result);
                         setLoading(false);

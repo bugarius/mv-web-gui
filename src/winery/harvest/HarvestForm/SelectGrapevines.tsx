@@ -1,24 +1,24 @@
 import React from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
-import useParcelsReceiver from "../../parcel/service/useParcelsReceiver";
+import useGrapevinesReceiver from "../../grapevine/service/useGrapevinesReceiver";
 import {SelectOption} from "../../../services/types/SelectOption";
-import {Parcel} from "../../parcel/types/Parcel";
+import {Grapevine} from "../../grapevine/types/Grapevine";
 import * as PropTypes from "prop-types";
 
 interface Props
 {
-    value: Parcel[] | SelectOption[];
+    value: Grapevine | SelectOption;
     onChange: () => void;
     name: string;
     label?: string;
     optional?: boolean;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
 
-    const {selected: value} = useParcelsReceiver(selected);
-    const {options: parcels} = useParcelsReceiver();
+    const {selected: value} = useGrapevinesReceiver(selected);
+    const {options: grapevines} = useGrapevinesReceiver();
 
     return (
         <fieldset>
@@ -28,10 +28,9 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                 </label>
                 <div className="col-md-10">
                     <Select name={name}
-                            options={parcels}
+                            options={grapevines}
                             onChange={onChange}
                             value={value}
-                            isMulti
                             placeholder={"Wybierz"}/>
                     <span className="invalid-feedback">Field is required</span>
                 </div>
@@ -40,12 +39,12 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
     )
 };
 
-SelectParcels.propTypes = {
-    value: PropTypes.array.isRequired,
+SelectGrapevines.propTypes = {
+    value: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     optional: PropTypes.bool
 };
 
-export default SelectParcels;
+export default SelectGrapevines;
