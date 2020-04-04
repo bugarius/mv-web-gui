@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
+import log from 'loglevel';
 
 const EntityListReceiver = ({history, render, service, listConverter, entityName}) => {
 
@@ -55,8 +56,9 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
         }
     };
 
-    const handleError = () => {
+    const handleError = (error) => {
         setLoading(false);
+        log.debug(error);
         history.push(`/error`);
     };
 

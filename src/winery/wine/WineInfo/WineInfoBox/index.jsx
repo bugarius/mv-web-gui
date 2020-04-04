@@ -1,13 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Card, CardBody, CardFooter, CardHeader, Table} from "reactstrap";
-import ProgressBar from "../../../common/charts/ProgressBar";
-import SmallTextBadge from "../../../common/badges/SmallTextBadge";
-import CommonRow from "../../../common/table/CommonRow";
-import {WineContext} from "../WineContext";
+import ProgressBar from "../../../../common/charts/ProgressBar";
+import SmallTextBadge from "../../../../common/badges/SmallTextBadge";
+import CommonRow from "../../../../common/table/CommonRow";
+import {useWineContext} from "../../WineContext";
+import * as PropTypes from 'prop-types';
 
-const WineInfoBox = ({actions: {edit}}) => {
+const WineInfoBox = ({actions: {editWine}}) => {
 
-    const {wine} = useContext(WineContext);
+    const {wine} = useWineContext();
+
     const {tankCapacity, liters, tankNumber, name, startDate, ingredients} = wine;
     const percent = Math.floor(liters * 100 / tankCapacity);
 
@@ -28,10 +30,14 @@ const WineInfoBox = ({actions: {edit}}) => {
                     </tbody>
                 </Table>
                 <CardFooter className="text-center">
-                    <button className="btn btn-secondary" type="button" onClick={edit}>Edytuj</button>
+                    <button className="btn btn-secondary" type="button" onClick={editWine}>Edytuj</button>
                 </CardFooter>
             </Card>
     );
+};
+
+WineInfoBox.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired
 };
 
 export default WineInfoBox;

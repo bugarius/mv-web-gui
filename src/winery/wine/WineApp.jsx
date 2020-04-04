@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
-import {WineProvider} from "./WineContext";
 import {AuthContext} from "../../platform/AuthContext";
 import WineList from "./WineList";
 import WineForm from "./WineForm";
 import WineInfo from "./WineInfo";
+import WineProvider from "./WineContext";
 
 class WineApp extends Component {
 

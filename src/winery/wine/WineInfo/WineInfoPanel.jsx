@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
-import {withRouter} from "react-router-dom";
-import {WineContext} from "../WineContext";
+import React from 'react';
+import {useWineContext} from "../WineContext";
 import PageWrapper from "../../../common/PageWrapper";
 import {Col, Row} from "reactstrap";
 import WineInfoBox from "./WineInfoBox";
-import WineIngredientsListBox from "./WineIngredientsListBox";
 import PanelTab from "../../../common/PanelTab/PanelTab";
+import PropTypes from 'prop-types';
+import WineIngredientsListBox from "./WineIngredientsListBox";
 
 const WineInfo = ({actions}) => {
 
-    const {loading} = useContext(WineContext);
+    const {loading} = useWineContext();
+
     return (
             <>
                 <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'} loading={loading}>
@@ -18,8 +19,8 @@ const WineInfo = ({actions}) => {
                             <WineInfoBox actions={actions}/>
                             <WineIngredientsListBox actions={actions}/>
                         </Col>
-                        <Col >
-                            <PanelTab />
+                        <Col>
+                            <PanelTab/>
                         </Col>
                     </Row>
 
@@ -28,4 +29,8 @@ const WineInfo = ({actions}) => {
     );
 };
 
-export default withRouter(WineInfo);
+WineInfo.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func)
+};
+
+export default WineInfo;

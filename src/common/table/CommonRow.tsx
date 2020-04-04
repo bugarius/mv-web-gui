@@ -1,6 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CommonRow = ({label, value, onClick, style, className}) => {
+interface Props
+{
+    label?: string,
+    value?: any[] | string | number,
+    onClick?: () => void,
+    style?: {},
+    className?: string
+}
+const CommonRow: React.FC<Props> = ({label, value, onClick, style, className}) => {
 
     const renderColumns = () => {
         if (Array.isArray(value))
@@ -18,6 +27,14 @@ const CommonRow = ({label, value, onClick, style, className}) => {
                 {renderColumns()}
             </tr>
     )
+};
+
+CommonRow.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number]),
+    onClick: PropTypes.func,
+    style: PropTypes.object,
+    className: PropTypes.string
 };
 
 export default CommonRow;

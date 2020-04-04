@@ -1,7 +1,7 @@
-import {useCallback, useContext, useEffect, useMemo, useReducer, useState} from 'react';
+import {useCallback, useEffect, useMemo, useReducer, useState} from 'react';
 import IngredientService from "../service/IngredientService";
 import WineService from "../../wine/service/WineService";
-import {WineContext} from "../../wine/WineContext";
+import {useWineContext} from "../../wine/WineContext";
 
 const initialState = {
     id: "",
@@ -39,7 +39,7 @@ const AddIngredientContainer = ({setSelectedIngredient, render}) => {
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    const {actions: {setWine, setLoading}, wine} = useContext(WineContext);
+    const {wine, setWine, setLoading} = useWineContext();
     const [ingredients, setIngredients] = useState([]);
     const [key, setKey] = useState(1); //to rerender defaultValues in inputs
     const [ingredientKey, setIngredientKey] = useState(1); //to rerender defaultValues in inputs

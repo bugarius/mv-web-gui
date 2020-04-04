@@ -60,9 +60,9 @@ const HarvestInfoContainer = ({render}) => {
             });
     };
 
-    const loading = (harvestId) => {
-        // setReload(true);
-    };
+    // const loading = (harvestId) => {
+    //     // setReload(true);
+    // };
 
     return render({addBoxToHarvest, edit, dispose});
 };
