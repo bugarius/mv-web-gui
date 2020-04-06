@@ -10,8 +10,7 @@ import SelectHarvest from "./SelectHarvest";
 const SimpleWineForm = ({updateHarvestInWine, onSubmit}) => {
 
     const {wine, updateWine, wineResult} = useWineContext();
-    const harvestName = wine?.harvest?.grapevine?.name + " - " + wine?.harvest?.dateOfHarvest;
-
+console.log(wine)
     return (
             <>
                 <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}
@@ -54,20 +53,13 @@ const SimpleWineForm = ({updateHarvestInWine, onSubmit}) => {
                                           onChange={e => updateWine(e.target.name, e.target.value)}
                                           defaultValue={wine?.liters}
                             />
+                            <SelectHarvest value={wine?.harvest}
+                                           name={'harvest'}
+                                           label={'Zbiór'}
+                                           disabled={wine?.harvest?.allDisposedToWine}
+                                           onChange={updateHarvestInWine}
+                            />
 
-                            {
-                                wine?.harvest?.allDisposedToWine ?
-                                        <SelectHarvest value={{id: wine?.harvest?.id, label: harvestName}}
-                                                       name={'harvest'}
-                                                       label={'Zbiór'}
-                                                       disabled={true}
-                                                       onChange={updateHarvestInWine}/>
-                                        :
-                                        <SelectHarvest value={wine?.harvest}
-                                                       name={'harvest'}
-                                                       label={'Zbiór'}
-                                                       onChange={updateHarvestInWine}/>
-                            }
 
                         </CardBody>
                         <CardFooter className="text-center">

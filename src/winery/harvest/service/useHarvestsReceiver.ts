@@ -17,9 +17,15 @@ const useHarvestsReceiver = (value?) => {
     useEffect(() => {
         if (value)
         {
-            setSelected(value?.id ? {value: value.id, label: value.label ? value.label : value.name} : '');
+            setSelected(value?.id ?
+                {
+                    value: value.id,
+                    label: value.label ? value.label : value.grapevine.name + " - " + value.dateOfHarvest
+                }
+                : '');
         }
-        if (!result?.payload) {
+        if (!result?.payload)
+        {
             service?.getList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});
