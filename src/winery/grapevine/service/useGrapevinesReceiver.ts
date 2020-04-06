@@ -18,7 +18,6 @@ const useGrapevinesReceiver = (value?) => {
         if (value)
         {
             setSelected(value?.id ? {value: value.id, label: value.label ? value.label : value.name} : '');
-            return;
         }
         if (!result?.payload) {
             service?.getList()

@@ -7,6 +7,10 @@ const useCrudeApi = <T>(endpoint: string) => {
         return crudApi.getAll(page);
     };
 
+    const getAllWithParams = (params: Map<string, string>) => {
+        return crudApi.getAllWithParams(params);
+    };
+
     const getList = () => {
         return crudApi.getList();
     };
@@ -28,7 +32,7 @@ const useCrudeApi = <T>(endpoint: string) => {
     };
 
     return {
-        get, getAll, getList, post, put, del
+        get, getAll, getAllWithParams, getList, post, put, del
     }
 };
 

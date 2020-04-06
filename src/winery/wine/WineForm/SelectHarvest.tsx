@@ -17,8 +17,7 @@ interface Props
 
 const SelectHarvest: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
 
-    const {selected: value} = useHarvestsReceiver(selected);
-    const {options: harvests} = useHarvestsReceiver();
+    const {selected: value, options: harvests} = useHarvestsReceiver(selected);
 
     return (
         <fieldset>

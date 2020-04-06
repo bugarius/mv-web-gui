@@ -18,7 +18,6 @@ const useParcelsReceiver = (value?) => {
         if (value)
         {
             setSelected(value?.map((p) => ({value: p.id, label: (p.label || false ? p.label : p.registrationNumber + " - " + p.district)})));
-            return;
         }
         if (!result?.payload) {
             service?.getList()

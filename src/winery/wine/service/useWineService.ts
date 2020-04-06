@@ -5,7 +5,7 @@ import useFetch from "../../../services/useFetch";
 const useWineService = (wineId?: number | string) => {
 
     const {get, getAll, post, put, del} = useCrudeApi<Wine>("/ajax/wines");
-    const {put: addIngredient, del: delIngredient} = useFetch<Wine>(`/ajax/wines/${wineId}/ingredient`);
+    const {putBody: addIngredient, del: delIngredient} = useFetch<Wine>(`/ajax/wines/${wineId}/ingredient`);
     const {get: getByHarvest} = useFetch<Wine>(`/ajax/wines/harvest`);
 
     return {

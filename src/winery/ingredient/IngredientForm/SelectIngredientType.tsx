@@ -1,23 +1,23 @@
 import React from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
-import useParcelsReceiver from "../../parcel/service/useParcelsReceiver";
 import {SelectOption} from "../../../services/types/SelectOption";
-import {Parcel} from "../../parcel/types/Parcel";
 import * as PropTypes from "prop-types";
+import {IngredientType} from "../types/IngredientType";
+import useIngredientTypesReceiver from "../service/useIngredientTypesReceiver";
 
 interface Props
 {
-    value: Parcel[] | SelectOption[];
+    value?: IngredientType | SelectOption;
     onChange: () => void;
     name: string;
     label?: string;
     optional?: boolean;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectIngredientType: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
 
-    const {selected: value, options: parcels} = useParcelsReceiver(selected);
+    const {options, selected: value} = useIngredientTypesReceiver(selected);
 
     return (
         <fieldset>
@@ -27,10 +27,9 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                 </label>
                 <div className="col-md-10">
                     <Select name={name}
-                            options={parcels}
+                            options={options}
                             onChange={onChange}
                             value={value}
-                            isMulti
                             placeholder={"Wybierz"}/>
                     <span className="invalid-feedback">Field is required</span>
                 </div>
@@ -39,12 +38,16 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
     )
 };
 
-SelectParcels.propTypes = {
-    value: PropTypes.array.isRequired,
+SelectIngredientType.propTypes = {
+    value: PropTypes.oneOfType(
+        [
+            PropTypes.oneOf(Object.values(IngredientType)),
+            PropTypes.oneOfType([PropTypes.any, PropTypes.string])
+        ]),
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     optional: PropTypes.bool
 };
 
-export default SelectParcels;
+export default SelectIngredientType;

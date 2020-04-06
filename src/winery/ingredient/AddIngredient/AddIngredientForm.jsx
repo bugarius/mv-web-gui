@@ -1,41 +1,45 @@
 import React from 'react';
 import {Button, Card, CardBody} from "reactstrap";
 import {useTranslation} from "react-i18next";
-import Input from "../../../common/form-elements/InputElement";
-import Select from "../../../common/form-elements/Select";
 import CardFooter from "../../../common/cards/CardFooter";
+import SelectIngredientType from "../IngredientForm/SelectIngredientType";
+import {useIngredientContext} from "../IngredientContext";
+import SelectIngredient from "./SelectIngredient";
+import InputElement from "../../../common/InputElement";
+import PropTypes from 'prop-types';
 
 const AddIngredientForm = ({
-                               options: {types, ingredients}, keys: {ingredientKey, key},
-                               actions: {handleChange, onSubmit, setType, setIngredient}
+                               actions: {onSubmit, updateIngredientSelect, updateTypeSelect}, newKey
                            }) => {
 
     const {t} = useTranslation();
+    const {ingredient, updateIngredient} = useIngredientContext();
 
     return (
-            <Card style={{margin: "0px"}}>
+            <Card style={{margin: "0px"}} key={newKey}>
                 <CardBody style={{padding: "7px"}}>
-                    <Select label={t('add_ingredient.SELECT_TYPE')}
-                            name={"type"}
-                            onChange={setType}
-                            options={types}
-                            key={"type" + key}
+                    <SelectIngredientType value={ingredient?.type}
+                                          name={'type'}
+                                          label={t('add_ingredient.SELECT_TYPE')}
+                                          onChange={updateTypeSelect}
                     />
-                    <Select label={t('add_ingredient.SELECT_INGREDIENT')}
-                            name={"ingredient"}
-                            onChange={setIngredient}
-                            options={ingredients}
-                            key={"ingredient" + key + ingredientKey}
+                    <SelectIngredient value={ingredient?.ingredient}
+                                      type={ingredient?.type}
+                                      name={'ingredient'}
+                                      label={t('add_ingredient.SELECT_INGREDIENT')}
+                                      onChange={updateIngredientSelect}
                     />
-                    <Input.Number label={t('add_ingredient.AMOUNT')}
-                                  name={"amount"}
-                                  onChange={handleChange}
-                                  key={"amount" + key}
+                    <InputElement label={t('add_ingredient.AMOUNT')}
+                                  type={'number'}
+                                  name={'amount'}
+                                  onChange={e => updateIngredient(e.target.name, e.target.value)}
+                                  defaultValue={ingredient?.amount}
                     />
-                    <Input.Textarea label={t('add_ingredient.NOTES')}
-                                    name={"notes"}
-                                    onChange={handleChange}
-                                    key={"notes" + key}
+                    <InputElement label={t('add_ingredient.NOTES')}
+                                  type={'textarea'}
+                                  name={'notes'}
+                                  onChange={e => updateIngredient(e.target.name, e.target.value)}
+                                  defaultValue={ingredient?.notes}
                     />
                 </CardBody>
                 <CardFooter>
@@ -45,6 +49,11 @@ const AddIngredientForm = ({
                 </CardFooter>
             </Card>
     )
+};
+
+AddIngredientForm.propTypes = {
+    actions: PropTypes.objectOf(PropTypes.func).isRequired,
+    newKey: PropTypes.any.isRequired
 };
 
 export default AddIngredientForm;

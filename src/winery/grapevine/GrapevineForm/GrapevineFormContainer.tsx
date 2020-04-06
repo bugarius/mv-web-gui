@@ -9,7 +9,7 @@ import log from "loglevel";
 
 const GrapevineFormContainer = ({render}) => {
 
-    const {grapevine, setGrapevine, updateGrapevine, setGrapevineResult} = useGrapevineContext();
+    const {grapevine, updateGrapevine, setGrapevineResult} = useGrapevineContext();
 
     const service = useGrapevineService();
 
@@ -46,7 +46,7 @@ const GrapevineFormContainer = ({render}) => {
         const action = () => (grapevine?.id ? service.put(grapevine.id, grapevine) : service.post(grapevine));
         action()
             .then(response => {
-                setGrapevine(response);
+                setGrapevineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/grapevine/all`);
             })
             .catch(res => {

@@ -17,8 +17,7 @@ interface Props
 
 const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
 
-    const {selected: value} = useGrapevinesReceiver(selected);
-    const {options: grapevines} = useGrapevinesReceiver();
+    const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
 
     return (
         <fieldset>

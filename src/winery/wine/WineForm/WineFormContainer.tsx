@@ -10,7 +10,7 @@ import {Wine} from "../types/Wine";
 
 const WineFormContainer = ({render}) => {
 
-    const {wine, setWine, updateWine, setWineResult} = useWineContext();
+    const {wine, updateWine, setWineResult} = useWineContext();
 
     const service = useWineService();
 
@@ -47,7 +47,7 @@ const WineFormContainer = ({render}) => {
         const action = () => (wine?.id ? service.put(wine.id, wine) : service.post(wine));
         action()
             .then(response => {
-                setWine(response);
+                setWineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/wine/all`);
             })
             .catch(res => {

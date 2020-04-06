@@ -9,7 +9,7 @@ import log from "loglevel";
 
 const HarvestFormContainer = ({render}) => {
 
-    const {harvest, setHarvest, updateHarvest, setHarvestResult} = useHarvestContext();
+    const {harvest, updateHarvest, setHarvestResult} = useHarvestContext();
 
     const service = useHarvestService();
 
@@ -46,7 +46,7 @@ const HarvestFormContainer = ({render}) => {
         const action = () => harvest?.id ? service.put(harvest.id, harvest) : service.post(harvest);
         action()
             .then(response => {
-                setHarvest(response);
+                setHarvestResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/harvest/all`);
             })
             .catch(res => {

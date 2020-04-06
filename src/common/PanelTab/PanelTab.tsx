@@ -2,14 +2,11 @@ import React, {useState} from "react";
 import {Card, CardBody, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 import {useTranslation} from "react-i18next";
 import AddIngredient from "../../winery/ingredient/AddIngredient";
-import {useWineContext} from "../../winery/wine/WineContext";
-import {Ingredient} from "../../winery/ingredient/types/Ingredient";
+import {useIngredientContext} from "../../winery/ingredient/IngredientContext";
 
 const PanelTab = () => {
-
-    const {wine} = useWineContext();
+    const {ingredient} = useIngredientContext();
     const [activeTab, setActiveTab] = useState('add');
-    const [selectedIngredient, setSelectedIngredient] = useState<Ingredient>({});
     const {t} = useTranslation();
 
     const toggleTab = tab => {
@@ -43,14 +40,14 @@ const PanelTab = () => {
                 </Nav>
                 <TabContent activeTab={activeTab} className="bg-white p-0">
                     <TabPane tabId="add">
-                        <AddIngredient wine={wine} setSelectedIngredient={setSelectedIngredient}/>
+                        <AddIngredient />
                     </TabPane>
                     <TabPane tabId="info">
-                        {selectedIngredient ?
+                        {ingredient?.ingredient?.id ?
                                 <Card style={{marginBottom: "0px"}} className={'p-2'}>
                                     <CardBody>
-                                    <p className='text-bold'>{selectedIngredient?.name}</p>
-                                    <p style={{whiteSpace: 'pre-wrap'}}>{selectedIngredient?.info}</p>
+                                    <p className='text-bold'>{ingredient?.ingredient?.name}</p>
+                                    <p style={{whiteSpace: 'pre-wrap'}}>{ingredient?.ingredient?.info}</p>
                                     </CardBody>
                                 </Card>
                         : <Card style={{marginBottom: "0px"}}>
