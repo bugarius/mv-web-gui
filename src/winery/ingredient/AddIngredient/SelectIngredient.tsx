@@ -22,9 +22,6 @@ const SelectIngredient: React.FC<Props> = ({value: selected, onChange, type, nam
 
     const {selected: value, options: ingredients, loading} = useIngredientsReceiver(selected, type);
 
-    console.log("selected", selected);
-    console.log("value", value);
-    console.log("loading", loading);
     return (
         <fieldset>
             <FormGroup row>

@@ -20,7 +20,6 @@ class SidebarUserBlock extends Component {
     }
     render() {
         const {principal} = this.context;
-        console.log(principal)
         return (
             <Collapse id="user-block" isOpen={ this.state.showUserBlock }>
                 <div>

@@ -15,7 +15,6 @@ const Lock = () => {
     useEffect(() => {
         setLock(true);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-console.log(history)
     const unlock = (e) => {
         e.preventDefault();
         AuthService.login(principal.login, password)
