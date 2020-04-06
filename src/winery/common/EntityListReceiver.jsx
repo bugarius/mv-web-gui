@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
+import log from 'loglevel';
 
 const EntityListReceiver = ({history, render, service, listConverter, entityName}) => {
 
@@ -19,7 +20,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
 
     useEffect(() => {
         window.addEventListener("resize", () => updateDimensions());
-        service.getList(page)
+        service.getAll(page)
                 .then((result) => {
                     setPagination(result);
                     setLoading(false);
@@ -45,7 +46,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
                 setPage(page - 1);
             }
 
-            service.delete(entity, page - fixLastInPage)
+            service.del(entity.id, page - fixLastInPage)
                     .then((result) => {
                         setPagination(result);
                         setLoading(false);
@@ -55,8 +56,9 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
         }
     };
 
-    const handleError = () => {
+    const handleError = (error) => {
         setLoading(false);
+        log.debug(error);
         history.push(`/error`);
     };
 

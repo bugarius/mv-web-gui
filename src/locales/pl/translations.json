@@ -67,9 +67,11 @@
   "ingredients.TYPE.ALCOHOL_INCREASING": "Wzmacnianie",
   "ingredients.TYPE.OTHER": "Inne",
 
-  "add_ingredient.TO_WINE": "Dodaj składnik do nastawu",
+  "add_ingredient.ADD_WINE": "Dodaj składnik do nastawu",
+  "add_ingredient.INGREDIENT_INFO": "Informacje o składniku",
   "add_ingredient.SELECT_TYPE": "Typ",
   "add_ingredient.SELECT_INGREDIENT": "Składnik",
+  "add_ingredient.NO_INGREDIENT_SELECTED": "Nie wybrano składnika",
   "add_ingredient.AMOUNT": "Ilość [g/hl]",
   "add_ingredient.NOTES": "Notatki",
 

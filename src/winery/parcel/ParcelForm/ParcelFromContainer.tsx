@@ -9,7 +9,7 @@ import log from "loglevel";
 
 const ParcelFormContainer = ({render}) => {
 
-    const {parcel, setParcel, updateParcel, setParcelResult} = useParcelContext();
+    const {parcel, updateParcel, setParcelResult} = useParcelContext();
 
     const service = useParcelService();
 
@@ -41,11 +41,11 @@ const ParcelFormContainer = ({render}) => {
         const action = () => (parcel?.id ? service.put(parcel.id, parcel) : service.post(parcel));
         action()
             .then(response => {
-                setParcel(response);
+                setParcelResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
             })
             .catch(res => {
-                history.push(`/error`);
+                history.push(`/mv/error`);
             });
     };
 

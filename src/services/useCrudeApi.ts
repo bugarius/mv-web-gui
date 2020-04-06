@@ -3,8 +3,12 @@ import useFetch from "./useFetch";
 const useCrudeApi = <T>(endpoint: string) => {
     const crudApi = useFetch<T>(endpoint);
 
-    const getAll = () => {
-        return crudApi.get();
+    const getAll = (page: number) => {
+        return crudApi.getAll(page);
+    };
+
+    const getAllWithParams = (params: Map<string, string>) => {
+        return crudApi.getAllWithParams(params);
     };
 
     const getList = () => {
@@ -28,7 +32,7 @@ const useCrudeApi = <T>(endpoint: string) => {
     };
 
     return {
-        get, getAll, getList, post, put, del
+        get, getAll, getAllWithParams, getList, post, put, del
     }
 };
 

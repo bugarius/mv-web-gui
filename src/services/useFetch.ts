@@ -27,7 +27,7 @@ const useFetch = <T>(endpoint?: string) => {
             .then(useTransformResponse);
     };
     const getAllByParams = (paramName1: string, paramValue1: number | string, paramName2?: string, paramValue2?: number | string) => {
-        const url = `${endpoint}?${URI.buildQuery({catalogId: paramValue1, typeId: paramValue2 })}`;
+        const url = `${endpoint}?${URI.buildQuery({catalogId: paramValue1, typeId: paramValue2})}`;
         return customFetch(url, 'GET', null);
     };
     const get = (id?: number) => {
@@ -36,6 +36,14 @@ const useFetch = <T>(endpoint?: string) => {
     };
     const getList = () => {
         const url = `${endpoint}/all`;
+        return customFetch(url, 'GET', null);
+    };
+    const getAll = (page: number) => {
+        const url = `${endpoint}?${URI.buildQuery({p: page})}`;
+        return customFetch(url, 'GET', null);
+    };
+    const getAllWithParams = (params: Map<string, string>) => {
+        const url = `${endpoint}/all?${URI.buildQuery(Object.fromEntries(params.entries()))}`;
         return customFetch(url, 'GET', null);
     };
     const post = (body: T) => {
@@ -74,15 +82,23 @@ const useFetch = <T>(endpoint?: string) => {
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", body);
     };
-    const del = (id: number) => {
+    const putBody = (body: T) => {
+        if (body === null)
+        {
+            throw new Error("to make a put you must provide the id and the body");
+        }
+        const url = `${endpoint}`;
+        return customFetch(url, "PUT", body);
+    };
+    const del = (id: number, page?: number) => {
         if (!id)
         {
             throw new Error("to make a delete you must provide the id");
         }
-        const url = `${endpoint}/${id}`;
+        const url = `${endpoint}/${id}?${URI.buildQuery({p: page})}`;
         return customFetch(url, "DELETE", null);
     };
 
-    return {get, getList, post, put, del, getAllByParams, postFile, putFile};
+    return {get, getList, getAll, getAllWithParams, post, put, putBody, del, getAllByParams, postFile, putFile};
 };
 export default useFetch;

@@ -35,7 +35,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nową',
-                path: '/mv/grapevine/0',
+                path: {
+                    pathname: '/mv/grapevine/0',
+                    state: {
+                        from: '/mv/grapevine/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
@@ -51,7 +56,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: '/mv/harvest/0',
+                path: {
+                    pathname: '/mv/harvest/0',
+                    state: {
+                        from: '/mv/harvest/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
@@ -67,7 +77,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: '/mv/wine/0',
+                path: {
+                    pathname: '/mv/wine/0',
+                    state: {
+                        from: '/mv/wine/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
@@ -83,7 +98,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: '/mv/ingredient/0',
+                path: {
+                    pathname: '/mv/ingredient/0',
+                    state: {
+                        from: '/mv/ingredient/all'
+                    }
+                },
                 translate: 'sidebar.nav.element.ADD_NEW_INGREDIENT'
             }
         ]

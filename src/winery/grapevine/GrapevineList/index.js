@@ -3,14 +3,16 @@ import EntityListReceiver from "../../common/EntityListReceiver";
 import {withRouter} from "react-router-dom";
 import {FromApiConverter} from "../../../services/Converters";
 import SimpleGrapevineList from "./SimpleGrapevineList";
-import GrapevineService from "../service/GrapevineService";
+import useGrapevineService from "../service/useGrapevineService";
 
 const ParcelList = (props) => {
+
+    const service = useGrapevineService();
 
     return (
             <EntityListReceiver {...props}
                                 entityName={'grapevine'}
-                                service={GrapevineService}
+                                service={service}
                                 listConverter={FromApiConverter.convertGrapevineList}
                                 render={(entities, page, pagination, limit, loading, paginationActions, entityActions) => (
                                         <SimpleGrapevineList grapevines={entities}

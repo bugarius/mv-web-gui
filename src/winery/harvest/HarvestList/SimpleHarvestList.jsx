@@ -27,20 +27,13 @@ const SimpleHarvestList = ({harvests, page, pagination, limit, loading, paginati
     };
 
     const buildRow = (harvest) => {
-        const id = harvest && harvest.id;
-        const grapevine = harvest && harvest.grapevine;
-        const dateOfHarvest = harvest && harvest.dateOfHarvest;
-        const weightOfGrapes = harvest && harvest.weightOfGrapes;
-        const amountOfMust = harvest && harvest.amountOfMust;
-        const amountOfWaste = harvest && harvest.amountOfWaste;
-        const weightOfEveryEmptyBox = harvest && harvest.weightOfEveryEmptyBox;
-        const fields = [<td style={{textAlign: 'center'}} key={1}>{id}</td>,
-            <td style={{textAlign: 'center'}} key={2}>{dateOfHarvest}</td>,
-            <td style={{textAlign: 'center'}} key={3}>{grapevine && grapevine.name}</td>,
-            <td style={{textAlign: 'center'}} key={4}>{weightOfGrapes || 0}</td>,
-            <td style={{textAlign: 'center'}} key={5}>{amountOfMust || 0}</td>,
-            <td style={{textAlign: 'center'}} key={6}>{amountOfWaste || 0}</td>,
-            <td style={{textAlign: 'center'}} key={7}>{weightOfEveryEmptyBox || 0}</td>,
+        const fields = [<td style={{textAlign: 'center'}} key={1}>{harvest?.id}</td>,
+            <td style={{textAlign: 'center'}} key={2}>{harvest?.dateOfHarvest}</td>,
+            <td style={{textAlign: 'center'}} key={3}>{harvest?.grapevine?.name}</td>,
+            <td style={{textAlign: 'center'}} key={4}>{harvest?.weightOfGrapes || 0}</td>,
+            <td style={{textAlign: 'center'}} key={5}>{harvest?.amountOfMust || 0}</td>,
+            <td style={{textAlign: 'center'}} key={6}>{harvest?.amountOfWaste || 0}</td>,
+            <td style={{textAlign: 'center'}} key={7}>{harvest?.weightOfEveryEmptyBox || 0}</td>,
             <td style={{textAlign: 'center'}} key={8}>
                 <ListActions entity={harvest}
                              actions={{remove: remove, proceed: proceed, info: info}}/>
