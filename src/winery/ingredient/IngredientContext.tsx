@@ -88,7 +88,7 @@ const IngredientProvider: React.FC = ({children}) => {
 
   const setIngredientResult = useCallback(result => {
     dispatch({type: "ingredientResult", value: result});
-    if (result?.payload ) dispatch({type: "ingredient", value: result.payload});
+    if (result?.payload ) dispatch({type: "setIngredient", value: result.payload});
   }, []);
 
   const providerValue = useMemo(() => ({
