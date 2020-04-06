@@ -22,9 +22,10 @@ const useIngredientsReceiver = (value?, type?: IngredientType | null) => {
         {
             setSelected(value?.id ? {...value, value: value.id, label: value.label ? value.label : value.name} : '');
         }
-        if (type !== null)
+        if (type !== null && type !== selectedType)
         {
             setSelectedType(type);
+            setResult({status: StatusType.loading});
         }
         if (!result?.payload || type !== selectedType)
         {
@@ -36,9 +37,11 @@ const useIngredientsReceiver = (value?, type?: IngredientType | null) => {
                 .catch(error => setResult(new ResponseError(error)));
         }
         return () => setSelectedType(null);
-    }, [value, type, selectedType, result]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [value, type]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return {result, options, selected};
+    const loading = result.status === StatusType.loading;
+
+    return {result, options, selected, loading};
 };
 
 

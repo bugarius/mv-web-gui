@@ -16,13 +16,15 @@ const BoxList = (props) => {
                                 service={service}
                                 listConverter={FromApiConverter.convertWineList}
                                 render={(entities, page, pagination, limit, loading, paginationActions, entityActions) => (
-                                        <SimpleWineList wines={entities}
-                                                        page={page}
-                                                        pagination={pagination}
-                                                        limit={limit}
-                                                        loading={loading}
-                                                        paginationActions={paginationActions}
-                                                        entityActions={entityActions}/>
+                                        <SimpleWineList
+                                                {...props}
+                                                wines={entities}
+                                                page={page}
+                                                pagination={pagination}
+                                                limit={limit}
+                                                loading={loading}
+                                                paginationActions={paginationActions}
+                                                entityActions={entityActions}/>
 
                                 )}/>
     )

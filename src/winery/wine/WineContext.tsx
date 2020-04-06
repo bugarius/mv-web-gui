@@ -11,6 +11,7 @@ interface WineContextInterface
   setWines: (value: Wine[]) => void;
   wineResult: Service<Wine>;
   setWineResult: (value: Service<Wine>) => void;
+  loading: boolean
 }
 
 const defaultWine = {
@@ -31,7 +32,8 @@ const defaultState = {
   wines: [],
   setWines: () => {},
   wineResult: {status: StatusType.loading},
-  setWineResult: () => {}
+  setWineResult: () => {},
+  loading: false
 };
 
 const reducer = (state, action) => {

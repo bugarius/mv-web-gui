@@ -13,7 +13,8 @@ const WineInfoBox = ({actions: {editWine}}) => {
     const {tankCapacity, liters, tankNumber, name, startDate, ingredients} = wine;
     const percent = Math.floor(liters * 100 / tankCapacity);
 
-    return (<Card className="b">
+    return (
+            <Card className="b">
                 <CardHeader>
                     <SmallTextBadge title={'wystartowany'} color={'success'}/>
                     <h4 className="m-0">Zbiornik nr {tankNumber}</h4>

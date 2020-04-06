@@ -18,6 +18,7 @@ const AddIngredientContainer = ({render}) => {
 
     const updateIngredientSelect = (selected) => {
         updateIngredient('ingredient', {...selected, id: selected.value, label: selected.label});
+        updateIngredient('type', selected.type);
     };
 
     const updateTypeSelect = (selected) => {

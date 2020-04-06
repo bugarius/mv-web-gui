@@ -20,6 +20,7 @@ const WineIngredientsListBoxContainer = ({render}) => {
     };
 
     const removeIngredient = (ingredientAddedId) => {
+        setWineResult({status: StatusType.loading});
         service.delIngredient(ingredientAddedId)
             .then(response => {
                 setWineResult({status: StatusType.loaded, payload: response});

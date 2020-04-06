@@ -6,6 +6,7 @@ import * as PropTypes from "prop-types";
 import {Ingredient} from "../types/Ingredient";
 import useIngredientsReceiver from "../service/useIngredientsReceiver";
 import {IngredientType} from "../types/IngredientType";
+import PageWrapper from "../../../common/PageWrapper";
 
 interface Props
 {
@@ -19,8 +20,11 @@ interface Props
 
 const SelectIngredient: React.FC<Props> = ({value: selected, onChange, type, name, label, optional}) => {
 
-    const {selected: value, options: ingredients} = useIngredientsReceiver(selected, type);
+    const {selected: value, options: ingredients, loading} = useIngredientsReceiver(selected, type);
 
+    console.log("selected", selected);
+    console.log("value", value);
+    console.log("loading", loading);
     return (
         <fieldset>
             <FormGroup row>
@@ -28,12 +32,14 @@ const SelectIngredient: React.FC<Props> = ({value: selected, onChange, type, nam
                     <span className="text-danger" style={{display: optional === true ? 'none' : ''}}> *</span>
                 </label>
                 <div className="col-md-10">
-                    <Select name={name}
-                            options={ingredients}
-                            onChange={onChange}
-                            value={value}
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                    <PageWrapper loading={loading} disabled>
+                        <Select name={name}
+                                options={ingredients}
+                                onChange={onChange}
+                                value={value}
+                                placeholder={"Wybierz"}/>
+                        <span className="invalid-feedback">Field is required</span>
+                    </PageWrapper>
                 </div>
             </FormGroup>
         </fieldset>

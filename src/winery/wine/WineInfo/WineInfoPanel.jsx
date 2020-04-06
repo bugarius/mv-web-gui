@@ -1,26 +1,31 @@
 import React from 'react';
-import {useWineContext} from "../WineContext";
 import PageWrapper from "../../../common/PageWrapper";
 import {Col, Row} from "reactstrap";
 import WineInfoBox from "./WineInfoBox";
 import PanelTab from "../../../common/PanelTab/PanelTab";
 import PropTypes from 'prop-types';
 import WineIngredientsListBox from "./WineIngredientsListBox";
+import AddIngredient from "../../ingredient/AddIngredient";
+import IngredientInfoPanelTab from "../../ingredient/IngredientInfoPanelTab";
+import {useTranslation} from "react-i18next";
 
 const WineInfo = ({actions}) => {
 
-    const {loading} = useWineContext();
+    const {t} = useTranslation();
 
     return (
             <>
-                <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'} loading={loading}>
+                <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}>
                     <Row>
                         <Col xl="4" lg="6">
                             <WineInfoBox actions={actions}/>
                             <WineIngredientsListBox actions={actions}/>
                         </Col>
                         <Col>
-                            <PanelTab/>
+                            <PanelTab tab1Label={t('add_ingredient.ADD_WINE')}
+                                      tab1={<AddIngredient/>}
+                                      tab2Label={t('add_ingredient.INGREDIENT_INFO')}
+                                      tab2={<IngredientInfoPanelTab/>}/>
                         </Col>
                     </Row>
 
@@ -30,7 +35,7 @@ const WineInfo = ({actions}) => {
 };
 
 WineInfo.propTypes = {
-  actions: PropTypes.objectOf(PropTypes.func)
+    actions: PropTypes.objectOf(PropTypes.func)
 };
 
 export default WineInfo;

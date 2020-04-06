@@ -26,7 +26,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
 
     return (
         <>
-            <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'} loading={harvestResult.status === StatusType.loading} disabled={false}>
+            <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'} loading={harvestResult.status === StatusType.loading}>
                 <div className="card card-default">
                     <div className="card-header">
                         <div className="card-title">Info
