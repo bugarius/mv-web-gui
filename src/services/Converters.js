@@ -103,14 +103,7 @@ const convertIngredientToApi = (ingredient) => ({
 });
 
 const convertWineFromApi = (wine) => ({
-  id: wine.id && ('' + wine.id),
-  name: wine.name || '',
-  startDate: wine.startDate || '',
-  tankNumber: wine.tankNumber || '',
-  tankCapacity: wine.tankCapacity || '',
-  liters: wine.liters || '',
-  harvest: wine.harvest || {},
-  ingredients: wine.ingredients || [],
+  ...wine
 });
 
 const convertWineToApi = (wine) => ({
@@ -121,6 +114,10 @@ const convertWineToApi = (wine) => ({
   tankCapacity: wine.tankCapacity || null,
   liters: wine.liters || null,
   harvest: wine.harvest || null,
+});
+
+const convertTankFromApi = (tank) => ({
+  ...tank
 });
 
 const convertGrapeColor = (color) =>
@@ -212,6 +209,7 @@ const checkBoolean = (value) =>
 
 export const FromApiConverter = {
   convertParcelList: (list) => list.map(convertParcelFromApi),
+  convertTankList: (list) => list.map(convertTankFromApi),
   convertParcel: convertParcelFromApi,
   convertGrapevine: convertGrapevineFromApi,
   convertGrapevineList: (list) => list.map(convertGrapevineFromApi),

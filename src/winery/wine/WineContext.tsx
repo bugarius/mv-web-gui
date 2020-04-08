@@ -17,8 +17,7 @@ interface WineContextInterface
 const defaultWine = {
   id: null,
   name: "",
-  tankNumber: null,
-  tankCapacity: null,
+  tank: {},
   startDate: "",
   liters: null,
   harvest: {},

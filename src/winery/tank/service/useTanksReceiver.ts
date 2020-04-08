@@ -1,14 +1,14 @@
+import useTankService from "./useTankService";
 import {useEffect, useState} from "react";
 import {Service, StatusType} from "../../../services/types/Service";
+import {Tank} from "../types/Tank";
 import {ResponseError} from "../../../error/ResponseError";
-import useHarvestService from "./useHarvestService";
-import {Harvest} from "../types/Harvest";
 import {SelectOption} from "../../../services/types/SelectOption";
 
-const useHarvestsReceiver = (value?) => {
+const useTanksReceiver = (value?) => {
 
-    const service = useHarvestService();
-    const [result, setResult] = useState<Service<Harvest[]>>({
+    const service = useTankService();
+    const [result, setResult] = useState<Service<Tank[]>>({
         status: StatusType.loading
     });
     const [options, setOptions] = useState<SelectOption[]>([]);
@@ -20,17 +20,15 @@ const useHarvestsReceiver = (value?) => {
             setSelected(value?.id ?
                 {
                     value: value.id,
-                    label: value.label ? value.label : value.grapevine.name + " - " + value.dateOfHarvest
+                    label: value.label ? value.label : value.number + " - " + value.capacity + " l."
                 }
                 : '');
         }
-        if (!result?.payload)
-        {
+        if (!result?.payload) {
             service?.getList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});
-                    setOptions(response?.filter(h => !h.allDisposedToWine)
-                        .map((h) => ({value: h.id, label: h.grapevine.name + " - " + h.dateOfHarvest})))
+                    setOptions(response?.map((t) => ({value: t.id, label: t.number + " - " + t.capacity + " l."})))
                 })
                 .catch(error => setResult(new ResponseError(error)));
         }
@@ -40,4 +38,4 @@ const useHarvestsReceiver = (value?) => {
 };
 
 
-export default useHarvestsReceiver;
+export default useTanksReceiver;

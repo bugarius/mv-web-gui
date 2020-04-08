@@ -29,8 +29,8 @@ const SimpleWineList = ({wines, page, pagination, limit, loading, paginationActi
         const fields = [<td style={{textAlign: 'center'}} key={1}>{wine?.id}</td>,
             <td style={{textAlign: 'center'}} key={2}>{wine?.name}</td>,
             <td style={{textAlign: 'center'}} key={3}>{wine?.startDate}</td>,
-            <td style={{textAlign: 'center'}} key={4}>{wine?.tankNumber}</td>,
-            <td style={{textAlign: 'center'}} key={5}>{wine?.tankCapacity}</td>,
+            <td style={{textAlign: 'center'}} key={4}>{wine?.tank?.number}</td>,
+            <td style={{textAlign: 'center'}} key={5}>{wine?.tank?.capacity}</td>,
             <td style={{textAlign: 'center'}} key={6}>{wine?.liters}</td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={wine}

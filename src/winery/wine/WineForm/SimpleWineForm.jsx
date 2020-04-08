@@ -6,11 +6,12 @@ import InputElement from "../../../common/InputElement";
 import {StatusType} from "../../../services/types/Service";
 import {useWineContext} from "../WineContext";
 import SelectHarvest from "./SelectHarvest";
+import SelectTank from "./SelectTank";
 
-const SimpleWineForm = ({updateHarvestInWine, onSubmit}) => {
+const SimpleWineForm = ({updateHarvestInWine, updateTankInWine, onSubmit}) => {
 
     const {wine, updateWine, wineResult} = useWineContext();
-console.log(wine)
+
     return (
             <>
                 <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}
@@ -32,19 +33,11 @@ console.log(wine)
                                           onChange={e => updateWine(e.target.name, e.target.value)}
                                           defaultValue={wine?.startDate}
                             />
-                            <InputElement label={<Trans i18nKey="wine.TANK_NUMBER"/>}
-                                          type={'text'}
-                                          name={'tankNumber'}
-                                          maxSize={'100'}
-                                          onChange={e => updateWine(e.target.name, e.target.value)}
-                                          defaultValue={wine?.tankNumber}
-                            />
-                            <InputElement label={<Trans i18nKey="wine.TANK_CAPACITY"/>}
-                                          type={'number'}
-                                          name={'tankCapacity'}
-                                          maxSize={'100'}
-                                          onChange={e => updateWine(e.target.name, e.target.value)}
-                                          defaultValue={wine?.tankCapacity}
+                            <SelectTank value={wine?.tank}
+                                           name={'tank'}
+                                           label={'Zbiornik'}
+                                           disabled={wine?.harvest?.allDisposedToWine}
+                                           onChange={updateTankInWine}
                             />
                             <InputElement label={<Trans i18nKey="wine.LITERS"/>}
                                           type={'number'}

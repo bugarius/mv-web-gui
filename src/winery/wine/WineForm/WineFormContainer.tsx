@@ -22,6 +22,11 @@ const WineFormContainer = ({render}) => {
         updateWine('harvest', harvest);
     };
 
+    const updateTankInWine = (value) => {
+        const tank = {id: value.value, label: value.label};
+        updateWine('tank', tank);
+    };
+
     useEffect(() => {
         setWineResult({status: StatusType.loading});
         if (wineId?.toString() === "0")
@@ -57,7 +62,7 @@ const WineFormContainer = ({render}) => {
     };
 
     log.debug("WineFormContainer::render", wine);
-    return render(updateHarvestInWine, onSubmit);
+    return render(updateHarvestInWine, updateTankInWine, onSubmit);
 };
 
 export default WineFormContainer;

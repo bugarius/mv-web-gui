@@ -6,8 +6,9 @@ const GrapevineForm = (props) => {
 
     return (
             <WineFormContainer {...props}
-                               render={(updateHarvestInWine, onSubmit) => (
+                               render={(updateHarvestInWine, updateTankInWine,  onSubmit) => (
                                        <SimpleWineForm updateHarvestInWine={updateHarvestInWine}
+                                                       updateTankInWine={updateTankInWine}
                                                        onSubmit={onSubmit}
                                        />
                                )}/>

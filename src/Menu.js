@@ -88,6 +88,27 @@ const Menu = [
         ]
     },
     {
+        name: 'Zbiorniki',
+        icon: 'icon-screen-smartphone',
+        translate: 'sidebar.nav.TANKS',
+        submenu: [{
+            name: 'Lista zbiorników',
+            path: '/mv/tank/all',
+            translate: 'sidebar.nav.element.TANKS_LIST'
+        },
+            {
+                name: 'Dodaj nowy',
+                path: {
+                    pathname: '/mv/tank/0',
+                    state: {
+                        from: '/mv/tank/all'
+                    }
+                },
+                translate: 'sidebar.nav.element.ADD_NEW_TANK'
+            }
+        ]
+    },
+    {
         name: 'Dodatki',
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.INGREDIENTS',

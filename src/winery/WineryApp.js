@@ -17,6 +17,7 @@ import NotFound from "../components/Pages/NotFound";
 import Error500 from "../components/Pages/Error500";
 import Maintenance from "../components/Pages/Maintenance";
 import ErrorApp from "../error/ErrorApp";
+import TankApp from "./tank/TankApp";
 
 const waitFor = Tag => props => <Tag {...props}/>;
 
@@ -84,6 +85,9 @@ const Routes = ({location}) => {
 
                                         {/*Wines*/}
                                         <Route path="/mv/wine" component={waitFor(WineApp)}/>
+
+                                        {/*Tanks*/}
+                                        <Route path="/mv/tank" component={waitFor(TankApp)}/>
 
                                         {/*Ingredients*/}
                                         <Route path="/mv/ingredient" component={waitFor(IngredientApp)}/>

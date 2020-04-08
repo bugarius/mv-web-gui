@@ -10,18 +10,17 @@ const WineInfoBox = ({actions: {editWine}}) => {
 
     const {wine} = useWineContext();
 
-    const {tankCapacity, liters, tankNumber, name, startDate, ingredients} = wine;
-    const percent = Math.floor(liters * 100 / tankCapacity);
+    const {liters, name, startDate, ingredients, tank} = wine;
 
     return (
             <Card className="b">
                 <CardHeader>
                     <SmallTextBadge title={'wystartowany'} color={'success'}/>
-                    <h4 className="m-0">Zbiornik nr {tankNumber}</h4>
+                    <h4 className="m-0">Zbiornik nr {tank?.number}</h4>
                     <small className="text-muted">{name}</small>
                 </CardHeader>
                 <CardBody>
-                    <ProgressBar percent={percent} color={'info'} title={'Zapełnienie zbiornika'}/>
+                    <ProgressBar percent={tank?.percentOfUsage} color={'info'} title={'Zapełnienie zbiornika'}/>
                 </CardBody>
                 <Table>
                     <tbody>
