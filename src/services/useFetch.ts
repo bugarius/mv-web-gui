@@ -85,10 +85,18 @@ const useFetch = <T>(endpoint?: string) => {
     const putBody = (body: T) => {
         if (body === null)
         {
-            throw new Error("to make a put you must provide the id and the body");
+            throw new Error("to make a put you must provide the body");
         }
         const url = `${endpoint}`;
         return customFetch(url, "PUT", body);
+    };
+    const putId = (id: number) => {
+        if (id === null)
+        {
+            throw new Error("to make a put you must provide the id");
+        }
+        const url = `${endpoint}/${id}`;
+        return customFetch(url, "PUT", null);
     };
     const del = (id: number, page?: number) => {
         if (!id)
@@ -99,6 +107,6 @@ const useFetch = <T>(endpoint?: string) => {
         return customFetch(url, "DELETE", null);
     };
 
-    return {get, getList, getAll, getAllWithParams, post, put, putBody, del, getAllByParams, postFile, putFile};
+    return {get, getList, getAll, getAllWithParams, post, put, putBody, putId, del, getAllByParams, postFile, putFile};
 };
 export default useFetch;

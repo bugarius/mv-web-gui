@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {useParams} from "react-router-dom";
 import {Wine} from "../../types/Wine";
 import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../../error/ResponseError";
@@ -10,8 +9,7 @@ import {useWineContext} from "../../WineContext";
 const WineIngredientsListBoxContainer = ({render}) => {
 
     const {wine, setWineResult} = useWineContext();
-    const {wineId} = useParams();
-    const service = useWineService(wineId);
+    const service = useWineService();
 
     const [ingredientToShow, setIngredientToShow] = useState({id: null, isOpen: false});
 

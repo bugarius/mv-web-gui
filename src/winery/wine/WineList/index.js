@@ -1,14 +1,13 @@
 import React from "react";
 import EntityListReceiver from "../../common/EntityListReceiver";
-import {useParams, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {FromApiConverter} from "../../../services/Converters";
 import SimpleWineList from "./SimpleWineList";
 import useWineService from "../service/useWineService";
 
-const BoxList = (props) => {
+const WineList = (props) => {
 
-    const {wineId} = useParams();
-    const service = useWineService(wineId);
+    const service = useWineService();
 
     return (
             <EntityListReceiver {...props}
@@ -30,4 +29,4 @@ const BoxList = (props) => {
     )
 };
 
-export default withRouter(BoxList);
+export default withRouter(WineList);

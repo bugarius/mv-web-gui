@@ -12,6 +12,7 @@ interface HarvestContextInterface
     setHarvests: (value: Harvest[]) => void;
     harvestResult: Service<Harvest>;
     setHarvestResult: (value: Service<Harvest>) => void;
+    loading: boolean;
 }
 
 const defaultHarvest = {
@@ -21,7 +22,7 @@ const defaultHarvest = {
     weightOfGrapes: null,
     amountOfMust: null,
     amountOfWaste: null,
-    box: {},
+    box: null,
     boxesCount: null,
     weightOfEveryEmptyBox: null,
     allDisposedToWine: false,
@@ -35,7 +36,8 @@ const defaultState = {
     harvests: [],
     setHarvests: () => {},
     harvestResult: {status: StatusType.loading},
-    setHarvestResult: () => {}
+    setHarvestResult: () => {},
+    loading: false
 };
 
 const reducer = (state, action) => {
@@ -112,7 +114,8 @@ const HarvestProvider: React.FC = ({children}) => {
         resetHarvest,
         resetHarvests,
         harvestResult: state.harvestResult,
-        setHarvestResult
+        setHarvestResult,
+        loading: state.harvestResult.status === StatusType.loading
 
     }), [state.harvest, updateHarvest, updateBox, state.harvests, setHarvest, setHarvests, resetHarvest,
         resetHarvests, state.harvestResult, setHarvestResult]);

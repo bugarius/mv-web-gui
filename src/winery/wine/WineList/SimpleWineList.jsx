@@ -45,7 +45,7 @@ const SimpleWineList = ({wines, page, pagination, limit, loading, paginationActi
             <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'} loading={loading}
                          disabled={wrapperDisabled}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
+                    <CardHeader><Trans i18nKey="sidebar.nav.element.WINE_LIST"/></CardHeader>
                     <CardBody>
                         <Table hover>
                             {

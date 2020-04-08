@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import log from 'loglevel';
 
@@ -18,8 +18,13 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
 
     const [limit, setLimit] = useState(getLimit());
 
-    useEffect(() => {
-        window.addEventListener("resize", () => updateDimensions());
+    const handleError = useCallback((error) => {
+        setLoading(false);
+        log.debug(error);
+        // history.push(`/error`);
+    }, []);
+
+    const fetchAllEntities = useCallback(() => {
         service.getAll(page)
                 .then((result) => {
                     setPagination(result);
@@ -27,7 +32,18 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
                     setEntities(listConverter(result.content));
                 })
                 .catch(handleError);
-        return window.removeEventListener("resize", () => updateDimensions());
+    }, [handleError, setEntities, listConverter, page, service]);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => updateDimensions());
+        if (!service?.payload)
+        {
+            fetchAllEntities();
+        }
+        return () => {
+            window.removeEventListener("resize", () => updateDimensions());
+            setEntities([]);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -36,30 +52,21 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     };
 
     const remove = (entity) => {
-        let fixLastInPage = 0;
         if (window.confirm("Czy jesteś pewien?") === true)
         {
             setLoading(true);
             if (pagination.numberOfElements === 1 && page > 0)
             {
-                fixLastInPage = 1;
                 setPage(page - 1);
             }
 
-            service.del(entity.id, page - fixLastInPage)
+            service.del(entity.id)
                     .then((result) => {
-                        setPagination(result);
+                        fetchAllEntities();
                         setLoading(false);
-                        setEntities(listConverter(result.content));
                     })
                     .catch(handleError);
         }
-    };
-
-    const handleError = (error) => {
-        setLoading(false);
-        log.debug(error);
-        history.push(`/error`);
     };
 
     const proceed = (entity) => {

@@ -9,7 +9,7 @@ export interface Harvest
     weightOfGrapes?: number | null;
     amountOfMust?: number | null;
     amountOfWaste?: number | null;
-    box?: BoxWithGrapes;
+    box?: BoxWithGrapes | null;
     boxesCount?: number | null;
     weightOfEveryEmptyBox?: number | null;
     allDisposedToWine?: boolean;

@@ -1,7 +1,6 @@
 import {useCallback, useState} from 'react';
 import {useWineContext} from "../../wine/WineContext";
 import useWineService from "../../wine/service/useWineService";
-import {useParams} from "react-router-dom";
 import {useIngredientContext} from "../IngredientContext";
 import {StatusType} from "../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
@@ -12,8 +11,7 @@ const AddIngredientContainer = ({render}) => {
 
     const {setWineResult} = useWineContext();
     const {ingredient, updateIngredient} = useIngredientContext();
-    const {wineId} = useParams();
-    const service = useWineService(wineId);
+    const service = useWineService();
     const [key, setKey] = useState(new Date());
 
     const updateIngredientSelect = (selected) => {

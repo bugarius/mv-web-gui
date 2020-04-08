@@ -16,7 +16,8 @@ const BoxList = (props) => {
                                 service={service}
                                 listConverter={FromApiConverter.convertBoxList}
                                 render={(entities, page, pagination, limit, loading, paginationActions, entityActions) => (
-                                        <SimpleBoxList boxes={entities}
+                                        <SimpleBoxList {...props}
+                                                       boxes={entities}
                                                        page={page}
                                                        pagination={pagination}
                                                        limit={limit}

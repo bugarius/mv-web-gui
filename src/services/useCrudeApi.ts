@@ -27,12 +27,20 @@ const useCrudeApi = <T>(endpoint: string) => {
         return crudApi.put(id, body);
     };
 
+    const putBody = (body: T) => {
+        return crudApi.putBody(body);
+    };
+
+    const putId = (id: number) => {
+        return crudApi.putId(id);
+    };
+
     const del = (id: number) => {
         return crudApi.del(id);
     };
 
     return {
-        get, getAll, getAllWithParams, getList, post, put, del
+        get, getAll, getAllWithParams, getList, post, put, putBody, putId, del
     }
 };
 

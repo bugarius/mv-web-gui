@@ -12,7 +12,7 @@ const thead = [
     <th style={{textAlign: 'center'}} key={5}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleBoxList = ({boxes, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove}}) => {
+const SimpleBoxList = ({boxes, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove}, reloadHarvest}) => {
 
     const {harvest} = useHarvestContext();
     const createTHead = () => {
@@ -32,7 +32,10 @@ const SimpleBoxList = ({boxes, page, pagination, limit, loading, paginationActio
             <td style={{padding: '5px', textAlign: 'center'}} key={5}>
                 {
                     !harvest?.allDisposedToWine ?
-                            <div className="card-body d-flex align-items-center" onClick={() => remove(box)}
+                            <div className="card-body d-flex align-items-center" onClick={() => {
+                                remove(box);
+                                reloadHarvest();
+                            }}
                                  style={{cursor: 'pointer'}}>
                                 <em className="fa-2x mr-2 far fa-trash-alt"/>
                             </div> :

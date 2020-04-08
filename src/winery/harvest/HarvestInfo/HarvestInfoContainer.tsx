@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useHistory, useParams} from "react-router-dom";
 import log from "loglevel";
 import {useHarvestContext} from "../HarvestContext";
@@ -10,6 +10,7 @@ import {Grapevine} from "../../grapevine/types/Grapevine";
 const HarvestInfoContainer = ({render}) => {
 
     const {harvest, updateHarvest, setHarvestResult} = useHarvestContext();
+    const [reload, setReload] = useState(false);
     const service = useHarvestService();
     const {harvestId} = useParams();
     const history = useHistory();
@@ -21,21 +22,21 @@ const HarvestInfoContainer = ({render}) => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
             })
             .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
-
+        setReload(false);
         return () => updateHarvest("reset", "");
-    }, [harvestId]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {
         history.push(`/mv/harvest/${harvestId}/`);
     };
 
-    const dispose = (e, disposeAll) => {
+    const dispose = (e) => {
         e.preventDefault();
         if (window.confirm("Czy jesteś pewien?"))
         {
             setHarvestResult({status: StatusType.loading});
-            harvest.allDisposedToWine = disposeAll;
-            harvest?.id && service.put(harvest.id, harvest)
+            const action = harvest.allDisposedToWine ? service.revertDispose : service.dispose;
+            harvest?.id && action(harvest.id)
                 .then(response => {
                     setHarvestResult({status: StatusType.loaded, payload: response});
                 })
@@ -48,8 +49,7 @@ const HarvestInfoContainer = ({render}) => {
         log.debug('HarvestInfo:onSubmit', e, harvest);
         setHarvestResult({status: StatusType.loading});
 
-        const action = () => harvest?.id ? service.put(harvest.id, harvest) : service.post(harvest);
-        action()
+        harvest?.box && service.addBox(harvest?.box)
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
                 history?.push(`/mv/harvest/${harvestId}/info`);
@@ -60,11 +60,11 @@ const HarvestInfoContainer = ({render}) => {
             });
     };
 
-    // const loading = (harvestId) => {
-    //     // setReload(true);
-    // };
+    const reloadHarvest = () => {
+        setReload(true);
+    };
 
-    return render({addBoxToHarvest, edit, dispose});
+    return render({addBoxToHarvest, edit, dispose, reloadHarvest});
 };
 
 export default HarvestInfoContainer;

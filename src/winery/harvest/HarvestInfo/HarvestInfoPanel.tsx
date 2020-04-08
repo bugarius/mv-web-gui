@@ -17,11 +17,12 @@ interface Props
         addBoxToHarvest?: (e) => void;
         edit?: () => void;
         dispose?: (e, disposeAll: boolean) => void;
+        reloadHarvest?: () => void;
     }
 }
-const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dispose}}) => {
+const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dispose, reloadHarvest}}) => {
 
-    const {harvest, harvestResult, updateBox} = useHarvestContext();
+    const {harvest, harvestResult, updateBox, loading} = useHarvestContext();
     const {harvestId} = useParams();
 
     return (
@@ -103,7 +104,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                         }
                     </div>
                 </div>
-                {harvestId && <BoxList harvest={harvest} harvestId={harvestId} loading={harvestResult.status === StatusType.loading}/>}
+                {harvestId && <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}
                 {harvestId && <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true}/>}
             </PageWrapper>
         </>
