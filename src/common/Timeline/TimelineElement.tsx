@@ -7,6 +7,8 @@ import {FromApiConverter} from "../../services/Converters";
 
 interface Props
 {
+    header?: string;
+    subHeader?: string;
     inverted?: boolean;
     icon?: string;
     iconBg?: Color | string;
@@ -15,6 +17,8 @@ interface Props
 
 const TimelineElement: React.FC<Props> = (
     {
+        header,
+        subHeader,
         inverted,
         icon,
         iconBg,
@@ -30,10 +34,10 @@ const TimelineElement: React.FC<Props> = (
             </div>
             <div className="timeline-card">
                 <div className="popover right">
-                    <h4 className="popover-header">{t(`history.status.${historyItem?.status}`)} <small>{FromApiConverter.convertDateTime(historyItem?.date)}</small></h4>
+                    <h4 className="popover-header">{header} <small>{FromApiConverter.convertDateTime(historyItem?.date)}</small></h4>
                     <div className="arrow"/>
                     <div className="popover-body">
-                        <p>{t(`ingredients.TYPE.${historyItem?.actionType}`)}: {historyItem?.message}
+                        <p>{subHeader}
                             <br/>
                             <small>Dodał: {historyItem?.modifier?.name}</small> <br/>
                         </p>

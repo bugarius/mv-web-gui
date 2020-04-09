@@ -10,6 +10,7 @@ import {Trans} from "react-i18next";
 import * as PropTypes from 'prop-types';
 import BoxList from "../../box/BoxList";
 import WineList from "../../wine/WineList";
+import HarvestHistory from "./history/HarvestHistory";
 
 interface Props
 {
@@ -106,6 +107,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                 </div>
                 {harvestId && <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}
                 {harvestId && <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true}/>}
+                <HarvestHistory history={harvest?.history}/>
             </PageWrapper>
         </>
     )

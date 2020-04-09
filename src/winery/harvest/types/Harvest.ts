@@ -1,5 +1,6 @@
 import {Grapevine} from "../../grapevine/types/Grapevine";
 import {BoxWithGrapes} from "../../box/types/BoxWithGrapes";
+import {History} from "../../wine/types/History";
 
 export interface Harvest
 {
@@ -13,4 +14,5 @@ export interface Harvest
     boxesCount?: number | null;
     weightOfEveryEmptyBox?: number | null;
     allDisposedToWine?: boolean;
+    history?: History[];
 }

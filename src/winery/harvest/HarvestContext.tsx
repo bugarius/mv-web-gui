@@ -26,6 +26,7 @@ const defaultHarvest = {
     boxesCount: null,
     weightOfEveryEmptyBox: null,
     allDisposedToWine: false,
+    history: []
 };
 
 const defaultState = {

@@ -51,8 +51,12 @@
   "wine.LITERS": "Litry",
   "wine.HARVEST": "Zbiór",
 
+  "history.status.CREATED": "Utworzono",
   "history.status.APPLIED_INGREDIENT": "Dodano składnik",
+  "history.status.ADDED_WINE": "Dodano nastaw",
   "history.icon.status.APPLIED_INGREDIENT": "icon-chemistry",
+  "history.icon.status.ADDED_WINE": "icon-drop",
+  "history.icon.status.CREATED": "icon-basket-loaded",
 
   "tank.TITLE": "Zbiorniki na wino",
   "tank.LIST": "Zarządzaj zbiornikami",
