@@ -45,7 +45,7 @@ const SelectTank: React.FC<Props> = ({value: selected, onChange, name, label, op
                         Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.
                         <span className="text-info btn-link" onClick={() => goToTank("id" in selected ? selected.id : '')}
                               style={{cursor: 'pointer', display: ("id" in selected && selected.id ? '' : 'none')}}>
-                             Przejdź do Zarządzania nastawem...
+                             Przejdź do Zarządzania zbiornikiem...
                         </span>
                         </span>
                     }

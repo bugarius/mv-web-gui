@@ -225,7 +225,8 @@ export const FromApiConverter = {
   convertAccountList: (list) => list.map(convertAccountFromApi),
   convertUserList: (list) => list.map(convertUserFromApi),
   convertPrincipal: convertPrincipalFromApi,
-  convertGrapeColor: convertGrapeColor
+  convertGrapeColor: convertGrapeColor,
+  convertDateTime: convertDateTimeFromApi
 };
 
 export const ToApiConverter = {

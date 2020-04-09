@@ -8,6 +8,7 @@ import WineIngredientsListBox from "./WineIngredientsListBox";
 import AddIngredient from "../../ingredient/AddIngredient";
 import IngredientInfoPanelTab from "../../ingredient/IngredientInfoPanelTab";
 import {useTranslation} from "react-i18next";
+import Timeline from "../history/Timeline";
 
 const WineInfo = ({actions}) => {
 
@@ -28,6 +29,7 @@ const WineInfo = ({actions}) => {
                                       tab2={<IngredientInfoPanelTab/>}/>
                         </Col>
                     </Row>
+                    <Timeline/>
 
                 </PageWrapper>
             </>
