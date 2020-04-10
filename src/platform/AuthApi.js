@@ -1,6 +1,4 @@
-import { baseApiUrl } from "../config";
-
-const apiUrl = baseApiUrl + '/auth';
+const apiUrl = '/auth';
 
 const transformResponse = (res) => {
   console.log('AuthApi:transformResponse', res);

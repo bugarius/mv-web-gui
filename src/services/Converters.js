@@ -1,4 +1,3 @@
-import {baseApiUrl} from "../config";
 import {StringValueValidator} from "./Validators";
 
 const convertParcelFromApi = (parcel) => ({
@@ -155,7 +154,7 @@ const convertDateTimeFromApi = (dateTime) =>
 
 const getAvatarUrl = (avatar) =>
 {
-  const url = baseApiUrl + "/ajax/avatar/";
+  const url = "/ajax/avatar/";
   const avatarId = avatar && avatar.id;
   return avatarId && (url + avatarId)
 };

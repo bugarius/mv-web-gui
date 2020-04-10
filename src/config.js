@@ -1,1 +1,4 @@
-export const baseApiUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:5000' : '';
+import * as log from 'loglevel'
+
+const devEnv = (process.env.NODE_ENV === 'development');
+devEnv ? log.setLevel('DEBUG') : log.setLevel('ERROR');

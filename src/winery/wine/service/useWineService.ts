@@ -7,7 +7,7 @@ const useWineService = () => {
 
     const {harvestId, wineId} = useParams();
     const {get, post, put, del} = useCrudeApi<Wine>(`/ajax/wines`);
-    const {getAll} = useCrudeApi<Wine>(`/ajax/wines/${harvestId ? `/harvest/${harvestId}` : ""}`);
+    const {getAll} = useCrudeApi<Wine>(`/ajax/wines${harvestId ? `/harvest/${harvestId}` : ""}`);
     const {putBody: addIngredient, del: delIngredient} = useFetch<Wine>(`/ajax/wines/${wineId}/ingredient`);
     const {getAllWithParams: getByHarvest} = useCrudeApi<Wine>(`/ajax/wines/harvest/${harvestId}`);
 
