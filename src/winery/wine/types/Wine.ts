@@ -11,4 +11,5 @@ export interface Wine
     liters?: number | null;
     harvest?: Harvest;
     ingredients?: Ingredient[];
+    history?: History[];
 }

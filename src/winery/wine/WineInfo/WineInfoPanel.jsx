@@ -8,10 +8,13 @@ import WineIngredientsListBox from "./WineIngredientsListBox";
 import AddIngredient from "../../ingredient/AddIngredient";
 import IngredientInfoPanelTab from "../../ingredient/IngredientInfoPanelTab";
 import {useTranslation} from "react-i18next";
+import {useWineContext} from "../WineContext";
+import WineHistory from "./history/WineHistory";
 
 const WineInfo = ({actions}) => {
 
     const {t} = useTranslation();
+    const {wine} = useWineContext();
 
     return (
             <>
@@ -28,6 +31,7 @@ const WineInfo = ({actions}) => {
                                       tab2={<IngredientInfoPanelTab/>}/>
                         </Col>
                     </Row>
+                    <WineHistory history={wine?.history}/>
 
                 </PageWrapper>
             </>

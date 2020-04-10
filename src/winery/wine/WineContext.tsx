@@ -22,6 +22,7 @@ const defaultWine = {
   liters: null,
   harvest: {},
   ingredients: [],
+  history: []
 };
 
 const defaultState = {
