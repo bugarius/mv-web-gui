@@ -29,8 +29,8 @@ const App = () => {
     // specify base href from env varible 'PUBLIC_URL'
     // use only if application isn't served from the root
     // for development it is forced to root only
-    /* global PUBLIC_URL */
-    const basename = process.env.NODE_ENV === 'development' ? '/' : (PUBLIC_URL || '/');
+
+    // const basename = process.env.NODE_ENV === 'development' ? '/' : (PUBLIC_URL || '/');
 
     const methods = useForm({
         mode: 'onChange',
@@ -44,7 +44,7 @@ const App = () => {
                 <ErrorProvider>
                     <ValidationSchemaProvider>
                         <FormContext {...methods} >
-                            <BrowserRouter basename={basename}>
+                            <BrowserRouter>
                                 <AppRouting/>
                             </BrowserRouter>
                         </FormContext>
