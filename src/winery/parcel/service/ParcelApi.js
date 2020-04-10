@@ -1,6 +1,6 @@
 import {baseApiUrl} from "../../../config";
 
-const apiUrl = baseApiUrl + '/ajax/parcel';
+const apiUrl = baseApiUrl + '/ajax/parcels';
 
 const initialFormData = {
   parcel: {},

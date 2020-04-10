@@ -1,36 +1,29 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
+import * as PropTypes from 'prop-types';
 
 export const AuthContext = React.createContext();
 
+const AuthProvider = ({children}) => {
+  const [principal, setPrincipal] = useState(null);
+  const [lock, setLock] = useState(false);
 
-export class AuthProvider extends React.Component {
-
-  constructor(props)
-  {
-    super(props);
-    console.log('AuthProvider::constructor', props);
-
-    this.state = {
-      setPrincipal: this.setPrincipal,
-    };
-  }
-
-  setPrincipal = (principal) => {
-    console.log('AuthProvider::setPrincipal', principal);
-
-    this.setState(() => {
-      return {principal: principal}
-    });
+  const actions = {
+    mainRole: principal?.realms?.[0],
+    isAdmin: principal?.hasAccess?.('/account'),
+    isUser: principal?.hasAccess?.('/mv')
   };
 
-  render()
-  {
-    return (
-      <AuthContext.Provider value={this.state}>
-        {this.props.children}
-      </AuthContext.Provider>
-    )
-  }
-}
+  const providerValue = useMemo(() => ({principal, setPrincipal, actions, lock, setLock}), [principal, setPrincipal, actions, lock, setLock]);
 
-export const AuthConsumer = AuthContext.Consumer;
+  return (
+          <AuthContext.Provider value={providerValue}>
+            {children}
+          </AuthContext.Provider>
+  )
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.any
+};
+
+export default AuthProvider;

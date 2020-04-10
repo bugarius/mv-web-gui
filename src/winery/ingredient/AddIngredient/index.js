@@ -1,12 +1,12 @@
 import React from "react";
-import AddIngredientContainer from "./AddIngredientContainer";
 import AddIngredientForm from "./AddIngredientForm";
+import AddIngredientContainer from "./AddIngredientContainer";
 
 const AddIngredient = (props) => {
     return (
-            <AddIngredientContainer {...props} render={(options, keys, actions) => (
-                    <AddIngredientForm options={options} keys={keys} actions={actions}/>
-            )} />
+            <AddIngredientContainer {...props} render={(actions, newKey) => (
+                    <AddIngredientForm actions={actions} newKey={newKey}/>
+            )}/>
     )
 };
 

@@ -103,14 +103,7 @@ const convertIngredientToApi = (ingredient) => ({
 });
 
 const convertWineFromApi = (wine) => ({
-  id: wine.id && ('' + wine.id),
-  name: wine.name || '',
-  startDate: wine.startDate || '',
-  tankNumber: wine.tankNumber || '',
-  tankCapacity: wine.tankCapacity || '',
-  liters: wine.liters || '',
-  harvest: wine.harvest || {},
-  ingredients: wine.ingredients || [],
+  ...wine
 });
 
 const convertWineToApi = (wine) => ({
@@ -121,6 +114,10 @@ const convertWineToApi = (wine) => ({
   tankCapacity: wine.tankCapacity || null,
   liters: wine.liters || null,
   harvest: wine.harvest || null,
+});
+
+const convertTankFromApi = (tank) => ({
+  ...tank
 });
 
 const convertGrapeColor = (color) =>
@@ -165,8 +162,8 @@ const getAvatarUrl = (avatar) =>
 
 const convertPrincipalFromApi = (principal) =>
 {
-  principal.avatarUrl = getAvatarUrl(principal.avatar) || '/images/fa-user-solid.png';
-  principal.hasAccess = (path) => (principal.realms.find(r => r.startsWith(path)));
+  principal.avatarUrl = getAvatarUrl(principal.avatar) || 'img/user/02.jpg';
+  principal.hasAccess = (path) => (principal.realms?.find(r => r.startsWith(path)));
   principal.lock = false;
 
   return principal;
@@ -177,7 +174,7 @@ const convertUserFromApi = (user, account) =>
   user.id = '' + user.id;
   user.created = (user.created && convertDateTimeFromApi(user.created)) || '';
   user.lastLogin = (user.lastLogin && convertDateTimeFromApi(user.lastLogin)) || '';
-  user.avatarUrl = getAvatarUrl(user.avatar) || '/images/fa-user-regular.png';
+  user.avatarUrl = getAvatarUrl(user.avatar) || 'img/user/02.jpg';
   user.account = account;
   user.permissions = (user.roles || []).includes('SUPERUSER') ? [{value: 'SUPERUSER', label: 'wszystkie uzgodnienia'}] : [];
 
@@ -212,6 +209,7 @@ const checkBoolean = (value) =>
 
 export const FromApiConverter = {
   convertParcelList: (list) => list.map(convertParcelFromApi),
+  convertTankList: (list) => list.map(convertTankFromApi),
   convertParcel: convertParcelFromApi,
   convertGrapevine: convertGrapevineFromApi,
   convertGrapevineList: (list) => list.map(convertGrapevineFromApi),
@@ -227,7 +225,8 @@ export const FromApiConverter = {
   convertAccountList: (list) => list.map(convertAccountFromApi),
   convertUserList: (list) => list.map(convertUserFromApi),
   convertPrincipal: convertPrincipalFromApi,
-  convertGrapeColor: convertGrapeColor
+  convertGrapeColor: convertGrapeColor,
+  convertDateTime: convertDateTimeFromApi
 };
 
 export const ToApiConverter = {

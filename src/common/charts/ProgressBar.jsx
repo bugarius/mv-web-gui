@@ -15,17 +15,15 @@ const ProgressBar = ({title, percent, color}) => {
         return color;
     };
 
-    const percentForColor = Math.floor(percent / 10) * 10;
-
     return (
             <>
                 <div className="d-flex align-items-center">
                     <div className="w-100">
-                        <Progress className="progress-xs m-0" value={percentForColor || percent}
-                                  color={barColor(percentForColor)}/>
+                        <Progress className="progress-xs m-0" value={percent}
+                                  color={barColor(percent)}/>
                     </div>
                     <div className="wd-xxs text-right">
-                        <div className="text-bold text-muted">{percentForColor || percent}%</div>
+                        <div className="text-bold text-muted">{percent || "0"}%</div>
                     </div>
                 </div>
                 <div className="text-muted">{title}</div>

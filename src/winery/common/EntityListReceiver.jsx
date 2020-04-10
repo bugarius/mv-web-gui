@@ -1,5 +1,6 @@
-import {useContext, useEffect, useState} from 'react';
-import {AuthContext} from "../../platform/AuthContext";
+import {useCallback, useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
+import log from 'loglevel';
 
 const EntityListReceiver = ({history, render, service, listConverter, entityName}) => {
 
@@ -7,6 +8,7 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     const [pagination, setPagination] = useState({});
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
     const getLimit = () => {
         const limit = window.innerWidth / 150 - 2.5;
@@ -16,18 +18,32 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
 
     const [limit, setLimit] = useState(getLimit());
 
-    const {principal} = useContext(AuthContext);
+    const handleError = useCallback((error) => {
+        setLoading(false);
+        log.debug(error);
+        // history.push(`/error`);
+    }, []);
 
-    useEffect(() => {
-        window.addEventListener("resize", () => updateDimensions());
-        service.getList(page)
+    const fetchAllEntities = useCallback(() => {
+        service.getAll(page)
                 .then((result) => {
                     setPagination(result);
                     setLoading(false);
                     setEntities(listConverter(result.content));
                 })
                 .catch(handleError);
-        return window.removeEventListener("resize", () => updateDimensions());
+    }, [handleError, setEntities, listConverter, page, service]);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => updateDimensions());
+        if (!service?.payload)
+        {
+            fetchAllEntities();
+        }
+        return () => {
+            window.removeEventListener("resize", () => updateDimensions());
+            setEntities([]);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -36,37 +52,29 @@ const EntityListReceiver = ({history, render, service, listConverter, entityName
     };
 
     const remove = (entity) => {
-        let fixLastInPage = 0;
         if (window.confirm("Czy jesteś pewien?") === true)
         {
             setLoading(true);
             if (pagination.numberOfElements === 1 && page > 0)
             {
-                fixLastInPage = 1;
                 setPage(page - 1);
             }
 
-            service.delete(entity, page - fixLastInPage)
+            service.del(entity.id)
                     .then((result) => {
-                        setPagination(result);
+                        fetchAllEntities();
                         setLoading(false);
-                        setEntities(listConverter(result.content));
                     })
                     .catch(handleError);
         }
     };
 
-    const handleError = () => {
-        setLoading(false);
-        history.push(`/error`);
-    };
-
     const proceed = (entity) => {
-        history.push(`${principal.realms[0]}/${entityName}/${entity.id}/`);
+        history.push(`/mv/${entityName}/${entity.id}/`, {from: location.pathname});
     };
 
     const info = (entity) => {
-        history.push(`${principal.realms[0]}/${entityName}/${entity.id}/info`);
+        history.push(`/mv/${entityName}/${entity.id}/info`, {from: location.pathname});
     };
 
     const changePage = (e) => {

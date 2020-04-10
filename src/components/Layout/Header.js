@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
 
 import {connect} from 'react-redux';
@@ -85,9 +85,9 @@ class Header extends Component {
                         { /* END User avatar toggle */ }
                         { /* START lock screen */ }
                         <li className="nav-item d-none d-md-block">
-                            <Link to="lock" title="Lock screen" className="nav-link">
+                            <NavLink to={{pathname: '/lock', state: {from: window.location.pathname}}} title="Lock screen" className="nav-link">
                                 <em className="icon-lock"></em>
-                            </Link>
+                            </NavLink>
                         </li>
                         { /* END lock screen */ }
                     </ul>
