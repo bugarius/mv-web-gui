@@ -5,6 +5,7 @@ import ContentWrapper from "../../../../components/Layout/ContentWrapper";
 import TimelineSection from "../../../../common/Timeline/TimelineSection";
 import TimelineElement from "../../../../common/Timeline/TimelineElement";
 import PropTypes from "prop-types";
+import {Color} from "../../../../common/enums/Color";
 
 interface Props
 {
@@ -24,8 +25,9 @@ const HarvestHistory: React.FC<Props> = ({history}) => {
                             const subHeader = (item?.actionType ? item?.actionType : "") + " "
                                 + (item?.message ?  item?.message : "");
                             return <TimelineElement historyItem={item}
-                                                    inverted={index % 2 === 1}
+                                                    inverted={item?.status === "ADDED_WINE"}
                                                     key={index}
+                                                    iconBg={item?.status === "ADDED_WINE" ? Color.Green : Color.Blue}
                                                     header={t(`history.status.${item?.status}`)}
                                                     subHeader={subHeader}
                             />

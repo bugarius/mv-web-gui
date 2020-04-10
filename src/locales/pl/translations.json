@@ -54,9 +54,11 @@
   "history.status.CREATED": "Utworzono",
   "history.status.APPLIED_INGREDIENT": "Dodano składnik",
   "history.status.ADDED_WINE": "Dodano nastaw",
+  "history.status.DISPOSED_HARVEST": "Rozdysponowano i zamknięto",
   "history.icon.status.APPLIED_INGREDIENT": "icon-chemistry",
   "history.icon.status.ADDED_WINE": "icon-drop",
   "history.icon.status.CREATED": "icon-basket-loaded",
+  "history.icon.status.DISPOSED_HARVEST": "icon-lock",
 
   "tank.TITLE": "Zbiorniki na wino",
   "tank.LIST": "Zarządzaj zbiornikami",

@@ -4,6 +4,7 @@ import {History} from "../../winery/wine/types/History";
 import {useTranslation} from "react-i18next";
 import PropTypes from 'prop-types';
 import {FromApiConverter} from "../../services/Converters";
+import TimelineSeparator from "./TimelineSeparator";
 
 interface Props
 {
@@ -27,7 +28,7 @@ const TimelineElement: React.FC<Props> = (
 
     const {t} = useTranslation();
 
-    return (
+    return (<>
         <li className={(inverted ? "timeline-inverted" : "")}>
             <div className={"timeline-badge " + (iconBg || Color.Blue)}>
                 <em className={icon || t(`history.icon.status.${historyItem?.status}`)}/>
@@ -45,10 +46,14 @@ const TimelineElement: React.FC<Props> = (
                 </div>
             </div>
         </li>
+            <TimelineSeparator className={"p-0"} style={{height: "0px"}}/>
+        </>
     )
 };
 
 TimelineElement.propTypes = {
+    header: PropTypes.string,
+    subHeader: PropTypes.string,
     inverted: PropTypes.bool,
     icon: PropTypes.string,
     iconBg: PropTypes.string,

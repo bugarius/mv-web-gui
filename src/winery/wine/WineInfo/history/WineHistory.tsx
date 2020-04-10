@@ -5,6 +5,7 @@ import ContentWrapper from "../../../../components/Layout/ContentWrapper";
 import TimelineSection from "../../../../common/Timeline/TimelineSection";
 import TimelineElement from "../../../../common/Timeline/TimelineElement";
 import PropTypes from "prop-types";
+import {Color} from "../../../../common/enums/Color";
 
 interface Props
 {
@@ -24,7 +25,8 @@ const WineHistory: React.FC<Props> = ({history}) => {
                             const subHeader = (item?.actionType ? t(`ingredients.TYPE.${item?.actionType}`) + ": " :"")
                                 + (item?.message && item?.message);
                             return <TimelineElement historyItem={item}
-                                                    inverted={index % 2 === 1}
+                                                    inverted={item?.status === "APPLIED_INGREDIENT"}
+                                                    iconBg={item?.status === "APPLIED_INGREDIENT" ? Color.Green : Color.Blue}
                                                     key={index}
                                                     header={t(`history.status.${item?.status}`)}
                                                     subHeader={subHeader}
