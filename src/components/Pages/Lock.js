@@ -51,7 +51,7 @@ const Lock = () => {
                                     <input className={"form-control border-right-0 " + (error ? 'is-invalid' : '')}
                                            id="exampleInputEmail1"
                                            type="password"
-                                           placeholder="Wprowadź email"
+                                           placeholder="Wprowadź hasło"
                                            autoComplete="off"
                                            required
                                            onChange={e => setPassword(e.target.value)}/>
@@ -83,9 +83,9 @@ const Lock = () => {
                     <span className="mr-2">&copy;</span>
                     <span>2020</span>
                     <span className="mx-2">-</span>
-                    <span>MyVinery</span>
+                    <span>Moja Winnica</span>
                     <br/>
-                    <span>Menadżer Twojej winnicy</span>
+                    <span>Aplikacja do zarządzania produkcją wina z upraw własnych</span>
                 </div>
             </div>
     );

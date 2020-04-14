@@ -44,7 +44,7 @@ const SimpleParcelList = ({parcels, page, pagination, limit, loading, pagination
             <td style={{textAlign: 'center'}} key={7}>{zipCode}</td>,
             <td style={{textAlign: 'center'}} key={8}>
                 <ListActions entity={parcel}
-                             actions={{remove: remove, proceed: proceed, info: info}}/>
+                             actions={{remove: remove, proceed: proceed}}/>
             </td>]
         return <tr key={parcel.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}

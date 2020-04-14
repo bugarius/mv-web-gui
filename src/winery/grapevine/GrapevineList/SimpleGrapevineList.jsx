@@ -37,7 +37,7 @@ const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, pagi
             </td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={grapevine}
-                             actions={{remove: remove, proceed: proceed, info: info}}/>
+                             actions={{remove: remove, proceed: proceed}}/>
             </td>];
         return <tr key={grapevine?.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}

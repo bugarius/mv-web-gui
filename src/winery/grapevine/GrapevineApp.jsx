@@ -20,8 +20,11 @@ class GrapevineApp extends Component {
                                 <Redirect to="/mv/grapevine/all"/>
                             </Route>
                             <Route exact path="/mv/grapevine/all" component={GrapevineList}/>
-                            <Route path="/mv/grapevine/:grapevineId?">
+                            <Route exact path="/mv/grapevine/:grapevineId?">
                                 <GrapevineForm  principal={principal}/>
+                            </Route>
+                            <Route path="/mv/grapevine/:grapevineId/info">
+
                             </Route>
                         </Switch>
                     </GrapevineProvider>

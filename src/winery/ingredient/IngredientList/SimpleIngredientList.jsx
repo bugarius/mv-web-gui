@@ -48,7 +48,7 @@ const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, pa
         fields.add(t(`ingredients.TYPE.${type}`));
         fields.add(information && information.split(".")[0] + "...");
         fields.add(<ListActions entity={ingredient}
-                                actions={{remove: remove, proceed: proceed, info: info}}/>);
+                                actions={{remove: remove, proceed: proceed}}/>);
         return <tr key={index}>{fields.filter((t, index) => index < limit || index === fields.length - 1)}</tr>;
     };
 

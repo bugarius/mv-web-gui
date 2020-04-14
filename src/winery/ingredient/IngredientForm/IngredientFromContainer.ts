@@ -36,6 +36,8 @@ const IngredientFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('IngredientForm:onSubmit', e, ingredient);
+        setIngredientResult({status: StatusType.loading});
+
         const action = () => (ingredient?.id ? service.put(ingredient.id, ingredient) : service.post(ingredient));
         action()
             .then(response => {

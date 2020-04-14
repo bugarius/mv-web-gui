@@ -15,8 +15,11 @@ const TankApp = () => {
                         <Redirect to="/mv/tank/all"/>
                     </Route>
                     <Route exact path="/mv/tank/all" component={TankList}/>
-                    <Route path="/mv/tank/:tankId">
+                    <Route exact path="/mv/tank/:tankId">
                         <TankForm principal={principal}/>
+                    </Route>
+                    <Route path="/mv/tank/:tankId/info">
+
                     </Route>
                 </Switch>
             </TankProvider>

@@ -42,6 +42,7 @@ const HarvestFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('HarvestForm:onSubmit', harvest);
+        setHarvestResult({status: StatusType.loading});
 
         const action = () => harvest?.id ? service.put(harvest.id, harvest) : service.post(harvest);
         action()
