@@ -36,9 +36,8 @@ class Recover extends Component {
                     <span className="mr-2">&copy;</span>
                     <span>2020</span>
                     <span className="mx-2">-</span>
-                    <span>Angle</span>
+                    <span>Moja Winnica</span>
                     <br/>
-                    <span>Bootstrap Admin Template</span>
                 </div>
             </div>
         );

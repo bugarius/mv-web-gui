@@ -48,6 +48,7 @@ const WineFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('WineFormContainer:onSubmit', e, wine);
+        setWineResult({status: StatusType.loading});
 
         const action = () => (wine?.id ? service.put(wine.id, wine) : service.post(wine));
         action()

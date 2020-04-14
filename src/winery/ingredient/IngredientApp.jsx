@@ -17,8 +17,8 @@ const IngredientApp = () => {
                         <Route exact path="/mv/ingredient/:ingredientId?">
                             <IngredientForm />
                         </Route>
-                        <Route path="/mv/wine/:ingredientId?/info">
-                            {/*<WineInfo/>*/}
+                        <Route path="/mv/ingredient/:ingredientId?/info">
+
                         </Route>
                     </Switch>
                 </IngredientProvider>

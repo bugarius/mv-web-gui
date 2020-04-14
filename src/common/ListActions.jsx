@@ -56,10 +56,12 @@ class ListActions extends Component {
     {
         const {isOpened} = this.state;
         const {entity, actions: {proceed, remove, info}} = this.props;
+
+        const mainButtonAction = info ? info : proceed;
         return (
                 <>
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
-                        <button className="btn btn-primary" onClick={() => info(entity)}>Zarządzaj</button>
+                        <button className="btn btn-primary" onClick={() => mainButtonAction(entity)}>{info ? "Zarządzaj" : "Edytuj"}</button>
                         <button type="button" aria-haspopup="true" aria-expanded="true"
                                 className="dropdown-toggle btn btn-primary" onClick={this.switchMenu}><span
                                 className="sr-only">Toggle Dropdown</span></button>
@@ -71,8 +73,8 @@ class ListActions extends Component {
                             left: '-100px',
                             transform: 'translate3d(76px, 33px, 0px)'
                         }} data-placement="bottom-start">
-                            {this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
-                            <div tabIndex={-1} className="dropdown-divider"/>
+                            {info && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
+                            {info && <div tabIndex={-1} className="dropdown-divider"/>}
                             {this.renderButton(entity, false, () => remove(entity), 'Usuń')}
                         </div>
                     </div>

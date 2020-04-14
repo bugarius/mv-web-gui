@@ -37,6 +37,7 @@ const ParcelFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('ParcelForm:onSubmit', e, parcel);
+        setParcelResult({status: StatusType.loading});
 
         const action = () => (parcel?.id ? service.put(parcel.id, parcel) : service.post(parcel));
         action()

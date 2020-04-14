@@ -54,11 +54,13 @@ class Header extends Component {
                     { /* START navbar header */ }
                     <div className="navbar-header">
                         <a className="navbar-brand" href="#/">
-                            <div className="brand-logo">
-                                <img className="img-fluid" src="img/logo.png" alt="App Logo" />
+                            <div className="brand-logo text-gray">
+                                {/*<img className="img-fluid" src="img/logo.png" alt="App Logo" />*/}
+                                Moja Winnica
                             </div>
-                            <div className="brand-logo-collapsed">
-                                <img className="img-fluid" src="img/logo-single.png" alt="App Logo" />
+                            <div className="brand-logo-collapsed text-gray">
+                                MV
+                                {/*<img className="img-fluid" src="img/logo-single.png" alt="App Logo" />*/}
                             </div>
                         </a>
                     </div>
@@ -95,21 +97,21 @@ class Header extends Component {
                     { /* START Right Navbar */ }
                     <ul className="navbar-nav flex-row">
                         { /* Search icon */ }
-                        <li className="nav-item">
-                            <div className="nav-link" data-search-open="">
-                                <em className="icon-magnifier"></em>
-                            </div>
-                        </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <div className="nav-link" data-search-open="">*/}
+                        {/*        <em className="icon-magnifier"></em>*/}
+                        {/*    </div>*/}
+                        {/*</li>*/}
                         { /* Fullscreen (only desktops) */ }
                         <li className="nav-item d-none d-md-block">
                             <ToggleFullscreen className="nav-link"/>
                         </li>
                         { /* START Alert menu */ }
                         <UncontrolledDropdown nav inNavbar className="dropdown-list">
-                            <DropdownToggle nav className="dropdown-toggle-nocaret">
-                                <em className="icon-bell"></em>
-                                <span className="badge badge-danger">11</span>
-                            </DropdownToggle>
+                            {/*<DropdownToggle nav className="dropdown-toggle-nocaret">*/}
+                            {/*    <em className="icon-bell"></em>*/}
+                            {/*    <span className="badge badge-danger">11</span>*/}
+                            {/*</DropdownToggle>*/}
                             { /* START Dropdown menu */ }
                             <DropdownMenu right className="dropdown-menu-right animated flipInX">
                                 <DropdownItem>
@@ -162,11 +164,11 @@ class Header extends Component {
                         </UncontrolledDropdown>
                         { /* END Alert menu */ }
                         { /* START Offsidebar button */ }
-                        <li className="nav-item">
-                            <div className="nav-link" onClick={this.toggleOffsidebar}>
-                                <em className="icon-notebook"></em>
-                            </div>
-                        </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <div className="nav-link" onClick={this.toggleOffsidebar}>*/}
+                        {/*        <em className="icon-notebook"></em>*/}
+                        {/*    </div>*/}
+                        {/*</li>*/}
                         { /* END Offsidebar menu */ }
                     </ul>
                     { /* END Right Navbar */ }

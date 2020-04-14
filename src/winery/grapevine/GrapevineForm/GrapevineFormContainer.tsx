@@ -42,6 +42,7 @@ const GrapevineFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('GrapevineFormContainer:onSubmit', e, grapevine);
+        setGrapevineResult({status: StatusType.loading});
 
         const action = () => (grapevine?.id ? service.put(grapevine.id, grapevine) : service.post(grapevine));
         action()

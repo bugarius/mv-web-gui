@@ -37,6 +37,7 @@ const TankFormContainer = ({render}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         log.debug('TankForm:onSubmit', e, tank);
+        setTankResult({status: StatusType.loading});
 
         const action = () => (tank?.id ? service.put(tank.id, tank) : service.post(tank));
         action()

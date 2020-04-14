@@ -57,9 +57,9 @@ class Login extends Component {
             }
         });
 
-        console.log(hasError ? 'Form has errors. Check!' : 'Form Submitted!')
         !hasError && AuthService.login(email, password)
-                .then(this.handleLogin);
+                .then(this.handleLogin)
+                .catch(res => console.log(res));
     }
 
     handleLogin = (principal) => {
@@ -71,7 +71,7 @@ class Login extends Component {
             showErrors: false,
             failed: !principal.login,
         }));
-        this.props.history.push(principal.realms[0]);
+        principal?.login && this.props.history.push(principal.realms[0]);
     };
 
     /* Simplify error check */
@@ -88,7 +88,8 @@ class Login extends Component {
                 <div className="card card-flat">
                     <div className="card-header text-center bg-dark">
                         <div>
-                            <img className="block-center rounded" src="img/logo.png" alt="Logo"/>
+                            {/*<img className="block-center rounded" src="img/logo.png" alt="Logo"/>*/}
+                            Moja Winnica
                         </div>
                     </div>
                     <div className="card-body">
@@ -109,8 +110,8 @@ class Login extends Component {
                                             <em className="fa fa-envelope"></em>
                                         </span>
                                     </div>
-                                    { this.hasError('formLogin','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                    { this.hasError('formLogin','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
+                                    { this.hasError('formLogin','email','required') && <span className="invalid-feedback">Pole wymagane</span> }
+                                    { this.hasError('formLogin','email','email') && <span className="invalid-feedback">Podaj prawidłowy email</span> }
                                 </div>
                             </div>
                             <div className="form-group">
@@ -130,9 +131,10 @@ class Login extends Component {
                                             <em className="fa fa-lock"></em>
                                         </span>
                                     </div>
-                                    <span className="invalid-feedback">Field is required</span>
+                                    <span className="invalid-feedback">Pole wymagane</span>
                                 </div>
                             </div>
+                            { this.state.failed && <small className="text-danger">Nieprawidłowy login lub hasło</small> }
                             <div className="clearfix">
                                 {/*<div className="checkbox c-checkbox float-left mt-0">*/}
                                 {/*    <label>*/}
@@ -151,11 +153,11 @@ class Login extends Component {
                 </div>
                 <div className="p-3 text-center">
                     <span className="mr-2">&copy;</span>
-                    <span>2019</span>
+                    <span>2020</span>
                     <span className="mx-2">-</span>
-                    <span>MyWinery</span>
+                    <span>Moja Winnica</span>
                     <br/>
-                    <span>Aplikacja do zarządzania wina z upraw własnych</span>
+                    <span>Aplikacja do zarządzania produkcją wina z upraw własnych</span>
                 </div>
             </div>
         );
