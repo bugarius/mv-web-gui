@@ -17,11 +17,11 @@ import "./Vendor";
 // Application Styles
 import './styles/bootstrap.scss';
 import './styles/app.scss'
-import AppRouting from "./platform/AppRouting";
-import ErrorProvider from "./error/ErrorContext";
-import ValidationSchemaProvider from "./winery/validation/ValidationSchemaContext";
+import AppRouting from "./components/platform/AppRouting";
+import ErrorProvider from "./components/error/ErrorContext";
+import ValidationSchemaProvider from "./components/winery/validation/ValidationSchemaContext";
 import {FormContext, useForm} from "react-hook-form";
-import AuthProvider from "./platform/AuthContext";
+import AuthProvider from "./components/platform/AuthContext";
 
 
 const App = () => {
