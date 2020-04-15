@@ -3,11 +3,11 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 /* loader component for Suspense*/
-import PageLoader from './components/Common/PageLoader';
+import PageLoader from './components/common/PageLoader';
 
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
-import ParcelApp from "./winery/parcel/ParcelApp";
+import ParcelApp from "./components/winery/parcel/ParcelApp";
 // import BaseHorizontal from './components/Layout/BaseHorizontal';
 
 /* Used to render a lazy component with react-router */
@@ -56,13 +56,13 @@ const FormWizard = lazy(() => import('./components/Forms/FormWizard'));
 const FormUpload = lazy(() => import('./components/Forms/FormUpload'));
 const FormCropper = lazy(() => import('./components/Forms/FormCropper'));
 
-const Login = lazy(() => import('./components/Pages/Login'));
-const Register = lazy(() => import('./components/Pages/Register'));
-const Recover = lazy(() => import('./components/Pages/Recover'));
-const Lock = lazy(() => import('./components/Pages/Lock'));
-const NotFound = lazy(() => import('./components/Pages/NotFound'));
-const Error500 = lazy(() => import('./components/Pages/Error500'));
-const Maintenance = lazy(() => import('./components/Pages/Maintenance'));
+const Login = lazy(() => import('./components/pages/Login'));
+const Register = lazy(() => import('./components/pages/Register'));
+const Recover = lazy(() => import('./components/pages/Recover'));
+const Lock = lazy(() => import('./components/pages/Lock'));
+const NotFound = lazy(() => import('./components/pages/NotFound'));
+const Error500 = lazy(() => import('./components/pages/Error500'));
+const Maintenance = lazy(() => import('./components/pages/Maintenance'));
 
 const Mailbox = lazy(() => import('./components/Extras/Mailbox'));
 const Timeline = lazy(() => import('./components/Extras/Timeline'));

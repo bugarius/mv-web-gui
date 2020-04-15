@@ -1,4 +1,4 @@
-import $ from '../Common/wrapper.js';
+import $ from '../common/wrapper.js';
 
 export default (navigator, closeSidebar) => {
 

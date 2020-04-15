@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
+import {DropdownItem, DropdownMenu, UncontrolledDropdown} from 'reactstrap';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../store/actions/actions';
 
-import ToggleFullscreen from '../Common/ToggleFullscreen';
+import ToggleFullscreen from '../common/ToggleFullscreen';
 import HeaderRun from './Header.run'
 
 class Header extends Component {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Collapse } from 'reactstrap';
 
 import { connect } from 'react-redux';
-import {AuthContext} from "../../platform/AuthContext";
+import {AuthContext} from "../platform/AuthContext";
 
 class SidebarUserBlock extends Component {
 
