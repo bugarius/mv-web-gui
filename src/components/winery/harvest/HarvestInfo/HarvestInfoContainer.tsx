@@ -46,10 +46,10 @@ const HarvestInfoContainer = ({render}) => {
 
     const addBoxToHarvest = (e) => {
         e.preventDefault();
-        log.debug('HarvestInfo:onSubmit', e, harvest);
+        log.debug('HarvestInfo:addBoxToHarvest', e, harvest);
         setHarvestResult({status: StatusType.loading});
 
-        harvest?.box && service.addBox(harvest?.box)
+       service.addBox(harvest.box)
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
                 history?.push(`/mv/harvest/${harvestId}/info`);
