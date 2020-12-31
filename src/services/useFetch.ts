@@ -47,18 +47,18 @@ const useFetch = <T>(endpoint?: string) => {
         return customFetch(url, 'GET', null);
     };
     const post = (body: T) => {
-        if (body === null)
-        {
-            throw new Error("to make a post you must provide a body");
-        }
+        // if (body === null)
+        // {
+        //     throw new Error("to make a post you must provide a body");
+        // }
         return customFetch(endpoint, "POST", body);
     };
 
     const postFile = (files, endpoint: string) => {
-        if (files === null)
-        {
-            throw new Error("to make a post you must provide a body");
-        }
+        // if (files === null)
+        // {
+        //     throw new Error("to make a post you must provide a body");
+        // }
         return fetch(endpoint, {
             method: 'POST',
             body: files,
@@ -67,42 +67,42 @@ const useFetch = <T>(endpoint?: string) => {
     };
 
     const putFile = (files, endpoint: string) => {
-        if (files === null)
-        {
-            throw new Error("to make a post you must provide a body");
-        }
+        // if (files === null)
+        // {
+        //     throw new Error("to make a post you must provide a body");
+        // }
         return customFetch(endpoint, "PUT", files);
     };
 
     const put = (id: number, body: T) => {
-        if (id === null || body === null)
-        {
-            throw new Error("to make a put you must provide the id and the body");
-        }
+        // if (id === null || body === null)
+        // {
+        //     throw new Error("to make a put you must provide the id and the body");
+        // }
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", body);
     };
     const putBody = (body: T) => {
-        if (body === null)
-        {
-            throw new Error("to make a put you must provide the body");
-        }
+        // if (body === null)
+        // {
+        //     throw new Error("to make a put you must provide the body");
+        // }
         const url = `${endpoint}`;
         return customFetch(url, "PUT", body);
     };
     const putId = (id: number) => {
-        if (id === null)
-        {
-            throw new Error("to make a put you must provide the id");
-        }
+        // if (id === null)
+        // {
+        //     throw new Error("to make a put you must provide the id");
+        // }
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", null);
     };
     const del = (id: number, page?: number) => {
-        if (!id)
-        {
-            throw new Error("to make a delete you must provide the id");
-        }
+        // if (!id)
+        // {
+        //     throw new Error("to make a delete you must provide the id");
+        // }
         const url = `${endpoint}/${id}?${URI.buildQuery({p: page})}`;
         return customFetch(url, "DELETE", null);
     };
