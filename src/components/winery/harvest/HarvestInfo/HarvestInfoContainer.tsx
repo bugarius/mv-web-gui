@@ -27,7 +27,7 @@ const HarvestInfoContainer = ({render}) => {
     }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {
-        history.push(`/mv/harvest/${harvestId}/`);
+        history.push(`/mv/harvest/${harvestId}/`, {from: history.location.pathname});
     };
 
     const dispose = (e) => {

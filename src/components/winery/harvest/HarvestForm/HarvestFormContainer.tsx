@@ -48,7 +48,8 @@ const HarvestFormContainer = ({render}) => {
         action()
             .then(response => {
                 setHarvestResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/harvest/all`);
+                const pushPath = history?.location?.state ? history?.location?.state['from'] : `/mv/harvest/all`;
+                history?.push(pushPath);
             })
             .catch(res => {
                 log.warn(res);
