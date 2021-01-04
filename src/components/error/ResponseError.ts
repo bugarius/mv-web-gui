@@ -18,4 +18,8 @@ export class ResponseError<T> implements ServiceError<T>
         }
         return false;
     }
+
+    getErrorMessage = (name: string) => {
+        return this.error?.errors?.[name];
+    }
 }

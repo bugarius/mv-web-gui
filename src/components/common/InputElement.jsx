@@ -3,7 +3,7 @@ import React from 'react';
 import {FormGroup, Input} from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const InputElement = ({label, name, optional, placeholder, type, maxSize, defaultValue, onChange, showErrors, disabled}) => {
+const InputElement = ({label, name, optional, placeholder, type, maxSize, defaultValue, onChange, showErrors, errorMessage, disabled}) => {
 
     return (
             <fieldset>
@@ -21,7 +21,7 @@ const InputElement = ({label, name, optional, placeholder, type, maxSize, defaul
                                disabled={disabled}
                                onChange={onChange}
                         />
-                        <span className="invalid-feedback">Field is required</span>
+                        <span className="invalid-feedback">{errorMessage}</span>
                     </div>
                 </FormGroup>
             </fieldset>
@@ -39,6 +39,7 @@ InputElement.propTypes = {
     defaultValue: PropTypes.any,
     onChange: PropTypes.func.isRequired,
     showErrors: PropTypes.bool,
+    errorMessage: PropTypes.string,
     disabled: PropTypes.number
 };
 

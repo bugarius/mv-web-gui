@@ -45,9 +45,7 @@ const ParcelFormContainer = ({render}) => {
                 setParcelResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
             })
-            .catch(res => {
-                history.push(`/mv/error`);
-            });
+            .catch(error => setParcelResult(new ResponseError<Parcel>(error)));
     };
 
     log.debug("ParcelForm::render", parcel);

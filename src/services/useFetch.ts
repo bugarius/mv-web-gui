@@ -10,9 +10,9 @@ const useFetch = <T>(endpoint?: string) => {
 
     const customFetch = (
         url,
-        method = "GET",
+        method: "GET" | "POST" | "PUT" | "DELETE",
         body,
-        headers: any = defaultHeader
+        headers = defaultHeader
     ) => {
         const options = {
             method,
@@ -54,24 +54,24 @@ const useFetch = <T>(endpoint?: string) => {
         return customFetch(endpoint, "POST", body);
     };
 
-    const postFile = (files, endpoint: string) => {
+    const postFile = (files, fileEndpoint: string) => {
         // if (files === null)
         // {
         //     throw new Error("to make a post you must provide a body");
         // }
-        return fetch(endpoint, {
+        return fetch(fileEndpoint, {
             method: 'POST',
             body: files,
             credentials: 'include'
         }).then(useTransformResponse);
     };
 
-    const putFile = (files, endpoint: string) => {
+    const putFile = (files, fileEndpoint: string) => {
         // if (files === null)
         // {
         //     throw new Error("to make a post you must provide a body");
         // }
-        return customFetch(endpoint, "PUT", files);
+        return customFetch(fileEndpoint, "PUT", files);
     };
 
     const put = (id: number, body: T) => {

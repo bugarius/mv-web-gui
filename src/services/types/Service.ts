@@ -15,22 +15,26 @@ export enum StatusType {
 interface ServiceInit<T> {
     status?: StatusType.init | StatusType;
     hasError?: (name: string) => boolean;
+    getErrorMessage?: (name: string) => string;
     payload?: T;
 }
 interface ServiceLoading<T> {
     status?: StatusType.loading | StatusType;
     hasError?: (name: string) => boolean;
+    getErrorMessage?: (name: string) => string;
     payload?: T;
 }
 interface ServiceLoaded<T> {
     status?: StatusType.loaded | StatusType;
     hasError?: (name: string) => boolean;
+    getErrorMessage?: (name: string) => string;
     payload: T;
 }
 export interface ServiceError<T> {
     status?: StatusType.error | StatusType;
     error: Error;
     hasError: (name: string) => boolean;
+    getErrorMessage: (name: string) => string;
     payload?: T;
 }
 export type Service<T> =
