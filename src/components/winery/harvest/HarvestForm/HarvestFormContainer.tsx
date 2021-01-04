@@ -51,10 +51,7 @@ const HarvestFormContainer = ({render}) => {
                 const pushPath = history?.location?.state ? history?.location?.state['from'] : `/mv/harvest/all`;
                 history?.push(pushPath);
             })
-            .catch(res => {
-                log.warn(res);
-                history.push(`/mv/error`);
-            });
+            .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
     };
 
     log.debug("HarvestForm::render", harvest);

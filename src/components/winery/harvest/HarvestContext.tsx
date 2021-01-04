@@ -17,7 +17,7 @@ interface HarvestContextInterface
 
 export const defaultHarvest = {
     id: null,
-    grapevine: {},
+    grapevine: null,
     dateOfHarvest: "",
     weightOfGrapes: null,
     amountOfMust: null,

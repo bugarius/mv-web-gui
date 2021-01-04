@@ -4,7 +4,6 @@ import Select from "react-select";
 import useParcelsReceiver from "../../parcel/service/useParcelsReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Parcel} from "../../parcel/types/Parcel";
-import * as PropTypes from "prop-types";
 
 interface Props
 {
@@ -51,14 +50,6 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectParcels.propTypes = {
-    value: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectParcels;

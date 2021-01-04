@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Card, CardBody, CardFooter, CardHeader} from "reactstrap";
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import SimpleSelect from "../../../common/SimpleSelect";
@@ -15,7 +15,8 @@ const SimpleGrapevineForm = ({updateParcelsInGrapevine, onSubmit}) => {
 
     return (
             <>
-                <PageWrapper title={"grapevine.TITLE"} subtitle={'grapevine.LIST'} loading={grapevineResult.status === StatusType.loading}>
+                <PageWrapper title={"grapevine.TITLE"} subtitle={'grapevine.LIST'}
+                             loading={grapevineResult.status === StatusType.loading}>
                     <Card className="card-default">
                         <CardHeader> {grapevine?.id ? t("sidebar.nav.element.EDIT") : t("sidebar.nav.element.ADD_NEW")}
                         </CardHeader>

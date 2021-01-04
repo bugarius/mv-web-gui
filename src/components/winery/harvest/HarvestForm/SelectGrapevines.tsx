@@ -4,7 +4,6 @@ import Select from "react-select";
 import useGrapevinesReceiver from "../../grapevine/service/useGrapevinesReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Grapevine} from "../../grapevine/types/Grapevine";
-import * as PropTypes from "prop-types";
 
 interface Props
 {
@@ -13,11 +12,23 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
+    showErrors?: boolean;
+    errorMessage?: string;
 }
 
-const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional, showErrors, errorMessage}) => {
 
     const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -30,20 +41,14 @@ const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, lab
                             options={grapevines}
                             onChange={onChange}
                             value={value}
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"}
+                            styles={showErrors && customStyles}
+                    />
+                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
                 </div>
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectGrapevines.propTypes = {
-    value: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectGrapevines;
