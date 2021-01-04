@@ -13,11 +13,23 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
+    showErrors?: boolean;
+    errorMessage?: string;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, showErrors, errorMessage}) => {
 
     const {selected: value, options: parcels} = useParcelsReceiver(selected);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -31,8 +43,10 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                             onChange={onChange}
                             value={value}
                             isMulti
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"}
+                            styles={showErrors && customStyles}
+                    />
+                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
                 </div>
             </FormGroup>
         </fieldset>

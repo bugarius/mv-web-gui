@@ -50,10 +50,7 @@ const GrapevineFormContainer = ({render}) => {
                 setGrapevineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/grapevine/all`);
             })
-            .catch(res => {
-                log.warn(res)
-                history.push(`/mv/error`);
-            });
+            .catch(error => setGrapevineResult(new ResponseError<Grapevine>(error)));
     };
 
     log.debug("GrapevineFormContainer::render", grapevine);

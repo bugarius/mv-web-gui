@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Card, CardBody, CardFooter, CardHeader} from "reactstrap";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import SimpleSelect from "../../../common/SimpleSelect";
@@ -11,59 +11,72 @@ import {StatusType} from "../../../../services/types/Service";
 const SimpleGrapevineForm = ({updateParcelsInGrapevine, onSubmit}) => {
 
     const {grapevine, updateGrapevine, grapevineResult} = useGrapevineContext();
+    const {t} = useTranslation();
 
     return (
             <>
                 <PageWrapper title={"grapevine.TITLE"} subtitle={'grapevine.LIST'} loading={grapevineResult.status === StatusType.loading}>
                     <Card className="card-default">
-                        <CardHeader> {grapevine?.id ? <Trans i18nKey="sidebar.nav.element.EDIT"/> :
-                                <Trans i18nKey="sidebar.nav.element.ADD_NEW"/>}
+                        <CardHeader> {grapevine?.id ? t("sidebar.nav.element.EDIT") : t("sidebar.nav.element.ADD_NEW")}
                         </CardHeader>
                         <CardBody>
-                            <InputElement label={<Trans i18nKey="grapevine.NAME"/>}
+                            <InputElement label={t("grapevine.NAME")}
                                           type={'text'}
                                           name={'name'}
                                           maxSize={'100'}
                                           onChange={e => updateGrapevine(e.target.name, e.target.value)}
                                           defaultValue={grapevine?.name}
+                                          showErrors={grapevineResult?.hasError?.("name")}
+                                          errorMessage={grapevineResult?.getErrorMessage?.("name")}
                             />
-                            <InputElement label={<Trans i18nKey="grapevine.NUMBER_OF_PLANTS"/>}
+                            <InputElement label={t("grapevine.NUMBER_OF_PLANTS")}
                                           type={'number'}
                                           name={'numberOfPlants'}
                                           maxSize={'100'}
                                           onChange={e => updateGrapevine(e.target.name, e.target.value)}
                                           defaultValue={grapevine?.numberOfPlants}
+                                          showErrors={grapevineResult?.hasError?.("numberOfPlants")}
+                                          errorMessage={grapevineResult?.getErrorMessage?.("numberOfPlants")}
                             />
-                            <InputElement label={<Trans i18nKey="grapevine.AREA"/>}
+                            <InputElement label={t("grapevine.AREA")}
                                           type={'number'}
                                           name={'area'}
                                           maxSize={'100'}
                                           onChange={e => updateGrapevine(e.target.name, e.target.value)}
                                           defaultValue={grapevine?.area}
+                                          showErrors={grapevineResult?.hasError?.("area")}
+                                          errorMessage={grapevineResult?.getErrorMessage?.("area")}
                             />
-                            <InputElement label={<Trans i18nKey="grapevine.YEAR_OF_PLANTING"/>}
+                            <InputElement label={t("grapevine.YEAR_OF_PLANTING")}
                                           type={'date'}
                                           name={'yearOfPlanting'}
                                           maxSize={'100'}
                                           onChange={e => updateGrapevine(e.target.name, e.target.value)}
                                           defaultValue={grapevine?.yearOfPlanting}
+                                          showErrors={grapevineResult?.hasError?.("yearOfPlanting")}
+                                          errorMessage={grapevineResult?.getErrorMessage?.("yearOfPlanting")}
+                                          optional
                             />
-                            <SimpleSelect label={<Trans i18nKey="grapevine.GRAPE_COLOR"/>}
+                            <SimpleSelect label={t("grapevine.GRAPE_COLOR")}
                                           name={"grapeColor"}
                                           onChange={e => updateGrapevine(e.target.name, e.target.value)}
                                           value={grapevine?.grapeColor || ''}
                                           options={[{value: "WHITE", text: "Białe"},
                                               {value: "RED", text: "Czerwone"}]}
+                                          showErrors={grapevineResult?.hasError?.("grapeColor")}
+                                          errorMessage={grapevineResult?.getErrorMessage?.("grapeColor")}
                             />
                             <SelectParcels value={grapevine?.parcels}
                                            name={'parcels'}
-                                           label={'Działki'}
-                                           onChange={updateParcelsInGrapevine}/>
+                                           label={t('grapevine.PARCELS')}
+                                           onChange={updateParcelsInGrapevine}
+                                           showErrors={grapevineResult?.hasError?.("parcels")}
+                                           errorMessage={grapevineResult?.getErrorMessage?.("parcels")}
+                            />
                         </CardBody>
                         <CardFooter className="text-center">
                             <Button color="primary" className="btn-square" onClick={onSubmit}>
-                                {grapevine?.id ? <Trans i18nKey="common.SAVE"/> :
-                                        <Trans i18nKey="common.ADD"/>}
+                                {grapevine?.id ? t("common.SAVE") : t("common.ADD")}
                             </Button>
                         </CardFooter>
                     </Card>

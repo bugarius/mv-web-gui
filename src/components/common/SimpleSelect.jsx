@@ -14,13 +14,13 @@ class SimpleSelect extends Component {
 
     render()
     {
-        const {value, onChange, showErrors, name, label, disabled, optional} = this.props;
+        const {value, onChange, showErrors, name, label, disabled, optional, errorMessage} = this.props;
 
         return (
                 <fieldset>
                     <FormGroup row>
                         <label className="col-md-2 col-form-label" htmlFor={name}>{label}
-                            <span className="text-danger" style={{display: optional === true ? 'none' : ''}}> *</span>
+                            <span className="text-danger" style={{display: optional ? 'none' : ''}}> *</span>
                         </label>
                         <div className="col-md-10">
                             <select name={name} id={name}
@@ -29,7 +29,7 @@ class SimpleSelect extends Component {
                                 <option value="">Wybierz</option>
                                 {this.renderOptions()}
                             </select>
-                            <span className="invalid-feedback">Field is required</span>
+                            <span className="invalid-feedback">{errorMessage}</span>
                         </div>
                     </FormGroup>
                 </fieldset>

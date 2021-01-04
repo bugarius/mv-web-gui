@@ -54,6 +54,7 @@ const SimpleParcelForm = ({onSubmit}) => {
                                   defaultValue={parcel?.country}
                                   showErrors={parcelResult?.hasError?.("country")}
                                   errorMessage={parcelResult?.getErrorMessage?.("country")}
+                                  optional
                     />
                     <InputElement label={t("parcel.CITY")}
                                   type={'text'}
@@ -63,6 +64,7 @@ const SimpleParcelForm = ({onSubmit}) => {
                                   defaultValue={parcel?.city}
                                   showErrors={parcelResult?.hasError?.("city")}
                                   errorMessage={parcelResult?.getErrorMessage?.("city")}
+                                  optional
                     />
                     <InputElement label={t("parcel.ZIP_CODE")}
                                   type={'text'}
@@ -72,6 +74,7 @@ const SimpleParcelForm = ({onSubmit}) => {
                                   defaultValue={parcel?.zipCode}
                                   showErrors={parcelResult?.hasError?.("zipCode")}
                                   errorMessage={parcelResult?.getErrorMessage?.("zipCode")}
+                                  optional
                     />
                 </CardBody>
                 <CardFooter className="text-center">
