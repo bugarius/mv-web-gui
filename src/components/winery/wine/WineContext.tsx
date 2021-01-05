@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Wine} from "./types/Wine";
 import {Service, StatusType} from "../../../services/types/Service";
-import {defaultHarvest} from "../harvest/HarvestContext";
 
 interface WineContextInterface
 {
@@ -18,10 +17,10 @@ interface WineContextInterface
 const defaultWine = {
   id: null,
   name: "",
-  tank: {},
+  tank: null,
   startDate: "",
   liters: null,
-  harvest: defaultHarvest,
+  harvest: null,
   ingredients: [],
   history: []
 };

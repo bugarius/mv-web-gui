@@ -56,10 +56,7 @@ const WineFormContainer = ({render}) => {
                 setWineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/wine/all`);
             })
-            .catch(res => {
-                log.warn(res)
-                history.push(`/mv/error`);
-            });
+            .catch(error => setWineResult(new ResponseError<Wine>(error)));
     };
 
     log.debug("WineFormContainer::render", wine);

@@ -46,7 +46,7 @@
   "wine.LIST": "Zarządzaj nastawami",
   "wine.NAME": "Nazwa",
   "wine.DATE": "Data nastawu",
-  "wine.TANK_NUMBER": "Numer zbiornika",
+  "wine.TANK": "Zbiornik",
   "wine.TANK_CAPACITY": "Pojemność zbiornika",
   "wine.LITERS": "Litry",
   "wine.HARVEST": "Zbiór",

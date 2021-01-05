@@ -2,7 +2,6 @@ import React from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
-import * as PropTypes from "prop-types";
 import {Tank} from "../../tank/types/Tank";
 import useTanksReceiver from "../../tank/service/useTanksReceiver";
 import {useHistory} from "react-router-dom";
@@ -15,15 +14,35 @@ interface Props
     label?: string;
     optional?: boolean;
     disabled?: boolean;
+    showErrors?: boolean;
+    errorMessage?: string;
 }
 
-const SelectTank: React.FC<Props> = ({value: selected, onChange, name, label, optional, disabled}) => {
+const SelectTank: React.FC<Props> = ({
+                                         value: selected,
+                                         onChange,
+                                         name,
+                                         label,
+                                         optional,
+                                         disabled,
+                                         showErrors,
+                                         errorMessage}) => {
 
     const {selected: value, options: tanks} = useTanksReceiver(selected);
     const history = useHistory();
 
     const goToTank = (id) => {
         history.push(`/mv/tank/${id}/info`, {from: window.location.pathname});
+    };
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
     };
 
     return (
@@ -38,8 +57,10 @@ const SelectTank: React.FC<Props> = ({value: selected, onChange, name, label, op
                             onChange={onChange}
                             value={value}
                             isDisabled={disabled}
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"}
+                            styles={showErrors && customStyles}
+                    />
+                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
                     {disabled &&
                     <span className="text-muted small">
                         Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.
@@ -53,15 +74,6 @@ const SelectTank: React.FC<Props> = ({value: selected, onChange, name, label, op
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectTank.propTypes = {
-    value: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool,
-    disabled: PropTypes.bool
 };
 
 export default SelectTank;

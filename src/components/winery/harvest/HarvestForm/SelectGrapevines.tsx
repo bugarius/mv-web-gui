@@ -16,7 +16,13 @@ interface Props
     errorMessage?: string;
 }
 
-const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional, showErrors, errorMessage}) => {
+const SelectGrapevines: React.FC<Props> = ({
+                                               value: selected,
+                                               onChange, name,
+                                               label,
+                                               optional,
+                                               showErrors,
+                                               errorMessage}) => {
 
     const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
 
