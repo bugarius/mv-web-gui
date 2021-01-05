@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Button, Card, CardBody, CardFooter, CardHeader} from "reactstrap";
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import {useTankContext} from "../TankContext";
 import {StatusType} from "../../../../services/types/Service";
-import * as PropTypes from 'prop-types';
 
-const SimpleTankForm = ({onSubmit}) => {
+interface Props {
+    onSubmit: () => void;
+}
+
+const SimpleTankForm: FC<Props> = ({onSubmit}) => {
 
     const {tank, tankResult, updateTank} = useTankContext();
     const {t} = useTranslation();
@@ -24,26 +27,26 @@ const SimpleTankForm = ({onSubmit}) => {
                                       maxSize={'100'}
                                       onChange={e => updateTank(e.target.name, e.target.value)}
                                       defaultValue={tank?.number}
+                                      showErrors={tankResult?.hasError?.("number")}
+                                      errorMessage={tankResult?.getErrorMessage?.("number")}
                         />
-                        <InputElement label={<Trans i18nKey="tank.CAPACITY"/>}
+                        <InputElement label={t("tank.CAPACITY")}
                                       type={'number'}
                                       name={'capacity'}
                                       onChange={e => updateTank(e.target.name, e.target.value)}
                                       defaultValue={tank?.capacity}
+                                      showErrors={tankResult?.hasError?.("capacity")}
+                                      errorMessage={tankResult?.getErrorMessage?.("capacity")}
                         />
                     </CardBody>
                     <CardFooter className="text-center">
                         <Button color="primary" className="btn-square" onClick={onSubmit}>
-                            {tank?.id ? <Trans i18nKey="common.SAVE"/> : <Trans i18nKey="common.ADD"/>}
+                            {tank?.id ? t("common.SAVE") : t("common.ADD")}
                         </Button>
                     </CardFooter>
                 </Card>
             </PageWrapper>
     )
-};
-
-SimpleTankForm.propTypes = {
-  onSubmit: PropTypes.func
 };
 
 export default SimpleTankForm;

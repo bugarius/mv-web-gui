@@ -45,9 +45,7 @@ const TankFormContainer = ({render}) => {
                 setTankResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/tank/all`);
             })
-            .catch(res => {
-                history.push(`/mv/error`);
-            });
+            .catch(error => setTankResult(new ResponseError<Tank>(error)));
     };
 
     log.debug("TankForm::render", tank);

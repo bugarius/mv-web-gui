@@ -1,11 +1,11 @@
 import React from "react";
-import ParcelFormContainer from "./TankFromContainer";
+import TankFromContainer from "./TankFromContainer";
 import SimpleTankForm from "./SimpleTankForm";
 
 const TankForm = (props) => {
 
     return (
-            <ParcelFormContainer {...props} render={(onSubmit) => (
+            <TankFromContainer {...props} render={(onSubmit) => (
                     <SimpleTankForm onSubmit={onSubmit}
                     />
             )}/>
