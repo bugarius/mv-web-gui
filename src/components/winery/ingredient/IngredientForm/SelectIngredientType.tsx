@@ -9,15 +9,34 @@ import useIngredientTypesReceiver from "../service/useIngredientTypesReceiver";
 interface Props
 {
     value?: IngredientType | SelectOption;
-    onChange: () => void;
+    onChange: (e: React.ChangeEvent) => void;
     name: string;
     label?: string;
     optional?: boolean;
+    showErrors?: boolean;
+    errorMessage?: string;
 }
 
-const SelectIngredientType: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectIngredientType: React.FC<Props> = ({
+                                                   value: selected,
+                                                   onChange, name,
+                                                   label,
+                                                   optional,
+                                                   showErrors,
+                                                   errorMessage
+                                               }) => {
 
     const {options, selected: value} = useIngredientTypesReceiver(selected);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -30,8 +49,10 @@ const SelectIngredientType: React.FC<Props> = ({value: selected, onChange, name,
                             options={options}
                             onChange={onChange}
                             value={value}
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"} styles={showErrors && customStyles}
+                    />
+                    <span className="invalid-feedback"
+                          style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
                 </div>
             </FormGroup>
         </fieldset>

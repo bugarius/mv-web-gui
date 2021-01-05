@@ -6,7 +6,7 @@ import {StatusType} from "../../../../services/types/Service";
 import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import SimpleInputElement from "../../../common/SimpleInputElement";
-import {Trans} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import * as PropTypes from 'prop-types';
 import BoxList from "../../box/BoxList/index";
 import WineList from "../../wine/WineList/index";
@@ -25,6 +25,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
 
     const {harvest, harvestResult, updateBox, loading} = useHarvestContext();
     const {harvestId} = useParams();
+    const {t} = useTranslation();
 
     return (
         <>
@@ -37,7 +38,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                     {
                         !harvest?.allDisposedToWine && [
                             <div className="card-body bb text-center" key={1}>
-                                <InputElement label={<Trans i18nKey="harvest.WEIGHT_OF_EMPTY_BOX"/>}
+                                <InputElement label={t("harvest.WEIGHT_OF_EMPTY_BOX")}
                                               type={'number'}
                                               name={'weightOfEmptyBox'}
                                               maxSize={'100'}
@@ -76,15 +77,15 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                     <div className="card-body bb">
                         <div className="row text-center">
                             <div className="col-4">
-                                <p className="text-bold"><Trans i18nKey="harvest.WEIGHT_OF_GRAPES"/></p>
+                                <p className="text-bold">{t("harvest.WEIGHT_OF_GRAPES")}</p>
                                 <div className="h3 m-0">{harvest?.weightOfGrapes || '0'} kg</div>
                             </div>
                             <div className="col-4">
-                                <p className="text-bold"><Trans i18nKey="harvest.AMOUNT_OF_MUST"/></p>
+                                <p className="text-bold">{t("harvest.AMOUNT_OF_MUST")}</p>
                                 <div className="h3 m-0">{harvest?.amountOfMust || '0'} l</div>
                             </div>
                             <div className="col-4">
-                                <p className="text-bold"><Trans i18nKey="harvest.AMOUNT_OF_WASTE"/></p>
+                                <p className="text-bold">{t("harvest.AMOUNT_OF_WASTE")}</p>
                                 <div className="h3 m-0">{harvest?.amountOfWaste || '0'} kg</div>
                             </div>
                         </div>

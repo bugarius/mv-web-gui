@@ -44,10 +44,7 @@ const IngredientFormContainer = ({render}) => {
                 setIngredientResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/ingredient/all`);
             })
-            .catch(res => {
-                log.warn(res);
-                history.push(`/mv/error`);
-            });
+            .catch(error => setIngredientResult(new ResponseError<Ingredient>(error)));
     };
 
     log.debug("IngredientForm::render", ingredient);
