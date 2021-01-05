@@ -1,15 +1,14 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
-import * as PropTypes from "prop-types";
 import {IngredientType} from "../types/IngredientType";
 import useIngredientTypesReceiver from "../service/useIngredientTypesReceiver";
 
 interface Props
 {
-    value?: IngredientType | SelectOption;
-    onChange: (e: React.ChangeEvent) => void;
+    value?: IngredientType | SelectOption | null;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     name: string;
     label?: string;
     optional?: boolean;
@@ -49,7 +48,8 @@ const SelectIngredientType: React.FC<Props> = ({
                             options={options}
                             onChange={onChange}
                             value={value}
-                            placeholder={"Wybierz"} styles={showErrors && customStyles}
+                            placeholder={"Wybierz"}
+                            styles={showErrors && customStyles}
                     />
                     <span className="invalid-feedback"
                           style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
@@ -57,18 +57,6 @@ const SelectIngredientType: React.FC<Props> = ({
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectIngredientType.propTypes = {
-    value: PropTypes.oneOfType(
-        [
-            PropTypes.oneOf(Object.values(IngredientType)),
-            PropTypes.oneOfType([PropTypes.any, PropTypes.string])
-        ]),
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectIngredientType;

@@ -4,8 +4,8 @@ import useWineService from "../../wine/service/useWineService";
 import {useIngredientContext} from "../IngredientContext";
 import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
-import {Grapevine} from "../../grapevine/types/Grapevine";
 import log from "loglevel";
+import {Wine} from "../../wine/types/Wine";
 
 const AddIngredientContainer = ({render}) => {
 
@@ -27,14 +27,14 @@ const AddIngredientContainer = ({render}) => {
     const onSubmit = useCallback((e) => {
         e.preventDefault();
         setWineResult({status: StatusType.loading});
-        ingredient?.ingredient && service.addIngredient(ingredient)
+        service.addIngredient(ingredient)
             .then(response => {
                 setWineResult({status: StatusType.loaded, payload: response});
                 setKey(new Date());
             })
             .catch(error => {
                 log.debug(error);
-                setWineResult(new ResponseError<Grapevine>(error));
+                setWineResult(new ResponseError<Wine>(error));
             });
         updateIngredient("reset", "");
     }, [ingredient, setWineResult, service, updateIngredient]);

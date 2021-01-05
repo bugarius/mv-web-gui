@@ -3,7 +3,7 @@ import {SelectOption} from "../../../../services/types/SelectOption";
 import {useTranslation} from "react-i18next";
 import {IngredientType} from "../types/IngredientType";
 
-const useIngredientTypesReceiver = (value?: IngredientType | SelectOption) => {
+const useIngredientTypesReceiver = (value?: IngredientType | SelectOption | null) => {
 
     const {t} = useTranslation();
     const options: SelectOption[] = Object.keys(IngredientType)

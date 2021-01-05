@@ -38,7 +38,7 @@ const SimpleWineForm = ({updateHarvestInWine, updateTankInWine, onSubmit}) => {
                                           errorMessage={wineResult?.getErrorMessage?.("date")}
                                           optional
                             />
-                            <SelectTank value={wine?.tank | {}}
+                            <SelectTank value={wine?.tank || {}}
                                         name={'tank'}
                                         label={t("wine.TANK")}
                                         disabled={wine?.harvest?.allDisposedToWine}
