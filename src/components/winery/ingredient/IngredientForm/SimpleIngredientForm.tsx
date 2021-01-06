@@ -11,7 +11,7 @@ interface Props
 {
     onSubmit: (e: ChangeEvent<HTMLInputElement>) => void;
     updateIngredientType: () => void;
-    error: ServiceError<Ingredient>;
+    error: ServiceError;
     ingredient: Ingredient;
     updateIngredient: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
@@ -40,23 +40,20 @@ export const SimpleIngredientForm: FC<Props> = ({
                                   maxSize={'100'}
                                   defaultValue={ingredient?.name}
                                   onChange={updateIngredient}
-                                  showErrors={error?.hasError?.("name")}
-                                  errorMessage={error?.getErrorMessage?.("name")}
+                                  error={error}
                     />
                     <SelectIngredientType value={ingredient?.type}
                                           name={'type'}
                                           label={t('ingredients.TYPE')}
                                           onChange={updateIngredientType}
-                                          showErrors={error?.hasError?.("type")}
-                                          errorMessage={error?.getErrorMessage?.("type")}
+                                          error={error}
                     />
                     <InputElement label={t('ingredients.INFO')}
                                   name={"info"}
                                   type={"textarea"}
                                   defaultValue={ingredient?.info}
                                   onChange={updateIngredient}
-                                  showErrors={error?.hasError?.("info")}
-                                  errorMessage={error?.getErrorMessage?.("info")}
+                                  error={error}
                                   optional
                     />
                 </CardBody>

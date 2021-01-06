@@ -5,6 +5,7 @@ import {SelectOption} from "../../../../services/types/SelectOption";
 import {Harvest} from "../../harvest/types/Harvest";
 import useHarvestsReceiver from "../../harvest/service/useHarvestsReceiver";
 import {useHistory} from "react-router-dom";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -14,8 +15,7 @@ interface Props
     label?: string;
     optional?: boolean;
     disabled?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
 const SelectHarvest: React.FC<Props> = ({
@@ -25,8 +25,7 @@ const SelectHarvest: React.FC<Props> = ({
                                             label,
                                             optional,
                                             disabled,
-                                            showErrors,
-                                            errorMessage
+                                            error
                                         }) => {
 
     const {selected: value, options: harvests} = useHarvestsReceiver(selected);
@@ -59,10 +58,10 @@ const SelectHarvest: React.FC<Props> = ({
                             value={value}
                             isDisabled={disabled}
                             placeholder={"Wybierz"}
-                            styles={showErrors && customStyles}
+                            styles={error?.hasError?.(name) && customStyles}
                     />
                     <span className="invalid-feedback"
-                          style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                          style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>
                     {disabled &&
                     <span className="text-muted small">
                         Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.

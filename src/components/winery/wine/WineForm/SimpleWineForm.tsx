@@ -13,7 +13,7 @@ interface Props
     onSubmit: (e: ChangeEvent<HTMLInputElement>) => void;
     updateHarvestInWine: () => void;
     updateTankInWine: () => void;
-    error: ServiceError<Wine>;
+    error: ServiceError;
     wine: Wine;
     updateWine: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
@@ -43,16 +43,14 @@ export const SimpleWineForm: FC<Props> = ({
                                   name={'name'}
                                   onChange={updateWine}
                                   defaultValue={wine?.name}
-                                  showErrors={error?.hasError?.("name")}
-                                  errorMessage={error?.getErrorMessage?.("name")}
+                                  error={error}
                     />
                     <InputElement label={t("wine.DATE")}
                                   type={'date'}
                                   name={'startDate'}
                                   onChange={updateWine}
                                   defaultValue={wine?.startDate}
-                                  showErrors={error?.hasError?.("date")}
-                                  errorMessage={error?.getErrorMessage?.("date")}
+                                  error={error}
                                   optional
                     />
                     <SelectTank value={wine?.tank || {}}
@@ -60,8 +58,7 @@ export const SimpleWineForm: FC<Props> = ({
                                 label={t("wine.TANK")}
                                 disabled={wine?.harvest?.allDisposedToWine}
                                 onChange={updateTankInWine}
-                                showErrors={error?.hasError?.("tank")}
-                                errorMessage={error?.getErrorMessage?.("tank")}
+                                error={error}
                     />
                     <InputElement label={t("wine.LITERS")}
                                   type={'number'}
@@ -69,16 +66,14 @@ export const SimpleWineForm: FC<Props> = ({
                                   maxSize={'100'}
                                   onChange={updateWine}
                                   defaultValue={wine?.liters}
-                                  showErrors={error?.hasError?.("liters")}
-                                  errorMessage={error?.getErrorMessage?.("liters")}
+                                  error={error}
                     />
                     <SelectHarvest value={wine?.harvest || {}}
                                    name={'harvest'}
                                    label={t("wine.HARVEST")}
                                    disabled={wine?.harvest?.allDisposedToWine}
                                    onChange={updateHarvestInWine}
-                                   showErrors={error?.hasError?.("harvest")}
-                                   errorMessage={error?.getErrorMessage?.("harvest")}
+                                   error={error}
                     />
 
 

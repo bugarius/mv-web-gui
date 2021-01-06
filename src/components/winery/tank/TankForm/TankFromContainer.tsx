@@ -27,7 +27,7 @@ const TankFormContainer = ({render}) => {
             .then(response => {
                 setTankResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError<Tank>));
+            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError));
 
         return () => {
             updateTank("reset", "")
@@ -49,10 +49,10 @@ const TankFormContainer = ({render}) => {
                 setTankResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/tank/all`);
             })
-            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError<Tank>));
+            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError));
     };
 
-    const error = tankResult as ServiceError<Tank>;
+    const error = tankResult as ServiceError;
 
     log.debug("TankForm::render", tank);
     return render(onSubmit,

@@ -4,6 +4,7 @@ import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {IngredientType} from "../types/IngredientType";
 import useIngredientTypesReceiver from "../service/useIngredientTypesReceiver";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -12,8 +13,7 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
 const SelectIngredientType: React.FC<Props> = ({
@@ -21,8 +21,7 @@ const SelectIngredientType: React.FC<Props> = ({
                                                    onChange, name,
                                                    label,
                                                    optional,
-                                                   showErrors,
-                                                   errorMessage
+                                                   error
                                                }) => {
 
     const {options, selected: value} = useIngredientTypesReceiver(selected);
@@ -49,10 +48,10 @@ const SelectIngredientType: React.FC<Props> = ({
                             onChange={onChange}
                             value={value}
                             placeholder={"Wybierz"}
-                            styles={showErrors && customStyles}
+                            styles={error?.hasError?.(name) && customStyles}
                     />
                     <span className="invalid-feedback"
-                          style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                          style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>

@@ -1,6 +1,6 @@
 import {Error, ServiceError, StatusType} from "../../services/types/Service";
 
-export class ResponseError<T> implements ServiceError<T>
+export class ResponseError<T> implements ServiceError
 {
     status;
     error: Error;

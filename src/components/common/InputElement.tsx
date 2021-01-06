@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC} from 'react';
 
 import {FormGroup, Input} from 'reactstrap';
+import {ServiceError} from "../../services/types/Service";
 
 interface Props
 {
@@ -12,9 +13,8 @@ interface Props
     maxSize?: string;
     defaultValue?: string | number | null;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    showErrors?: boolean;
-    errorMessage?: string;
     disabled?: boolean;
+    error?: ServiceError
 }
 
 const InputElement: FC<Props> = ({
@@ -25,8 +25,7 @@ const InputElement: FC<Props> = ({
                                      maxSize,
                                      defaultValue,
                                      onChange,
-                                     showErrors,
-                                     errorMessage,
+                                     error,
                                      disabled,
                                      type = "text"
                                  }) => {
@@ -41,13 +40,13 @@ const InputElement: FC<Props> = ({
                     <Input placeholder={placeholder}
                            name={name}
                            type={type}
-                           invalid={showErrors}
+                           invalid={error?.hasError?.(name)}
                            maxLength={maxSize}
                            defaultValue={defaultValue}
                            disabled={disabled}
                            onChange={onChange}
                     />
-                    <span className="invalid-feedback">{errorMessage}</span>
+                    <span className="invalid-feedback">{error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>

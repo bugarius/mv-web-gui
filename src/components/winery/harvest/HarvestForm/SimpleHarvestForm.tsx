@@ -11,7 +11,7 @@ interface Props
 {
     onSubmit: (e: ChangeEvent<HTMLInputElement>) => void;
     updateGrapevineInHarvest: () => void;
-    error: ServiceError<Harvest>;
+    error: ServiceError;
     harvest: Harvest;
     updateHarvest: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
@@ -40,8 +40,7 @@ const SimpleHarvestForm: FC<Props> = ({
                                   name={'dateOfHarvest'}
                                   onChange={updateHarvest}
                                   defaultValue={harvest?.dateOfHarvest}
-                                  showErrors={error?.hasError?.("dateOfHarvest")}
-                                  errorMessage={error?.getErrorMessage?.("dateOfHarvest")}
+                                  error={error}
                     />
                     <InputElement label={t("harvest.WEIGHT_OF_EVERY_EMPTY_BOX")}
                                   type={'number'}
@@ -49,16 +48,14 @@ const SimpleHarvestForm: FC<Props> = ({
                                   maxSize={'100'}
                                   onChange={updateHarvest}
                                   defaultValue={harvest?.weightOfEveryEmptyBox}
-                                  showErrors={error?.hasError?.("weightOfEveryEmptyBox")}
-                                  errorMessage={error?.getErrorMessage?.("weightOfEveryEmptyBox")}
+                                  error={error}
                                   optional
                     />
                     <Grapevines value={harvest?.grapevine || {}}
                                 name={'grapevine'}
                                 label={t("harvest.GRAPEVINE")}
                                 onChange={updateGrapevineInHarvest}
-                                showErrors={error?.hasError?.("grapevine")}
-                                errorMessage={error?.getErrorMessage?.("grapevine")}
+                                error={error}
                     />
                 </CardBody>
                 <CardFooter className="text-center">

@@ -12,7 +12,7 @@ interface Props
 {
     onSubmit: (e: ChangeEvent<HTMLInputElement>) => void;
     updateParcelsInGrapevine: () => void;
-    error: ServiceError<Grapevine>;
+    error: ServiceError;
     grapevine: Grapevine;
     updateGrapevine: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
@@ -43,8 +43,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       maxSize={'100'}
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.name}
-                                      showErrors={error?.hasError?.("name")}
-                                      errorMessage={error?.getErrorMessage?.("name")}
+                                      error={error}
                         />
                         <InputElement label={t("grapevine.NUMBER_OF_PLANTS")}
                                       type={'number'}
@@ -52,8 +51,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       maxSize={'100'}
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.numberOfPlants}
-                                      showErrors={error?.hasError?.("numberOfPlants")}
-                                      errorMessage={error?.getErrorMessage?.("numberOfPlants")}
+                                      error={error}
                         />
                         <InputElement label={t("grapevine.AREA")}
                                       type={'number'}
@@ -61,8 +59,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       maxSize={'100'}
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.area}
-                                      showErrors={error?.hasError?.("area")}
-                                      errorMessage={error?.getErrorMessage?.("area")}
+                                      error={error}
                         />
                         <InputElement label={t("grapevine.YEAR_OF_PLANTING")}
                                       type={'date'}
@@ -70,8 +67,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       maxSize={'100'}
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.yearOfPlanting}
-                                      showErrors={error?.hasError?.("yearOfPlanting")}
-                                      errorMessage={error?.getErrorMessage?.("yearOfPlanting")}
+                                      error={error}
                                       optional
                         />
                         <SimpleSelect label={t("grapevine.GRAPE_COLOR")}
@@ -80,15 +76,13 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       value={grapevine?.grapeColor || ''}
                                       options={[{value: "WHITE", text: "Białe"},
                                           {value: "RED", text: "Czerwone"}]}
-                                      showErrors={error?.hasError?.("grapeColor")}
-                                      errorMessage={error?.getErrorMessage?.("grapeColor")}
+                                      error={error}
                         />
                         <SelectParcels value={grapevine?.parcels || []}
                                        name={'parcels'}
                                        label={t('grapevine.PARCELS')}
                                        onChange={updateParcelsInGrapevine}
-                                       showErrors={error?.hasError?.("parcels")}
-                                       errorMessage={error?.getErrorMessage?.("parcels")}
+                                       error={error}
                         />
                     </CardBody>
                     <CardFooter className="text-center">

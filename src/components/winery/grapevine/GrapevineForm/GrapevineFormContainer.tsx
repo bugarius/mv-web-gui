@@ -32,7 +32,7 @@ const GrapevineFormContainer = ({render}) => {
             .then(response => {
                 setGrapevineResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError<Grapevine>));
+            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError));
 
         return () => {
             updateGrapevine("reset", "")
@@ -54,10 +54,10 @@ const GrapevineFormContainer = ({render}) => {
                 setGrapevineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/grapevine/all`);
             })
-            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError<Grapevine>));
+            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError));
     };
 
-    const error = grapevineResult as ServiceError<Grapevine>;
+    const error = grapevineResult as ServiceError;
 
     log.debug("GrapevineFormContainer::render", grapevine);
     return render(

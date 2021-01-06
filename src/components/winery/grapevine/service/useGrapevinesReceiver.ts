@@ -26,7 +26,7 @@ const useGrapevinesReceiver = (value?) => {
                     setResult({status: StatusType.loaded, payload: response});
                     setOptions(response?.map((p) => ({value: p.id, label: p.name})))
                 })
-                .catch(error => setResult(new ResponseError(error) as ServiceError<Grapevine[]>));
+                .catch(error => setResult(new ResponseError(error) as ServiceError));
         }
     }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 

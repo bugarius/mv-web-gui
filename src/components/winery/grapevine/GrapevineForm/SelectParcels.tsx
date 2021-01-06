@@ -4,6 +4,7 @@ import Select from "react-select";
 import useParcelsReceiver from "../../parcel/service/useParcelsReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Parcel} from "../../parcel/types/Parcel";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -12,11 +13,10 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, showErrors, errorMessage}) => {
+const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, error}) => {
 
     const {selected: value, options: parcels} = useParcelsReceiver(selected);
 
@@ -43,9 +43,10 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                             value={value}
                             isMulti
                             placeholder={"Wybierz"}
-                            styles={showErrors && customStyles}
+                            styles={error?.hasError?.(name) && customStyles}
                     />
-                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                    <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                        {error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>

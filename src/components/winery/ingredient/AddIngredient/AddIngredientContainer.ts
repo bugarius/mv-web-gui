@@ -38,13 +38,13 @@ const AddIngredientContainer = ({render}) => {
             })
             .catch(response => {
                 log.debug(response);
-                setWineResult(new ResponseError<Wine>(response) as ServiceError<Wine>);
+                setWineResult(new ResponseError<Wine>(response) as ServiceError);
             });
         updateIngredient("reset", "");
     }, [ingredient, setWineResult, service, updateIngredient]);
 
     const actions = {onSubmit, updateIngredientSelect, updateTypeSelect, onChange};
-    const error = wineResult as ServiceError<Wine>
+    const error = wineResult as ServiceError;
 
     return render(actions, key, error, ingredient);
 };

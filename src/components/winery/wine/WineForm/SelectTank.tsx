@@ -5,6 +5,7 @@ import {SelectOption} from "../../../../services/types/SelectOption";
 import {Tank} from "../../tank/types/Tank";
 import useTanksReceiver from "../../tank/service/useTanksReceiver";
 import {useHistory} from "react-router-dom";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -14,8 +15,7 @@ interface Props
     label?: string;
     optional?: boolean;
     disabled?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
 const SelectTank: React.FC<Props> = ({
@@ -25,8 +25,7 @@ const SelectTank: React.FC<Props> = ({
                                          label,
                                          optional,
                                          disabled,
-                                         showErrors,
-                                         errorMessage}) => {
+                                         error}) => {
 
     const {selected: value, options: tanks} = useTanksReceiver(selected);
     const history = useHistory();
@@ -58,9 +57,10 @@ const SelectTank: React.FC<Props> = ({
                             value={value}
                             isDisabled={disabled}
                             placeholder={"Wybierz"}
-                            styles={showErrors && customStyles}
+                            styles={error?.hasError?.(name) && customStyles}
                     />
-                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                    <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                        {error?.getErrorMessage?.(name)}</span>
                     {disabled &&
                     <span className="text-muted small">
                         Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.

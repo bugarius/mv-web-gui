@@ -4,6 +4,7 @@ import Select from "react-select";
 import useGrapevinesReceiver from "../../grapevine/service/useGrapevinesReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Grapevine} from "../../grapevine/types/Grapevine";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -12,8 +13,7 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
 const SelectGrapevines: React.FC<Props> = ({
@@ -21,8 +21,7 @@ const SelectGrapevines: React.FC<Props> = ({
                                                onChange, name,
                                                label,
                                                optional,
-                                               showErrors,
-                                               errorMessage}) => {
+                                               error}) => {
 
     const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
 
@@ -48,9 +47,10 @@ const SelectGrapevines: React.FC<Props> = ({
                             onChange={onChange}
                             value={value}
                             placeholder={"Wybierz"}
-                            styles={showErrors && customStyles}
+                            styles={error?.hasError?.(name) && customStyles}
                     />
-                    <span className="invalid-feedback" style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                    <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                        {error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>

@@ -25,7 +25,7 @@ interface ServiceLoaded<T> {
 
 export type ServiceWorking<T> = | ServiceInit<T> | ServiceLoading<T> | ServiceLoaded<T>;
 
-export interface ServiceError<T> {
+export interface ServiceError {
     status?: StatusType.error | StatusType;
     error: Error;
     hasError: (name: string) => boolean;
@@ -33,4 +33,4 @@ export interface ServiceError<T> {
 }
 export type Service<T> =
     | ServiceWorking<T>
-    | ServiceError<T>;
+    | ServiceError;

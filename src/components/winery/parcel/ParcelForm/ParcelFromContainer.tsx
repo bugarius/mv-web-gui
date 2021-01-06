@@ -27,7 +27,7 @@ const ParcelFormContainer = ({render}) => {
             .then(response => {
                 setParcelResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError<Parcel>));
+            .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError));
 
         return () => {
             updateParcel("reset", "")
@@ -49,10 +49,10 @@ const ParcelFormContainer = ({render}) => {
                 setParcelResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
             })
-            .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError<Parcel>));
+            .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError));
     };
 
-    const error = parcelResult as ServiceError<Parcel>;
+    const error = parcelResult as ServiceError;
 
     log.debug("ParcelForm::render", parcel);
     return render(onSubmit,

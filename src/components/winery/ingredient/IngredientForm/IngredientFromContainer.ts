@@ -6,7 +6,6 @@ import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {Ingredient} from "../types/Ingredient";
-import {Harvest} from "../../harvest/types/Harvest";
 import {SelectOption} from "../../../../services/types/SelectOption";
 
 export const IngredientFormContainer = ({render}) => {
@@ -28,7 +27,7 @@ export const IngredientFormContainer = ({render}) => {
             .then(response => {
                 setIngredientResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError<Ingredient>));
+            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError));
 
         return () => {
             updateIngredient("reset", "")
@@ -54,10 +53,10 @@ export const IngredientFormContainer = ({render}) => {
                 setIngredientResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/ingredient/all`);
             })
-            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError<Ingredient>));
+            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError));
     };
 
-    const error = ingredientResult as ServiceError<Harvest>;
+    const error = ingredientResult as ServiceError;
 
     log.debug("IngredientForm::render", ingredient);
     return render(

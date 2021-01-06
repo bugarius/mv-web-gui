@@ -27,7 +27,7 @@ const HarvestFormContainer = ({render}) => {
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError<Harvest>));
+            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError));
 
         return () => {
             updateHarvest("reset", "")
@@ -55,10 +55,10 @@ const HarvestFormContainer = ({render}) => {
                 const pushPath = history?.location?.state ? history?.location?.state['from'] : `/mv/harvest/all`;
                 history?.push(pushPath);
             })
-            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError<Harvest>));
+            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError));
     };
 
-    const error = harvestResult as ServiceError<Harvest>;
+    const error = harvestResult as ServiceError;
 
     log.debug("HarvestForm::render", harvest);
     return render(

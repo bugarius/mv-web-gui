@@ -6,7 +6,6 @@ import SelectIngredientType from "../IngredientForm/SelectIngredientType";
 import SelectIngredient from "./SelectIngredient";
 import InputElement from "../../../common/InputElement";
 import {ServiceError} from "../../../../services/types/Service";
-import {Wine} from "../../wine/types/Wine";
 import {Ingredient} from "../types/Ingredient";
 
 interface Props {
@@ -18,7 +17,7 @@ interface Props {
         onChange: () => void;
     };
     newKey: number;
-    error: ServiceError<Wine>
+    error: ServiceError;
 }
 
 const AddIngredientForm: FC<Props> = ({
@@ -37,8 +36,7 @@ const AddIngredientForm: FC<Props> = ({
                                           name={'type'}
                                           label={t('add_ingredient.SELECT_TYPE')}
                                           onChange={updateTypeSelect}
-                                          showErrors={error.hasError("type")}
-                                          errorMessage={error.getErrorMessage("type")}
+                                          error={error}
                                           optional
                     />
                     <SelectIngredient value={ingredient.ingredient}
@@ -46,24 +44,21 @@ const AddIngredientForm: FC<Props> = ({
                                       name={'ingredient'}
                                       label={t('add_ingredient.SELECT_INGREDIENT')}
                                       onChange={updateIngredientSelect}
-                                      showErrors={error.hasError("ingredient")}
-                                      errorMessage={error.getErrorMessage("ingredient")}
+                                      error={error}
                     />
                     <InputElement label={t('add_ingredient.AMOUNT')}
                                   type={'number'}
                                   name={'amount'}
                                   onChange={onChange}
                                   defaultValue={ingredient.amount}
-                                  showErrors={error.hasError("amount")}
-                                  errorMessage={error.getErrorMessage("amount")}
+                                  error={error}
                     />
                     <InputElement label={t('add_ingredient.NOTES')}
                                   type={'textarea'}
                                   name={'notes'}
                                   onChange={onChange}
                                   defaultValue={ingredient.notes}
-                                  showErrors={error.hasError("notes")}
-                                  errorMessage={error.getErrorMessage("notes")}
+                                  error={error}
                                   optional
                     />
                 </CardBody>

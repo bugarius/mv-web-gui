@@ -8,7 +8,7 @@ import {Tank} from "../types/Tank";
 
 interface Props {
     onSubmit: () => void;
-    error: ServiceError<Tank>;
+    error: ServiceError;
     tank: Tank;
     updateTank: () => void;
     loading: boolean;
@@ -30,16 +30,14 @@ const SimpleTankForm: FC<Props> = ({onSubmit, tank, updateTank, error, loading})
                                       maxSize={'100'}
                                       onChange={updateTank}
                                       defaultValue={tank?.number}
-                                      showErrors={error?.hasError?.("number")}
-                                      errorMessage={error?.getErrorMessage?.("number")}
+                                      error={error}
                         />
                         <InputElement label={t("tank.CAPACITY")}
                                       type={'number'}
                                       name={'capacity'}
                                       onChange={updateTank}
                                       defaultValue={tank?.capacity}
-                                      showErrors={error?.hasError?.("capacity")}
-                                      errorMessage={error?.getErrorMessage?.("capacity")}
+                                      error={error}
                         />
                     </CardBody>
                     <CardFooter className="text-center">

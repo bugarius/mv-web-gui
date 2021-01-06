@@ -43,7 +43,7 @@ const WineFormContainer = ({render}) => {
             .then(response => {
                 setWineResult({status: StatusType.loaded, payload: response});
             })
-            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError<Wine>));
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
 
         return () => {
             updateWine("reset", "")
@@ -61,10 +61,10 @@ const WineFormContainer = ({render}) => {
                 setWineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/wine/all`);
             })
-            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError<Wine>));
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
 
-    const error = wineResult as ServiceError<Wine>;
+    const error = wineResult as ServiceError;
 
     log.debug("WineFormContainer::render", wine);
     return render(

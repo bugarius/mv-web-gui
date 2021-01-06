@@ -9,7 +9,7 @@ import {Parcel} from "../types/Parcel";
 interface Props
 {
     onSubmit: (e: ChangeEvent<HTMLInputElement>) => void;
-    error: ServiceError<Parcel>;
+    error: ServiceError;
     parcel: Parcel;
     updateParcel: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
@@ -33,8 +33,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.registrationNumber}
-                                  showErrors={error?.hasError?.("registrationNumber")}
-                                  errorMessage={error?.getErrorMessage?.("registrationNumber")}
+                                  error={error}
                     />
                     <InputElement label={t("parcel.AREA")}
                                   type={'number'}
@@ -42,8 +41,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.area}
-                                  showErrors={error?.hasError?.("area")}
-                                  errorMessage={error?.getErrorMessage?.("area")}
+                                  error={error}
                     />
                     <InputElement label={t("parcel.DISTRICT")}
                                   type={'text'}
@@ -51,8 +49,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.district}
-                                  showErrors={error?.hasError?.("district")}
-                                  errorMessage={error?.getErrorMessage?.("district")}
+                                  error={error}
                     />
                     <InputElement label={t("parcel.COUNTRY")}
                                   type={'text'}
@@ -60,8 +57,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.country}
-                                  showErrors={error?.hasError?.("country")}
-                                  errorMessage={error?.getErrorMessage?.("country")}
+                                  error={error}
                                   optional
                     />
                     <InputElement label={t("parcel.CITY")}
@@ -70,8 +66,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.city}
-                                  showErrors={error?.hasError?.("city")}
-                                  errorMessage={error?.getErrorMessage?.("city")}
+                                  error={error}
                                   optional
                     />
                     <InputElement label={t("parcel.ZIP_CODE")}
@@ -80,8 +75,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   maxSize={'100'}
                                   onChange={updateParcel}
                                   defaultValue={parcel?.zipCode}
-                                  showErrors={error?.hasError?.("zipCode")}
-                                  errorMessage={error?.getErrorMessage?.("zipCode")}
+                                  error={error}
                                   optional
                     />
                 </CardBody>

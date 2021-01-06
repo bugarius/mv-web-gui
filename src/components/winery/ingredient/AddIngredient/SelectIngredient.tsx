@@ -6,6 +6,7 @@ import {Ingredient} from "../types/Ingredient";
 import useIngredientsReceiver from "../service/useIngredientsReceiver";
 import {IngredientType} from "../types/IngredientType";
 import PageWrapper from "../../../common/PageWrapper";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -15,8 +16,7 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
-    showErrors?: boolean;
-    errorMessage?: string;
+    error?: ServiceError;
 }
 
 const SelectIngredient: React.FC<Props> = ({
@@ -25,8 +25,7 @@ const SelectIngredient: React.FC<Props> = ({
                                                name,
                                                label,
                                                optional,
-                                               showErrors,
-                                               errorMessage}) => {
+                                               error}) => {
 
     const {selected: value, options: ingredients, loading} = useIngredientsReceiver(selected, type);
 
@@ -53,10 +52,10 @@ const SelectIngredient: React.FC<Props> = ({
                                 onChange={onChange}
                                 value={value}
                                 placeholder={"Wybierz"}
-                                styles={showErrors && customStyles}
+                                styles={error?.hasError?.(name) && customStyles}
                         />
                         <span className="invalid-feedback"
-                              style={{display: (showErrors ? "block" : "none")}}>{errorMessage}</span>
+                              style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>
                     </PageWrapper>
                 </div>
             </FormGroup>
