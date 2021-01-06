@@ -3,62 +3,67 @@ import {Button, Card, CardBody} from "reactstrap";
 import {useTranslation} from "react-i18next";
 import CardFooter from "../../../common/cards/CardFooter";
 import SelectIngredientType from "../IngredientForm/SelectIngredientType";
-import {useIngredientContext} from "../IngredientContext";
 import SelectIngredient from "./SelectIngredient";
 import InputElement from "../../../common/InputElement";
-import {useWineContext} from "../../wine/WineContext";
+import {ServiceError} from "../../../../services/types/Service";
+import {Wine} from "../../wine/types/Wine";
+import {Ingredient} from "../types/Ingredient";
 
 interface Props {
+    ingredient: Ingredient;
     actions: {
         onSubmit: (e: MouseEvent) => void;
         updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
+        onChange: () => void;
     };
     newKey: number;
+    error: ServiceError<Wine>
 }
 
 const AddIngredientForm: FC<Props> = ({
-                               actions: {onSubmit, updateIngredientSelect, updateTypeSelect}, newKey
+                                          ingredient,
+                                          actions: {onSubmit, updateIngredientSelect, updateTypeSelect, onChange},
+                                          newKey,
+                                          error
                            }) => {
 
     const {t} = useTranslation();
-    const {ingredient, updateIngredient} = useIngredientContext();
-    const {wineResult} = useWineContext();
 
     return (
             <Card style={{margin: "0px"}} key={newKey}>
                 <CardBody style={{padding: "7px"}}>
-                    <SelectIngredientType value={ingredient?.type}
+                    <SelectIngredientType value={ingredient.type}
                                           name={'type'}
                                           label={t('add_ingredient.SELECT_TYPE')}
                                           onChange={updateTypeSelect}
-                                          showErrors={wineResult?.hasError?.("type")}
-                                          errorMessage={wineResult?.getErrorMessage?.("type")}
+                                          showErrors={error.hasError("type")}
+                                          errorMessage={error.getErrorMessage("type")}
                                           optional
                     />
-                    <SelectIngredient value={ingredient?.ingredient}
-                                      type={ingredient?.type}
+                    <SelectIngredient value={ingredient.ingredient}
+                                      type={ingredient.type}
                                       name={'ingredient'}
                                       label={t('add_ingredient.SELECT_INGREDIENT')}
                                       onChange={updateIngredientSelect}
-                                      showErrors={wineResult?.hasError?.("ingredient")}
-                                      errorMessage={wineResult?.getErrorMessage?.("ingredient")}
+                                      showErrors={error.hasError("ingredient")}
+                                      errorMessage={error.getErrorMessage("ingredient")}
                     />
                     <InputElement label={t('add_ingredient.AMOUNT')}
                                   type={'number'}
                                   name={'amount'}
-                                  onChange={e => updateIngredient(e.target.name, e.target.value)}
-                                  defaultValue={ingredient?.amount}
-                                  showErrors={wineResult?.hasError?.("amount")}
-                                  errorMessage={wineResult?.getErrorMessage?.("amount")}
+                                  onChange={onChange}
+                                  defaultValue={ingredient.amount}
+                                  showErrors={error.hasError("amount")}
+                                  errorMessage={error.getErrorMessage("amount")}
                     />
                     <InputElement label={t('add_ingredient.NOTES')}
                                   type={'textarea'}
                                   name={'notes'}
-                                  onChange={e => updateIngredient(e.target.name, e.target.value)}
-                                  defaultValue={ingredient?.notes}
-                                  showErrors={wineResult?.hasError?.("notes")}
-                                  errorMessage={wineResult?.getErrorMessage?.("notes")}
+                                  onChange={onChange}
+                                  defaultValue={ingredient.notes}
+                                  showErrors={error.hasError("notes")}
+                                  errorMessage={error.getErrorMessage("notes")}
                                   optional
                     />
                 </CardBody>

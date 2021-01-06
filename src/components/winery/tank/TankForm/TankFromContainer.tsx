@@ -1,6 +1,6 @@
-import {useEffect} from 'react';
+import {ChangeEvent, useEffect} from 'react';
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import useTankService from "../service/useTankService";
 import {ResponseError} from "../../../error/ResponseError";
 import {Tank} from "../types/Tank";
@@ -9,7 +9,7 @@ import {useTankContext} from "../TankContext";
 
 const TankFormContainer = ({render}) => {
 
-    const {tank, updateTank, setTankResult} = useTankContext();
+    const {tank, updateTank, setTankResult, tankResult} = useTankContext();
 
     const service = useTankService();
 
@@ -27,12 +27,16 @@ const TankFormContainer = ({render}) => {
             .then(response => {
                 setTankResult({status: StatusType.loaded, payload: response});
             })
-            .catch(error => setTankResult(new ResponseError<Tank>(error)));
+            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError<Tank>));
 
         return () => {
             updateTank("reset", "")
         }
     }, [tankId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleUpdateTank = (e: ChangeEvent<HTMLInputElement>) => {
+        updateTank(e.target.name, e.target.value);
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -45,11 +49,17 @@ const TankFormContainer = ({render}) => {
                 setTankResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/tank/all`);
             })
-            .catch(error => setTankResult(new ResponseError<Tank>(error)));
+            .catch(response => setTankResult(new ResponseError<Tank>(response) as ServiceError<Tank>));
     };
 
+    const error = tankResult as ServiceError<Tank>;
+
     log.debug("TankForm::render", tank);
-    return render(onSubmit);
+    return render(onSubmit,
+        tank,
+        handleUpdateTank,
+        error,
+        tankResult.status === StatusType.loading);
 };
 
 export default TankFormContainer;

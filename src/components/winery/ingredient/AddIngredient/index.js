@@ -4,8 +4,8 @@ import AddIngredientContainer from "./AddIngredientContainer";
 
 const AddIngredient = (props) => {
     return (
-            <AddIngredientContainer {...props} render={(actions, newKey) => (
-                    <AddIngredientForm actions={actions} newKey={newKey}/>
+            <AddIngredientContainer {...props} render={(actions, newKey, error, ingredient) => (
+                    <AddIngredientForm actions={actions} newKey={newKey} error={error} ingredient={ingredient}/>
             )}/>
     )
 };

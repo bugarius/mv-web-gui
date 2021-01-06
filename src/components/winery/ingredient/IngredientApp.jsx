@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 import IngredientList from "./IngredientList";
-import IngredientForm from "./IngredientForm";
+import {IngredientForm} from "./IngredientForm";
 import IngredientProvider from "./IngredientContext";
 
 const IngredientApp = () => {

@@ -1,15 +1,17 @@
-import {useEffect} from 'react';
+import {ChangeEvent, useEffect} from 'react';
 import {useIngredientContext} from "../IngredientContext";
 import useIngredientService from "../service/useIngredientService";
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {Ingredient} from "../types/Ingredient";
+import {Harvest} from "../../harvest/types/Harvest";
+import {SelectOption} from "../../../../services/types/SelectOption";
 
-const IngredientFormContainer = ({render}) => {
+export const IngredientFormContainer = ({render}) => {
 
-    const {ingredient, updateIngredient, setIngredientResult} = useIngredientContext();
+    const {ingredient, updateIngredient, setIngredientResult, ingredientResult} = useIngredientContext();
     const service = useIngredientService();
 
     const {ingredientId} = useParams();
@@ -23,15 +25,23 @@ const IngredientFormContainer = ({render}) => {
             return;
         }
         ingredientId && service.get(parseInt(ingredientId))
-                .then(response => {
-                    setIngredientResult({status: StatusType.loaded, payload: response});
-                })
-                .catch(error => setIngredientResult(new ResponseError<Ingredient>(error)));
+            .then(response => {
+                setIngredientResult({status: StatusType.loaded, payload: response});
+            })
+            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError<Ingredient>));
 
         return () => {
             updateIngredient("reset", "")
         }
     }, [ingredientId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleUpdateIngredient = (e: ChangeEvent<HTMLInputElement>) => {
+        updateIngredient(e.target.name, e.target.value);
+    };
+
+    const handleUpdateIngredientType = (selected: SelectOption) => {
+        updateIngredient('type', selected.value);
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -44,11 +54,18 @@ const IngredientFormContainer = ({render}) => {
                 setIngredientResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/ingredient/all`);
             })
-            .catch(error => setIngredientResult(new ResponseError<Ingredient>(error)));
+            .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError<Ingredient>));
     };
 
-    log.debug("IngredientForm::render", ingredient);
-    return render(onSubmit);
-};
+    const error = ingredientResult as ServiceError<Harvest>;
 
-export default IngredientFormContainer;
+    log.debug("IngredientForm::render", ingredient);
+    return render(
+        onSubmit,
+        handleUpdateIngredientType,
+        error,
+        ingredient,
+        handleUpdateIngredient,
+        ingredientResult.status === StatusType.loading
+    );
+};

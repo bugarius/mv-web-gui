@@ -1,15 +1,15 @@
-import {useEffect} from 'react';
+import {ChangeEvent, useEffect} from 'react';
 import {useGrapevineContext} from "../GrapevineContext";
 import useGrapevineService from "../service/useGrapevineService";
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Grapevine} from "../types/Grapevine";
 import log from "loglevel";
 
 const GrapevineFormContainer = ({render}) => {
 
-    const {grapevine, updateGrapevine, setGrapevineResult} = useGrapevineContext();
+    const {grapevine, updateGrapevine, setGrapevineResult, grapevineResult} = useGrapevineContext();
 
     const service = useGrapevineService();
 
@@ -32,12 +32,16 @@ const GrapevineFormContainer = ({render}) => {
             .then(response => {
                 setGrapevineResult({status: StatusType.loaded, payload: response});
             })
-            .catch(error => setGrapevineResult(new ResponseError<Grapevine>(error)));
+            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError<Grapevine>));
 
         return () => {
             updateGrapevine("reset", "")
         }
     }, [grapevineId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleUpdateGrapevine = (e: ChangeEvent<HTMLInputElement>) => {
+        updateGrapevine(e.target.name, e.target.value);
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -50,11 +54,19 @@ const GrapevineFormContainer = ({render}) => {
                 setGrapevineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/grapevine/all`);
             })
-            .catch(error => setGrapevineResult(new ResponseError<Grapevine>(error)));
+            .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError<Grapevine>));
     };
 
+    const error = grapevineResult as ServiceError<Grapevine>;
+
     log.debug("GrapevineFormContainer::render", grapevine);
-    return render(updateParcelsInGrapevine, onSubmit);
+    return render(
+        updateParcelsInGrapevine,
+        onSubmit,
+        error,
+        grapevine,
+        handleUpdateGrapevine,
+        grapevineResult.status === StatusType.loading);
 };
 
 export default GrapevineFormContainer;

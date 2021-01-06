@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Service, StatusType} from "../../../../services/types/Service";
+import {Service, ServiceWorking, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import useIngredientService from "./useIngredientService";
 import {Ingredient} from "../types/Ingredient";
@@ -27,7 +27,8 @@ const useIngredientsReceiver = (value?, type?: IngredientType | null) => {
             setSelectedType(type);
             setResult({status: StatusType.loading});
         }
-        if (!result?.payload || type !== selectedType)
+        const workingResult = result as ServiceWorking<Ingredient[]>;
+        if (!workingResult?.payload || type !== selectedType)
         {
             const action = type ? service.getAllByType(type) : service.getList();
             action.then(response => {

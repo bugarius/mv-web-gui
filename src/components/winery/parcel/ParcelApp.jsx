@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 import ParcelList from "./ParcelList";
 import {AuthContext} from "../../platform/AuthContext";
-import ParcelForm from "./ParcelForm";
+import {ParcelForm} from "./ParcelForm";
 import ParcelProvider from "./ParcelContext";
 
 class ParcelApp extends Component {
