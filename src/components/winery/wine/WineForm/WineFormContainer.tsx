@@ -1,7 +1,7 @@
-import {useEffect} from 'react';
+import {ChangeEvent, useEffect} from 'react';
 
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {useWineContext} from "../WineContext";
@@ -10,7 +10,7 @@ import {Wine} from "../types/Wine";
 
 const WineFormContainer = ({render}) => {
 
-    const {wine, updateWine, setWineResult} = useWineContext();
+    const {wine, updateWine, setWineResult, wineResult} = useWineContext();
 
     const service = useWineService();
 
@@ -27,6 +27,11 @@ const WineFormContainer = ({render}) => {
         updateWine('tank', tank);
     };
 
+    const handleUpdateWine = (e: ChangeEvent<HTMLInputElement>) => {
+        updateWine(e.target.name, e.target.value);
+    };
+
+
     useEffect(() => {
         setWineResult({status: StatusType.loading});
         if (wineId?.toString() === "0")
@@ -38,7 +43,7 @@ const WineFormContainer = ({render}) => {
             .then(response => {
                 setWineResult({status: StatusType.loaded, payload: response});
             })
-            .catch(error => setWineResult(new ResponseError<Wine>(error)));
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
 
         return () => {
             updateWine("reset", "")
@@ -56,14 +61,20 @@ const WineFormContainer = ({render}) => {
                 setWineResult(response);
                 history?.push(history?.location?.state!['from'] || `mv/wine/all`);
             })
-            .catch(res => {
-                log.warn(res)
-                history.push(`/mv/error`);
-            });
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
 
+    const error = wineResult as ServiceError;
+
     log.debug("WineFormContainer::render", wine);
-    return render(updateHarvestInWine, updateTankInWine, onSubmit);
+    return render(
+        updateHarvestInWine,
+        updateTankInWine,
+        onSubmit,
+        error,
+        wine,
+        handleUpdateWine,
+        wineResult.status === StatusType.loading);
 };
 
 export default WineFormContainer;

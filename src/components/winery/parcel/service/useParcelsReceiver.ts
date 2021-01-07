@@ -1,6 +1,6 @@
 import useParcelService from "./useParcelService";
 import {useEffect, useState} from "react";
-import {Service, StatusType} from "../../../../services/types/Service";
+import {Service, ServiceWorking, StatusType} from "../../../../services/types/Service";
 import {Parcel} from "../types/Parcel";
 import {ResponseError} from "../../../error/ResponseError";
 import {SelectOption} from "../../../../services/types/SelectOption";
@@ -19,7 +19,8 @@ const useParcelsReceiver = (value?) => {
         {
             setSelected(value?.map((p) => ({value: p.id, label: (p.label || false ? p.label : p.registrationNumber + " - " + p.district)})));
         }
-        if (!result?.payload) {
+        const workingResult = result as ServiceWorking<Parcel[]>;
+        if (!workingResult?.payload) {
             service?.getList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});

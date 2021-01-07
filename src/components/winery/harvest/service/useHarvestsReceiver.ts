@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Service, StatusType} from "../../../../services/types/Service";
+import {Service, ServiceWorking, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import useHarvestService from "./useHarvestService";
 import {Harvest} from "../types/Harvest";
@@ -24,7 +24,8 @@ const useHarvestsReceiver = (value?) => {
                 }
                 : '');
         }
-        if (!result?.payload)
+        const workingResult = result as ServiceWorking<Harvest[]>;
+        if (!workingResult?.payload)
         {
             service?.getList()
                 .then(response => {

@@ -6,10 +6,10 @@ export interface Wine
 {
     id?: number | null;
     name?: string;
-    tank?: Tank;
+    tank?: Tank | null;
     startDate?: string;
     liters?: number | null;
-    harvest?: Harvest;
+    harvest?: Harvest | null;
     ingredients?: Ingredient[];
     history?: History[];
 }

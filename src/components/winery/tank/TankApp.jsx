@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import {AuthContext} from "../../platform/AuthContext";
 import TankProvider from "./TankContext";
 import TankList from "./TankList";
-import TankForm from "./TankForm";
+import {TankForm} from "./TankForm";
 
 const TankApp = () => {
 

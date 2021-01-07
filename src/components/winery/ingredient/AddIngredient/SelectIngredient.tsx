@@ -1,26 +1,43 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
-import * as PropTypes from "prop-types";
 import {Ingredient} from "../types/Ingredient";
 import useIngredientsReceiver from "../service/useIngredientsReceiver";
 import {IngredientType} from "../types/IngredientType";
 import PageWrapper from "../../../common/PageWrapper";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
-    value: Ingredient | SelectOption;
-    onChange: () => void;
-    type?: IngredientType;
+    value?: Ingredient | SelectOption | null;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    type?: IngredientType | null;
     name: string;
     label?: string;
     optional?: boolean;
+    error?: ServiceError;
 }
 
-const SelectIngredient: React.FC<Props> = ({value: selected, onChange, type, name, label, optional}) => {
+const SelectIngredient: React.FC<Props> = ({
+                                               value: selected,
+                                               onChange, type,
+                                               name,
+                                               label,
+                                               optional,
+                                               error}) => {
 
     const {selected: value, options: ingredients, loading} = useIngredientsReceiver(selected, type);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -34,22 +51,16 @@ const SelectIngredient: React.FC<Props> = ({value: selected, onChange, type, nam
                                 options={ingredients}
                                 onChange={onChange}
                                 value={value}
-                                placeholder={"Wybierz"}/>
-                        <span className="invalid-feedback">Field is required</span>
+                                placeholder={"Wybierz"}
+                                styles={error?.hasError?.(name) && customStyles}
+                        />
+                        <span className="invalid-feedback"
+                              style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>
                     </PageWrapper>
                 </div>
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectIngredient.propTypes = {
-    value: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    type: PropTypes.oneOfType([PropTypes.oneOf(Object.values(IngredientType)), PropTypes.any]),
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectIngredient;
