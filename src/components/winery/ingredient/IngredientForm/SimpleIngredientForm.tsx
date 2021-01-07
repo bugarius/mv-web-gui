@@ -6,6 +6,7 @@ import SelectIngredientType from "./SelectIngredientType";
 import {ServiceError} from "../../../../services/types/Service";
 import InputElement from "../../../common/InputElement";
 import {Ingredient} from "../types/Ingredient";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -56,6 +57,7 @@ export const SimpleIngredientForm: FC<Props> = ({
                                   error={error}
                                   optional
                     />
+                    <FormErrorMessage error={error}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     <Button color="primary" className="btn-square" onClick={onSubmit}>

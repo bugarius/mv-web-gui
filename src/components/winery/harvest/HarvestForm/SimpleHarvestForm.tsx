@@ -6,6 +6,7 @@ import InputElement from "../../../common/InputElement";
 import Grapevines from "./SelectGrapevines";
 import {ServiceError} from "../../../../services/types/Service";
 import {Harvest} from "../types/Harvest";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -57,6 +58,7 @@ const SimpleHarvestForm: FC<Props> = ({
                                 onChange={updateGrapevineInHarvest}
                                 error={error}
                     />
+                    <FormErrorMessage error={error}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     <Button color="primary" className="btn-square" onClick={onSubmit}>

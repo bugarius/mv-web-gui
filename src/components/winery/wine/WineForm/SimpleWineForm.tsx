@@ -7,6 +7,7 @@ import {ServiceError} from "../../../../services/types/Service";
 import SelectHarvest from "./SelectHarvest";
 import SelectTank from "./SelectTank";
 import {Wine} from "../types/Wine";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -75,8 +76,7 @@ export const SimpleWineForm: FC<Props> = ({
                                    onChange={updateHarvestInWine}
                                    error={error}
                     />
-
-
+                    <FormErrorMessage error={error}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     <Button color="primary" className="btn-square" onClick={onSubmit}>

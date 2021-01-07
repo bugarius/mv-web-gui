@@ -7,6 +7,7 @@ import SimpleSelect from "../../../common/SimpleSelect";
 import SelectParcels from "./SelectParcels";
 import {ServiceError} from "../../../../services/types/Service";
 import {Grapevine} from "../types/Grapevine";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -84,6 +85,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                        onChange={updateParcelsInGrapevine}
                                        error={error}
                         />
+                        <FormErrorMessage error={error}/>
                     </CardBody>
                     <CardFooter className="text-center">
                         <Button color="primary" className="btn-square" onClick={onSubmit}>

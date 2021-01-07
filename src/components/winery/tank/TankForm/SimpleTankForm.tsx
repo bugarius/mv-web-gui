@@ -5,6 +5,7 @@ import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import {ServiceError} from "../../../../services/types/Service";
 import {Tank} from "../types/Tank";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props {
     onSubmit: () => void;
@@ -39,6 +40,7 @@ const SimpleTankForm: FC<Props> = ({onSubmit, tank, updateTank, error, loading})
                                       defaultValue={tank?.capacity}
                                       error={error}
                         />
+                        <FormErrorMessage error={error}/>
                     </CardBody>
                     <CardFooter className="text-center">
                         <Button color="primary" className="btn-square" onClick={onSubmit}>

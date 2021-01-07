@@ -5,7 +5,7 @@ export class ResponseError<T> implements ServiceError
     status;
     error: Error;
 
-    constructor(error)
+    constructor(error: {message: string, errors: {}})
     {
         this.status = StatusType.error;
         this.error = error;

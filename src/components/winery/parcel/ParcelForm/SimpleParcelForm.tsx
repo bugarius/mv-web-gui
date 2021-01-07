@@ -5,6 +5,7 @@ import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import {ServiceError} from "../../../../services/types/Service";
 import {Parcel} from "../types/Parcel";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -78,6 +79,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   error={error}
                                   optional
                     />
+                    <FormErrorMessage error={error}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     <Button color="primary" className="btn-square" onClick={onSubmit}>
