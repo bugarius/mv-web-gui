@@ -50,6 +50,13 @@
   "wine.TANK_CAPACITY": "Pojemność zbiornika",
   "wine.LITERS": "Litry",
   "wine.HARVEST": "Zbiór",
+  "wine.status.CREATED": "Utworzono",
+  "wine.status.SEDIMENTATION": "Sedymentacja",
+  "wine.status.MACERATION": "Maceracja",
+  "wine.status.FERMENTATION": "Fermentacja",
+  "wine.status.DEACIDIFICATION": "Odkwaszanie",
+  "wine.status.CLARIFICATION": "Klarowanie",
+  "wine.status.AGING": "Leżakowanie",
 
   "history.status.CREATED": "Utworzono",
   "history.status.APPLIED_INGREDIENT": "Dodano składnik",
