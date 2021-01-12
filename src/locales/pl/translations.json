@@ -58,8 +58,10 @@
   "wine.status.SEDIMENTATION": "Sedymentacja",
   "wine.status.MACERATION": "Maceracja",
   "wine.status.FERMENTATION": "Fermentacja",
+  "wine.status.MALOLACTIC_FERMENTATION": "Fermentacja malolaktyczna",
   "wine.status.DEACIDIFICATION": "Odkwaszanie",
   "wine.status.CLARIFICATION": "Klarowanie",
+  "wine.status.YOUNG_WINE": "Młode wino",
   "wine.status.AGING": "Leżakowanie",
   "wine.info.ADD_NEW_EVENT": "Dodaj proces technologiczny",
 
@@ -82,6 +84,8 @@
   "event.type.SUGARING": "Słodzenie",
   "event.type.ALCOHOL_INCREASING": "Wznacnianie",
   "event.type.DECANTING_ABOVE_SEDIMENT": "Zlanie znad osadu",
+  "event.type.FILTERING": "Filtrowanie",
+  "event.type.BOTTLING": "Butelkowanie",
   "event.type.OTHER": "Inny",
 
   "history.status.CREATED": "Utworzono",
@@ -92,7 +96,7 @@
   "history.icon.status.APPLIED_INGREDIENT": "icon-chemistry",
   "history.icon.status.ADDED_WINE": "icon-drop",
   "history.icon.status.ADDED_EVENT": "icon-pie-chart",
-  "history.icon.status.CREATED": "icon-basket-loaded",
+  "history.icon.status.CREATED": "icon-pin",
   "history.icon.status.DISPOSED_HARVEST": "icon-lock",
   "history.ACTION_TYPE.SEDIMENTATION": "Sedymentacja",
   "history.ACTION_TYPE.MACERATION": "Maceracja",

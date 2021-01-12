@@ -21,6 +21,8 @@ export enum ProductionEventType {
     SUGARING,
     ALCOHOL_INCREASING,
     DECANTING_ABOVE_SEDIMENT,
+    FILTERING,
+    BOTTLING,
     OTHER
 }
 
