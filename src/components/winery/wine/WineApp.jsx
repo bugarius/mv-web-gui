@@ -6,6 +6,7 @@ import WineForm from "./WineForm";
 import WineInfo from "./WineInfo";
 import WineProvider from "./WineContext";
 import IngredientProvider from "../ingredient/IngredientContext";
+import ProductionEventProvider from "../production_event/ProductionEventContext";
 
 class WineApp extends Component {
 
@@ -18,18 +19,20 @@ class WineApp extends Component {
                 <>
                     <WineProvider>
                         <IngredientProvider>
-                            <Switch>
-                                <Route exact path="/mv/wine">
-                                    <Redirect to="/mv/wine/all"/>
-                                </Route>
-                                <Route exact path="/mv/wine/all" component={WineList}/>
-                                <Route exact path="/mv/wine/:wineId?">
-                                    <WineForm principal={principal}/>
-                                </Route>
-                                <Route path="/mv/wine/:wineId?/info">
-                                    <WineInfo principal={principal}/>
-                                </Route>
-                            </Switch>
+                            <ProductionEventProvider>
+                                <Switch>
+                                    <Route exact path="/mv/wine">
+                                        <Redirect to="/mv/wine/all"/>
+                                    </Route>
+                                    <Route exact path="/mv/wine/all" component={WineList}/>
+                                    <Route exact path="/mv/wine/:wineId?">
+                                        <WineForm principal={principal}/>
+                                    </Route>
+                                    <Route path="/mv/wine/:wineId?/info">
+                                        <WineInfo principal={principal}/>
+                                    </Route>
+                                </Switch>
+                            </ProductionEventProvider>
                         </IngredientProvider>
                     </WineProvider>
                 </>

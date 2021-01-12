@@ -3,7 +3,7 @@ import {SelectOption} from "../../../../../services/types/SelectOption";
 import {ServiceError} from "../../../../../services/types/Service";
 import {SelectType} from "../../../../common/form-elements/SelectType";
 import {WineStatus} from "../../types/Wine";
-import {useWineStatusesReceiver} from "../../../ingredient/service/useWineStatusReceiver";
+import {useWineStatusesReceiver} from "../../service/useWineStatusReceiver";
 
 interface Props
 {

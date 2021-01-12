@@ -10,8 +10,9 @@ import IngredientInfoPanelTab from "../../ingredient/IngredientInfoPanelTab";
 import {useTranslation} from "react-i18next";
 import {useWineContext} from "../WineContext";
 import WineHistory from "./history/WineHistory";
+import {ProductionEventForm} from "../../production_event/ProductionEventForm";
 
-const WineInfo = ({actions}) => {
+const WineInfoPanel = ({actions}) => {
 
     const {t} = useTranslation();
     const {wine} = useWineContext();
@@ -25,10 +26,12 @@ const WineInfo = ({actions}) => {
                             <WineIngredientsListBox actions={actions}/>
                         </Col>
                         <Col>
+                            <ProductionEventForm />
                             <PanelTab tab1Label={t('add_ingredient.ADD_WINE')}
                                       tab1={<AddIngredient/>}
                                       tab2Label={t('add_ingredient.INGREDIENT_INFO')}
-                                      tab2={<IngredientInfoPanelTab/>}/>
+                                      tab2={<IngredientInfoPanelTab/>}
+                            />
                         </Col>
                     </Row>
                     <WineHistory history={wine?.history}/>
@@ -38,8 +41,8 @@ const WineInfo = ({actions}) => {
     );
 };
 
-WineInfo.propTypes = {
+WineInfoPanel.propTypes = {
     actions: PropTypes.objectOf(PropTypes.func)
 };
 
-export default WineInfo;
+export default WineInfoPanel;

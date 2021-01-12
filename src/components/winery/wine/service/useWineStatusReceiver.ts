@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {useTranslation} from "react-i18next";
-import {WineStatus} from "../../wine/types/Wine";
+import {WineStatus} from "../types/Wine";
 
 export const useWineStatusesReceiver = (value?: WineStatus | SelectOption | null) => {
 

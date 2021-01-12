@@ -23,7 +23,8 @@ const defaultWine = {
   harvest: null,
   ingredients: [],
   history: [],
-  status: null
+  status: null,
+  events: []
 };
 
 const defaultState = {

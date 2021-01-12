@@ -23,7 +23,8 @@ const WineHistory: React.FC<Props> = ({history}) => {
                     {
                         history?.map((item, index) => {
                             const subHeader = (item?.actionType ? t(`ingredients.TYPE.${item?.actionType}`) + ": " :"")
-                                + (item?.message && item?.message);
+                                + (item?.message);
+                            console.log("subHeader", item)
                             return <TimelineElement historyItem={item}
                                                     inverted={item?.status === "APPLIED_INGREDIENT"}
                                                     iconBg={item?.status === "APPLIED_INGREDIENT" ? Color.Green : Color.Blue}

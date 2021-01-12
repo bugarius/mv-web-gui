@@ -29,13 +29,13 @@ const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, act
         <PageWrapper loading={loading} disabled>
             <Card className="b">
                 <CardHeader>
-                    <h4 className="m-0">Składniki dodane</h4>
-                    <small className="text-muted">Łącznie: {ingredients?.length}</small>
+                    <h4 className="m-0">{t('wine.info.ADDED_INGREDIENTS')}</h4>
+                    <small className="text-muted">{t('common.SUMMARY')}: {ingredients?.length}</small>
                 </CardHeader>
                 {ingredients?.length ?
-                    <Table className={'table table-hover'}>
+                    <Table className={'table table-striped table-bordered table-hover'}>
                         <tbody>
-                        <CommonRow label={'Nazwa:'} value={['Typ:', 'Ilość:']}/>
+                        <CommonRow label={`${t('common.NAME')}:`} value={[`${t('common.TYPE')}:`, `${t('common.QUANTITY')}:`]}/>
                         {(ingredients || []).map((i, index) => {
                             return <React.Fragment key={index}>
                                 <CommonRow label={i.name}
@@ -47,7 +47,7 @@ const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, act
                                 {ingredientToShow.id === i.id && ingredientToShow.isOpen &&
                                 <tr>
                                     <td className={'bg-gray-lighter'} colSpan={2}>
-                                        <div style={{whiteSpace: 'pre-wrap'}}>{i.notes}</div>
+                                        <div style={{whiteSpace: 'pre-wrap'}}>{i.notes || t('ingredients.INFO.no_data')}</div>
                                     </td>
                                     <td className={'bg-gray-lighter'}>
                                         <div className="float-right" onClick={() => removeIngredient?.(i.id)}
@@ -62,7 +62,7 @@ const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, act
                         </tbody>
                     </Table>
                     : <CardBody>
-                        <div className={'text-center'}>Nie dodano</div>
+                        <div className={'text-center'}>{t('common.NO_DATA')}</div>
                     </CardBody>
                 }
             </Card>

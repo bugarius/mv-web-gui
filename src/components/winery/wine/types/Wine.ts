@@ -11,6 +11,29 @@ export enum WineStatus {
     AGING,
 }
 
+export enum ProductionEventType {
+    SEDIMENTATION,
+    MACERATION,
+    FERMENTATION,
+    MALOLACTIC_FERMENTATION,
+    DEACIDIFICATION,
+    CLARIFICATION,
+    SUGARING,
+    ALCOHOL_INCREASING,
+    DECANTING_ABOVE_SEDIMENT,
+    OTHER
+}
+
+export interface ProductionEvent {
+    id?: number | null;
+    name?: string;
+    type: ProductionEventType | null;
+    info?: string;
+    startingDate: string;
+    endingDate?: string;
+    waste?: number | null;
+}
+
 export interface Wine
 {
     id?: number | null;
@@ -22,4 +45,5 @@ export interface Wine
     ingredients: Ingredient[];
     history: History[];
     status: WineStatus | null;
+    events: ProductionEvent[];
 }
