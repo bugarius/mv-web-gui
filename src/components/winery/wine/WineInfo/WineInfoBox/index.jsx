@@ -27,7 +27,7 @@ const WineInfoBox = ({button: {action, label}, wine, loading}) => {
                         <CommonRow label={'Litry aktualnie'} value={wine?.liters}/>
                         <CommonRow label={'Ostatni dodany składnik'}
                                    value={wine?.ingredients && wine?.ingredients.length > 0 ? wine?.ingredients[wine?.ingredients.length - 1].name : "Brak"}/>
-                        <CommonRow label={'Ostatni proces'} value={t(`event.type.${wine?.lastEvent?.type}`)}/>
+                        <CommonRow label={'Ostatni proces'} value={wine?.lastEvent?.type ? t(`event.type.${wine?.lastEvent?.type}`) : "Brak"}/>
                         </tbody>
                     </Table>
                     <CardFooter className="text-center">

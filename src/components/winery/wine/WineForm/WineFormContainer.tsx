@@ -59,7 +59,7 @@ const WineFormContainer = ({render}) => {
         action()
             .then(response => {
                 setWineResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/wine/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/wine/all`);
             })
             .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
