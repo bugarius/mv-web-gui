@@ -4,8 +4,8 @@ import WineInfoPanel from "./WineInfoPanel";
 
 const WineInfo = () => {
     return (
-            <WineInfoContainer render={(actions) => (
-                    <WineInfoPanel actions={actions}/>
+            <WineInfoContainer render={(button) => (
+                    <WineInfoPanel button={button}/>
             )}/>
     );
 };

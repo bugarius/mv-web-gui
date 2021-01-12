@@ -7,7 +7,7 @@ import {Ingredient} from "../../ingredient/types/Ingredient";
 const useWineService = () => {
 
     const {harvestId, wineId} = useParams();
-    const {get, post, put, del} = useCrudeApi<Wine>(`/ajax/wines`);
+    const {get, post, put, del, getList} = useCrudeApi<Wine>(`/ajax/wines`);
     const {getAll} = useCrudeApi<Wine>(`/ajax/wines${harvestId ? `/harvest/${harvestId}` : ""}`);
     const {putBody: addIngredient, del: delIngredient} = useFetch<Ingredient>(`/ajax/wines/${wineId}/ingredient`);
     const {getAllWithParams: getByHarvest} = useCrudeApi<Wine>(`/ajax/wines/harvest/${harvestId}`);
@@ -27,7 +27,7 @@ const useWineService = () => {
     }
 
     return {
-        get, getAll, post, put, del, addIngredient, delIngredient, getByHarvest, addEvent, editEvent, removeEvent
+        get, getList, getAll, post, put, del, addIngredient, delIngredient, getByHarvest, addEvent, editEvent, removeEvent
     }
 };
 

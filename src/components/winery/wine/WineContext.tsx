@@ -24,7 +24,8 @@ const defaultWine = {
   ingredients: [],
   history: [],
   status: null,
-  events: []
+  events: [],
+  lastEvent: null
 };
 
 const defaultState = {
@@ -90,7 +91,9 @@ const WineProvider: React.FC = ({children}) => {
 
   const setWineResult = useCallback(result => {
     dispatch({type: "wineResult", value: result});
-    if (result?.payload ) dispatch({type: "wine", value: result.payload});
+    if (result?.payload ) {
+      dispatch({type: "wine", value: result.payload});
+    }
   }, []);
 
   const providerValue = useMemo(() => ({

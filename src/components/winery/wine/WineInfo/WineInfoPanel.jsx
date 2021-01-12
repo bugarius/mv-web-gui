@@ -12,18 +12,18 @@ import {useWineContext} from "../WineContext";
 import WineHistory from "./history/WineHistory";
 import {ProductionEventForm} from "../../production_event/ProductionEventForm";
 
-const WineInfoPanel = ({actions}) => {
+const WineInfoPanel = ({button}) => {
 
     const {t} = useTranslation();
-    const {wine} = useWineContext();
+    const {wine, loading} = useWineContext();
 
     return (
             <>
                 <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}>
                     <Row>
                         <Col xl="4" lg="6">
-                            <WineInfoBox actions={actions}/>
-                            <WineIngredientsListBox actions={actions}/>
+                            <WineInfoBox button={button} wine={wine} loading={loading}/>
+                            <WineIngredientsListBox/>
                         </Col>
                         <Col>
                             <ProductionEventForm />

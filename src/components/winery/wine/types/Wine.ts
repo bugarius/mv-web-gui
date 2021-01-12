@@ -48,4 +48,5 @@ export interface Wine
     history: History[];
     status: WineStatus | null;
     events: ProductionEvent[];
+    lastEvent: ProductionEvent | null;
 }

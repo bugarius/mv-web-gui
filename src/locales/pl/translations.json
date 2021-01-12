@@ -10,6 +10,8 @@
   "common.TYPE": "Typ",
   "common.QUANTITY": "Ilość",
 
+  "home.TITLE": "Zbiorniki w użyciu",
+
   "parcel.TITLE": "Działki ewidencyjne",
   "parcel.LIST": "Zarządzaj swoimi działkami",
   "parcel.REGISTRATION_NUMBER": "Nr ewid. działki",
