@@ -7,7 +7,6 @@ export const useProductionEventTypesReceiver = (value?: ProductionEventType | Se
 
     const {t} = useTranslation();
     const options: SelectOption[] = Object.keys(ProductionEventType)
-        .filter(i => typeof ProductionEventType[i] === "number")
         .map(i => ({value: i, label: t(`event.type.${i}`)}));
     const [selected, setSelected] = useState<SelectOption | string>('');
 

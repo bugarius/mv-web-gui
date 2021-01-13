@@ -12,18 +12,18 @@ const useWineService = () => {
     const {putBody: addIngredient, del: delIngredient} = useFetch<Ingredient>(`/ajax/wines/${wineId}/ingredient`);
     const {getAllWithParams: getByHarvest} = useCrudeApi<Wine>(`/ajax/wines/harvest/${harvestId}`);
 
-    const wineCrudApi = useCrudeApi<ProductionEvent>(`/ajax/wines/event/${wineId}`);
+    const eventWineCrudApi = useCrudeApi<ProductionEvent>(`/ajax/wines/${wineId}/event`);
 
     const addEvent = (body: ProductionEvent) => {
-        return wineCrudApi.putBody(body);
+        return eventWineCrudApi.putBody(body);
     }
 
     const editEvent = (eventId: number, body: ProductionEvent) => {
-        return wineCrudApi.put(eventId, body);
+        return eventWineCrudApi.put(eventId, body);
     }
 
     const removeEvent = (eventId: number) => {
-        return wineCrudApi.del(eventId);
+        return eventWineCrudApi.del(eventId);
     }
 
     return {

@@ -46,11 +46,11 @@ export const withProductionEventToWineServiceHOC = <EventToWineProps, >(WrappedC
     };
 
     const handleOnSubmit = (e) => {
-        console.log(event)
         e.preventDefault();
         setResult({status: StatusType.loading});
         service.addEvent(event)
             .then(response => {
+                update("reset", "");
                 setResult({status: StatusType.loaded});
                 setWineResult({status: StatusType.loaded, payload: response});
                 setKey(new Date());
@@ -60,7 +60,6 @@ export const withProductionEventToWineServiceHOC = <EventToWineProps, >(WrappedC
                 setWineResult({status: StatusType.loaded});
                 setResult(new ResponseError<ProductionEvent>(response) as ServiceError);
             });
-        update("reset", "");
     };
 
     const error = result as ServiceError;

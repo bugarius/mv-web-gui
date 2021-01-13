@@ -1,7 +1,8 @@
 import React, {ChangeEvent, FC} from 'react';
 
-import {FormGroup, Input} from 'reactstrap';
+import {Input} from 'reactstrap';
 import {ServiceError} from "../../services/types/Service";
+import {InputElementSection} from "./form-elements/InputElement/InputElementSection";
 
 interface Props
 {
@@ -31,11 +32,13 @@ const InputElement: FC<Props> = ({
                                  }) => {
 
     return (
-        <fieldset>
-            <FormGroup row>
-                <label className="col-md-2 col-form-label" htmlFor={name}>{label}
-                    <span className="text-danger" style={{display: optional === true ? 'none' : ''}}> *</span>
-                </label>
+        <InputElementSection>
+            <>
+                {label &&
+                    <label className="col-md-2 col-form-label" htmlFor={name}>{label}
+                        <span className="text-danger" style={{display: optional === true ? 'none' : ''}}> *</span>
+                    </label>
+                }
                 <div className="col-md-10">
                     <Input placeholder={placeholder}
                            name={name}
@@ -48,8 +51,8 @@ const InputElement: FC<Props> = ({
                     />
                     <span className="invalid-feedback">{error?.getErrorMessage?.(name)}</span>
                 </div>
-            </FormGroup>
-        </fieldset>
+            </>
+        </InputElementSection>
     );
 
 };

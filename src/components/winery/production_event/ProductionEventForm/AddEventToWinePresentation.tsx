@@ -6,6 +6,7 @@ import InputElement from "../../../common/InputElement";
 import CardFooter from "../../../common/cards/CardFooter";
 import {SelectProductionEventType} from "./SelectProductionEventTypeType";
 import {EventToWineProps} from "./withProductionEventToWineServiceHOC";
+import {ProductionEventType} from "../../wine/types/Wine";
 
 export const AddEventToWinePresentation: FC<EventToWineProps> = ({
                                                                      loading,
@@ -32,6 +33,15 @@ export const AddEventToWinePresentation: FC<EventToWineProps> = ({
                                                onChange={updateTypeSelect}
                                                error={error}
                     />
+                    {event?.type === ProductionEventType.OTHER &&
+                    <InputElement label={t('event.NAME')}
+                                  name={'name'}
+                                  defaultValue={event?.name}
+                                  onChange={onChange}
+                                  error={error}
+                                  optional
+                    />
+                    }
                     <InputElement label={t('event.STARTING_DATE')}
                                   name={'startingDate'}
                                   defaultValue={event?.startingDate}
@@ -43,13 +53,6 @@ export const AddEventToWinePresentation: FC<EventToWineProps> = ({
                                   type={'date'}
                                   name={'endingDate'}
                                   defaultValue={event?.endingDate}
-                                  onChange={onChange}
-                                  error={error}
-                                  optional
-                    />
-                    <InputElement label={t('event.NAME')}
-                                  name={'name'}
-                                  defaultValue={event?.name}
                                   onChange={onChange}
                                   error={error}
                                   optional
