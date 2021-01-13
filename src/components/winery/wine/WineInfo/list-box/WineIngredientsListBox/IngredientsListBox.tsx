@@ -1,11 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import {useTranslation} from "react-i18next";
-import CommonRow from "../../../../common/table/CommonRow";
+import CommonRow from "../../../../../common/table/CommonRow";
 import PropTypes from 'prop-types';
-import {Ingredient} from "../../../ingredient/types/Ingredient";
-import PageWrapper from "../../../../common/PageWrapper";
-import {useWineContext} from "../../WineContext";
+import {Ingredient} from "../../../../ingredient/types/Ingredient";
+import PageWrapper from "../../../../../common/PageWrapper";
+import {useWineContext} from "../../../WineContext";
 
 interface Props
 {
@@ -15,12 +15,17 @@ interface Props
         isOpen?: boolean
     },
     actions: {
-        handleClick?: (id) => void;
-        removeIngredient?: (id) => void
+        toggleShow?: (id) => void;
+        removeElement?: (id) => void;
+        editElement?: (entityName, id) => void;
     }
 }
 
-const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, actions: {handleClick, removeIngredient}}) => {
+const IngredientsListBox: React.FC<Props> = ({
+                                                 ingredients,
+                                                 ingredientToShow,
+                                                 actions: {toggleShow, removeElement, editElement}
+                                             }) => {
 
     const {t} = useTranslation();
     const {loading} = useWineContext();
@@ -35,12 +40,13 @@ const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, act
                 {ingredients?.length ?
                     <Table className={'table table-striped table-bordered table-hover'}>
                         <tbody>
-                        <CommonRow label={`${t('common.NAME')}:`} value={[`${t('common.TYPE')}:`, `${t('common.QUANTITY')}:`]}/>
+                        <CommonRow label={`${t('common.NAME')}:`}
+                                   value={[`${t('common.TYPE')}:`, `${t('common.QUANTITY')}:`]}/>
                         {(ingredients || []).map((i, index) => {
                             return <React.Fragment key={index}>
                                 <CommonRow label={i.name}
                                            value={[t(`ingredients.TYPE.${i.type}`), i.amount + ' g/hl']}
-                                           onClick={() => handleClick?.(i.id)}
+                                           onClick={() => toggleShow?.(i.id)}
                                            style={{cursor: "pointer"}}
                                            key={index}
                                 />
@@ -50,9 +56,13 @@ const IngredientsListBox: React.FC<Props> = ({ingredients, ingredientToShow, act
                                         <div style={{whiteSpace: 'pre-wrap'}}>{i.notes || t('ingredients.INFO.no_data')}</div>
                                     </td>
                                     <td className={'bg-gray-lighter'}>
-                                        <div className="float-right" onClick={() => removeIngredient?.(i.id)}
-                                             style={{cursor: 'pointer'}}>
-                                            <em className="fa-2x mr-2 far fa-trash-alt btn-md"/>
+                                        <div className="float-right">
+                                            <em className="fa-2x mr-2 far fa-trash-alt btn-sm"
+                                                onClick={() => removeElement?.(i.id)}
+                                                style={{cursor: 'pointer'}}/>
+                                            <em className="fa-2x mr-2 far fa-edit btn-sm"
+                                                onClick={() => editElement?.("ingredient/applied", i.id)}
+                                                style={{cursor: 'pointer'}}/>
                                         </div>
                                     </td>
                                 </tr>

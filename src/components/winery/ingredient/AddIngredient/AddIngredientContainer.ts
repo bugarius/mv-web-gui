@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useState} from 'react';
+import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useWineContext} from "../../wine/WineContext";
 import useWineService from "../../wine/service/useWineService";
 import {useIngredientContext} from "../IngredientContext";
@@ -6,13 +6,24 @@ import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {Wine} from "../../wine/types/Wine";
+import {useParams} from "react-router-dom";
 
 const AddIngredientContainer = ({render}) => {
 
     const {setWineResult, wineResult} = useWineContext();
-    const {ingredient, updateIngredient} = useIngredientContext();
+    const {ingredient, updateIngredient, setIngredientResult} = useIngredientContext();
     const service = useWineService();
     const [key, setKey] = useState(new Date());
+
+    const {appliedIngredientId} = useParams();
+
+    useEffect(() => {
+        if (appliedIngredientId && ingredient?.id?.toString() !== appliedIngredientId)
+        {
+            setIngredientResult({status: StatusType.loaded, payload: {id: parseInt(appliedIngredientId)}})
+            console.log(appliedIngredientId)
+        }
+    })
 
     const updateIngredientSelect = (selected) => {
         updateIngredient('ingredient', {...selected, id: selected.value, label: selected.label});

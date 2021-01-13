@@ -1,5 +1,5 @@
 import React from "react";
-import WineIngredientsListBoxContainer from "./WineIngredientsListBoxContainer";
+import {WineIngredientsListBoxContainer} from "./WineIngredientsListBoxContainer";
 import IngredientsListBox from "./IngredientsListBox";
 
 const WineIngredientsListBox = () => {

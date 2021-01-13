@@ -9,6 +9,10 @@
   "common.NAME": "Nazwa",
   "common.TYPE": "Typ",
   "common.QUANTITY": "Ilość",
+  "common.NO_INFO": "Brak notatki",
+  "common.START": "Początek",
+  "common.END": "Koniec",
+  "common.PERIOD": "Data",
 
   "home.TITLE": "Zbiorniki w użyciu",
 
@@ -67,7 +71,8 @@
   "wine.status.AGING": "Leżakowanie",
   "wine.info.ADD_NEW_EVENT": "Dodaj proces technologiczny",
 
-  "wine.info.ADDED_INGREDIENTS": "Składniki dodane",
+  "wine.info.ADDED_INGREDIENTS": "Dodane składniki",
+  "wine.info.ADDED_EVENTS": "Przeprowadzone procesy",
   "wine.info.EVENTS": "Procesy technologiczne",
 
   "event.TYPE": "Typ",

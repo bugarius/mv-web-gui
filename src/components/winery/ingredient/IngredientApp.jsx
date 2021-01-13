@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import IngredientList from "./IngredientList";
 import {IngredientForm} from "./IngredientForm";
 import IngredientProvider from "./IngredientContext";
+import {AppliedIngredientForm} from "./AppliedIngrediendForm";
 
 const IngredientApp = () => {
 
@@ -16,6 +17,9 @@ const IngredientApp = () => {
                         <Route exact path="/mv/ingredient/all" component={IngredientList}/>
                         <Route exact path="/mv/ingredient/:ingredientId?">
                             <IngredientForm />
+                        </Route>
+                        <Route exact path="/mv/ingredient/applied/:appliedIngredientId?">
+                            <AppliedIngredientForm />
                         </Route>
                         <Route path="/mv/ingredient/:ingredientId?/info">
 
