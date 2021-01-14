@@ -63,6 +63,7 @@ export const AddEventToWinePresentation: FC<EventToWineProps> = ({
                                   defaultValue={event?.info}
                                   onChange={onChange}
                                   error={error}
+                                  maxSize={'1000'}
                                   optional
                     />
                     <InputElement label={t('event.WASTE')}

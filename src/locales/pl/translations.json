@@ -14,6 +14,8 @@
   "common.END": "Koniec",
   "common.PERIOD": "Data",
 
+  "alerts.confirmation.REMOVE_ELEMENT": "Czy usunąć ostatecznie ten element?",
+
   "home.TITLE": "Zbiorniki w użyciu",
 
   "parcel.TITLE": "Działki ewidencyjne",
@@ -81,6 +83,7 @@
   "event.STARTING_DATE": "Początek",
   "event.ENDING_DATE": "Koniec",
   "event.WASTE": "Strata",
+  "event.PROCESS_ENDING_DATE": "Koniec procesu",
 
   "event.type.SEDIMENTATION": "Sedymentacja",
   "event.type.MACERATION": "Maceracja",

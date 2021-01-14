@@ -1,7 +1,7 @@
-import {Wine} from "../../types/Wine";
-import {useWineContext} from "../../WineContext";
-import {useElementToShow} from "../../../common/useElementToShow";
-import {useGenericCRUDEntityService} from "../../../common/useGenericCRUDEntityService";
+import {Wine} from "../../../types/Wine";
+import {useWineContext} from "../../../WineContext";
+import {useElementToShow} from "../../../../common/useElementToShow";
+import {useGenericCRUDEntityService} from "../../../../common/useGenericCRUDEntityService";
 
 export const useWineRelationListBoxContainer = <T>(list: T[], removeItemCallback): {list: T[], elementToShow, actions: {toggleShow, removeElement}} => {
 

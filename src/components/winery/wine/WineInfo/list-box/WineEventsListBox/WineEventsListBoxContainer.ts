@@ -1,5 +1,5 @@
 import {useWineContext} from "../../../WineContext";
-import {useWineRelationListBoxContainer} from "../useWineRelationListBoxContainer";
+import {useWineRelationListBoxContainer} from "../shared/useWineRelationListBoxContainer";
 import useWineService from "../../../service/useWineService";
 
 
