@@ -1,16 +1,15 @@
 import React from "react";
-import AddIngredient from "../AddIngredient";
-import PageWrapper from "../../../common/PageWrapper";
-import {useWineContext} from "../../wine/WineContext";
+import {EditAppliedIngredientForm} from "./EditAppliedIngredientForm";
+import {useIngredientContext} from "../IngredientContext";
+import EditIngredientContainer from "./EditIngredientContainer";
 
 export const AppliedIngredientForm = () => {
 
-    const {loading} = useWineContext();
+    const {loading} = useIngredientContext();
 
     return (
-        <PageWrapper title={"ingredients.TITLE"} subtitle={'ingredients.LIST'}
-                     loading={loading}>
-            <AddIngredient/>
-        </PageWrapper>
+        <EditIngredientContainer render={(actions, error, ingredient) => (
+            <EditAppliedIngredientForm actions={actions} error={error} ingredient={ingredient} loading={loading}/>
+        )}/>
     )
 };

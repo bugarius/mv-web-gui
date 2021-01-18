@@ -13,6 +13,7 @@ const useWineService = () => {
     const {getAllWithParams: getByHarvest} = useCrudeApi<Wine>(`/ajax/wines/harvest/${harvestId}`);
 
     const eventWineCrudApi = useCrudeApi<ProductionEvent>(`/ajax/wines/${wineId}/event`);
+    const {put: putIngredient} = useCrudeApi<Ingredient>(`/ajax/wines/${wineId}/ingredient`);
 
     const addEvent = (body: ProductionEvent) => {
         return eventWineCrudApi.putBody(body);
@@ -27,7 +28,7 @@ const useWineService = () => {
     }
 
     return {
-        get, getList, getAll, post, put, del, addIngredient, delIngredient, getByHarvest, addEvent, editEvent, removeEvent
+        get, getList, getAll, post, put, del, addIngredient, delIngredient, getByHarvest, addEvent, editEvent, removeEvent, putIngredient
     }
 };
 

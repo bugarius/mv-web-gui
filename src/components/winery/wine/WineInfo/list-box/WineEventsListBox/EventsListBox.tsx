@@ -39,7 +39,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                             ]}
                                                   actions={actions}
                                                   elementToSHow={eventToShow}
-                                                  entityName={"event"}
+                                                  path={"event"}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.info,

@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {useWineContext} from "../../wine/WineContext";
 import useWineService from "../../wine/service/useWineService";
 import {useIngredientContext} from "../IngredientContext";
@@ -6,38 +6,15 @@ import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {Wine} from "../../wine/types/Wine";
-import {useParams} from "react-router-dom";
+import {useIngredientOnClickService} from "../service/useIngredientOnClickService";
 
 const AddIngredientContainer = ({render}) => {
 
     const {setWineResult, wineResult} = useWineContext();
-    const {ingredient, updateIngredient, setIngredientResult} = useIngredientContext();
+    const {ingredient, updateIngredient} = useIngredientContext();
+    const {onChange, updateIngredientSelect, updateTypeSelect} = useIngredientOnClickService();
     const service = useWineService();
     const [key, setKey] = useState(new Date());
-
-    const {appliedIngredientId} = useParams();
-
-    useEffect(() => {
-        if (appliedIngredientId && ingredient?.id?.toString() !== appliedIngredientId)
-        {
-            setIngredientResult({status: StatusType.loaded, payload: {id: parseInt(appliedIngredientId)}})
-            console.log(appliedIngredientId)
-        }
-    })
-
-    const updateIngredientSelect = (selected) => {
-        updateIngredient('ingredient', {...selected, id: selected.value, label: selected.label});
-        updateIngredient('type', selected.type);
-    };
-
-    const updateTypeSelect = (selected) => {
-        updateIngredient('type', selected.value);
-        updateIngredient('ingredient', {});
-    };
-
-    const onChange = (e: ChangeEvent<HTMLButtonElement>) => {
-        updateIngredient(e.target.name, e.target.value);
-    };
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();

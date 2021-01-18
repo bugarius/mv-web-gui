@@ -17,6 +17,7 @@ interface Props
     label?: string;
     optional?: boolean;
     error?: ServiceError;
+    disabled?: boolean;
 }
 
 const SelectIngredient: React.FC<Props> = ({
@@ -25,7 +26,8 @@ const SelectIngredient: React.FC<Props> = ({
                                                name,
                                                label,
                                                optional,
-                                               error}) => {
+                                               error,
+                                               disabled}) => {
 
     const {selected: value, options: ingredients, loading} = useIngredientsReceiver(selected, type);
 
@@ -53,6 +55,7 @@ const SelectIngredient: React.FC<Props> = ({
                                 value={value}
                                 placeholder={"Wybierz"}
                                 styles={error?.hasError?.(name) && customStyles}
+                                isDisabled={disabled}
                         />
                         <span className="invalid-feedback"
                               style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>

@@ -21,7 +21,7 @@ const IngredientsListBox: React.FC<Props> = ({
                                              }) => {
 
     const {t} = useTranslation();
-    const {loading} = useWineContext();
+    const {loading, wine} = useWineContext();
 
     return (
         <PageWrapper loading={loading} disabled>
@@ -43,7 +43,7 @@ const IngredientsListBox: React.FC<Props> = ({
                             ]}
                                                   actions={actions}
                                                   elementToSHow={ingredientToShow}
-                                                  entityName={"ingredient/applied"}
+                                                  path={`wine/${wine?.id}/ingredient`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.notes || t('ingredients.INFO.no_data')

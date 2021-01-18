@@ -8,7 +8,7 @@ interface Props
     header: string[]
     actions: ListBoxActions;
     elementToSHow: ListBoxElementToShow;
-    entityName: "event" | "ingredient/applied";
+    path: string;
     elementId?: number | null;
     dropdownInfo: { paragraph?: string, footer?: { label: string, value?: string } };
 }
@@ -30,7 +30,7 @@ export const CommonListBox: FC<Props> = ({
                                              header,
                                              actions: {toggleShow, editElement, removeElement},
                                              elementToSHow,
-                                             entityName,
+                                             path,
                                              elementId,
                                              dropdownInfo
                                          }) => {
@@ -55,7 +55,7 @@ export const CommonListBox: FC<Props> = ({
                         <p className='m-0'>{`${dropdownInfo?.footer?.label}: ${dropdownInfo?.footer?.value}`}</p>}
                     </div>
                     <BoxListActionsButtons actions={{
-                        editElement: () => editElement?.(entityName, elementId),
+                        editElement: () => editElement?.(path, elementId),
                         removeElement: () => removeElement?.(elementId)
                     }}
                     />

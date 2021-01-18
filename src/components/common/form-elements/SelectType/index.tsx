@@ -12,17 +12,19 @@ interface Props
     label?: string;
     optional?: boolean;
     error?: ServiceError;
-    receiver: (value: any) => {options: SelectOption[], selected: string | SelectOption}
+    receiver: (value: any) => { options: SelectOption[], selected: string | SelectOption };
+    disabled?: boolean;
 }
 
 export const SelectType: React.FC<Props> = ({
-                                                   value: selected,
-                                                   onChange, name,
-                                                   label,
-                                                   optional,
-                                                   error,
-                                                   receiver
-                                               }) => {
+                                                value: selected,
+                                                onChange, name,
+                                                label,
+                                                optional,
+                                                error,
+                                                receiver,
+                                                disabled
+                                            }) => {
 
     const {options, selected: value} = receiver(selected);
 
@@ -49,6 +51,7 @@ export const SelectType: React.FC<Props> = ({
                             value={value}
                             placeholder={"Wybierz"}
                             styles={error?.hasError?.(name) && customStyles}
+                            isDisabled={disabled}
                     />
                     <span className="invalid-feedback"
                           style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>

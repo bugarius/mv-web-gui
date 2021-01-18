@@ -13,6 +13,7 @@ interface Props
     label?: string;
     optional?: boolean;
     error?: ServiceError;
+    disabled?: boolean;
 }
 
 const SelectIngredientType: React.FC<Props> = ({
@@ -20,11 +21,12 @@ const SelectIngredientType: React.FC<Props> = ({
                                                    onChange, name,
                                                    label,
                                                    optional,
-                                                   error
+                                                   error,
+                                                   disabled
                                                }) => {
 
     return <SelectType onChange={onChange} name={name} receiver={useIngredientTypesReceiver} error={error}
-                       optional={optional} label={label} value={value}/>
+                       optional={optional} label={label} value={value} disabled={disabled}/>
 };
 
 export default SelectIngredientType;
