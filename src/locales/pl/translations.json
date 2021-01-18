@@ -13,6 +13,7 @@
   "common.START": "Początek",
   "common.END": "Koniec",
   "common.PERIOD": "Data",
+  "common.EDIT": "Edytuj",
 
   "alerts.confirmation.REMOVE_ELEMENT": "Czy usunąć ostatecznie ten element?",
 
@@ -122,6 +123,7 @@
   "history.ACTION_TYPE.CLARIFICATION": "Klarowanie",
   "history.ACTION_TYPE.SUGARING": "Słodzenie",
   "history.ACTION_TYPE.ALCOHOL_INCREASING": "Wzmacnianie",
+  "history.ACTION_TYPE.BOTTLING": "Butelkowanie",
   "history.ACTION_TYPE.OTHER": "Inne",
 
   "tank.TITLE": "Zbiorniki na wino",

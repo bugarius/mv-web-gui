@@ -17,7 +17,7 @@ interface Props
 const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
 
     const {t} = useTranslation();
-    const {loading} = useWineContext();
+    const {loading, wine} = useWineContext();
 
     return (
         <PageWrapper loading={loading} disabled>
@@ -39,7 +39,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                             ]}
                                                   actions={actions}
                                                   elementToSHow={eventToShow}
-                                                  path={"event"}
+                                                  path={`wine/${wine?.id}/event`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.info,

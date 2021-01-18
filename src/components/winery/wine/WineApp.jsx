@@ -8,6 +8,7 @@ import WineProvider from "./WineContext";
 import IngredientProvider from "../ingredient/IngredientContext";
 import ProductionEventProvider from "../production_event/ProductionEventContext";
 import {AppliedIngredientForm} from "../ingredient/AppliedIngrediendForm";
+import {ProductionEventForm} from "../production_event/ProductionEventForm";
 
 class WineApp extends Component {
 
@@ -34,6 +35,9 @@ class WineApp extends Component {
                                     </Route>
                                     <Route exact path="/mv/wine/:wineId?/ingredient/:appliedIngredientId?">
                                         <AppliedIngredientForm />
+                                    </Route>
+                                    <Route exact path="/mv/wine/:wineId?/event/:productionEventId?">
+                                        <ProductionEventForm />
                                     </Route>
                                 </Switch>
                             </ProductionEventProvider>
