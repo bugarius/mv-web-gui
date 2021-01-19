@@ -7,7 +7,7 @@ import WineInfo from "./WineInfo";
 import WineProvider from "./WineContext";
 import IngredientProvider from "../ingredient/IngredientContext";
 import ProductionEventProvider from "../production_event/ProductionEventContext";
-import {AppliedIngredientForm} from "../ingredient/AppliedIngrediendForm";
+import {AppliedIngredientForm} from "../ingredient/applied/AppliedIngrediendForm";
 import {ProductionEventForm} from "../production_event/ProductionEventForm";
 
 class WineApp extends Component {

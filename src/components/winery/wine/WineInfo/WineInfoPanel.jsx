@@ -5,7 +5,7 @@ import WineInfoBox from "./WineInfoBox";
 import PanelTab from "../../../common/PanelTab/PanelTab";
 import PropTypes from 'prop-types';
 import WineIngredientsListBox from "./list-box/WineIngredientsListBox";
-import AddIngredient from "../../ingredient/AddIngredient";
+import {ApplyIngredient} from "../../ingredient/applied/ApplyIngredient";
 import IngredientInfoPanelTab from "../../ingredient/IngredientInfoPanelTab";
 import {useTranslation} from "react-i18next";
 import {useWineContext} from "../WineContext";
@@ -30,7 +30,7 @@ const WineInfoPanel = ({button}) => {
                         <Col>
                             <ProductionEventForm />
                             <PanelTab tab1Label={t('add_ingredient.ADD_WINE')}
-                                      tab1={<AddIngredient/>}
+                                      tab1={<ApplyIngredient/>}
                                       tab2Label={t('add_ingredient.INGREDIENT_INFO')}
                                       tab2={<IngredientInfoPanelTab/>}
                             />

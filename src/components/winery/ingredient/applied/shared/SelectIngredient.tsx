@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
-import {SelectOption} from "../../../../services/types/SelectOption";
-import {Ingredient} from "../types/Ingredient";
-import useIngredientsReceiver from "../service/useIngredientsReceiver";
-import {IngredientType} from "../types/IngredientType";
-import PageWrapper from "../../../common/PageWrapper";
-import {ServiceError} from "../../../../services/types/Service";
+import {SelectOption} from "../../../../../services/types/SelectOption";
+import {Ingredient} from "../../types/Ingredient";
+import useIngredientsReceiver from "../../service/useIngredientsReceiver";
+import {IngredientType} from "../../types/IngredientType";
+import PageWrapper from "../../../../common/PageWrapper";
+import {ServiceError} from "../../../../../services/types/Service";
 
 interface Props
 {

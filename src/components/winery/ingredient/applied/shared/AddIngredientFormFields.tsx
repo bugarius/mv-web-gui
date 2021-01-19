@@ -1,11 +1,11 @@
 import React, {ChangeEvent, FC} from 'react';
 import {useTranslation} from "react-i18next";
-import SelectIngredientType from "../IngredientForm/SelectIngredientType";
+import SelectIngredientType from "../../IngredientForm/SelectIngredientType";
 import SelectIngredient from "./SelectIngredient";
-import InputElement from "../../../common/InputElement";
-import {ServiceError} from "../../../../services/types/Service";
-import {Ingredient} from "../types/Ingredient";
-import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import InputElement from "../../../../common/InputElement";
+import {ServiceError} from "../../../../../services/types/Service";
+import {Ingredient} from "../../types/Ingredient";
+import {FormErrorMessage} from "../../../../common/notifications/FormErrorMessage";
 
 interface Props
 {

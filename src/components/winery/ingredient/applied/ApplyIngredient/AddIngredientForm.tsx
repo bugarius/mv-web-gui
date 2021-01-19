@@ -1,35 +1,21 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import {Button, Card, CardBody} from "reactstrap";
 import {useTranslation} from "react-i18next";
-import CardFooter from "../../../common/cards/CardFooter";
-import {ServiceError} from "../../../../services/types/Service";
-import {Ingredient} from "../types/Ingredient";
-import {AddIngredientFormFields} from "./AddIngredientFormFields";
+import CardFooter from "../../../../common/cards/CardFooter";
+import {AddIngredientFormFields} from "../shared/AddIngredientFormFields";
+import {IngredientFormProps} from "../shared/withIngredientServiceHOC";
 
-interface Props
-{
-    ingredient: Ingredient;
-    actions: {
-        onSubmit: (e: MouseEvent) => void;
-        updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
-        updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
-        onChange: () => void;
-    };
-    newKey: number;
-    error: ServiceError;
-}
-
-const AddIngredientForm: FC<Props> = ({
+const AddIngredientForm: FC<IngredientFormProps> = ({
                                           ingredient,
                                           actions: {onSubmit, updateIngredientSelect, updateTypeSelect, onChange},
-                                          newKey,
+                                          key,
                                           error
                                       }) => {
 
     const {t} = useTranslation();
 
     return (
-        <Card style={{margin: "0px"}} key={newKey}>
+        <Card style={{margin: "0px"}} key={key}>
             <CardBody style={{padding: "7px"}}>
                 <AddIngredientFormFields ingredient={ingredient}
                                          actions={{updateIngredientSelect, updateTypeSelect, onChange}}
@@ -37,7 +23,7 @@ const AddIngredientForm: FC<Props> = ({
                 />
             </CardBody>
             <CardFooter>
-                <Button color="primary" className="btn-square" onClick={onSubmit}>
+                <Button color="primary" className="btn-square" onClick={onSubmit.save}>
                     {t("common.ADD")}
                 </Button>
             </CardFooter>
