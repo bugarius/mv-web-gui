@@ -9,17 +9,19 @@ import {ProductionEventType} from "../../wine/types/Wine";
 
 export const ProductionEventFormFields: FC<EventToWineProps> = ({
                                                                     event,
-                                                                    onChange,
-                                                                    updateTypeSelect,
-                                                                    onSubmit,
-                                                                    error,
-                                                                    newKey
+                                                                    actions: {
+                                                                        onChange,
+                                                                        updateTypeSelect,
+                                                                        onSubmit,
+                                                                        key
+                                                                    },
+                                                                    error
                                                                 }) => {
 
     const {t} = useTranslation();
 
     return (
-        <Card className="b" key={newKey}>
+        <Card className="b" key={key}>
             <CardHeader>
                 <h4 className="m-0">{t('wine.info.ADD_NEW_EVENT')}</h4>
             </CardHeader>
@@ -73,7 +75,7 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
                 />
             </CardBody>
             <CardFooter>
-                <Button color="primary" className="btn-square" onClick={onSubmit}>
+                <Button color="primary" className="btn-square" onClick={event?.id ? onSubmit?.update : onSubmit?.save}>
                     {event?.id ? t("common.SAVE") : t("common.ADD")}
                 </Button>
             </CardFooter>

@@ -6,11 +6,16 @@ import {AddIngredientFormFields} from "../shared/AddIngredientFormFields";
 import {IngredientFormProps} from "../shared/withIngredientServiceHOC";
 
 const AddIngredientForm: FC<IngredientFormProps> = ({
-                                          ingredient,
-                                          actions: {onSubmit, updateIngredientSelect, updateTypeSelect, onChange},
-                                          key,
-                                          error
-                                      }) => {
+                                                        ingredient,
+                                                        actions: {
+                                                            onSubmit,
+                                                            updateIngredientSelect,
+                                                            updateTypeSelect,
+                                                            onChange,
+                                                            key,
+                                                        },
+                                                        error
+                                                    }) => {
 
     const {t} = useTranslation();
 

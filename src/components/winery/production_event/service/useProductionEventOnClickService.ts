@@ -69,5 +69,10 @@ export const useProductionEventOnClickService = () => {
         }
     };
 
-    return {onChange, updateTypeSelect, saveOnSubmit, updateOnSubmit, key}
+    return {
+        onChange,
+        updateTypeSelect,
+        onSubmit: {update: updateOnSubmit, save: saveOnSubmit},
+        key
+    }
 }

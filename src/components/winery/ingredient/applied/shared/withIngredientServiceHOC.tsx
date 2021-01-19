@@ -15,10 +15,10 @@ export interface IngredientFormProps
         updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         onChange: () => void;
+        key?: string
     };
     error: ServiceError;
     loading: boolean;
-    key?: string | number;
 }
 
 export const withIngredientServiceHOC = <IngredientFormProps, >(WrappedComponent: React.ComponentType<IngredientFormProps>) => (props) => {
