@@ -1,5 +1,15 @@
 const Menu = [
     {
+        heading: 'Start',
+        translate: 'sidebar.heading.START',
+    },
+    {
+        name: 'Panel',
+        icon: 'icon-layers',
+        translate: 'sidebar.nav.BOARD',
+        path: '/mv/board',
+    },
+    {
         heading: 'Winnica',
         translate: 'sidebar.heading.VINEYARD'
     },
@@ -65,6 +75,10 @@ const Menu = [
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
+    },
+    {
+        heading: 'Winiarnia',
+        translate: 'sidebar.heading.WINERY'
     },
     {
         name: 'Nastawy',

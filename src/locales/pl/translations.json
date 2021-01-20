@@ -159,7 +159,10 @@
   "add_ingredient.NOTES": "Notatki",
 
   "sidebar.WELCOME": "Welcome",
+  "sidebar.heading.BOARD": "Panel",
+  "sidebar.heading.START": "Start",
   "sidebar.heading.VINEYARD": "Winnica",
+  "sidebar.heading.WINERY": "Winiarnia",
   "sidebar.heading.HEADER": "Main Navigation",
   "sidebar.heading.COMPONENTS": "Components",
   "sidebar.heading.MORE": "More",

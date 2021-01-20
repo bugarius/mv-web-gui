@@ -9,7 +9,7 @@ import {ResponseError} from "../../../error/ResponseError";
 import {Wine} from "../../wine/types/Wine";
 import {Card, CardBody} from "reactstrap";
 
-export const HomePage = () => {
+export const BoardPage = () => {
 
     const history = useHistory();
     const service = useWineService();
