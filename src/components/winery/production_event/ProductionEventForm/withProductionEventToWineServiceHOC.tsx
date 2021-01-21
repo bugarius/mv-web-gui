@@ -14,6 +14,7 @@ export interface EventToWineProps
             update: (e: MouseEvent) => void;
             save: (e: MouseEvent) => void;
         };
+        updateDate: () => void;
         key?: string;
     }
     error: ServiceError;

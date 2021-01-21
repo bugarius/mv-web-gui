@@ -35,10 +35,10 @@ const TimelineElement: React.FC<Props> = (
             </div>
             <div className="timeline-card">
                 <div className="popover right">
-                    <h4 className="popover-header">{header} <small>{FromApiConverter.convertDateTime(historyItem?.date)}</small></h4>
+                    <h4 className="popover-header">{header} <small>{FromApiConverter.convertDateTime(historyItem?.createdItemDate)}</small></h4>
                     <div className="arrow"/>
                     <div className="popover-body">
-                        <p>{subHeader}
+                        <p style={{whiteSpace: 'pre-wrap'}}>{subHeader}
                             <br/>
                             <small>Dodał: {historyItem?.modifier?.name}</small> <br/>
                         </p>

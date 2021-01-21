@@ -6,6 +6,7 @@ import PageWrapper from "../../../../../common/PageWrapper";
 import {useWineContext} from "../../../WineContext";
 import {ProductionEvent, ProductionEventType} from "../../../types/Wine";
 import {CommonListBox, ListBoxActions, ListBoxElementToShow} from "../shared/CommonListBox";
+import {FromApiConverter} from "../../../../../../services/Converters";
 
 interface Props
 {
@@ -34,7 +35,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                         {(events || []).map((i, key) => {
                             return <CommonListBox header={[
                                 (i.type === ProductionEventType.OTHER ? i.name || "" : t(`event.type.${i.type}`)),
-                                i.startingDate,
+                                FromApiConverter.convertDateTime(i.startingDate),
                                 (i?.waste?.toString() || "-")
                             ]}
                                                   actions={actions}
@@ -45,7 +46,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                                                       paragraph: i.info,
                                                       footer: {
                                                           label: t('event.PROCESS_ENDING_DATE'),
-                                                          value: i.endingDate
+                                                          value: FromApiConverter.convertDateTime?.(i.endingDate)
                                                       }
                                                   }}
                                                   key={key}

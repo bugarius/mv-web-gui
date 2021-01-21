@@ -20,8 +20,8 @@ const defaultProductionEvent = {
     name: "",
     type: null,
     info: "",
-    startingDate: "",
-    endingDate: "",
+    startingDate: null,
+    endingDate: null,
     waste: null
 };
 

@@ -38,16 +38,13 @@ export const useIngredientOnClickService = () => {
         {
             setIngredientResult({status: StatusType.loading});
             wineService.putIngredient(parseInt(appliedIngredientId), ingredient)
-                .then(response => {
-                    setWineResult({status: StatusType.loaded, payload: response});
-                    history.push(history?.location?.state!['from'] || `mv/wine/all`)
-                })
+                .then(() => history.push(history?.location?.state!['from'] || `mv/wine/all`))
                 .catch(response => {
                     log.debug(response);
                     setIngredientResult(new ResponseError<Ingredient>(response));
                 });
         }
-    }, [ingredient, appliedIngredientId, setIngredientResult, history, setWineResult, wineService]);
+    }, [ingredient, appliedIngredientId, setIngredientResult, history, wineService]);
 
     const saveOnSubmit = useCallback((e) => {
         e.preventDefault();

@@ -31,8 +31,8 @@ export interface ProductionEvent {
     name?: string;
     type: ProductionEventType | null;
     info?: string;
-    startingDate: string;
-    endingDate?: string;
+    startingDate: Date | string | null;
+    endingDate?: Date | string | null;
     waste?: number | null;
 }
 

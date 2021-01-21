@@ -31,6 +31,10 @@ const WineFormContainer = ({render}) => {
         updateWine(e.target.name, e.target.value);
     };
 
+    const updateDate = (dateName: string, date: Date) => {
+        updateWine(dateName, date);
+    };
+
 
     useEffect(() => {
         setWineResult({status: StatusType.loading});
@@ -74,6 +78,7 @@ const WineFormContainer = ({render}) => {
         error,
         wine,
         handleUpdateWine,
+        updateDate,
         wineResult.status === StatusType.loading);
 };
 

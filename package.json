@@ -24,6 +24,7 @@
     "prop-types": "latest",
     "react": "^16.13.1",
     "react-collapse": "^5.0.1",
+    "react-datepicker": "^3.4.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "latest",
     "react-i18next": "^11.0.0",

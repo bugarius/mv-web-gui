@@ -6,12 +6,14 @@ import CardFooter from "../../../common/cards/CardFooter";
 import {SelectProductionEventType} from "./SelectProductionEventTypeType";
 import {EventToWineProps} from "./withProductionEventToWineServiceHOC";
 import {ProductionEventType} from "../../wine/types/Wine";
+import {InputDate} from "../../../common/form-elements/InputDate";
 
 export const ProductionEventFormFields: FC<EventToWineProps> = ({
                                                                     event,
                                                                     actions: {
                                                                         onChange,
                                                                         updateTypeSelect,
+                                                                        updateDate,
                                                                         onSubmit,
                                                                         key
                                                                     },
@@ -19,7 +21,6 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
                                                                 }) => {
 
     const {t} = useTranslation();
-
     return (
         <Card className="b" key={key}>
             <CardHeader>
@@ -41,20 +42,20 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
                               optional
                 />
                 }
-                <InputElement label={t('event.STARTING_DATE')}
-                              name={'startingDate'}
-                              defaultValue={event?.startingDate}
-                              type={'date'}
-                              onChange={onChange}
-                              error={error}
+                <InputDate label={t('event.STARTING_DATE')}
+                           name={'startingDate'}
+                           defaultValue={event?.startingDate}
+                           onChange={updateDate}
+                           error={error}
+                           showTimeSelect
                 />
-                <InputElement label={t('event.ENDING_DATE')}
-                              type={'date'}
-                              name={'endingDate'}
-                              defaultValue={event?.endingDate}
-                              onChange={onChange}
-                              error={error}
-                              optional
+                <InputDate label={t('event.ENDING_DATE')}
+                           name={'endingDate'}
+                           defaultValue={event?.endingDate}
+                           onChange={updateDate}
+                           error={error}
+                           optional
+                           showTimeSelect
                 />
                 <InputElement label={t('event.INFO')}
                               type={'textarea'}

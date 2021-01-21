@@ -26,7 +26,7 @@ export const useGetProductionEvent = (): ReturnProps  => {
     const eventService = useProductionEventService();
 
     useEffect(() => {
-        if ((result.status === StatusType.loading) && productionEventId)
+        if ((result.status === StatusType.loading) && productionEventId && !event?.type)
         {
             eventService.get(parseInt(productionEventId))
                 .then(response => setResult({status: StatusType.loaded, payload: response}))
