@@ -35,7 +35,7 @@ const defaultState = {
     setProductionEvents: () => {
     },
     productionEventResult: {status: StatusType.loading},
-    setProductionEventResult: () => {
+    setProductionEventResult: () =>  {
     },
     loading: false
 };

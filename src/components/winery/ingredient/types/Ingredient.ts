@@ -9,4 +9,5 @@ export interface Ingredient
     type?: IngredientType | null;
     amount?: number | null;
     notes?: string;
+    appliedDate: Date | string | null;
 }

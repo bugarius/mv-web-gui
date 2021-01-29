@@ -15,6 +15,7 @@ export interface IngredientFormProps
         updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         onChange: () => void;
+        updateDate: () => void;
         key?: string
     };
     error: ServiceError;

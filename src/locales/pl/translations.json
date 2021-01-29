@@ -156,6 +156,7 @@
   "add_ingredient.SELECT_TYPE": "Typ",
   "add_ingredient.SELECT_INGREDIENT": "Składnik",
   "add_ingredient.NO_INGREDIENT_SELECTED": "Nie wybrano składnika",
+  "add_ingredient.APPLIED_DATE": "Data dodania",
   "add_ingredient.AMOUNT": "Ilość [g/hl]",
   "add_ingredient.NOTES": "Notatki",
 

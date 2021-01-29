@@ -20,7 +20,7 @@ export const useGetAppliedIngredient = (): ReturnProps  => {
     const {ingredient, setIngredientResult, ingredientResult, loading} = useIngredientContext();
 
     useEffect(() => {
-        if (ingredientResult.status === StatusType.loading && appliedIngredientId && !ingredient.type)
+        if (loading && appliedIngredientId && !ingredient.type)
         {
             const resolveAppliedIngredient = (appliedIngredient: Ingredient) => {
 
@@ -29,7 +29,8 @@ export const useGetAppliedIngredient = (): ReturnProps  => {
                     name: appliedIngredient.name,
                     type: appliedIngredient.type,
                     amount: appliedIngredient.amount,
-                    ingredient: appliedIngredient.ingredient
+                    ingredient: appliedIngredient.ingredient,
+                    appliedDate: appliedIngredient.appliedDate
                 }
             }
             service.getApplied(parseInt(appliedIngredientId))

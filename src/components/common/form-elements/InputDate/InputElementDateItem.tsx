@@ -48,10 +48,11 @@ export const InputElementDateItem: FC<InputDateProps> = ({
                     disabled={disabled}
                     minDate={minDate}
                     maxDate={maxDate}
-                    className={'form-control'}
+                    className={'form-control ' + (error?.hasError?.(name) ? "border-danger" : "")}
 
                 />
-                <span className="invalid-feedback">{error?.getErrorMessage?.(name)}</span>
+                <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                    {error?.getErrorMessage?.(name)}</span>
             </div>
 
         );

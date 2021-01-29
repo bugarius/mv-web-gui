@@ -12,7 +12,8 @@ export const EditAppliedIngredientForm: FC<IngredientFormProps> = ({
                                                                            onSubmit,
                                                                            updateIngredientSelect,
                                                                            updateTypeSelect,
-                                                                           onChange
+                                                                           onChange,
+                                                                           updateDate
                                                                        },
                                                                        error,
                                                                        loading
@@ -27,7 +28,7 @@ export const EditAppliedIngredientForm: FC<IngredientFormProps> = ({
                 <CardHeader> {t("sidebar.nav.element.EDIT")}</CardHeader>
                 <CardBody>
                     <AddIngredientFormFields ingredient={ingredient}
-                                             actions={{updateIngredientSelect, updateTypeSelect, onChange}}
+                                             actions={{updateIngredientSelect, updateTypeSelect, onChange, updateDate}}
                                              error={error}
                                              editing={true}
                     />

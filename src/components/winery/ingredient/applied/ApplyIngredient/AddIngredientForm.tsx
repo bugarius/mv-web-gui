@@ -12,6 +12,7 @@ const AddIngredientForm: FC<IngredientFormProps> = ({
                                                             updateIngredientSelect,
                                                             updateTypeSelect,
                                                             onChange,
+                                                            updateDate,
                                                             key,
                                                         },
                                                         error
@@ -23,7 +24,7 @@ const AddIngredientForm: FC<IngredientFormProps> = ({
         <Card style={{margin: "0px"}} key={key}>
             <CardBody style={{padding: "7px"}}>
                 <AddIngredientFormFields ingredient={ingredient}
-                                         actions={{updateIngredientSelect, updateTypeSelect, onChange}}
+                                         actions={{updateIngredientSelect, updateTypeSelect, onChange, updateDate}}
                                          error={error}
                 />
             </CardBody>

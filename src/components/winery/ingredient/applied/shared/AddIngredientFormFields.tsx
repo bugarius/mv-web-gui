@@ -6,6 +6,7 @@ import InputElement from "../../../../common/InputElement";
 import {ServiceError} from "../../../../../services/types/Service";
 import {Ingredient} from "../../types/Ingredient";
 import {FormErrorMessage} from "../../../../common/notifications/FormErrorMessage";
+import {InputDate} from "../../../../common/form-elements/InputDate";
 
 interface Props
 {
@@ -14,6 +15,7 @@ interface Props
         updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
         onChange: () => void;
+        updateDate: () => void;
     };
     error: ServiceError;
     editing?: boolean;
@@ -21,7 +23,7 @@ interface Props
 
 export const AddIngredientFormFields: FC<Props> = ({
                                                        ingredient,
-                                                       actions: {updateIngredientSelect, updateTypeSelect, onChange},
+                                                       actions: {updateIngredientSelect, updateTypeSelect, onChange, updateDate},
                                                        error,
                                                        editing
                                                    }) => {
@@ -45,6 +47,13 @@ export const AddIngredientFormFields: FC<Props> = ({
                               onChange={updateIngredientSelect}
                               error={error}
                               disabled={editing}
+            />
+            <InputDate label={t('add_ingredient.APPLIED_DATE')}
+                       name={'appliedDate'}
+                       defaultValue={ingredient?.appliedDate}
+                       onChange={updateDate}
+                       error={error}
+                       showTimeSelect
             />
             <InputElement label={t('add_ingredient.AMOUNT')}
                           type={'number'}

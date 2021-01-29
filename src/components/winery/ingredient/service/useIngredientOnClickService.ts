@@ -1,13 +1,12 @@
 import {ChangeEvent, useCallback, useState} from "react";
 import {useIngredientContext} from "../IngredientContext";
-import {ServiceError, StatusType} from "../../../../services/types/Service";
+import {StatusType} from "../../../../services/types/Service";
 import log from "loglevel";
 import {ResponseError} from "../../../error/ResponseError";
 import {Ingredient} from "../types/Ingredient";
 import {useWineContext} from "../../wine/WineContext";
 import useWineService from "../../wine/service/useWineService";
 import {useHistory, useParams} from "react-router-dom";
-import {Wine} from "../../wine/types/Wine";
 
 export const useIngredientOnClickService = () => {
 
@@ -32,6 +31,10 @@ export const useIngredientOnClickService = () => {
         updateIngredient(e.target.name, e.target.value);
     };
 
+    const updateDate = (dateName: string, date: Date) => {
+        updateIngredient(dateName, date);
+    };
+
     const updateOnSubmit = useCallback((e) => {
         e.preventDefault();
         if (appliedIngredientId)
@@ -48,23 +51,24 @@ export const useIngredientOnClickService = () => {
 
     const saveOnSubmit = useCallback((e) => {
         e.preventDefault();
-        setWineResult({status: StatusType.loading});
+        setIngredientResult({status: StatusType.loading});
         wineService.addIngredient(ingredient)
             .then(response => {
+                updateIngredient("reset", "");
                 setWineResult({status: StatusType.loaded, payload: response});
                 setKey(new Date());
             })
             .catch(response => {
                 log.debug(response);
-                setWineResult(new ResponseError<Wine>(response) as ServiceError);
+                setIngredientResult(new ResponseError<Ingredient>(response));
             });
-        updateIngredient("reset", "");
-    }, [ingredient, setWineResult, wineService, updateIngredient]);
+    }, [ingredient, setWineResult, wineService, updateIngredient, setIngredientResult]);
 
     return {
         updateIngredientSelect,
         updateTypeSelect,
         onChange,
+        updateDate,
         onSubmit: {update: updateOnSubmit, save: saveOnSubmit},
         key
     }
