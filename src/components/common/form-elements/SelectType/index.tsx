@@ -1,22 +1,16 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {FormGroup} from "reactstrap";
 import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
-import {ServiceError} from "../../../../services/types/Service";
+import {SelectOptionProps} from "./SelectTypeModel";
 
 interface Props
 {
-    value?: any | SelectOption | null;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    name: string;
-    label?: string;
-    optional?: boolean;
-    error?: ServiceError;
     receiver: (value: any) => { options: SelectOption[], selected: string | SelectOption };
     disabled?: boolean;
 }
 
-export const SelectType: React.FC<Props> = ({
+export const SelectType: React.FC<SelectOptionProps<any> & Props> = ({
                                                 value: selected,
                                                 onChange, name,
                                                 label,
@@ -47,7 +41,7 @@ export const SelectType: React.FC<Props> = ({
                 <div className="col-md-10">
                     <Select name={name}
                             options={options}
-                            onChange={onChange}
+                            onChange={(s) => onChange(name, s)}
                             value={value}
                             placeholder={"Wybierz"}
                             styles={error?.hasError?.(name) && customStyles}

@@ -6,7 +6,7 @@ export interface Harvest
 {
     id?: number | null;
     grapevine?: Grapevine | null;
-    dateOfHarvest?: string;
+    dateOfHarvest: Date | string | null;
     weightOfGrapes?: number | null;
     amountOfMust?: number | null;
     amountOfWaste?: number | null;

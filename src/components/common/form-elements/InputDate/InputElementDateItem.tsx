@@ -33,13 +33,24 @@ export const InputElementDateItem: FC<InputDateProps> = ({
 
         const {t} = useTranslation();
 
+        const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień']
+        const days = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sb', 'Nd']
+
+        const locale = {
+            localize: {
+                month: n => months[n],
+                day: n => days[n]
+            },
+            formatLong: {}
+        }
+
         return (
             <div className="col-md-10">
                 <DatePicker
                     selected={defaultValue ? new Date(defaultValue) : ""}
                     onChange={(date) => onChange(name, date)}
                     timeInputLabel={`${t('common.TIME')}:`}
-                    dateFormat="dd.MM.yyyy HH:mm"
+                    dateFormat={"dd.MM.yyyy" + (showTimeSelect ? " HH:mm" : "")}
                     showTimeSelect={showTimeSelect}
                     timeFormat="HH:mm"
                     timeCaption={t('common.TIME')}
@@ -48,6 +59,7 @@ export const InputElementDateItem: FC<InputDateProps> = ({
                     disabled={disabled}
                     minDate={minDate}
                     maxDate={maxDate}
+                    locale={locale}
                     className={'form-control ' + (error?.hasError?.(name) ? "border-danger" : "")}
 
                 />

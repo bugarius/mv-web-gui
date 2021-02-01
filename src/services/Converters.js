@@ -94,11 +94,14 @@ const convertIngredientFromApi = (ingredient) => ({
 });
 
 const convertIngredientToApi = (ingredient) => ({
+    ...ingredient,
     id: ingredient.id || null,
     name: ingredient.name || null,
     info: ingredient.info || null,
     type: ingredient.type || null,
     amount: ingredient.amount || null,
+    appliedDate: ingredient.appliedDate ? convertDateTimeToApi(ingredient.appliedDate) : null,
+
 });
 
 const convertWineFromApi = (wine) => ({

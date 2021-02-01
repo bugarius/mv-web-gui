@@ -22,8 +22,8 @@ const HarvestHistory: React.FC<Props> = ({history}) => {
                 <TimelineSection>
                     {
                         history?.map((item, index) => {
-                            const subHeader = (item?.actionType ? item?.actionType : "") + " "
-                                + (item?.message ?  item?.message : "");
+                            const subHeader = (item?.actionType ? item?.actionType : "")
+                                + (item?.message ? item?.message : "");
                             return <TimelineElement historyItem={item}
                                                     inverted={item?.status === "ADDED_WINE"}
                                                     key={index}

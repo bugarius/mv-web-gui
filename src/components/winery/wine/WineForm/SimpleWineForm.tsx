@@ -54,8 +54,6 @@ export const SimpleWineForm: FC<Props> = ({
                                onChange={updateDate}
                                defaultValue={wine?.startDate}
                                error={error}
-                               optional
-                               showTimeSelect
                     />
                     <SelectTank value={wine?.tank || {}}
                                 name={'tank'}

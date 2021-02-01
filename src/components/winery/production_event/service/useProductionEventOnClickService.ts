@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from "react";
+import {useState} from "react";
 import {useProductionEventContext} from "../ProductionEventContext";
 import {ServiceError, StatusType} from "../../../../services/types/Service";
 import log from "loglevel";
@@ -8,6 +8,7 @@ import {useHistory, useParams} from "react-router-dom";
 import {useWineContext} from "../../wine/WineContext";
 import useWineService from "../../wine/service/useWineService";
 import {ToApiConverter} from "../../../../services/Converters";
+import {useEventHandlerActions} from "../../common/useEventHandlerActions";
 
 export const useProductionEventOnClickService = () => {
 
@@ -27,17 +28,7 @@ export const useProductionEventOnClickService = () => {
 
     const history = useHistory();
 
-    const onChange = (e: ChangeEvent<HTMLButtonElement>) => {
-        update(e.target.name, e.target.value);
-    };
-
-    const updateTypeSelect = (selected) => {
-        update('type', selected.value);
-    };
-
-    const updateDate = (dateName: string, date: Date) => {
-        update(dateName, date);
-    };
+    const {onChange, updateSelect: updateTypeSelect, updateDateTime: updateDate} = useEventHandlerActions(update);
 
     const saveOnSubmit = (e) => {
         e.preventDefault();

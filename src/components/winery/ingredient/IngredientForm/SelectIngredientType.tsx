@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {IngredientType} from "../types/IngredientType";
 import useIngredientTypesReceiver from "../service/useIngredientTypesReceiver";
@@ -8,7 +8,7 @@ import {SelectType} from "../../../common/form-elements/SelectType";
 interface Props
 {
     value?: IngredientType | SelectOption | null;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (name: string, s: Record<string, string>) => void;
     name: string;
     label?: string;
     optional?: boolean;

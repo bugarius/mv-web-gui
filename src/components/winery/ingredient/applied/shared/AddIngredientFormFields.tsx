@@ -13,7 +13,7 @@ interface Props
     ingredient: Ingredient;
     actions: {
         updateIngredientSelect: (e: ChangeEvent<HTMLInputElement>) => void;
-        updateTypeSelect: (e: ChangeEvent<HTMLInputElement>) => void;
+        updateTypeSelect: (name: string, s: Record<string, string>) => void;
         onChange: () => void;
         updateDate: () => void;
     };
