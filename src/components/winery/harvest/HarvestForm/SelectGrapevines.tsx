@@ -9,7 +9,7 @@ import {ServiceError} from "../../../../services/types/Service";
 interface Props
 {
     value: Grapevine | SelectOption;
-    onChange: () => void;
+    onChange: (name: string, selected: Record<string, string>) => void;
     name: string;
     label?: string;
     optional?: boolean;
@@ -44,7 +44,7 @@ const SelectGrapevines: React.FC<Props> = ({
                 <div className="col-md-10">
                     <Select name={name}
                             options={grapevines}
-                            onChange={onChange}
+                            onChange={(s) => onChange(name, s)}
                             value={value}
                             placeholder={"Wybierz"}
                             styles={error?.hasError?.(name) && customStyles}

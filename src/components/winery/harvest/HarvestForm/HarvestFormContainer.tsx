@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useHarvestContext} from "../HarvestContext";
 import useHarvestService from "../service/useHarvestService";
 import {useHistory, useParams} from "react-router-dom";
@@ -6,6 +6,7 @@ import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {Harvest} from "../types/Harvest";
+import {useEventHandlerActions} from "../../common/useEventHandlerActions";
 
 const HarvestFormContainer = ({render}) => {
 
@@ -15,6 +16,12 @@ const HarvestFormContainer = ({render}) => {
 
     const {harvestId} = useParams();
     const history = useHistory();
+
+    const {
+        updateDate,
+        onChange: handleUpdateHarvest,
+        updateEntitySelect: updateGrapevineInHarvest
+    } = useEventHandlerActions(updateHarvest);
 
     useEffect(() => {
         setHarvestResult({status: StatusType.loading});
@@ -33,15 +40,6 @@ const HarvestFormContainer = ({render}) => {
             updateHarvest("reset", "")
         }
     }, [harvestId]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const handleUpdateHarvest = (e: ChangeEvent<HTMLInputElement>) => {
-        updateHarvest(e.target.name, e.target.value);
-    };
-
-    const updateGrapevineInHarvest = (value) => {
-        const grapevine = {id: value.value, label: value.label};
-        updateHarvest('grapevine', grapevine);
-    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -67,6 +65,7 @@ const HarvestFormContainer = ({render}) => {
         error,
         harvest,
         handleUpdateHarvest,
+        updateDate,
         harvestResult.status === StatusType.loading);
 };
 

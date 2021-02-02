@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect} from 'react';
+import {useEffect} from 'react';
 
 import {useHistory, useParams} from "react-router-dom";
 import {ServiceError, StatusType} from "../../../../services/types/Service";
@@ -7,10 +7,13 @@ import log from "loglevel";
 import {useWineContext} from "../WineContext";
 import useWineService from "../service/useWineService";
 import {Wine} from "../types/Wine";
+import {useEventHandlerActions} from "../../common/useEventHandlerActions";
 
 const WineFormContainer = ({render}) => {
 
     const {wine, updateWine, setWineResult, wineResult} = useWineContext();
+
+    const {updateDate, onChange: handleUpdateWine} = useEventHandlerActions(updateWine);
 
     const service = useWineService();
 
@@ -26,11 +29,6 @@ const WineFormContainer = ({render}) => {
         const tank = {id: value.value, label: value.label};
         updateWine('tank', tank);
     };
-
-    const handleUpdateWine = (e: ChangeEvent<HTMLInputElement>) => {
-        updateWine(e.target.name, e.target.value);
-    };
-
 
     useEffect(() => {
         setWineResult({status: StatusType.loading});
@@ -59,7 +57,7 @@ const WineFormContainer = ({render}) => {
         action()
             .then(response => {
                 setWineResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/wine/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/wine/all`);
             })
             .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
@@ -74,6 +72,7 @@ const WineFormContainer = ({render}) => {
         error,
         wine,
         handleUpdateWine,
+        updateDate,
         wineResult.status === StatusType.loading);
 };
 

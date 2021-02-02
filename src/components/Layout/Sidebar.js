@@ -21,8 +21,8 @@ const SidebarItemHeader = ({item}) => (
 )
 
 /** Normal items for the sidebar */
-const SidebarItem = ({item, isActive}) => (
-    <li className={ isActive ? 'active' : '' }>
+const SidebarItem = ({item, isActive, handler}) => (
+    <li className={ isActive ? 'active' : '' } onClick={handler}>
         <Link to={item.path} title={item.name}>
             {item.label && <Badge tag="div" className="float-right" color={item.label.color}>{item.label.value}</Badge>}
             {item.icon && <em className={item.icon}></em>}
@@ -143,7 +143,7 @@ class Sidebar extends Component {
                                     else {
                                         if(this.itemType(item) === 'menu')
                                             return (
-                                                <SidebarItem isActive={this.routeActive(item.path)} item={item} key={i} />
+                                                <SidebarItem isActive={this.routeActive(item.path)} item={item} key={i} handler={this.toggleItemCollapse.bind(this, item.name)}/>
                                             )
                                         if(this.itemType(item) === 'submenu')
                                             return [

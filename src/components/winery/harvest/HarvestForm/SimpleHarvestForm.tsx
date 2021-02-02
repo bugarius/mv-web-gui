@@ -7,6 +7,7 @@ import Grapevines from "./SelectGrapevines";
 import {ServiceError} from "../../../../services/types/Service";
 import {Harvest} from "../types/Harvest";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import {InputDate} from "../../../common/form-elements/InputDate";
 
 interface Props
 {
@@ -15,6 +16,7 @@ interface Props
     error: ServiceError;
     harvest: Harvest;
     updateHarvest: (e: ChangeEvent<HTMLInputElement>) => void;
+    updateDate: (date: Date | string) => void;
     loading: boolean;
 }
 
@@ -24,6 +26,7 @@ const SimpleHarvestForm: FC<Props> = ({
                                           error,
                                           harvest,
                                           updateHarvest,
+                                          updateDate,
                                           loading
                                       }) => {
 
@@ -36,12 +39,11 @@ const SimpleHarvestForm: FC<Props> = ({
                 <CardHeader> {harvest?.id ? t("sidebar.nav.element.EDIT") : t("sidebar.nav.element.ADD_NEW_HARVEST")}
                 </CardHeader>
                 <CardBody>
-                    <InputElement label={t("harvest.DATE_OF_HARVEST")}
-                                  type={'date'}
-                                  name={'dateOfHarvest'}
-                                  onChange={updateHarvest}
-                                  defaultValue={harvest?.dateOfHarvest}
-                                  error={error}
+                    <InputDate label={t("harvest.DATE_OF_HARVEST")}
+                               name={'dateOfHarvest'}
+                               onChange={updateDate}
+                               defaultValue={harvest?.dateOfHarvest}
+                               error={error}
                     />
                     <InputElement label={t("harvest.WEIGHT_OF_EVERY_EMPTY_BOX")}
                                   type={'number'}

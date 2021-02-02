@@ -79,6 +79,7 @@ const useFetch = <T>(endpoint?: string) => {
         // {
         //     throw new Error("to make a put you must provide the id and the body");
         // }
+        console.log("BODY: ", body)
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", body);
     };

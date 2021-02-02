@@ -8,6 +8,7 @@ import SelectHarvest from "./SelectHarvest";
 import SelectTank from "./SelectTank";
 import {Wine} from "../types/Wine";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import {InputDate} from "../../../common/form-elements/InputDate";
 
 interface Props
 {
@@ -17,6 +18,7 @@ interface Props
     error: ServiceError;
     wine: Wine;
     updateWine: (e: ChangeEvent<HTMLInputElement>) => void;
+    updateDate: () => void;
     loading: boolean;
 }
 
@@ -27,6 +29,7 @@ export const SimpleWineForm: FC<Props> = ({
                                               error,
                                               wine,
                                               updateWine,
+                                              updateDate,
                                               loading
                                           }) => {
 
@@ -46,13 +49,11 @@ export const SimpleWineForm: FC<Props> = ({
                                   defaultValue={wine?.name}
                                   error={error}
                     />
-                    <InputElement label={t("wine.DATE")}
-                                  type={'date'}
-                                  name={'startDate'}
-                                  onChange={updateWine}
-                                  defaultValue={wine?.startDate}
-                                  error={error}
-                                  optional
+                    <InputDate label={t("wine.DATE")}
+                               name={'startDate'}
+                               onChange={updateDate}
+                               defaultValue={wine?.startDate}
+                               error={error}
                     />
                     <SelectTank value={wine?.tank || {}}
                                 name={'tank'}

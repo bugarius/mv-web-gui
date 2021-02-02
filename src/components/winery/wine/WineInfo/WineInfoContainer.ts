@@ -28,9 +28,12 @@ const WineInfoContainer = ({render}) => {
         history.push(`/mv/wine/${wineId}/`,{from: history.location.pathname});
     };
 
-    const actions = {editWine};
+    const button = {
+        action: editWine,
+        label: "Edytuj"
+    };
 
-    return render(actions);
+    return render(button);
 };
 
 export default WineInfoContainer;

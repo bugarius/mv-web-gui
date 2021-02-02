@@ -1,6 +1,7 @@
 export interface Error {
     message: string;
     errors?: {}
+    details?: string;
 }
 
 export enum StatusType {

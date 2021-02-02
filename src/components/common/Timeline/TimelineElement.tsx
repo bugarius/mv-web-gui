@@ -3,7 +3,6 @@ import {Color} from "../enums/Color";
 import {History} from "../../winery/wine/types/History";
 import {useTranslation} from "react-i18next";
 import PropTypes from 'prop-types';
-import {FromApiConverter} from "../../../services/Converters";
 import TimelineSeparator from "./TimelineSeparator";
 
 interface Props
@@ -14,6 +13,7 @@ interface Props
     icon?: string;
     iconBg?: Color | string;
     historyItem?: History;
+    date?: string;
 }
 
 const TimelineElement: React.FC<Props> = (
@@ -24,6 +24,7 @@ const TimelineElement: React.FC<Props> = (
         icon,
         iconBg,
         historyItem,
+        date
     }) => {
 
     const {t} = useTranslation();
@@ -35,10 +36,10 @@ const TimelineElement: React.FC<Props> = (
             </div>
             <div className="timeline-card">
                 <div className="popover right">
-                    <h4 className="popover-header">{header} <small>{FromApiConverter.convertDateTime(historyItem?.date)}</small></h4>
+                    <h4 className="popover-header">{header} <small>{date}</small></h4>
                     <div className="arrow"/>
                     <div className="popover-body">
-                        <p>{subHeader}
+                        <p style={{whiteSpace: 'pre-wrap'}}>{subHeader}
                             <br/>
                             <small>Dodał: {historyItem?.modifier?.name}</small> <br/>
                         </p>

@@ -18,6 +18,7 @@ import Error500 from "../pages/Error500";
 import Maintenance from "../pages/Maintenance";
 import ErrorApp from "../error/ErrorApp";
 import TankApp from "./tank/TankApp";
+import {BoardApp} from "./home/BoardApp";
 
 const waitFor = Tag => props => <Tag {...props}/>;
 
@@ -94,6 +95,9 @@ const Routes = ({location}) => {
 
                                         {/*Error*/}
                                         <Route path="/mv/error" component={waitFor(ErrorApp)}/>
+
+                                        {/*Home*/}
+                                        <Route path="/mv" component={waitFor(BoardApp)}/>
                                     </Switch>
                                 </Suspense>
                             </div>

@@ -23,6 +23,7 @@ const defaultIngredient = {
   amount: null,
   notes: "",
   // picture: {},
+  appliedDate: ""
 };
 
 const defaultState = {
