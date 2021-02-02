@@ -6,6 +6,7 @@ import TimelineSection from "../../../../common/Timeline/TimelineSection";
 import TimelineElement from "../../../../common/Timeline/TimelineElement";
 import PropTypes from "prop-types";
 import {Color} from "../../../../common/enums/Color";
+import {FromApiConverter} from "../../../../../services/Converters";
 
 interface Props
 {
@@ -29,6 +30,10 @@ const HarvestHistory: React.FC<Props> = ({history}) => {
                                                     key={index}
                                                     iconBg={item?.status === "ADDED_WINE" ? Color.Green : Color.Blue}
                                                     header={t(`history.status.${item?.status}`)}
+                                                    date={item?.status === 'CREATED' || item?.status === 'ADDED_WINE' ?
+                                                        FromApiConverter.convertDate(item?.createdItemDate)
+                                                        : FromApiConverter.convertDateTime(item?.createdItemDate)
+                                                    }
                                                     subHeader={subHeader}
                             />
                         })

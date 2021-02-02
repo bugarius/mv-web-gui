@@ -155,6 +155,25 @@ const convertDateTimeFromApi = (dateTime) => {
     return result;
 };
 
+const convertDateFromApi = (date) => {
+    let result = '';
+    if (date)
+    {
+        try
+        {
+            const dateTimeBuffer = date?.split("T");
+            const newDate = dateTimeBuffer?.[0];
+            const dateBuffer = newDate?.split("-");
+            result = dateBuffer?.[2] + "." + dateBuffer?.[1] + "." + dateBuffer?.[0];
+        }
+        catch (e)
+        {
+            console.error('convertDateFromApi', date, e);
+        }
+    }
+    return result;
+};
+
 const getAvatarUrl = (avatar) => {
     const url = "/ajax/avatar/";
     const avatarId = avatar && avatar.id;
@@ -243,7 +262,8 @@ export const FromApiConverter = {
     convertUserList: (list) => list.map(convertUserFromApi),
     convertPrincipal: convertPrincipalFromApi,
     convertGrapeColor: convertGrapeColor,
-    convertDateTime: convertDateTimeFromApi
+    convertDateTime: convertDateTimeFromApi,
+    convertDate: convertDateFromApi
 };
 
 export const ToApiConverter = {
