@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Moja Winnica",
+  "name": "Program do zarządzania produkcją wina z upraw własnych",
   "icons": [
     {
       "src": "favicon.ico",
