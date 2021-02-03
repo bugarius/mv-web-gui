@@ -1,8 +1,7 @@
 export interface Error {
-    name: string;
     message: string;
-    stack?: string;
     errors?: {}
+    details?: string;
 }
 
 export enum StatusType {
@@ -14,27 +13,25 @@ export enum StatusType {
 
 interface ServiceInit<T> {
     status?: StatusType.init | StatusType;
-    hasError?: (name: string) => boolean;
     payload?: T;
 }
 interface ServiceLoading<T> {
     status?: StatusType.loading | StatusType;
-    hasError?: (name: string) => boolean;
     payload?: T;
 }
 interface ServiceLoaded<T> {
     status?: StatusType.loaded | StatusType;
-    hasError?: (name: string) => boolean;
-    payload: T;
+    payload?: T;
 }
-export interface ServiceError<T> {
+
+export type ServiceWorking<T> = | ServiceInit<T> | ServiceLoading<T> | ServiceLoaded<T>;
+
+export interface ServiceError {
     status?: StatusType.error | StatusType;
     error: Error;
     hasError: (name: string) => boolean;
-    payload?: T;
+    getErrorMessage: (name: string) => string;
 }
 export type Service<T> =
-    | ServiceInit<T>
-    | ServiceLoading<T>
-    | ServiceLoaded<T>
-    | ServiceError<T>;
+    | ServiceWorking<T>
+    | ServiceError;

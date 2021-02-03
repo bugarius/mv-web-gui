@@ -19,7 +19,6 @@ const Lock = () => {
         e.preventDefault();
         AuthService.login(principal.login, password)
                 .then(principal => {
-                    console.log(principal, history)
                     if (principal?.login)
                     {
                         setLock(false);

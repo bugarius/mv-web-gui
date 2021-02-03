@@ -2,24 +2,26 @@ import {useEffect} from 'react';
 import {useHarvestContext} from "../HarvestContext";
 import useHarvestService from "../service/useHarvestService";
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
-import {Grapevine} from "../../grapevine/types/Grapevine";
 import log from "loglevel";
+import {Harvest} from "../types/Harvest";
+import {useEventHandlerActions} from "../../common/useEventHandlerActions";
 
 const HarvestFormContainer = ({render}) => {
 
-    const {harvest, updateHarvest, setHarvestResult} = useHarvestContext();
+    const {harvest, updateHarvest, setHarvestResult, harvestResult} = useHarvestContext();
 
     const service = useHarvestService();
 
     const {harvestId} = useParams();
     const history = useHistory();
 
-    const updateGrapevineInHarvest = (value) => {
-        const grapevine = {id: value.value, label: value.label};
-        updateHarvest('grapevine', grapevine);
-    };
+    const {
+        updateDate,
+        onChange: handleUpdateHarvest,
+        updateEntitySelect: updateGrapevineInHarvest
+    } = useEventHandlerActions(updateHarvest);
 
     useEffect(() => {
         setHarvestResult({status: StatusType.loading});
@@ -32,7 +34,7 @@ const HarvestFormContainer = ({render}) => {
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
             })
-            .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
+            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError));
 
         return () => {
             updateHarvest("reset", "")
@@ -48,16 +50,23 @@ const HarvestFormContainer = ({render}) => {
         action()
             .then(response => {
                 setHarvestResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/harvest/all`);
+                const pushPath = history?.location?.state ? history?.location?.state['from'] : `/mv/harvest/all`;
+                history?.push(pushPath);
             })
-            .catch(res => {
-                log.warn(res);
-                history.push(`/mv/error`);
-            });
+            .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError));
     };
 
+    const error = harvestResult as ServiceError;
+
     log.debug("HarvestForm::render", harvest);
-    return render(updateGrapevineInHarvest, onSubmit);
+    return render(
+        updateGrapevineInHarvest,
+        onSubmit,
+        error,
+        harvest,
+        handleUpdateHarvest,
+        updateDate,
+        harvestResult.status === StatusType.loading);
 };
 
 export default HarvestFormContainer;

@@ -5,12 +5,12 @@ import {History} from "../../wine/types/History";
 export interface Harvest
 {
     id?: number | null;
-    grapevine?: Grapevine;
-    dateOfHarvest?: string;
+    grapevine?: Grapevine | null;
+    dateOfHarvest: Date | string | null;
     weightOfGrapes?: number | null;
     amountOfMust?: number | null;
     amountOfWaste?: number | null;
-    box?: BoxWithGrapes | null;
+    box: BoxWithGrapes;
     boxesCount?: number | null;
     weightOfEveryEmptyBox?: number | null;
     allDisposedToWine?: boolean;

@@ -4,20 +4,36 @@ import Select from "react-select";
 import useGrapevinesReceiver from "../../grapevine/service/useGrapevinesReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Grapevine} from "../../grapevine/types/Grapevine";
-import * as PropTypes from "prop-types";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
     value: Grapevine | SelectOption;
-    onChange: () => void;
+    onChange: (name: string, selected: Record<string, string>) => void;
     name: string;
     label?: string;
     optional?: boolean;
+    error?: ServiceError;
 }
 
-const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectGrapevines: React.FC<Props> = ({
+                                               value: selected,
+                                               onChange, name,
+                                               label,
+                                               optional,
+                                               error}) => {
 
     const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -28,22 +44,17 @@ const SelectGrapevines: React.FC<Props> = ({value: selected, onChange, name, lab
                 <div className="col-md-10">
                     <Select name={name}
                             options={grapevines}
-                            onChange={onChange}
+                            onChange={(s) => onChange(name, s)}
                             value={value}
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"}
+                            styles={error?.hasError?.(name) && customStyles}
+                    />
+                    <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                        {error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectGrapevines.propTypes = {
-    value: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectGrapevines;

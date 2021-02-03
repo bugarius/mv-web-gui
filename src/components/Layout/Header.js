@@ -164,11 +164,11 @@ class Header extends Component {
                         </UncontrolledDropdown>
                         { /* END Alert menu */ }
                         { /* START Offsidebar button */ }
-                        {/*<li className="nav-item">*/}
-                        {/*    <div className="nav-link" onClick={this.toggleOffsidebar}>*/}
-                        {/*        <em className="icon-notebook"></em>*/}
-                        {/*    </div>*/}
-                        {/*</li>*/}
+                        <li className="nav-item">
+                            <div className="nav-link" onClick={this.toggleOffsidebar}>
+                                <em className="icon-notebook"></em>
+                            </div>
+                        </li>
                         { /* END Offsidebar menu */ }
                     </ul>
                     { /* END Right Navbar */ }

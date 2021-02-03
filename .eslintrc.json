@@ -18,6 +18,7 @@
     ],
     "plugins": ["@typescript-eslint", "react-hooks"],
     "rules": {
+        "react/prop-types": "off",
         "no-console": "off",
         "no-restricted-syntax": [
             "error",

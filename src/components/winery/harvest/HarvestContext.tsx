@@ -15,14 +15,14 @@ interface HarvestContextInterface
     loading: boolean;
 }
 
-const defaultHarvest = {
+export const defaultHarvest = {
     id: null,
-    grapevine: {},
+    grapevine: null,
     dateOfHarvest: "",
     weightOfGrapes: null,
     amountOfMust: null,
     amountOfWaste: null,
-    box: null,
+    box: {id: null, weightOfEmptyBox: null, weightOfFullBox: null},
     boxesCount: null,
     weightOfEveryEmptyBox: null,
     allDisposedToWine: false,

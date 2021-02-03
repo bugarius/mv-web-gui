@@ -16,13 +16,14 @@ interface IngredientContextInterface
 
 const defaultIngredient = {
   id: null,
-  ingredient: {},
+  ingredient: null,
   name: "",
   info: "",
   type: null,
   amount: null,
   notes: "",
   // picture: {},
+  appliedDate: ""
 };
 
 const defaultState = {

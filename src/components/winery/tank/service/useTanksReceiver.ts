@@ -1,6 +1,6 @@
 import useTankService from "./useTankService";
 import {useEffect, useState} from "react";
-import {Service, StatusType} from "../../../../services/types/Service";
+import {Service, ServiceWorking, StatusType} from "../../../../services/types/Service";
 import {Tank} from "../types/Tank";
 import {ResponseError} from "../../../error/ResponseError";
 import {SelectOption} from "../../../../services/types/SelectOption";
@@ -24,7 +24,8 @@ const useTanksReceiver = (value?) => {
                 }
                 : '');
         }
-        if (!result?.payload) {
+        const workingResult = result as ServiceWorking<Tank[]>;
+        if (!workingResult?.payload) {
             service?.getList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});

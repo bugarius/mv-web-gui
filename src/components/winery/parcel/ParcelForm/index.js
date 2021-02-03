@@ -2,14 +2,12 @@ import React from "react";
 import ParcelFormContainer from "./ParcelFromContainer";
 import SimpleParcelForm from "./SimpleParcelForm";
 
-const ParcelForm = (props) => {
+export const ParcelForm = (props) => {
 
     return (
-            <ParcelFormContainer {...props} render={(onSubmit) => (
-                    <SimpleParcelForm onSubmit={onSubmit}
+            <ParcelFormContainer {...props} render={(onSubmit, error, parcel, updateParcel, loading) => (
+                    <SimpleParcelForm onSubmit={onSubmit} error={error} parcel={parcel} updateParcel={updateParcel} loading={loading}
                     />
             )}/>
     )
 };
-
-export default ParcelForm;

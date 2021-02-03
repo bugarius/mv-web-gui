@@ -4,7 +4,7 @@ import Select from "react-select";
 import useParcelsReceiver from "../../parcel/service/useParcelsReceiver";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Parcel} from "../../parcel/types/Parcel";
-import * as PropTypes from "prop-types";
+import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
 {
@@ -13,11 +13,22 @@ interface Props
     name: string;
     label?: string;
     optional?: boolean;
+    error?: ServiceError;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional}) => {
+const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, error}) => {
 
     const {selected: value, options: parcels} = useParcelsReceiver(selected);
+
+    const customStyles = {
+        control: (base) => ({
+            ...base,
+            borderColor: '#d92550',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center right calc(2.25rem / 4)',
+            backgroundSize: 'calc(2.25rem / 2) calc(2.25rem / 2)'
+        }),
+    };
 
     return (
         <fieldset>
@@ -31,20 +42,15 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                             onChange={onChange}
                             value={value}
                             isMulti
-                            placeholder={"Wybierz"}/>
-                    <span className="invalid-feedback">Field is required</span>
+                            placeholder={"Wybierz"}
+                            styles={error?.hasError?.(name) && customStyles}
+                    />
+                    <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
+                        {error?.getErrorMessage?.(name)}</span>
                 </div>
             </FormGroup>
         </fieldset>
     )
-};
-
-SelectParcels.propTypes = {
-    value: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    optional: PropTypes.bool
 };
 
 export default SelectParcels;

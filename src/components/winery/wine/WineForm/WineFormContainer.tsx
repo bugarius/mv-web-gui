@@ -1,16 +1,19 @@
 import {useEffect} from 'react';
 
 import {useHistory, useParams} from "react-router-dom";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import log from "loglevel";
 import {useWineContext} from "../WineContext";
 import useWineService from "../service/useWineService";
 import {Wine} from "../types/Wine";
+import {useEventHandlerActions} from "../../common/useEventHandlerActions";
 
 const WineFormContainer = ({render}) => {
 
-    const {wine, updateWine, setWineResult} = useWineContext();
+    const {wine, updateWine, setWineResult, wineResult} = useWineContext();
+
+    const {updateDate, onChange: handleUpdateWine} = useEventHandlerActions(updateWine);
 
     const service = useWineService();
 
@@ -38,7 +41,7 @@ const WineFormContainer = ({render}) => {
             .then(response => {
                 setWineResult({status: StatusType.loaded, payload: response});
             })
-            .catch(error => setWineResult(new ResponseError<Wine>(error)));
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
 
         return () => {
             updateWine("reset", "")
@@ -54,16 +57,23 @@ const WineFormContainer = ({render}) => {
         action()
             .then(response => {
                 setWineResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/wine/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/wine/all`);
             })
-            .catch(res => {
-                log.warn(res)
-                history.push(`/mv/error`);
-            });
+            .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
 
+    const error = wineResult as ServiceError;
+
     log.debug("WineFormContainer::render", wine);
-    return render(updateHarvestInWine, updateTankInWine, onSubmit);
+    return render(
+        updateHarvestInWine,
+        updateTankInWine,
+        onSubmit,
+        error,
+        wine,
+        handleUpdateWine,
+        updateDate,
+        wineResult.status === StatusType.loading);
 };
 
 export default WineFormContainer;
