@@ -27,7 +27,7 @@ const useHarvestsReceiver = (value?) => {
         const workingResult = result as ServiceWorking<Harvest[]>;
         if (!workingResult?.payload)
         {
-            service?.getList()
+            service?.getAvailableList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});
                     setOptions(response?.filter(h => !h.allDisposedToWine)

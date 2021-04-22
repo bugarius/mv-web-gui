@@ -7,6 +7,7 @@ import {SelectProductionEventType} from "./SelectProductionEventTypeType";
 import {EventToWineProps} from "./withProductionEventToWineServiceHOC";
 import {ProductionEventType} from "../../wine/types/Wine";
 import {InputDate} from "../../../common/form-elements/InputDate";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 export const ProductionEventFormFields: FC<EventToWineProps> = ({
                                                                     event,
@@ -74,6 +75,7 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
                               error={error}
                               optional
                 />
+                <FormErrorMessage error={error}/>
             </CardBody>
             <CardFooter>
                 <Button color="primary" className="btn-square" onClick={event?.id ? onSubmit?.update : onSubmit?.save}>

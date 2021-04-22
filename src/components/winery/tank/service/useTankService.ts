@@ -3,10 +3,15 @@ import {Tank} from "../types/Tank";
 
 const useTankService = () => {
 
-    const {get, getAll, getList, post, put, del} = useCrudeApi<Tank>("/ajax/tanks");
+    const crudeApi = useCrudeApi<Tank>("/ajax/tanks");
+    const {get, getAll, getList, post, put, del} = crudeApi;
+
+    const getAvailableList = () => {
+        return crudeApi.getAllWithParams(new Map<string, boolean>([["available", true]]));
+    };
 
     return {
-        get, getAll, getList, post, put, del
+        get, getAll, getList, post, put, del, getAvailableList
     }
 };
 

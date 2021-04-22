@@ -7,7 +7,7 @@ const useCrudeApi = <T>(endpoint: string) => {
         return crudApi.getAll(page);
     };
 
-    const getAllWithParams = (params: Map<string, string>) => {
+    const getAllWithParams = (params: Map<string, string | boolean>) => {
         return crudApi.getAllWithParams(params);
     };
 
