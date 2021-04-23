@@ -3,6 +3,7 @@ import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import {Trans} from "react-i18next";
 import Pagination from "../../../common/pagination/Pagination";
 import {useHarvestContext} from "../../harvest/HarvestContext";
+import PageWrapper from "../../../common/PageWrapper";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -12,7 +13,16 @@ const thead = [
     <th style={{textAlign: 'center'}} key={5}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleBoxList = ({boxes, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove}, reloadHarvest}) => {
+const SimpleBoxList = ({
+                           boxes,
+                           page,
+                           pagination,
+                           limit,
+                           loading,
+                           paginationActions: {changePage, onPrev, onNext},
+                           entityActions: {remove},
+                           reloadHarvest
+                       }) => {
 
     const {harvest} = useHarvestContext();
     const createTHead = () => {
@@ -50,37 +60,39 @@ const SimpleBoxList = ({boxes, page, pagination, limit, loading, paginationActio
     };
 
     return (
-            <Card className="card-default">
-                <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
-                <CardBody>
-                    <Table hover>
+            <PageWrapper loading={loading}>
+                <Card className="card-default">
+                    <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
+                    <CardBody>
+                        <Table hover>
+                            {
+                                createTHead()
+                            }
+                            <tbody>
+                            {(boxes || []).map((harvest) => buildRow(harvest))}
+                            {
+                                boxes && boxes.length === 0 &&
+                                <tr>
+                                    <td style={{textAlign: 'center'}} colSpan={'100%'}>
+                                        <Trans i18nKey="common.NO_DATA"/>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </Table>
                         {
-                            createTHead()
+                            (pagination.totalPages > 1) && <Pagination
+                                    page={page}
+                                    pagination={pagination}
+                                    actions={{
+                                        changePage: changePage,
+                                        prev: onPrev,
+                                        next: onNext
+                                    }}/>
                         }
-                        <tbody>
-                        {(boxes || []).map((harvest) => buildRow(harvest))}
-                        {
-                            boxes && boxes.length === 0 &&
-                            <tr>
-                                <td style={{textAlign: 'center'}} colSpan={'100%'}>
-                                    <Trans i18nKey="common.NO_DATA"/>
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </Table>
-                    {
-                        (pagination.totalPages > 1) && <Pagination
-                                page={page}
-                                pagination={pagination}
-                                actions={{
-                                    changePage: changePage,
-                                    prev: onPrev,
-                                    next: onNext
-                                }}/>
-                    }
-                </CardBody>
-            </Card>
+                    </CardBody>
+                </Card>
+            </PageWrapper>
     );
 };
 

@@ -8,8 +8,8 @@ import InputElement from "../../../common/InputElement";
 import SimpleInputElement from "../../../common/SimpleInputElement";
 import {useTranslation} from "react-i18next";
 import * as PropTypes from 'prop-types';
-import BoxList from "../../box/BoxList/index";
-import WineList from "../../wine/WineList/index";
+import BoxList from "../../box/BoxList";
+import WineList from "../../wine/WineList";
 import HarvestHistory from "./history/HarvestHistory";
 
 interface Props
