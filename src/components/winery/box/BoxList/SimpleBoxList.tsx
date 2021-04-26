@@ -4,6 +4,8 @@ import {Trans} from "react-i18next";
 import Pagination from "../../../common/pagination/Pagination";
 import {useHarvestContext} from "../../harvest/HarvestContext";
 import PageWrapper from "../../../common/PageWrapper";
+import { TPagination } from '../../common/pagination/useFetchEntityPage';
+import {BoxWithGrapes} from "../types/BoxWithGrapes";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -33,8 +35,12 @@ const SimpleBoxList = ({
         </thead>;
     };
 
-    const buildRow = (box) => {
-        const fields = [<td style={{padding: '5px', textAlign: 'center'}} key={1}>sdf</td>,
+    const getRowNumber = (paginationObj: TPagination<BoxWithGrapes>, index) => {
+        return paginationObj.pageable.pageNumber * paginationObj.pageable.pageSize + index + 1
+    }
+
+    const buildRow = (box, index) => {
+        const fields = [<td style={{padding: '5px', textAlign: 'center'}} key={1}>{getRowNumber(pagination, index)}</td>,
             <td style={{padding: '5px', textAlign: 'center'}} key={2}>{box?.weightOfEmptyBox || 0}</td>,
             <td style={{padding: '5px', textAlign: 'center'}} key={3}>{box?.weightOfFullBox}</td>,
             <td style={{padding: '5px', textAlign: 'center'}}
@@ -55,7 +61,7 @@ const SimpleBoxList = ({
                 }
             </td>];
         return <tr key={box.id}>
-            {fields.filter((t, index) => index < limit || index === thead.length - 1)}
+            {fields.filter((t, i) => i < limit || i === thead.length - 1)}
         </tr>
     };
 
@@ -69,11 +75,11 @@ const SimpleBoxList = ({
                                 createTHead()
                             }
                             <tbody>
-                            {(boxes || []).map((harvest) => buildRow(harvest))}
+                            {(boxes || []).map((box, index) => buildRow(box, index))}
                             {
                                 boxes && boxes.length === 0 &&
                                 <tr>
-                                    <td style={{textAlign: 'center'}} colSpan={'100%'}>
+                                    <td style={{textAlign: 'center'}} colSpan={100}>
                                         <Trans i18nKey="common.NO_DATA"/>
                                     </td>
                                 </tr>
