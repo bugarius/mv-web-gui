@@ -25,7 +25,7 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
     return (
         <Card className="b" key={key}>
             <CardHeader>
-                <h4 className="m-0">{t('wine.info.ADD_NEW_EVENT')}</h4>
+                <h4 className="m-0">{t(event?.id ? 'wine.info.EDIT_EVENT' : 'wine.info.ADD_NEW_EVENT')}</h4>
             </CardHeader>
             <CardBody style={{padding: "7px"}}>
                 <SelectProductionEventType value={event?.type}

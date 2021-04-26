@@ -74,6 +74,7 @@
   "wine.status.YOUNG_WINE": "Młode wino",
   "wine.status.AGING": "Leżakowanie",
   "wine.info.ADD_NEW_EVENT": "Dodaj proces technologiczny",
+  "wine.info.EDIT_EVENT": "Edytuj proces technologiczny",
 
   "wine.info.ADDED_INGREDIENTS": "Dodane składniki",
   "wine.info.ADDED_EVENTS": "Przeprowadzone procesy",
