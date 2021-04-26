@@ -2,10 +2,30 @@ import React, {FC} from "react";
 import {ServiceError} from "../../../services/types/Service";
 import log from "loglevel";
 
-export const FormErrorMessage: FC<{error: ServiceError}> = ({error}) => {
+interface Props {
+    error: ServiceError;
+    messageType?: 'details' | 'generalMessage' | 'fieldError';
+    fieldName?: string;
+}
+
+export const FormErrorMessage: FC<Props> = ({error, messageType = 'generalMessage', fieldName}) => {
 
     log.debug("FormErrorMessage: ", error)
-    const message = error?.error?.message ? error?.error?.message : error?.error?.details;
+
+    const getMessage = (errorObj) => {
+        switch (messageType)
+        {
+            case "details":
+                return errorObj?.error?.details;
+            case "fieldError":
+                return errorObj?.getErrorMessage?.(fieldName);
+            default:
+                return errorObj?.error?.message;
+        }
+    }
+
+    const message = getMessage(error)
+
     return (
         <em className="error invalid-feedback"
             style={{display: (message ? 'block' : 'none')}}>{message}</em>

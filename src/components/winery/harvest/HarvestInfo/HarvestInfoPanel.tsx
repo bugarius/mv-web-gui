@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from "react-router-dom";
 import {Button, Card, CardBody, CardHeader} from "reactstrap";
 import {useHarvestContext} from "../HarvestContext";
-import {StatusType} from "../../../../services/types/Service";
+import {ServiceError, StatusType} from "../../../../services/types/Service";
 import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import SimpleInputElement from "../../../common/SimpleInputElement";
@@ -11,6 +11,7 @@ import * as PropTypes from 'prop-types';
 import BoxList from "../../box/BoxList";
 import WineList from "../../wine/WineList";
 import HarvestHistory from "./history/HarvestHistory";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 interface Props
 {
@@ -69,6 +70,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                                                 className="btn-square"
                                                 style={{width: '100%'}} onClick={addBoxToHarvest}>Dodaj
                                             skrzynkę</Button>
+                                        <FormErrorMessage error={harvestResult as ServiceError} messageType={'fieldError'} fieldName={'weightOfFullBox'}/>
                                     </CardBody>
                                 </Card>
                             </div>

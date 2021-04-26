@@ -60,7 +60,7 @@ const SimpleBoxList = ({
     };
 
     return (
-            <PageWrapper loading={loading}>
+            <PageWrapper loading={loading} disabled>
                 <Card className="card-default">
                     <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
                     <CardBody>
