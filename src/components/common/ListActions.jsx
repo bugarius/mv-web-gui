@@ -55,7 +55,7 @@ class ListActions extends Component {
     render()
     {
         const {isOpened} = this.state;
-        const {entity, actions: {proceed, remove, info}} = this.props;
+        const {entity, actions: {proceed, remove, info}, triggerRemoveCallback} = this.props;
 
         const mainButtonAction = info ? info : proceed;
         return (
@@ -75,7 +75,10 @@ class ListActions extends Component {
                         }} data-placement="bottom-start">
                             {info && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
                             {info && <div tabIndex={-1} className="dropdown-divider"/>}
-                            {this.renderButton(entity, false, () => remove(entity), 'Usuń')}
+                            {this.renderButton(entity, false, () => {
+                                remove(entity);
+                                triggerRemoveCallback && triggerRemoveCallback();
+                            }, 'Usuń')}
                         </div>
                     </div>
                 </>

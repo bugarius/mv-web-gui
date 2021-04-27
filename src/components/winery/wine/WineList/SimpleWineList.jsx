@@ -24,7 +24,8 @@ const SimpleWineList = ({
                             paginationActions: {changePage, onPrev, onNext},
                             entityActions: {remove, proceed, info},
                             wrapperDisabled,
-                            addWine
+                            addWine,
+                            reloadHarvest
                         }) => {
 
     const createTHead = () => {
@@ -44,7 +45,9 @@ const SimpleWineList = ({
             <td style={{textAlign: 'center'}} key={6}>{wine?.liters}</td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={wine}
-                             actions={{remove: remove, proceed: proceed, info: info}}/>
+                             actions={{remove: remove, proceed: proceed, info: info}}
+                             triggerRemoveCallback={reloadHarvest}
+                />
             </td>];
         return <tr key={wine.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}
@@ -84,11 +87,12 @@ const SimpleWineList = ({
                                     }}/>
                         }
                     </CardBody>
-                    { addWine &&
-                        <div className="card-footer text-center">
-                            <button type="button" className="btn btn-secondary btn-oval" onClick={addWine}><Trans i18nKey="button.MAKE_WINE"/>
-                            </button>
-                        </div>
+                    {addWine &&
+                    <div className="card-footer text-center">
+                        <button type="button" className="btn btn-secondary btn-oval" onClick={addWine}><Trans
+                                i18nKey="button.MAKE_WINE"/>
+                        </button>
+                    </div>
                     }
                 </Card>
             </PageWrapper>

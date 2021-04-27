@@ -114,7 +114,7 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                 {harvestId &&
                 <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}
                 {harvestId &&
-                <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true} addWine={addWineToHarvest}/>}
+                <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true} addWine={addWineToHarvest} reloadHarvest={reloadHarvest}/>}
                 <HarvestHistory history={harvest?.history}/>
             </PageWrapper>
         </>

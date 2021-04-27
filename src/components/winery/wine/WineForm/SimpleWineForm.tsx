@@ -35,7 +35,7 @@ export const SimpleWineForm: FC<Props> = ({
                                           }) => {
 
     const {t} = useTranslation();
-    const {harvestId} = useParams();
+    const {harvestId, wineId} = useParams();
 
     return (
         <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}
@@ -72,7 +72,7 @@ export const SimpleWineForm: FC<Props> = ({
                                   defaultValue={wine?.liters}
                                   error={error}
                     />
-                    {!harvestId &&
+                    {!harvestId && wineId === '0' &&
                         <SelectHarvest value={wine?.harvest || {}}
                                        name={'harvest'}
                                        label={t("wine.HARVEST")}
