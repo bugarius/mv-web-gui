@@ -26,7 +26,7 @@ const useTanksReceiver = (value?) => {
         }
         const workingResult = result as ServiceWorking<Tank[]>;
         if (!workingResult?.payload) {
-            service?.getList()
+            service?.getAvailableList()
                 .then(response => {
                     setResult({status: StatusType.loaded, payload: response});
                     setOptions(response?.map((t) => ({value: t.id, label: t.number + " - " + t.capacity + " l."})))

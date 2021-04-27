@@ -16,6 +16,8 @@
   "common.EDIT": "Edytuj",
   "common.TIME": "Czas",
 
+  "button.MAKE_WINE": "Stwórz nastaw",
+
   "alerts.confirmation.REMOVE_ELEMENT": "Czy usunąć ostatecznie ten element?",
 
   "home.TITLE": "Zbiorniki w użyciu",
@@ -74,6 +76,7 @@
   "wine.status.YOUNG_WINE": "Młode wino",
   "wine.status.AGING": "Leżakowanie",
   "wine.info.ADD_NEW_EVENT": "Dodaj proces technologiczny",
+  "wine.info.EDIT_EVENT": "Edytuj proces technologiczny",
 
   "wine.info.ADDED_INGREDIENTS": "Dodane składniki",
   "wine.info.ADDED_EVENTS": "Przeprowadzone procesy",

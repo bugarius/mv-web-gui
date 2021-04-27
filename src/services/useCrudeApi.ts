@@ -1,13 +1,18 @@
 import useFetch from "./useFetch";
+import {TPagination} from "../components/winery/common/pagination/useFetchEntityPage";
 
-const useCrudeApi = <T>(endpoint: string) => {
+interface TCrudApi<T> {
+    get, getAll: (page: number) => Promise<TPagination<T>>, getAllWithParams, getList, post, put, putBody, putId, del
+}
+
+const useCrudeApi = <T>(endpoint: string): TCrudApi<T> => {
     const crudApi = useFetch<T>(endpoint);
 
     const getAll = (page: number) => {
         return crudApi.getAll(page);
     };
 
-    const getAllWithParams = (params: Map<string, string>) => {
+    const getAllWithParams = (params: Map<string, string | boolean>) => {
         return crudApi.getAllWithParams(params);
     };
 

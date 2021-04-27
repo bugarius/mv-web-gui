@@ -2,7 +2,7 @@ import React from "react";
 import WineFormContainer from "./WineFormContainer";
 import {SimpleWineForm} from "./SimpleWineForm";
 
-const GrapevineForm = (props) => {
+const WineForm = (props) => {
 
     return (
         <WineFormContainer {...props}
@@ -20,4 +20,4 @@ const GrapevineForm = (props) => {
     )
 };
 
-export default GrapevineForm;
+export default WineForm;

@@ -42,7 +42,7 @@ const useFetch = <T>(endpoint?: string) => {
         const url = `${endpoint}?${URI.buildQuery({p: page})}`;
         return customFetch(url, 'GET', null);
     };
-    const getAllWithParams = (params: Map<string, string>) => {
+    const getAllWithParams = (params: Map<string, string | boolean>) => {
         const url = `${endpoint}/all?${URI.buildQuery(Object.fromEntries(params.entries()))}`;
         return customFetch(url, 'GET', null);
     };
@@ -79,7 +79,6 @@ const useFetch = <T>(endpoint?: string) => {
         // {
         //     throw new Error("to make a put you must provide the id and the body");
         // }
-        console.log("BODY: ", body)
         const url = `${endpoint}/${id}`;
         return customFetch(url, "PUT", body);
     };

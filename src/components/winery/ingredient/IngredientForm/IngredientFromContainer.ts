@@ -38,8 +38,8 @@ export const IngredientFormContainer = ({render}) => {
         updateIngredient(e.target.name, e.target.value);
     };
 
-    const handleUpdateIngredientType = (selected: SelectOption) => {
-        updateIngredient('type', selected.value);
+    const handleUpdateIngredientType = (name: string, selected: SelectOption) => {
+        updateIngredient(name, selected.value);
     };
 
     const onSubmit = (e) => {

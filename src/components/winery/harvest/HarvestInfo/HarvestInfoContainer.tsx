@@ -6,6 +6,7 @@ import useHarvestService from "../service/useHarvestService";
 import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Grapevine} from "../../grapevine/types/Grapevine";
+import {Harvest} from "../types/Harvest";
 
 const HarvestInfoContainer = ({render}) => {
 
@@ -49,14 +50,15 @@ const HarvestInfoContainer = ({render}) => {
         log.debug('HarvestInfo:addBoxToHarvest', e, harvest);
         setHarvestResult({status: StatusType.loading});
 
-       service.addBox(harvest.box)
+        service.addBox(harvest.box || {})
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
                 history?.push(`/mv/harvest/${harvestId}/info`);
             })
-            .catch(res => {
-                log.warn(res);
-                history.push(`/mv/error`);
+            .catch(error => {
+                log.debug(error);
+                setHarvestResult(new ResponseError<Harvest>(error));
+                // history.push(`/mv/error`);
             });
     };
 
@@ -64,7 +66,11 @@ const HarvestInfoContainer = ({render}) => {
         setReload(true);
     };
 
-    return render({addBoxToHarvest, edit, dispose, reloadHarvest});
+    const addWineToHarvest = () => {
+        history?.push({pathname: `/mv/wine/0/info/${harvestId}`, state: {from: window.location.pathname}});
+    }
+
+    return render({addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest});
 };
 
 export default HarvestInfoContainer;
