@@ -7,7 +7,6 @@ import PageWrapper from "../../../common/PageWrapper";
 import InputElement from "../../../common/InputElement";
 import SimpleInputElement from "../../../common/SimpleInputElement";
 import {useTranslation} from "react-i18next";
-import * as PropTypes from 'prop-types';
 import BoxList from "../../box/BoxList";
 import WineList from "../../wine/WineList";
 import HarvestHistory from "./history/HarvestHistory";
@@ -20,9 +19,11 @@ interface Props
         edit?: () => void;
         dispose?: (e, disposeAll: boolean) => void;
         reloadHarvest?: () => void;
+        addWineToHarvest: () => void;
     }
 }
-const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dispose, reloadHarvest}}) => {
+
+const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest}}) => {
 
     const {harvest, harvestResult, updateBox, loading} = useHarvestContext();
     const {harvestId} = useParams();
@@ -30,7 +31,8 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
 
     return (
         <>
-            <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'} loading={harvestResult.status === StatusType.loading}>
+            <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'}
+                         loading={harvestResult.status === StatusType.loading}>
                 <div className="card card-default">
                     <div className="card-header">
                         <div className="card-title">Info
@@ -70,7 +72,8 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                                                 className="btn-square"
                                                 style={{width: '100%'}} onClick={addBoxToHarvest}>Dodaj
                                             skrzynkę</Button>
-                                        <FormErrorMessage error={harvestResult as ServiceError} messageType={'fieldError'} fieldName={'weightOfFullBox'}/>
+                                        <FormErrorMessage error={harvestResult as ServiceError}
+                                                          messageType={'fieldError'} fieldName={'weightOfFullBox'}/>
                                     </CardBody>
                                 </Card>
                             </div>
@@ -108,16 +111,14 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                         }
                     </div>
                 </div>
-                {harvestId && <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}
-                {harvestId && <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true}/>}
+                {harvestId &&
+                <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}
+                {harvestId &&
+                <WineList harvest={harvest} harvestId={harvestId} wrapperDisabled={true} addWine={addWineToHarvest}/>}
                 <HarvestHistory history={harvest?.history}/>
             </PageWrapper>
         </>
     )
-};
-
-HarvestInfoPanel.propTypes = {
-    actions: PropTypes.objectOf(PropTypes.func).isRequired
 };
 
 export default HarvestInfoPanel;

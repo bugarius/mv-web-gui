@@ -66,7 +66,11 @@ const HarvestInfoContainer = ({render}) => {
         setReload(true);
     };
 
-    return render({addBoxToHarvest, edit, dispose, reloadHarvest});
+    const addWineToHarvest = () => {
+        history?.push({pathname: `/mv/wine/0/info/${harvestId}`, state: {from: window.location.pathname}});
+    }
+
+    return render({addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest});
 };
 
 export default HarvestInfoContainer;

@@ -17,7 +17,7 @@ const WineFormContainer = ({render}) => {
 
     const service = useWineService();
 
-    const {wineId} = useParams();
+    const {wineId, harvestId} = useParams();
     const history = useHistory();
 
     const updateHarvestInWine = (value) => {
@@ -32,6 +32,10 @@ const WineFormContainer = ({render}) => {
 
     useEffect(() => {
         setWineResult({status: StatusType.loading});
+        if (harvestId)
+        {
+            updateWine('harvest', {id: harvestId})
+        }
         if (wineId?.toString() === "0")
         {
             setWineResult({status: StatusType.loaded});
@@ -46,7 +50,7 @@ const WineFormContainer = ({render}) => {
         return () => {
             updateWine("reset", "")
         }
-    }, [wineId]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [wineId, harvestId, updateWine]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (e) => {
         e.preventDefault();

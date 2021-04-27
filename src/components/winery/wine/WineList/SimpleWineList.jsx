@@ -15,7 +15,17 @@ const thead = [
     <th style={{textAlign: 'center'}} key={7}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleWineList = ({wines, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, wrapperDisabled}) => {
+const SimpleWineList = ({
+                            wines,
+                            page,
+                            pagination,
+                            limit,
+                            loading,
+                            paginationActions: {changePage, onPrev, onNext},
+                            entityActions: {remove, proceed, info},
+                            wrapperDisabled,
+                            addWine
+                        }) => {
 
     const createTHead = () => {
         return <thead>
@@ -74,6 +84,12 @@ const SimpleWineList = ({wines, page, pagination, limit, loading, paginationActi
                                     }}/>
                         }
                     </CardBody>
+                    { addWine &&
+                        <div className="card-footer text-center">
+                            <button type="button" className="btn btn-secondary btn-oval" onClick={addWine}><Trans i18nKey="button.MAKE_WINE"/>
+                            </button>
+                        </div>
+                    }
                 </Card>
             </PageWrapper>
     );

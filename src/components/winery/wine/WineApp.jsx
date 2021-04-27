@@ -30,8 +30,11 @@ class WineApp extends Component {
                                     <Route exact path="/mv/wine/:wineId?">
                                         <WineForm principal={principal}/>
                                     </Route>
-                                    <Route path="/mv/wine/:wineId?/info">
+                                    <Route exact path="/mv/wine/:wineId?/info">
                                         <WineInfo principal={principal}/>
+                                    </Route>
+                                    <Route exact path="/mv/wine/:wineId?/info/:harvestId?">
+                                        <WineForm principal={principal}/>
                                     </Route>
                                     <Route exact path="/mv/wine/:wineId?/ingredient/:appliedIngredientId?">
                                         <AppliedIngredientForm />

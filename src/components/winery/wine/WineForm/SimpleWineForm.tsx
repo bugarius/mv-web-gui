@@ -9,6 +9,7 @@ import SelectTank from "./SelectTank";
 import {Wine} from "../types/Wine";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 import {InputDate} from "../../../common/form-elements/InputDate";
+import {useParams} from "react-router-dom";
 
 interface Props
 {
@@ -34,6 +35,7 @@ export const SimpleWineForm: FC<Props> = ({
                                           }) => {
 
     const {t} = useTranslation();
+    const {harvestId} = useParams();
 
     return (
         <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'}
@@ -70,13 +72,15 @@ export const SimpleWineForm: FC<Props> = ({
                                   defaultValue={wine?.liters}
                                   error={error}
                     />
-                    <SelectHarvest value={wine?.harvest || {}}
-                                   name={'harvest'}
-                                   label={t("wine.HARVEST")}
-                                   disabled={wine?.harvest?.allDisposedToWine}
-                                   onChange={updateHarvestInWine}
-                                   error={error}
-                    />
+                    {!harvestId &&
+                        <SelectHarvest value={wine?.harvest || {}}
+                                       name={'harvest'}
+                                       label={t("wine.HARVEST")}
+                                       disabled={wine?.harvest?.allDisposedToWine}
+                                       onChange={updateHarvestInWine}
+                                       error={error}
+                        />
+                    }
                     <FormErrorMessage error={error}/>
                 </CardBody>
                 <CardFooter className="text-center">
