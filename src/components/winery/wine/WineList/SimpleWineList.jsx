@@ -25,7 +25,8 @@ const SimpleWineList = ({
                             entityActions: {remove, proceed, info},
                             wrapperDisabled,
                             addWine,
-                            reloadHarvest
+                            reloadHarvest,
+                            children
                         }) => {
 
     const createTHead = () => {
@@ -76,6 +77,7 @@ const SimpleWineList = ({
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Parcel} from "./types/Parcel";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {ResponseError} from "../../error/ResponseError";
 
 interface ParcelContextInterface
 {
@@ -11,6 +12,8 @@ interface ParcelContextInterface
     setParcels: (value: Parcel[]) => void;
     parcelResult: Service<Parcel>;
     setParcelResult: (value: Service<Parcel>) => void;
+    setError: (value: Error) => void;
+    error: ServiceError
 }
 
 const defaultParcel = {
@@ -23,6 +26,17 @@ const defaultParcel = {
     registrationNumber: "",
 };
 
+export const defaultError = {
+    status: StatusType.error,
+    error: {
+        message: "",
+        errors: {},
+        details: ""
+    },
+    hasError: () => false,
+    getErrorMessage: () => ""
+}
+
 const defaultState = {
     parcel: defaultParcel,
     setParcel: () => {},
@@ -30,7 +44,9 @@ const defaultState = {
     parcels: [],
     setParcels: () => {},
     parcelResult: {status: StatusType.loading},
-    setParcelResult: () => {}
+    setParcelResult: () => {},
+    setError: () => {},
+    error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -48,6 +64,8 @@ const reducer = (state, action) => {
           return {...state, parcels: [...action.value]};
       case "parcelResult":
           return {...state, parcelResult: {...action.value}};
+      case "error":
+          return {...state, error: action.value}
 
       default:
           return {...state, parcel: {...state.parcel, [action.type]: action.value}};
@@ -88,6 +106,10 @@ const ParcelProvider: React.FC = ({children}) => {
         if (result?.payload ) dispatch({type: "parcel", value: result.payload});
     }, []);
 
+    const setError = useCallback((error) => {
+        dispatch({type: "error", value: new ResponseError(error)})
+    }, []);
+
     const providerValue = useMemo(() => ({
         parcel: state.parcel,
         updateParcel,
@@ -97,9 +119,12 @@ const ParcelProvider: React.FC = ({children}) => {
         resetParcel,
         resetParcels,
         parcelResult: state.parcelResult,
-        setParcelResult
+        setParcelResult,
+        setError,
+        error: state.error
 
-    }), [state.parcel, updateParcel, state.parcels, setParcel, setParcels, resetParcel, resetParcels, state.parcelResult, setParcelResult]);
+    }), [state.parcel, updateParcel, state.parcels, setParcel, setParcels, resetParcel, resetParcels, state.parcelResult,
+        setParcelResult, setError, state.error]);
 
     return (
         <ParcelContext.Provider value={providerValue}>

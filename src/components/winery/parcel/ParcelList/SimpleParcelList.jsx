@@ -16,7 +16,16 @@ const thead = [
     <th style={{textAlign: 'center'}} key={8}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleParcelList = ({parcels, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleParcelList = ({
+                              parcels,
+                              page,
+                              pagination,
+                              limit,
+                              loading,
+                              paginationActions: {changePage, onPrev, onNext},
+                              entityActions: {remove, proceed, info},
+                              children
+                          }) => {
 
     const createTHead = () => {
         return <thead>
@@ -72,6 +81,7 @@ const SimpleParcelList = ({parcels, page, pagination, limit, loading, pagination
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

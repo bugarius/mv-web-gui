@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Grapevine} from "./types/Grapevine";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 interface GrapevineContextInterface
 {
@@ -11,6 +13,8 @@ interface GrapevineContextInterface
   setGrapevines: (value: Grapevine[]) => void;
   grapevineResult: Service<Grapevine>;
   setGrapevineResult: (value: Service<Grapevine>) => void;
+  setError: (value: Error) => void;
+  error: ServiceError
 }
 
 const defaultGrapevine = {
@@ -31,7 +35,9 @@ const defaultState = {
   grapevines: [],
   setGrapevines: () => {},
   grapevineResult: {status: StatusType.loading},
-  setGrapevineResult: () => {}
+  setGrapevineResult: () => {},
+  setError: () => {},
+  error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -49,6 +55,8 @@ const reducer = (state, action) => {
       return {...state, grapevines: [...action.value]};
     case "grapevineResult":
       return {...state, grapevineResult: {...action.value}};
+    case "error":
+      return {...state, error: action.value}
 
     default:
       return {...state, grapevine: {...state.grapevine, [action.type]: action.value}};
@@ -89,6 +97,10 @@ const GrapevineProvider: React.FC = ({children}) => {
     if (result?.payload ) dispatch({type: "grapevine", value: result.payload});
   }, []);
 
+  const setError = useCallback((error) => {
+    dispatch({type: "error", value: new ResponseError(error)})
+  }, []);
+
   const providerValue = useMemo(() => ({
     grapevine: state.grapevine,
     updateGrapevine,
@@ -98,9 +110,11 @@ const GrapevineProvider: React.FC = ({children}) => {
     resetGrapevine,
     resetGrapevines,
     grapevineResult: state.grapevineResult,
-    setGrapevineResult
+    setGrapevineResult,
+    setError,
+    error: state.error
 
-  }), [state.grapevine, updateGrapevine, state.grapevines, setGrapevine, setGrapevines, resetGrapevine, resetGrapevines, state.grapevineResult, setGrapevineResult]);
+  }), [state.grapevine, updateGrapevine, state.grapevines, setGrapevine, setGrapevines, resetGrapevine, resetGrapevines, state.grapevineResult, setGrapevineResult, setError, state.error]);
 
   return (
           <GrapevineContext.Provider value={providerValue}>

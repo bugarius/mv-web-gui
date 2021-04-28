@@ -13,7 +13,7 @@ const thead = [
     <th style={{textAlign: 'center'}} key={5}><Trans i18nKey="tank.PERCENT_OF_USAGE"/></th>,
 ];
 
-const SimpleTankList = ({tanks, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleTankList = ({tanks, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, children}) => {
 
     const createTHead = () => {
         return <thead>
@@ -59,6 +59,7 @@ const SimpleTankList = ({tanks, page, pagination, limit, loading, paginationActi
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {ResponseError} from "../../../error/ResponseError";
 
 export interface TPagination<T> {
     content: T[];
@@ -35,7 +34,7 @@ export interface TService<T> {
     del: (id: number) => Promise<T>
 }
 
-export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: ResponseError<T[]>) => void, newPage = 0) => {
+export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: Error) => void, newPage = 0) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(newPage);
     const [pagination, setPagination] = useState<Partial<TPagination<T>>>({});
@@ -94,7 +93,7 @@ export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: R
                 .then(() => {
                     reload();
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => setError(error));
         }
     };
 

@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Ingredient} from "./types/Ingredient";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 interface IngredientContextInterface
 {
@@ -12,6 +14,8 @@ interface IngredientContextInterface
   ingredientResult: Service<Ingredient>;
   setIngredientResult: (value: Service<Ingredient>) => void;
   loading;
+  setError: (value: Error) => void;
+  error: ServiceError
 }
 
 const defaultIngredient = {
@@ -34,7 +38,9 @@ const defaultState = {
   setIngredients: () => {},
   ingredientResult: {status: StatusType.loading},
   setIngredientResult: () => {},
-  loading: false
+  loading: false,
+  setError: () => {},
+  error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -52,6 +58,8 @@ const reducer = (state, action) => {
       return {...state, ingredients: [...action.value]};
     case "ingredientResult":
       return {...state, ingredientResult: {...action.value}};
+    case "error":
+      return {...state, error: action.value}
 
     default:
       return {...state, ingredient: {...state.ingredient, [action.type]: action.value}};
@@ -92,6 +100,10 @@ const IngredientProvider: React.FC = ({children}) => {
     if (result?.payload ) dispatch({type: "setIngredient", value: result.payload});
   }, []);
 
+  const setError = useCallback((error) => {
+    dispatch({type: "error", value: new ResponseError(error)})
+  }, []);
+
   const providerValue = useMemo(() => ({
     ingredient: state.ingredient,
     updateIngredient,
@@ -102,9 +114,12 @@ const IngredientProvider: React.FC = ({children}) => {
     resetIngredients,
     ingredientResult: state.ingredientResult,
     setIngredientResult,
-    loading: state.ingredientResult.status === StatusType.loading
+    loading: state.ingredientResult.status === StatusType.loading,
+    setError,
+    error: state.error
 
-  }), [state.ingredient, updateIngredient, state.ingredients, setIngredient, setIngredients, resetIngredient, resetIngredients, state.ingredientResult, setIngredientResult]);
+  }), [state.ingredient, updateIngredient, state.ingredients, setIngredient, setIngredients, resetIngredient,
+    resetIngredients, state.ingredientResult, setIngredientResult, setError, state.error]);
 
   return (
           <IngredientContext.Provider value={providerValue}>

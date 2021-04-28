@@ -10,7 +10,7 @@ import {Harvest} from "../types/Harvest";
 
 const HarvestInfoContainer = ({render}) => {
 
-    const {harvest, updateHarvest, setHarvestResult} = useHarvestContext();
+    const {harvest, setHarvestResult} = useHarvestContext();
     const [reload, setReload] = useState(false);
     const service = useHarvestService();
     const {harvestId} = useParams();
@@ -24,7 +24,6 @@ const HarvestInfoContainer = ({render}) => {
             })
             .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
         setReload(false);
-        return () => updateHarvest("reset", "");
     }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {

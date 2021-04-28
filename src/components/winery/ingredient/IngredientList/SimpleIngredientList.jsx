@@ -5,7 +5,7 @@ import {Trans, useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
 
-const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, children}) => {
 
     const {t} = useTranslation();
 
@@ -73,6 +73,7 @@ const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, pa
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

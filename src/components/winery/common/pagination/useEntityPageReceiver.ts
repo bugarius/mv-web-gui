@@ -1,14 +1,8 @@
 import {TService, useFetchEntityPage} from "./useFetchEntityPage";
 import {useLimitedRowsToDimension} from "./useLimitedRowsToDimension";
 import {useEntityActions} from "./useEntityActions";
-import log from "loglevel";
 
-export const useEntityPageReceiver = <T>(service: TService<T>, listConverter: (entity: T[]) => T[], entityName: string) => {
-
-    const handleError = (error) => {
-        //need to implement general errors alerts
-        log.debug(error)
-    }
+export const useEntityPageReceiver = <T>(service: TService<T>, listConverter: (entity: T[]) => T[], entityName: string, setError: (value: Error) => void) => {
 
     const {
         pagination,
@@ -16,7 +10,7 @@ export const useEntityPageReceiver = <T>(service: TService<T>, listConverter: (e
         loading,
         removeEntity,
         currentPage
-    } = useFetchEntityPage(service, handleError)
+    } = useFetchEntityPage(service, setError)
     const {limit} = useLimitedRowsToDimension();
     const {proceed, info} = useEntityActions(entityName);
 

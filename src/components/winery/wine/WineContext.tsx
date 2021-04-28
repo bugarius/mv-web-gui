@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Wine} from "./types/Wine";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 interface WineContextInterface
 {
@@ -11,7 +13,9 @@ interface WineContextInterface
   setWines: (value: Wine[]) => void;
   wineResult: Service<Wine>;
   setWineResult: (value: Service<Wine>) => void;
-  loading: boolean
+  loading: boolean,
+  setError: (value: Error) => void;
+  error: ServiceError
 }
 
 const defaultWine = {
@@ -36,7 +40,9 @@ const defaultState = {
   setWines: () => {},
   wineResult: {status: StatusType.loading},
   setWineResult: () => {},
-  loading: false
+  loading: false,
+  setError: () => {},
+  error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -54,6 +60,8 @@ const reducer = (state, action) => {
       return {...state, wines: [...action.value]};
     case "wineResult":
       return {...state, wineResult: {...action.value}};
+    case "error":
+      return {...state, error: action.value}
 
     default:
       return {...state, wine: {...state.wine, [action.type]: action.value}};
@@ -96,6 +104,10 @@ const WineProvider: React.FC = ({children}) => {
     }
   }, []);
 
+  const setError = useCallback((error) => {
+    dispatch({type: "error", value: new ResponseError(error)})
+  }, []);
+
   const providerValue = useMemo(() => ({
     wine: state.wine,
     updateWine,
@@ -106,9 +118,12 @@ const WineProvider: React.FC = ({children}) => {
     resetWines,
     wineResult: state.wineResult,
     setWineResult,
-    loading: state.wineResult.status === StatusType.loading
+    loading: state.wineResult.status === StatusType.loading,
+    setError,
+    error: state.error
 
-  }), [state.wine, updateWine, state.wines, setWine, setWines, resetWine, resetWines, state.wineResult, setWineResult]);
+  }), [state.wine, updateWine, state.wines, setWine, setWines, resetWine, resetWines, state.wineResult, setWineResult,
+    setError, state.error]);
 
   return (
       <WineContext.Provider value={providerValue}>

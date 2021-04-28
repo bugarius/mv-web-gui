@@ -17,7 +17,7 @@ const thead = [
     <th style={{textAlign: 'center'}} key={7}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, children}) => {
 
     const createTHead = () => {
         return <thead>
@@ -65,6 +65,7 @@ const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, pagi
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

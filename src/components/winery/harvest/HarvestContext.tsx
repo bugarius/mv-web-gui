@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Harvest} from "./types/Harvest";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 interface HarvestContextInterface
 {
@@ -13,6 +15,8 @@ interface HarvestContextInterface
     harvestResult: Service<Harvest>;
     setHarvestResult: (value: Service<Harvest>) => void;
     loading: boolean;
+    setError: (value: Error) => void;
+    error: ServiceError
 }
 
 export const defaultHarvest = {
@@ -38,7 +42,9 @@ const defaultState = {
     setHarvests: () => {},
     harvestResult: {status: StatusType.loading},
     setHarvestResult: () => {},
-    loading: false
+    loading: false,
+    setError: () => {},
+    error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -58,6 +64,8 @@ const reducer = (state, action) => {
             return {...state, harvestResult: {...action.value}};
         case "box":
             return {...state, harvest: {...state.harvest, box: {...state.harvest.box, [action.value.name]: action.value.value}}};
+        case "error":
+            return {...state, error: action.value}
 
         default:
             return {...state, harvest: {...state.harvest, [action.type]: action.value}};
@@ -105,6 +113,10 @@ const HarvestProvider: React.FC = ({children}) => {
         }
     }, []);
 
+    const setError = useCallback((error) => {
+        dispatch({type: "error", value: new ResponseError(error)})
+    }, []);
+
     const providerValue = useMemo(() => ({
         harvest: state.harvest,
         updateHarvest,
@@ -116,10 +128,12 @@ const HarvestProvider: React.FC = ({children}) => {
         resetHarvests,
         harvestResult: state.harvestResult,
         setHarvestResult,
-        loading: state.harvestResult.status === StatusType.loading
+        loading: state.harvestResult.status === StatusType.loading,
+        setError,
+        error: state.error
 
     }), [state.harvest, updateHarvest, updateBox, state.harvests, setHarvest, setHarvests, resetHarvest,
-        resetHarvests, state.harvestResult, setHarvestResult]);
+        resetHarvests, state.harvestResult, setHarvestResult, setError, state.error]);
 
     return (
         <HarvestContext.Provider value={providerValue}>

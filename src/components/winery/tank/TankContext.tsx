@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
 import {Tank} from "./types/Tank";
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 interface TankContextInterface
 {
@@ -11,6 +13,8 @@ interface TankContextInterface
     setTanks: (value: Tank[]) => void;
     tankResult: Service<Tank>;
     setTankResult: (value: Service<Tank>) => void;
+    setError: (value: Error) => void;
+    error: ServiceError
 }
 
 const defaultTank = {
@@ -28,7 +32,9 @@ const defaultState = {
     tanks: [],
     setTanks: () => {},
     tankResult: {status: StatusType.loading},
-    setTankResult: () => {}
+    setTankResult: () => {},
+    setError: () => {},
+    error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -46,6 +52,8 @@ const reducer = (state, action) => {
           return {...state, tanks: [...action.value]};
       case "tankResult":
           return {...state, tankResult: {...action.value}};
+      case "error":
+          return {...state, error: action.value}
 
       default:
           return {...state, tank: {...state.tank, [action.type]: action.value}};
@@ -86,6 +94,10 @@ const TankProvider: React.FC = ({children}) => {
         if (result?.payload ) dispatch({type: "tank", value: result.payload});
     }, []);
 
+    const setError = useCallback((error) => {
+        dispatch({type: "error", value: new ResponseError(error)})
+    }, []);
+
     const providerValue = useMemo(() => ({
         tank: state.tank,
         updateTank,
@@ -95,9 +107,12 @@ const TankProvider: React.FC = ({children}) => {
         resetTank,
         resetTanks,
         tankResult: state.tankResult,
-        setTankResult
+        setTankResult,
+        setError,
+        error: state.error
 
-    }), [state.tank, updateTank, state.tanks, setTank, setTanks, resetTank, resetTanks, state.tankResult, setTankResult]);
+    }), [state.tank, updateTank, state.tanks, setTank, setTanks, resetTank, resetTanks, state.tankResult, setTankResult,
+        setError, state.error]);
 
     return (
         <TankContext.Provider value={providerValue}>
