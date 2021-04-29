@@ -31,6 +31,13 @@ const Menu = [
                     }
                 },
                 translate: 'sidebar.nav.element.ADD_NEW'
+            },
+            {
+                name: 'Zarchiwizowane',
+                path: {
+                    pathname: '/mv/parcel/all/archived',
+                },
+                translate: 'sidebar.nav.element.ARCHIVED'
             }
         ]
     },

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from "react-router-dom";
+import {EntityLiveStatus} from "./enums/EntityLiveStatus";
 
 class ListActions extends Component {
 
@@ -55,13 +56,19 @@ class ListActions extends Component {
     render()
     {
         const {isOpened} = this.state;
-        const {entity, actions: {proceed, remove, info}, triggerRemoveCallback} = this.props;
+        const {entity, actions: {proceed, remove, info, archive, revertArchive}, triggerRemoveCallback, status} = this.props;
 
         const mainButtonAction = info ? info : proceed;
         return (
                 <>
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
-                        <button className="btn btn-primary" onClick={() => mainButtonAction(entity)}>{info ? "Zarządzaj" : "Edytuj"}</button>
+                        {status === EntityLiveStatus.ARCHIVED.toLowerCase() ?
+                                <button className="btn btn-primary"
+                                        onClick={() => mainButtonAction(entity)}>Podgląd</button>
+                                :
+                            <button className="btn btn-primary"
+                                    onClick={() => mainButtonAction(entity)}>{info ? "Zarządzaj" : "Edytuj"}</button>
+                        }
                         <button type="button" aria-haspopup="true" aria-expanded="true"
                                 className="dropdown-toggle btn btn-primary" onClick={this.switchMenu}><span
                                 className="sr-only">Toggle Dropdown</span></button>
@@ -74,6 +81,8 @@ class ListActions extends Component {
                             transform: 'translate3d(76px, 33px, 0px)'
                         }} data-placement="bottom-start">
                             {info && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
+                            {archive && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => archive(entity), 'Archiwizuj')}
+                            {revertArchive && status === EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => revertArchive(entity), 'Cofnij archiwizację')}
                             {info && <div tabIndex={-1} className="dropdown-divider"/>}
                             {this.renderButton(entity, false, () => {
                                 remove(entity);

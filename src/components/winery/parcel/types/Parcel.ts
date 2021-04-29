@@ -1,3 +1,5 @@
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
+
 export interface Parcel
 {
     id?: number | null;
@@ -7,4 +9,5 @@ export interface Parcel
     district?: string;
     area?: number | null;
     registrationNumber?: string;
+    liveStatus?: EntityLiveStatus;
 }

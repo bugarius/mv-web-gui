@@ -52,6 +52,10 @@ const ParcelFormContainer = ({render}) => {
             .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError));
     };
 
+    const onClickBack = () => {
+        history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
+    }
+
     const error = parcelResult as ServiceError;
 
     log.debug("ParcelForm::render", parcel);
@@ -59,6 +63,7 @@ const ParcelFormContainer = ({render}) => {
         error,
         parcel,
         handleUpdateParcel,
+        onClickBack,
         parcelResult.status === StatusType.loading);
 };
 

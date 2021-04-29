@@ -24,6 +24,7 @@ const defaultParcel = {
     district: "",
     area: null,
     registrationNumber: "",
+    liveStatus: undefined
 };
 
 export const defaultError = {

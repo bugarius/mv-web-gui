@@ -4,6 +4,7 @@ import PageWrapper from "../../../common/PageWrapper";
 import {Trans} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -23,9 +24,11 @@ const SimpleParcelList = ({
                               limit,
                               loading,
                               paginationActions: {changePage, onPrev, onNext},
-                              entityActions: {remove, proceed, info},
+                              entityActions: {remove, proceed, archive, revertArchive},
                               children
                           }) => {
+
+    const {status} = useParams();
 
     const createTHead = () => {
         return <thead>
@@ -53,7 +56,9 @@ const SimpleParcelList = ({
             <td style={{textAlign: 'center'}} key={7}>{zipCode}</td>,
             <td style={{textAlign: 'center'}} key={8}>
                 <ListActions entity={parcel}
-                             actions={{remove: remove, proceed: proceed}}/>
+                             actions={{remove: remove, proceed: proceed, archive: archive, revertArchive: revertArchive}}
+                             status={status}
+                />
             </td>]
         return <tr key={parcel.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}

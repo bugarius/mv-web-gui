@@ -15,6 +15,7 @@
   "common.PERIOD": "Data",
   "common.EDIT": "Edytuj",
   "common.TIME": "Czas",
+  "common.BACK": "Wróć",
 
   "button.MAKE_WINE": "Stwórz nastaw",
 
@@ -192,6 +193,7 @@
   "sidebar.nav.element.EDIT": "Edytuj",
   "sidebar.nav.element.ADD_NEW": "Dodaj nową",
   "sidebar.nav.element.ADD_NEW_HARVEST": "Dodaj nowy",
+  "sidebar.nav.element.ARCHIVED": "Zarchiwizowane",
   "sidebar.nav.element.ELEMENTS": "Elements",
   "sidebar.nav.element.BUTTON": "Button",
   "sidebar.nav.element.COLOR": "Colors",
