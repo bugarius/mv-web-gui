@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {defaultError} from "../../parcel/ParcelContext";
 
 export interface TPagination<T> {
     content: T[];
@@ -40,7 +41,8 @@ export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: E
     const [pagination, setPagination] = useState<Partial<TPagination<T>>>({});
 
     const reload = () => {
-        setPagination({})
+        setPagination({});
+        setError({...defaultError.error, name: ""});
     }
 
     useEffect(() => {
@@ -53,6 +55,7 @@ export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: E
             .then(p => {
                 setPagination(p);
                 setLoading(false);
+                setError({...defaultError.error, name: ""});
             })
             .catch(error => {
                 setError(error);

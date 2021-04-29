@@ -7,10 +7,13 @@ import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Grapevine} from "../../grapevine/types/Grapevine";
 import {Harvest} from "../types/Harvest";
+import {defaultError} from "../../parcel/ParcelContext";
+import {useWineContext} from "../../wine/WineContext";
 
 const HarvestInfoContainer = ({render}) => {
 
-    const {harvest, setHarvestResult} = useHarvestContext();
+    const {harvest, setHarvestResult, setError: setHarvestError} = useHarvestContext();
+    const {setError: setWineError} = useWineContext();
     const [reload, setReload] = useState(false);
     const service = useHarvestService();
     const {harvestId} = useParams();
@@ -63,6 +66,8 @@ const HarvestInfoContainer = ({render}) => {
 
     const reloadHarvest = () => {
         setReload(true);
+        setHarvestError({...defaultError.error});
+        setWineError({...defaultError.error});
     };
 
     const addWineToHarvest = () => {
