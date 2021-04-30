@@ -24,19 +24,12 @@ const Menu = [
         },
             {
                 name: 'Dodaj nową',
-                path: {
-                    pathname: '/mv/parcel/0',
-                    state: {
-                        from: '/mv/parcel/all'
-                    }
-                },
+                path: '/mv/parcel/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW'
             },
             {
                 name: 'Zarchiwizowane',
-                path: {
-                    pathname: '/mv/parcel/all/archived',
-                },
+                path: '/mv/parcel/archived',
                 translate: 'sidebar.nav.element.ARCHIVED'
             }
         ]

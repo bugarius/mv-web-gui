@@ -20,11 +20,11 @@ class ParcelApp extends Component {
                                 <Redirect to="/mv/parcel/all"/>
                             </Route>
                             <Route exact path="/mv/parcel/all" component={ParcelList}/>
-                            <Route exact path="/mv/parcel/all/:status?" component={ParcelList}/>
-                            <Route exact path="/mv/parcel/:parcelId">
+                            <Route exact path="/mv/parcel/:status?" component={ParcelList}/>
+                            <Route exact path="/mv/parcel/e/:parcelId">
                                 <ParcelForm  principal={principal}/>
                             </Route>
-                            <Route path="/mv/parcel/:parcelId/info">
+                            <Route path="/mv/parcel/info/:parcelId">
 
                             </Route>
                         </Switch>

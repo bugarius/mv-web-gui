@@ -47,7 +47,7 @@ const ParcelFormContainer = ({render}) => {
         action()
             .then(response => {
                 setParcelResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/parcel/all`);
             })
             .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError));
     };
