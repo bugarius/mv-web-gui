@@ -82,7 +82,7 @@ class ListActions extends Component {
                         }}
                              onClick={this.closeMenu}
                         >
-                            {info && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
+                            {info && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
                             {archive && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => archive(entity), 'Archiwizuj')}
                             {revertArchive && status === EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => revertArchive(entity), 'Cofnij archiwizację')}
                             {info && <div tabIndex={-1} className="dropdown-divider"/>}

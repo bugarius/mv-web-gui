@@ -90,9 +90,14 @@ const Menu = [
             translate: 'sidebar.nav.element.WINE_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/wine/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
                 path: {
-                    pathname: '/mv/wine/0',
+                    pathname: '/mv/wine/e/0',
                     state: {
                         from: '/mv/wine/all'
                     }

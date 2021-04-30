@@ -1,6 +1,7 @@
 import {Ingredient} from "../../ingredient/types/Ingredient";
 import {Harvest} from "../../harvest/types/Harvest";
 import {Tank} from "../../tank/types/Tank";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 export enum WineStatus {
     SEDIMENTATION,
@@ -49,4 +50,5 @@ export interface Wine
     status: WineStatus | null;
     events: ProductionEvent[];
     lastEvent: ProductionEvent | null;
+    liveStatus?: EntityLiveStatus;
 }

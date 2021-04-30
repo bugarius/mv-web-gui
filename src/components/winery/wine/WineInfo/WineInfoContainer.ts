@@ -25,7 +25,7 @@ const WineInfoContainer = ({render}) => {
     }, [wineId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const editWine = () => {
-        history.push(`/mv/wine/${wineId}/`,{from: history.location.pathname});
+        history.push(`/mv/wine/e/${wineId}/`,{from: history.location.pathname});
     };
 
     const button = {

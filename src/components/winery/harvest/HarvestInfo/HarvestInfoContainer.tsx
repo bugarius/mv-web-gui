@@ -71,7 +71,7 @@ const HarvestInfoContainer = ({render}) => {
     };
 
     const addWineToHarvest = () => {
-        history?.push({pathname: `/mv/wine/0/info/${harvestId}`, state: {from: window.location.pathname}});
+        history?.push({pathname: `/mv/wine/info/0/${harvestId}`, state: {from: window.location.pathname}});
     }
 
     return render({addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest});

@@ -40,7 +40,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                             ]}
                                                   actions={actions}
                                                   elementToSHow={eventToShow}
-                                                  path={`wine/${wine?.id}/event`}
+                                                  path={`wine/event/${wine?.id}`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.info,

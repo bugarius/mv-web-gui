@@ -66,6 +66,10 @@ const WineFormContainer = ({render}) => {
             .catch(response => setWineResult(new ResponseError<Wine>(response) as ServiceError));
     };
 
+    const onClickBack = () => {
+        history?.push(history?.location?.state!['from'] || `/mv/wine/archived`);
+    }
+
     const error = wineResult as ServiceError;
 
     log.debug("WineFormContainer::render", wine);
@@ -77,7 +81,8 @@ const WineFormContainer = ({render}) => {
         wine,
         handleUpdateWine,
         updateDate,
-        wineResult.status === StatusType.loading);
+        wineResult.status === StatusType.loading,
+        onClickBack);
 };
 
 export default WineFormContainer;

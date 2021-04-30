@@ -43,7 +43,7 @@ const IngredientsListBox: React.FC<Props> = ({
                             ]}
                                                   actions={actions}
                                                   elementToSHow={ingredientToShow}
-                                                  path={`wine/${wine?.id}/ingredient`}
+                                                  path={`wine/ingredient/${wine?.id}`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.notes || t('ingredients.INFO.no_data')
