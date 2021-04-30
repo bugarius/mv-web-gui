@@ -73,13 +73,15 @@ class ListActions extends Component {
                                 className="dropdown-toggle btn btn-primary" onClick={this.switchMenu}><span
                                 className="sr-only">Toggle Dropdown</span></button>
                         <div tabIndex={-1} role="menu" aria-hidden="false" className={"dropdown-menu" + (isOpened ? " show" : "")}
-                             x-placement="bottom-start" style={{
+                             style={{
                             position: 'absolute',
                             willChange: 'transform',
                             top: '0px',
                             left: '-100px',
                             transform: 'translate3d(76px, 33px, 0px)'
-                        }} data-placement="bottom-start">
+                        }}
+                             onClick={this.closeMenu}
+                        >
                             {info && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
                             {archive && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => archive(entity), 'Archiwizuj')}
                             {revertArchive && status === EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => revertArchive(entity), 'Cofnij archiwizację')}
