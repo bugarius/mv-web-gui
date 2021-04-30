@@ -44,13 +44,13 @@ const Menu = [
             translate: 'sidebar.nav.element.GRAPEVINE_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/grapevine/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nową',
-                path: {
-                    pathname: '/mv/grapevine/0',
-                    state: {
-                        from: '/mv/grapevine/all'
-                    }
-                },
+                path: '/mv/grapevine/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
