@@ -4,10 +4,21 @@ import PageWrapper from "../../../common/PageWrapper";
 import {Trans, useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
 
-const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, children}) => {
+const SimpleIngredientList = ({
+                                  ingredients,
+                                  page,
+                                  pagination,
+                                  limit,
+                                  loading,
+                                  paginationActions: {changePage, onPrev, onNext},
+                                  entityActions: {remove, proceed, archive, revertArchive},
+                                  children
+                              }) => {
 
     const {t} = useTranslation();
+    const {status} = useParams();
 
     const addTHead = function (label, hide) {
         !hide && this.push(<th className="text-center" key={this.length}>{label}</th>);
@@ -48,7 +59,9 @@ const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, pa
         fields.add(t(`ingredients.TYPE.${type}`));
         fields.add(information && information.split(".")[0] + "...");
         fields.add(<ListActions entity={ingredient}
-                                actions={{remove: remove, proceed: proceed}}/>);
+                                actions={{remove: remove, proceed: proceed, archive: archive, revertArchive: revertArchive}}
+                                status={status}
+        />);
         return <tr key={index}>{fields.filter((t, index) => index < limit || index === fields.length - 1)}</tr>;
     };
 

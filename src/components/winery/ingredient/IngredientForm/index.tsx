@@ -5,13 +5,14 @@ import {IngredientFormContainer} from "./IngredientFromContainer";
 export const IngredientForm = (props) => {
 
     return (
-            <IngredientFormContainer {...props} render={(onSubmit, updateIngredientType,  error, ingredient, updateIngredient, loading) => (
+            <IngredientFormContainer {...props} render={(onSubmit, updateIngredientType,  error, ingredient, updateIngredient, loading, onClickBack) => (
                     <SimpleIngredientForm onSubmit={onSubmit}
                                           updateIngredientType={updateIngredientType}
                                           error={error}
                                           ingredient={ingredient}
                                           updateIngredient={updateIngredient}
                                           loading={loading}
+                                          onClickBack={onClickBack}
                     />
             )}/>
     )

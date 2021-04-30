@@ -96,12 +96,7 @@ const Menu = [
             },
             {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/wine/e/0',
-                    state: {
-                        from: '/mv/wine/all'
-                    }
-                },
+                path: '/mv/wine/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
@@ -117,12 +112,7 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/tank/0',
-                    state: {
-                        from: '/mv/tank/all'
-                    }
-                },
+                path:'/mv/tank/0',
                 translate: 'sidebar.nav.element.ADD_NEW_TANK'
             }
         ]
@@ -137,13 +127,13 @@ const Menu = [
             translate: 'sidebar.nav.element.INGREDIENTS_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/ingredient/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/ingredient/0',
-                    state: {
-                        from: '/mv/ingredient/all'
-                    }
-                },
+                path: '/mv/ingredient/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_INGREDIENT'
             }
         ]

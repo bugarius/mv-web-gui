@@ -56,6 +56,10 @@ export const IngredientFormContainer = ({render}) => {
             .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError));
     };
 
+    const onClickBack = () => {
+        history?.push(history?.location?.state!['from'] || `/mv/ingredient/archived`);
+    }
+
     const error = ingredientResult as ServiceError;
 
     log.debug("IngredientForm::render", ingredient);
@@ -65,6 +69,7 @@ export const IngredientFormContainer = ({render}) => {
         error,
         ingredient,
         handleUpdateIngredient,
-        ingredientResult.status === StatusType.loading
+        ingredientResult.status === StatusType.loading,
+        onClickBack
     );
 };

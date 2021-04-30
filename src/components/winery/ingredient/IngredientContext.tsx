@@ -27,7 +27,8 @@ const defaultIngredient = {
   amount: null,
   notes: "",
   // picture: {},
-  appliedDate: ""
+  appliedDate: "",
+  liveStatus: undefined
 };
 
 const defaultState = {
