@@ -23,14 +23,14 @@ const Menu = [
             translate: 'sidebar.nav.element.PARCEL_LIST'
         },
             {
-                name: 'Dodaj nową',
-                path: '/mv/parcel/e/0',
-                translate: 'sidebar.nav.element.ADD_NEW'
-            },
-            {
                 name: 'Zarchiwizowane',
                 path: '/mv/parcel/archived',
                 translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
+                name: 'Dodaj nową',
+                path: '/mv/parcel/e/0',
+                translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
     },
