@@ -53,7 +53,7 @@ const ParcelFormContainer = ({render}) => {
     };
 
     const onClickBack = () => {
-        history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
+        history?.push(history?.location?.state!['from'] || `/mv/parcel/archived`);
     }
 
     const error = parcelResult as ServiceError;

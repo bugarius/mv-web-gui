@@ -64,7 +64,7 @@ class ListActions extends Component {
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
                         {status === EntityLiveStatus.ARCHIVED.toLowerCase() ?
                                 <button className="btn btn-primary"
-                                        onClick={() => mainButtonAction(entity)}>Podgląd</button>
+                                        onClick={() => proceed(entity)}>Podgląd</button>
                                 :
                             <button className="btn btn-primary"
                                     onClick={() => mainButtonAction(entity)}>{info ? "Zarządzaj" : "Edytuj"}</button>

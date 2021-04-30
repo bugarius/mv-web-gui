@@ -50,11 +50,14 @@ const HarvestFormContainer = ({render}) => {
         action()
             .then(response => {
                 setHarvestResult(response);
-                const pushPath = history?.location?.state ? history?.location?.state['from'] : `/mv/harvest/all`;
-                history?.push(pushPath);
+                history?.push(history?.location?.state?.['from'] || `/mv/harvest/all`);
             })
             .catch(response => setHarvestResult(new ResponseError<Harvest>(response) as ServiceError));
     };
+
+    const onClickBack = () => {
+        history?.push(history?.location?.state!['from'] || `/mv/harvest/archived`);
+    }
 
     const error = harvestResult as ServiceError;
 
@@ -66,7 +69,8 @@ const HarvestFormContainer = ({render}) => {
         harvest,
         handleUpdateHarvest,
         updateDate,
-        harvestResult.status === StatusType.loading);
+        harvestResult.status === StatusType.loading,
+        onClickBack);
 };
 
 export default HarvestFormContainer;

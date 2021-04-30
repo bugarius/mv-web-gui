@@ -65,13 +65,13 @@ const Menu = [
             translate: 'sidebar.nav.element.HARVEST_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/harvest/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/harvest/0',
-                    state: {
-                        from: '/mv/harvest/all'
-                    }
-                },
+                path: '/mv/harvest/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]

@@ -8,6 +8,7 @@ import SelectParcels from "./SelectParcels";
 import {ServiceError} from "../../../../services/types/Service";
 import {Grapevine} from "../types/Grapevine";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -17,6 +18,7 @@ interface Props
     grapevine: Grapevine;
     updateGrapevine: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    onClickBack: () => void;
 }
 
 export const SimpleGrapevineForm: FC<Props> = ({
@@ -25,7 +27,8 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                                    error,
                                                    grapevine,
                                                    updateGrapevine,
-                                                   loading
+                                                   loading,
+                                                   onClickBack
                                                }) => {
 
     const {t} = useTranslation();
@@ -45,6 +48,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.name}
                                       error={error}
+                                      disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <InputElement label={t("grapevine.NUMBER_OF_PLANTS")}
                                       type={'number'}
@@ -53,6 +57,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.numberOfPlants}
                                       error={error}
+                                      disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <InputElement label={t("grapevine.AREA")}
                                       type={'number'}
@@ -61,6 +66,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       onChange={updateGrapevine}
                                       defaultValue={grapevine?.area}
                                       error={error}
+                                      disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <InputElement label={t("grapevine.YEAR_OF_PLANTING")}
                                       type={'date'}
@@ -70,6 +76,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       defaultValue={grapevine?.yearOfPlanting}
                                       error={error}
                                       optional
+                                      disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <SimpleSelect label={t("grapevine.GRAPE_COLOR")}
                                       name={"grapeColor"}
@@ -78,19 +85,27 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                       options={[{value: "WHITE", text: "Białe"},
                                           {value: "RED", text: "Czerwone"}]}
                                       error={error}
+                                      disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <SelectParcels value={grapevine?.parcels || []}
                                        name={'parcels'}
                                        label={t('grapevine.PARCELS')}
                                        onChange={updateParcelsInGrapevine}
                                        error={error}
+                                       disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
                         <FormErrorMessage error={error}/>
                     </CardBody>
                     <CardFooter className="text-center">
-                        <Button color="primary" className="btn-square" onClick={onSubmit}>
-                            {grapevine?.id ? t("common.SAVE") : t("common.ADD")}
-                        </Button>
+                        {grapevine?.liveStatus === EntityLiveStatus.ARCHIVED ?
+                            <Button color="primary" className="btn-square" onClick={onClickBack}>
+                                {t("common.BACK")}
+                            </Button>
+                            :
+                            <Button color="primary" className="btn-square" onClick={onSubmit}>
+                                {grapevine?.id ? t("common.SAVE") : t("common.ADD")}
+                            </Button>
+                        }
                     </CardFooter>
                 </Card>
             </PageWrapper>
