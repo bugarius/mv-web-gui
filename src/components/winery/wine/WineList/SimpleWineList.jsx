@@ -1,10 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import Pagination from "../../../common/pagination/Pagination";
 import ListActions from "../../../common/ListActions";
 import PageWrapper from "../../../common/PageWrapper";
 import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -27,10 +28,12 @@ const SimpleWineList = ({
                             wrapperDisabled,
                             addWine,
                             reloadHarvest,
-                            children
+                            children,
+                            title
                         }) => {
 
     const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -49,8 +52,13 @@ const SimpleWineList = ({
             <td style={{textAlign: 'center'}} key={6}>{wine?.liters}</td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={wine}
-                             actions={{remove: remove, proceed: proceed, info: info, archive: archive, revertArchive: revertArchive}}
-                             status={status}
+                             actions={{
+                                 remove: remove,
+                                 proceed: proceed,
+                                 info: info,
+                                 archive: archive,
+                                 revertArchive: revertArchive
+                             }}
                              triggerRemoveCallback={reloadHarvest}
                 />
             </td>];
@@ -63,7 +71,7 @@ const SimpleWineList = ({
             <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'} loading={loading}
                          disabled={wrapperDisabled}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.WINE_LIST"/></CardHeader>
+                    <CardHeader>{title || status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('wine.list.archived.TITLE') : t('wine.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import PageWrapper from "../../../common/PageWrapper";
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
 import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const SimpleIngredientList = ({
                                   ingredients,
@@ -68,7 +69,7 @@ const SimpleIngredientList = ({
     return (
             <PageWrapper title={"ingredients.TITLE"} subtitle={'ingredients.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.INGREDIENTS_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('ingredients.list.archived.TITLE') : t('ingredients.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {

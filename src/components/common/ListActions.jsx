@@ -56,13 +56,14 @@ class ListActions extends Component {
     render()
     {
         const {isOpened} = this.state;
-        const {entity, actions: {proceed, remove, info, archive, revertArchive}, triggerRemoveCallback, status} = this.props;
+        const {entity, actions: {proceed, remove, info, archive, revertArchive}, triggerRemoveCallback} = this.props;
 
         const mainButtonAction = info ? info : proceed;
+
         return (
                 <>
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
-                        {status === EntityLiveStatus.ARCHIVED.toLowerCase() ?
+                        {entity?.liveStatus === EntityLiveStatus.ARCHIVED ?
                                 <button className="btn btn-primary"
                                         onClick={() => proceed(entity)}>Podgląd</button>
                                 :
@@ -82,9 +83,9 @@ class ListActions extends Component {
                         }}
                              onClick={this.closeMenu}
                         >
-                            {info && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
-                            {archive && status !== EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => archive(entity), 'Archiwizuj')}
-                            {revertArchive && status === EntityLiveStatus.ARCHIVED.toLowerCase() && this.renderButton(entity, false, () => revertArchive(entity), 'Cofnij archiwizację')}
+                            {info && entity?.liveStatus !== EntityLiveStatus.ARCHIVED && this.renderButton(entity, false, () => proceed(entity), 'Edytuj')}
+                            {archive && entity?.liveStatus !== EntityLiveStatus.ARCHIVED && this.renderButton(entity, false, () => archive(entity), 'Archiwizuj')}
+                            {revertArchive && entity?.liveStatus === EntityLiveStatus.ARCHIVED && this.renderButton(entity, false, () => revertArchive(entity), 'Cofnij archiwizację')}
                             {info && <div tabIndex={-1} className="dropdown-divider"/>}
                             {this.renderButton(entity, false, () => {
                                 remove(entity);

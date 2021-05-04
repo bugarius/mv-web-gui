@@ -31,6 +31,8 @@
   "parcel.CITY": "Miasto",
   "parcel.DISTRICT": "Obręb ewid.",
   "parcel.ZIP_CODE": "Kod pocztowy",
+  "parcel.list.created.TITLE": "Aktualnie updawiane",
+  "parcel.list.archived.TITLE": "Zarchiwizowane",
 
   "grapevine.TITLE": "Winorośla",
   "grapevine.LIST": "Zarządzaj swoimi winoroślami",
@@ -42,6 +44,8 @@
   "grapevine.PARCELS": "Nr działki",
   "grapevine.GRAPE_COLOR_WHITE": "Białe",
   "grapevine.GRAPE_COLOR_RED": "Czerwone",
+  "grapevine.list.created.TITLE": "Aktualnie updawiane",
+  "grapevine.list.archived.TITLE": "Zarchiwizowane",
 
   "harvest.TITLE": "Zbiory",
   "harvest.LIST": "Zarządzaj swoimi zbiorami",
@@ -52,6 +56,8 @@
   "harvest.AMOUNT_OF_WASTE": "Ilość odpadów",
   "harvest.WEIGHT_OF_EMPTY_BOX": "Waga pustej skrzynki",
   "harvest.WEIGHT_OF_EVERY_EMPTY_BOX": "Waga każdej pustej skrzynki",
+  "harvest.list.created.TITLE": "Aktualnie przetwarzane",
+  "harvest.list.archived.TITLE": "Zarchiwizowane",
 
   "box.TITLE": "Skrzynie z winogronami",
   "box.LIST": "Zarządzaj skrzyniami",
@@ -78,6 +84,9 @@
   "wine.status.AGING": "Leżakowanie",
   "wine.info.ADD_NEW_EVENT": "Dodaj proces technologiczny",
   "wine.info.EDIT_EVENT": "Edytuj proces technologiczny",
+  "wine.list.fromHarvest.TITLE": "Nastawy z tego zbioru",
+  "wine.list.created.TITLE": "Aktualnie w produckji",
+  "wine.list.archived.TITLE": "Zarchiwizowane",
 
   "wine.info.ADDED_INGREDIENTS": "Dodane składniki",
   "wine.info.ADDED_EVENTS": "Przeprowadzone procesy",
@@ -155,6 +164,8 @@
   "ingredients.TYPE.SUGARING": "Słodzenie",
   "ingredients.TYPE.ALCOHOL_INCREASING": "Wzmacnianie",
   "ingredients.TYPE.OTHER": "Inne",
+  "ingredients.list.created.TITLE": "Lista dodatków",
+  "ingredients.list.archived.TITLE": "Zarchiwizowane",
 
   "add_ingredient.ADD_WINE": "Dodaj składnik do nastawu",
   "add_ingredient.INGREDIENT_INFO": "Informacje o składniku",

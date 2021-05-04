@@ -1,10 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import PageWrapper from "../../../common/PageWrapper";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
 import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -29,6 +30,7 @@ const SimpleHarvestList = ({
                            }) => {
 
     const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -60,7 +62,7 @@ const SimpleHarvestList = ({
     return (
             <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.HARVEST_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('harvest.list.archived.TITLE') : t('harvest.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {

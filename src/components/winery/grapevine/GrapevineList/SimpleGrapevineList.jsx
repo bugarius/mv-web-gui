@@ -1,11 +1,12 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {FromApiConverter} from "../../../../services/Converters";
 import PageWrapper from "../../../common/PageWrapper";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
 import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 
 const thead = [
@@ -30,6 +31,7 @@ const SimpleGrapevineList = ({
                              }) => {
 
     const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -62,7 +64,7 @@ const SimpleGrapevineList = ({
     return (
             <PageWrapper title={"grapevine.TITLE"} subtitle={'grapevine.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.GRAPEVINE_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('grapevine.list.archived.TITLE') : t('grapevine.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {
