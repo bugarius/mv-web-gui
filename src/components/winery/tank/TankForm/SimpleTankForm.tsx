@@ -40,7 +40,7 @@ const SimpleTankForm: FC<Props> = ({onSubmit, tank, updateTank, error, loading})
                                       defaultValue={tank?.capacity}
                                       error={error}
                         />
-                        <FormErrorMessage error={error}/>
+                        <FormErrorMessage error={error} messageType={"details"}/>
                     </CardBody>
                     <CardFooter className="text-center">
                         <Button color="primary" className="btn-square" onClick={onSubmit}>

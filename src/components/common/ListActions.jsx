@@ -59,13 +59,13 @@ class ListActions extends Component {
         const {entity, actions: {proceed, remove, info, archive, revertArchive}, triggerRemoveCallback} = this.props;
 
         const mainButtonAction = info ? info : proceed;
-
+        console.log(entity)
         return (
                 <>
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
                         {entity?.liveStatus === EntityLiveStatus.ARCHIVED ?
                                 <button className="btn btn-primary"
-                                        onClick={() => proceed(entity)}>Podgląd</button>
+                                        onClick={() => mainButtonAction(entity)}>Podgląd</button>
                                 :
                             <button className="btn btn-primary"
                                     onClick={() => mainButtonAction(entity)}>{info ? "Zarządzaj" : "Edytuj"}</button>

@@ -66,7 +66,7 @@ const SimpleHarvestForm: FC<Props> = ({
                                 error={error}
                                 disabled={harvest?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     {harvest?.liveStatus === EntityLiveStatus.ARCHIVED ?

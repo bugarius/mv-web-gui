@@ -63,7 +63,7 @@ export const SimpleIngredientForm: FC<Props> = ({
                                   optional
                                   disabled={ingredient?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     {ingredient?.liveStatus === EntityLiveStatus.ARCHIVED ?

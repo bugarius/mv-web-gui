@@ -29,7 +29,8 @@ const SimpleWineList = ({
                             addWine,
                             reloadHarvest,
                             children,
-                            title
+                            title,
+                            harvest
                         }) => {
 
     const {status} = useParams();
@@ -71,7 +72,7 @@ const SimpleWineList = ({
             <PageWrapper title={"wine.TITLE"} subtitle={'wine.LIST'} loading={loading}
                          disabled={wrapperDisabled}>
                 <Card className="card-default">
-                    <CardHeader>{title || status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('wine.list.archived.TITLE') : t('wine.list.created.TITLE')}</CardHeader>
+                    <CardHeader>{title || (status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('wine.list.archived.TITLE') : t('wine.list.created.TITLE'))}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {
@@ -101,7 +102,7 @@ const SimpleWineList = ({
                                     }}/>
                         }
                     </CardBody>
-                    {addWine &&
+                    {addWine && !harvest.allDisposedToWine &&
                     <div className="card-footer text-center">
                         <button type="button" className="btn btn-secondary btn-oval" onClick={addWine}><Trans
                                 i18nKey="button.MAKE_WINE"/>

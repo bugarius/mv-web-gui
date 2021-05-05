@@ -110,6 +110,9 @@ const HarvestInfoPanel: React.FC<Props> = ({actions: {addBoxToHarvest, edit, dis
                         </div>
                         }
                     </div>
+                    <div className="card-footer text-center">
+                        <FormErrorMessage error={harvestResult as ServiceError} messageType={'details'}/>
+                    </div>
                 </div>
                 {harvestId &&
                 <BoxList harvest={harvest} harvestId={harvestId} loading={loading} reloadHarvest={reloadHarvest}/>}

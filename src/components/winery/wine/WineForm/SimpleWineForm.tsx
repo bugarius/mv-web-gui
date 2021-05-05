@@ -88,7 +88,7 @@ export const SimpleWineForm: FC<Props> = ({
                                        showExtraMessage={wine?.harvest?.allDisposedToWine && wine?.liveStatus !== EntityLiveStatus.ARCHIVED}
                         />
                     }
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     {wine?.liveStatus === EntityLiveStatus.ARCHIVED ?

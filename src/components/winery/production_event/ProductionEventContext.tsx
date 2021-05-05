@@ -1,6 +1,8 @@
 import React, {useCallback, useContext, useMemo, useReducer} from 'react';
-import {Service, StatusType} from "../../../services/types/Service";
+import {Error, Service, ServiceError, StatusType} from "../../../services/types/Service";
 import {ProductionEvent} from "../wine/types/Wine";
+import {defaultError} from "../parcel/ParcelContext";
+import {ResponseError} from "../../error/ResponseError";
 
 
 interface ProductionEventContextInterface
@@ -13,6 +15,8 @@ interface ProductionEventContextInterface
     productionEventResult: Service<ProductionEvent>;
     setProductionEventResult: (value: Service<ProductionEvent>) => void;
     loading: boolean;
+    setError: (value: Error) => void;
+    error: ServiceError
 }
 
 const defaultProductionEvent = {
@@ -37,7 +41,9 @@ const defaultState = {
     productionEventResult: {status: StatusType.loading},
     setProductionEventResult: () =>  {
     },
-    loading: false
+    loading: false,
+    setError: () => {},
+    error: defaultError
 };
 
 const reducer = (state, action) => {
@@ -55,6 +61,8 @@ const reducer = (state, action) => {
             return {...state, productionEvents: [...action.value]};
         case "productionEventResult":
             return {...state, productionEventResult: {...action.value}};
+        case "error":
+            return {...state, error: action.value}
 
         default:
             return {...state, productionEvent: {...state.productionEvent, [action.type]: action.value}};
@@ -98,6 +106,10 @@ const ProductionEventProvider: React.FC = ({children}) => {
         }
     }, []);
 
+    const setError = useCallback((error) => {
+        dispatch({type: "error", value: new ResponseError(error)})
+    }, []);
+
     const providerValue = useMemo(() => ({
         productionEvent: state.productionEvent,
         updateProductionEvent,
@@ -108,9 +120,12 @@ const ProductionEventProvider: React.FC = ({children}) => {
         resetProductionEvents,
         productionEventResult: state.productionEventResult,
         setProductionEventResult,
-        loading: state.productionEventResult.status === StatusType.loading
+        loading: state.productionEventResult.status === StatusType.loading,
+        setError,
+        error: state.error
 
-    }), [state.productionEvent, updateProductionEvent, state.productionEvents, setProductionEvent, setProductionEvents, resetProductionEvent, resetProductionEvents, state.productionEventResult, setProductionEventResult]);
+    }), [state.productionEvent, updateProductionEvent, state.productionEvents, setProductionEvent, setProductionEvents,
+        resetProductionEvent, resetProductionEvents, state.productionEventResult, setProductionEventResult, setError, state.error]);
 
     return (
         <ProductionEventContext.Provider value={providerValue}>

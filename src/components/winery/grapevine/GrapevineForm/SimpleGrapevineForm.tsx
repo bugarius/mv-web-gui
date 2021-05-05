@@ -94,7 +94,7 @@ export const SimpleGrapevineForm: FC<Props> = ({
                                        error={error}
                                        disabled={grapevine?.liveStatus === EntityLiveStatus.ARCHIVED}
                         />
-                        <FormErrorMessage error={error}/>
+                        <FormErrorMessage error={error} messageType={"details"}/>
                     </CardBody>
                     <CardFooter className="text-center">
                         {grapevine?.liveStatus === EntityLiveStatus.ARCHIVED ?

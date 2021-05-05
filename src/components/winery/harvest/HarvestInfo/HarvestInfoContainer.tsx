@@ -30,7 +30,7 @@ const HarvestInfoContainer = ({render}) => {
     }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {
-        history.push(`/mv/harvest/${harvestId}/`, {from: history.location.pathname});
+        history.push(`/mv/harvest/e/${harvestId}/`, {from: history.location.pathname});
     };
 
     const dispose = (e) => {
@@ -43,7 +43,7 @@ const HarvestInfoContainer = ({render}) => {
                 .then(response => {
                     setHarvestResult({status: StatusType.loaded, payload: response});
                 })
-                .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
+                .catch(error => setHarvestResult(new ResponseError<Harvest>(error)));
         }
     };
 

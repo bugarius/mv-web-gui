@@ -11,6 +11,7 @@ interface Props
     path: string;
     elementId?: number | null;
     dropdownInfo: { paragraph?: string, footer?: { label: string, value?: string } };
+    disableActions?: boolean;
 }
 
 export interface ListBoxActions
@@ -23,12 +24,13 @@ export interface ListBoxActions
 export interface ListBoxElementToShow
 {
     id?: number,
-    isOpen?: boolean
+    isOpen?: boolean,
 }
 
 export const CommonListBox: FC<Props> = ({
                                              header,
                                              actions: {toggleShow, editElement, removeElement},
+                                             disableActions,
                                              elementToSHow,
                                              path,
                                              elementId,
@@ -54,14 +56,16 @@ export const CommonListBox: FC<Props> = ({
                         {dropdownInfo?.footer?.value &&
                         <p className='m-0'>{`${dropdownInfo?.footer?.label}: ${dropdownInfo?.footer?.value}`}</p>}
                     </div>
-                    <BoxListActionsButtons actions={{
-                        editElement: () => editElement?.(path, elementId),
-                        removeElement: () => removeElement?.(elementId)
-                    }}
-                    />
+                    {!disableActions &&
+                        <BoxListActionsButtons actions={{
+                            editElement: () => editElement?.(path, elementId),
+                            removeElement: () => removeElement?.(elementId)
+                        }}
+                        />
+                    }
                 </td>
             </tr>
             }
         </>
     )
-};
+}

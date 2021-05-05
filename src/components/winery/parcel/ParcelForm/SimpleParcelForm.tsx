@@ -87,7 +87,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, onC
                                   optional
                                   disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
                     {parcel?.liveStatus === EntityLiveStatus.ARCHIVED ?

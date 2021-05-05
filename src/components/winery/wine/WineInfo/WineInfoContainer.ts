@@ -5,10 +5,11 @@ import useWineService from "../service/useWineService";
 import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Wine} from "../types/Wine";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const WineInfoContainer = ({render}) => {
 
-    const {updateWine, setWineResult} = useWineContext();
+    const {updateWine, setWineResult, wine} = useWineContext();
     const service = useWineService();
     const {wineId} = useParams();
     const history = useHistory();
@@ -30,7 +31,7 @@ const WineInfoContainer = ({render}) => {
 
     const button = {
         action: editWine,
-        label: "Edytuj"
+        label: wine?.liveStatus === EntityLiveStatus.ARCHIVED ? "Podgląd" : "Edytuj"
     };
 
     return render(button);
