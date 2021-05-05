@@ -75,7 +75,7 @@ export const ProductionEventFormFields: FC<EventToWineProps> = ({
                               error={error}
                               optional
                 />
-                <FormErrorMessage error={error}/>
+                <FormErrorMessage error={error} messageType={'details'}/>
             </CardBody>
             <CardFooter>
                 <Button color="primary" className="btn-square" onClick={event?.id ? onSubmit?.update : onSubmit?.save}>

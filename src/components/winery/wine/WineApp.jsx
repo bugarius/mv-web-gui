@@ -27,19 +27,20 @@ class WineApp extends Component {
                                         <Redirect to="/mv/wine/all"/>
                                     </Route>
                                     <Route exact path="/mv/wine/all" component={WineList}/>
-                                    <Route exact path="/mv/wine/:wineId?">
+                                    <Route exact path="/mv/wine/:status?" component={WineList}/>
+                                    <Route exact path="/mv/wine/e/:wineId?">
                                         <WineForm principal={principal}/>
                                     </Route>
-                                    <Route exact path="/mv/wine/:wineId?/info">
+                                    <Route exact path="/mv/wine/info/:wineId?">
                                         <WineInfo principal={principal}/>
                                     </Route>
-                                    <Route exact path="/mv/wine/:wineId?/info/:harvestId?">
+                                    <Route exact path="/mv/wine/info/:wineId?/:harvestId?">
                                         <WineForm principal={principal}/>
                                     </Route>
-                                    <Route exact path="/mv/wine/:wineId?/ingredient/:appliedIngredientId?">
+                                    <Route exact path="/mv/wine/ingredient/:wineId?/:appliedIngredientId?">
                                         <AppliedIngredientForm />
                                     </Route>
-                                    <Route exact path="/mv/wine/:wineId?/event/:productionEventId?">
+                                    <Route exact path="/mv/wine/event/:wineId?/:productionEventId?">
                                         <ProductionEventForm />
                                     </Route>
                                 </Switch>

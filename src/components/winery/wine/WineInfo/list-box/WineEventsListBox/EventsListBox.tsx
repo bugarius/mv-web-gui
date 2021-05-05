@@ -7,6 +7,10 @@ import {useWineContext} from "../../../WineContext";
 import {ProductionEvent, ProductionEventType} from "../../../types/Wine";
 import {CommonListBox, ListBoxActions, ListBoxElementToShow} from "../shared/CommonListBox";
 import {FromApiConverter} from "../../../../../../services/Converters";
+import {FormErrorMessage} from "../../../../../common/notifications/FormErrorMessage";
+import CardFooter from "../../../../../common/cards/CardFooter";
+import {useProductionEventContext} from "../../../../production_event/ProductionEventContext";
+import {EntityLiveStatus} from "../../../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -19,6 +23,7 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
 
     const {t} = useTranslation();
     const {loading, wine} = useWineContext();
+    const {error} = useProductionEventContext();
 
     return (
         <PageWrapper loading={loading} disabled>
@@ -39,8 +44,9 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                                 (i?.waste?.toString() || "-")
                             ]}
                                                   actions={actions}
+                                                  disableActions={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                                                   elementToSHow={eventToShow}
-                                                  path={`wine/${wine?.id}/event`}
+                                                  path={`wine/event/${wine?.id}`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.info,
@@ -57,6 +63,9 @@ const EventsListBox: React.FC<Props> = ({events, eventToShow, actions}) => {
                     : <CardBody>
                         <div className={'text-center'}>{t('common.NO_DATA')}</div>
                     </CardBody>
+                }
+                {error?.error?.details &&
+                <CardFooter><FormErrorMessage error={error} messageType={'details'}/></CardFooter>
                 }
             </Card>
         </PageWrapper>

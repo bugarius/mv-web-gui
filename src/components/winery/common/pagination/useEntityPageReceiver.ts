@@ -9,7 +9,9 @@ export const useEntityPageReceiver = <T>(service: TService<T>, listConverter: (e
         paginationActions,
         loading,
         removeEntity,
-        currentPage
+        currentPage,
+        archiveEntity,
+        revertArchiveEntity
     } = useFetchEntityPage(service, setError)
     const {limit} = useLimitedRowsToDimension();
     const {proceed, info} = useEntityActions(entityName);
@@ -17,7 +19,9 @@ export const useEntityPageReceiver = <T>(service: TService<T>, listConverter: (e
     const entityActions = {
         remove: removeEntity,
         proceed: proceed,
-        info: info
+        info: info,
+        archive: archiveEntity,
+        revertArchive: revertArchiveEntity
     };
 
     const entities = pagination.content ? listConverter(pagination.content) : []

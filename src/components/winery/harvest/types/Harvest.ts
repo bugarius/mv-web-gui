@@ -1,6 +1,7 @@
 import {Grapevine} from "../../grapevine/types/Grapevine";
 import {BoxWithGrapes} from "../../box/types/BoxWithGrapes";
 import {History} from "../../wine/types/History";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 export interface Harvest
 {
@@ -15,4 +16,5 @@ export interface Harvest
     weightOfEveryEmptyBox?: number | null;
     allDisposedToWine?: boolean;
     history?: History[];
+    liveStatus?: EntityLiveStatus;
 }

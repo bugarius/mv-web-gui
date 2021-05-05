@@ -8,8 +8,8 @@ interface TCrudApi<T> {
 const useCrudeApi = <T>(endpoint: string): TCrudApi<T> => {
     const crudApi = useFetch<T>(endpoint);
 
-    const getAll = (page: number) => {
-        return crudApi.getAll(page);
+    const getAll = (page: number, status?: string) => {
+        return crudApi.getAll(page, status);
     };
 
     const getAllWithParams = (params: Map<string, string | boolean>) => {

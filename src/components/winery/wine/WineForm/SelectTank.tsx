@@ -4,7 +4,6 @@ import Select from "react-select";
 import {SelectOption} from "../../../../services/types/SelectOption";
 import {Tank} from "../../tank/types/Tank";
 import useTanksReceiver from "../../tank/service/useTanksReceiver";
-import {useHistory} from "react-router-dom";
 import {ServiceError} from "../../../../services/types/Service";
 
 interface Props
@@ -25,14 +24,10 @@ const SelectTank: React.FC<Props> = ({
                                          label,
                                          optional,
                                          disabled,
-                                         error}) => {
+                                         error
+                                     }) => {
 
     const {selected: value, options: tanks} = useTanksReceiver(selected);
-    const history = useHistory();
-
-    const goToTank = (id) => {
-        history.push(`/mv/tank/${id}/info`, {from: window.location.pathname});
-    };
 
     const customStyles = {
         control: (base) => ({
@@ -61,15 +56,6 @@ const SelectTank: React.FC<Props> = ({
                     />
                     <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
                         {error?.getErrorMessage?.(name)}</span>
-                    {disabled &&
-                    <span className="text-muted small">
-                        Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.
-                        <span className="text-info btn-link" onClick={() => goToTank("id" in selected ? selected.id : '')}
-                              style={{cursor: 'pointer', display: ("id" in selected && selected.id ? '' : 'none')}}>
-                             Przejdź do Zarządzania zbiornikiem...
-                        </span>
-                        </span>
-                    }
                 </div>
             </FormGroup>
         </fieldset>

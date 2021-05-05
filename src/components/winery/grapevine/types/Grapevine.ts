@@ -1,5 +1,6 @@
 import {Parcel} from "../../parcel/types/Parcel";
 import {GrapeColor} from "./GrapeColor";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 export interface Grapevine
 {
@@ -10,5 +11,6 @@ export interface Grapevine
     parcels?: Parcel[];
     yearOfPlanting?: string;
     grapeColor?: GrapeColor | null;
+    liveStatus?: EntityLiveStatus;
     // picture?: {};
 }

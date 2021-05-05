@@ -1,9 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import PageWrapper from "../../../common/PageWrapper";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -23,9 +25,12 @@ const SimpleParcelList = ({
                               limit,
                               loading,
                               paginationActions: {changePage, onPrev, onNext},
-                              entityActions: {remove, proceed, info},
+                              entityActions: {remove, proceed, archive, revertArchive},
                               children
                           }) => {
+
+    const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -53,7 +58,9 @@ const SimpleParcelList = ({
             <td style={{textAlign: 'center'}} key={7}>{zipCode}</td>,
             <td style={{textAlign: 'center'}} key={8}>
                 <ListActions entity={parcel}
-                             actions={{remove: remove, proceed: proceed}}/>
+                             actions={{remove: remove, proceed: proceed, archive: archive, revertArchive: revertArchive}}
+                             status={status}
+                />
             </td>]
         return <tr key={parcel.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}
@@ -63,7 +70,7 @@ const SimpleParcelList = ({
     return (
             <PageWrapper title={"parcel.TITLE"} subtitle={'parcel.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.PARCEL_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('parcel.list.archived.TITLE') : t('parcel.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {

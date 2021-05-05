@@ -7,11 +7,11 @@ interface Entity {
 export const useEntityActions =  (entityName: string) => {
     const history = useHistory();
     const proceed = (entity: Entity) => {
-        history.push(`/mv/${entityName}/${entity.id}/`, {from: history.location.pathname});
+        history.push(`/mv/${entityName}/e/${entity.id}/`, {from: history.location.pathname});
     };
 
     const info = (entity: Entity) => {
-        history.push(`/mv/${entityName}/${entity.id}/info`, {from: history.location.pathname});
+        history.push(`/mv/${entityName}/info/${entity.id}`, {from: history.location.pathname});
     };
 
     return {proceed, info}

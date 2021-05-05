@@ -30,7 +30,8 @@ export const defaultHarvest = {
     boxesCount: null,
     weightOfEveryEmptyBox: null,
     allDisposedToWine: false,
-    history: []
+    history: [],
+    liveStatus: undefined
 };
 
 const defaultState = {

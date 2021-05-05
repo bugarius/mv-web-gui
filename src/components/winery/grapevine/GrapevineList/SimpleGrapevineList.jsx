@@ -1,10 +1,12 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {FromApiConverter} from "../../../../services/Converters";
 import PageWrapper from "../../../common/PageWrapper";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 
 const thead = [
@@ -17,7 +19,19 @@ const thead = [
     <th style={{textAlign: 'center'}} key={7}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}, children}) => {
+const SimpleGrapevineList = ({
+                                 grapevines,
+                                 page,
+                                 pagination,
+                                 limit,
+                                 loading,
+                                 paginationActions: {changePage, onPrev, onNext},
+                                 entityActions: {remove, proceed, archive, revertArchive},
+                                 children
+                             }) => {
+
+    const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -33,11 +47,14 @@ const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, pagi
             <td style={{textAlign: 'center'}} key={3}>{grapevine?.numberOfPlants}</td>,
             <td style={{textAlign: 'center'}} key={4}>{grapevine?.area}</td>,
             <td style={{textAlign: 'center'}} key={5}>{grapevine?.yearOfPlanting}</td>,
-            <td style={{textAlign: 'center'}} key={6}><Trans i18nKey={FromApiConverter.convertGrapeColor(grapevine?.grapeColor)}/>
+            <td style={{textAlign: 'center'}} key={6}><Trans
+                    i18nKey={FromApiConverter.convertGrapeColor(grapevine?.grapeColor)}/>
             </td>,
             <td style={{textAlign: 'center'}} key={7}>
                 <ListActions entity={grapevine}
-                             actions={{remove: remove, proceed: proceed}}/>
+                             actions={{remove: remove, proceed: proceed, archive: archive, revertArchive: revertArchive}}
+                             status={status}
+                />
             </td>];
         return <tr key={grapevine?.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}
@@ -47,7 +64,7 @@ const SimpleGrapevineList = ({grapevines, page, pagination, limit, loading, pagi
     return (
             <PageWrapper title={"grapevine.TITLE"} subtitle={'grapevine.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.GRAPEVINE_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('grapevine.list.archived.TITLE') : t('grapevine.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {

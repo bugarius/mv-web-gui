@@ -29,7 +29,8 @@ const defaultWine = {
   history: [],
   status: null,
   events: [],
-  lastEvent: null
+  lastEvent: null,
+  liveStatus: undefined
 };
 
 const defaultState = {

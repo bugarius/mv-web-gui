@@ -37,7 +37,7 @@ export const useIngredientOnClickService = () => {
         {
             setIngredientResult({status: StatusType.loading});
             wineService.putIngredient(parseInt(appliedIngredientId), ToApiConverter.convertIngredient(ingredient))
-                .then(() => history.push(history?.location?.state!['from'] || `mv/wine/all`))
+                .then(() => history.push(history?.location?.state!['from'] || `/mv/wine/all`))
                 .catch(response => {
                     log.debug(response);
                     setIngredientResult(new ResponseError<Ingredient>(response));

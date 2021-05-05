@@ -14,9 +14,10 @@ interface Props
     label?: string;
     optional?: boolean;
     error?: ServiceError;
+    disabled: boolean;
 }
 
-const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, error}) => {
+const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label, optional, error, disabled}) => {
 
     const {selected: value, options: parcels} = useParcelsReceiver(selected);
 
@@ -44,6 +45,7 @@ const SelectParcels: React.FC<Props> = ({value: selected, onChange, name, label,
                             isMulti
                             placeholder={"Wybierz"}
                             styles={error?.hasError?.(name) && customStyles}
+                            isDisabled={disabled}
                     />
                     <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
                         {error?.getErrorMessage?.(name)}</span>

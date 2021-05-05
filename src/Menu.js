@@ -23,13 +23,13 @@ const Menu = [
             translate: 'sidebar.nav.element.PARCEL_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/parcel/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nową',
-                path: {
-                    pathname: '/mv/parcel/0',
-                    state: {
-                        from: '/mv/parcel/all'
-                    }
-                },
+                path: '/mv/parcel/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
@@ -44,13 +44,13 @@ const Menu = [
             translate: 'sidebar.nav.element.GRAPEVINE_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/grapevine/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nową',
-                path: {
-                    pathname: '/mv/grapevine/0',
-                    state: {
-                        from: '/mv/grapevine/all'
-                    }
-                },
+                path: '/mv/grapevine/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW'
             }
         ]
@@ -65,13 +65,13 @@ const Menu = [
             translate: 'sidebar.nav.element.HARVEST_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/harvest/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/harvest/0',
-                    state: {
-                        from: '/mv/harvest/all'
-                    }
-                },
+                path: '/mv/harvest/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
@@ -90,13 +90,13 @@ const Menu = [
             translate: 'sidebar.nav.element.WINE_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/wine/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/wine/0',
-                    state: {
-                        from: '/mv/wine/all'
-                    }
-                },
+                path: '/mv/wine/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_HARVEST'
             }
         ]
@@ -112,12 +112,7 @@ const Menu = [
         },
             {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/tank/0',
-                    state: {
-                        from: '/mv/tank/all'
-                    }
-                },
+                path:'/mv/tank/0',
                 translate: 'sidebar.nav.element.ADD_NEW_TANK'
             }
         ]
@@ -132,13 +127,13 @@ const Menu = [
             translate: 'sidebar.nav.element.INGREDIENTS_LIST'
         },
             {
+                name: 'Zarchiwizowane',
+                path: '/mv/ingredient/archived',
+                translate: 'sidebar.nav.element.ARCHIVED'
+            },
+            {
                 name: 'Dodaj nowy',
-                path: {
-                    pathname: '/mv/ingredient/0',
-                    state: {
-                        from: '/mv/ingredient/all'
-                    }
-                },
+                path: '/mv/ingredient/e/0',
                 translate: 'sidebar.nav.element.ADD_NEW_INGREDIENT'
             }
         ]

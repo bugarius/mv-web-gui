@@ -7,13 +7,14 @@ const GrapevineForm = (props) => {
 
     return (
             <GrapevineFormContainer {...props}
-                                    render={(updateParcelsInGrapevine, onSubmit, error, grapevine, updateGrapevine, loading) => (
+                                    render={(updateParcelsInGrapevine, onSubmit, error, grapevine, updateGrapevine, loading, onClickBack) => (
                                             <SimpleGrapevineForm updateParcelsInGrapevine={updateParcelsInGrapevine}
                                                                  onSubmit={onSubmit}
                                                                  error={error}
                                                                  grapevine={grapevine}
                                                                  updateGrapevine={updateGrapevine}
                                                                  loading={loading}
+                                                                 onClickBack={onClickBack}
                                             />
                                     )}/>
     )

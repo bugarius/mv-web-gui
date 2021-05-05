@@ -25,6 +25,7 @@ const defaultGrapevine = {
   parcels: [],
   yearOfPlanting: "",
   grapeColor: null,
+  liveStatus: undefined
   // picture: {},
 };
 

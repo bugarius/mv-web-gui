@@ -23,10 +23,11 @@ class HarvestApp extends Component {
                                     <Redirect to="/mv/harvest/all"/>
                                 </Route>
                                 <Route exact path="/mv/harvest/all" component={HarvestList}/>
-                                <Route exact path="/mv/harvest/:harvestId?">
+                                <Route exact path="/mv/harvest/:status?" component={HarvestList}/>
+                                <Route exact path="/mv/harvest/e/:harvestId?">
                                     <HarvestForm principal={principal}/>
                                 </Route>
-                                <Route path="/mv/harvest/:harvestId?/info">
+                                <Route path="/mv/harvest/info/:harvestId?">
                                     <HarvestInfo principal={principal}/>
                                 </Route>
                             </Switch>

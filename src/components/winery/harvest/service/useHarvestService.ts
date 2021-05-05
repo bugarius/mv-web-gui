@@ -12,13 +12,15 @@ const useHarvestService = () => {
     const {putId: dispose} = useCrudeApi<Harvest>("/ajax/harvests/dispose");
     const {putId: revertDispose} = useCrudeApi<Harvest>("/ajax/harvests/revert-dispose");
     const {putBody: addBox} = useCrudeApi<BoxWithGrapes>(`/ajax/harvests/${harvestId}/box`);
+    const {putId: archive} = useCrudeApi<Harvest>("/ajax/harvests/archive");
+    const {putId: revertArchive} = useCrudeApi<Harvest>("/ajax/harvests/revert-archive");
 
     const getAvailableList = () => {
         return crudeApi.getAllWithParams(new Map<string, boolean>([["available", true]]));
     };
 
     return {
-        get, getAll, getList, getAvailableList, post, put, del, addBox, dispose, revertDispose
+        get, getAll, getList, getAvailableList, post, put, del, addBox, dispose, revertDispose, archive, revertArchive
     }
 };
 

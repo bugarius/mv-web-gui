@@ -16,7 +16,7 @@ export const FormErrorMessage: FC<Props> = ({error, messageType = 'generalMessag
         switch (messageType)
         {
             case "details":
-                return errorObj?.error?.details;
+                return errorObj?.error?.details || errorObj?.error?.message;
             case "fieldError":
                 return errorObj?.getErrorMessage?.(fieldName);
             default:

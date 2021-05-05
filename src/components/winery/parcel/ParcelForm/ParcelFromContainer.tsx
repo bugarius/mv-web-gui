@@ -47,10 +47,14 @@ const ParcelFormContainer = ({render}) => {
         action()
             .then(response => {
                 setParcelResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/parcel/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/parcel/all`);
             })
             .catch(response => setParcelResult(new ResponseError<Parcel>(response) as ServiceError));
     };
+
+    const onClickBack = () => {
+        history?.push(history?.location?.state!['from'] || `/mv/parcel/archived`);
+    }
 
     const error = parcelResult as ServiceError;
 
@@ -59,6 +63,7 @@ const ParcelFormContainer = ({render}) => {
         error,
         parcel,
         handleUpdateParcel,
+        onClickBack,
         parcelResult.status === StatusType.loading);
 };
 

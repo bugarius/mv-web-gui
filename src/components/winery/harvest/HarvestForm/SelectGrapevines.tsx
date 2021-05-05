@@ -14,6 +14,7 @@ interface Props
     label?: string;
     optional?: boolean;
     error?: ServiceError;
+    disabled: boolean;
 }
 
 const SelectGrapevines: React.FC<Props> = ({
@@ -21,7 +22,8 @@ const SelectGrapevines: React.FC<Props> = ({
                                                onChange, name,
                                                label,
                                                optional,
-                                               error}) => {
+                                               error,
+                                               disabled}) => {
 
     const {selected: value, options: grapevines} = useGrapevinesReceiver(selected);
 
@@ -48,6 +50,7 @@ const SelectGrapevines: React.FC<Props> = ({
                             value={value}
                             placeholder={"Wybierz"}
                             styles={error?.hasError?.(name) && customStyles}
+                            isDisabled={disabled}
                     />
                     <span className="invalid-feedback" style={{display: (error?.hasError?.(name) ? "block" : "none")}}>
                         {error?.getErrorMessage?.(name)}</span>

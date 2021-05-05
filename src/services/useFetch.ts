@@ -38,8 +38,9 @@ const useFetch = <T>(endpoint?: string) => {
         const url = `${endpoint}/all`;
         return customFetch(url, 'GET', null);
     };
-    const getAll = (page: number) => {
-        const url = `${endpoint}?${URI.buildQuery({p: page})}`;
+    const getAll = (page: number, status?: string) => {
+        status = status ? status.toUpperCase() : status;
+        const url = `${endpoint}?${URI.buildQuery({p: page, s: status})}`;
         return customFetch(url, 'GET', null);
     };
     const getAllWithParams = (params: Map<string, string | boolean>) => {
