@@ -84,7 +84,7 @@ class Sidebar extends Component {
     }
 
     navigator = route => {
-        this.props.history.push(route.replace('#','')); // remove '#' in case of use HashRouter
+        this.props.history.push(route?.split('#')?.[1]); // remove '#' in case of use HashRouter
     }
 
     routeActive(paths) {

@@ -14,6 +14,7 @@ class Header extends Component {
 
     componentDidMount() {
         HeaderRun();
+        this.props.isMobile && this.collapse();
     }
 
     toggleUserblock = e => {
@@ -41,6 +42,11 @@ class Header extends Component {
         return hash?.split("#")?.[1]
     }
 
+    collapse = () => {
+        // e.preventDefault()
+        this.props.actions.changeSetting('isCollapsed', true);
+    }
+
     resize () {
         // all IE friendly dispatchEvent
         var evt = document.createEvent('UIEvents');
@@ -51,6 +57,7 @@ class Header extends Component {
     }
 
     render() {
+        const {isMobile} = this.props;
         return (
             <header className="topnavbar-wrapper">
                 { /* START Top Navbar */ }
@@ -59,7 +66,7 @@ class Header extends Component {
                     <div className="navbar-header">
                         <a className="navbar-brand" href="#/">
                             <div className="brand-logo text-gray">
-                                <img className="img-fluid" src="img/logo.png" alt="App Logo" />
+                                {!isMobile && <img className="img-fluid" src="img/logo.png" alt="App Logo" />}
                             </div>
                             <div className="brand-logo-collapsed text-gray">
                                 <img className="img-fluid" src="img/logo-single.png" alt="App Logo" />

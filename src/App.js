@@ -22,6 +22,7 @@ import ErrorProvider from "./components/error/ErrorContext";
 import ValidationSchemaProvider from "./components/winery/validation/ValidationSchemaContext";
 import {FormContext, useForm} from "react-hook-form";
 import AuthProvider from "./components/platform/AuthContext";
+import ResponsiveProvider from "./components/platform/ResponsiveContext";
 
 
 const App = () => {
@@ -43,11 +44,13 @@ const App = () => {
             <AuthProvider>
                 <ErrorProvider>
                     <ValidationSchemaProvider>
-                        <FormContext {...methods} >
-                            <HashRouter>
-                                <AppRouting/>
-                            </HashRouter>
-                        </FormContext>
+                        <ResponsiveProvider>
+                            <FormContext {...methods} >
+                                <HashRouter>
+                                    <AppRouting/>
+                                </HashRouter>
+                            </FormContext>
+                        </ResponsiveProvider>
                     </ValidationSchemaProvider>
                 </ErrorProvider>
             </AuthProvider>
