@@ -24,16 +24,15 @@ const AppRouting = ({location: {pathname}, history}) => {
     };
 
     useEffect(() => {
-        if (principal !== null) return;
         log.debug('AppRouting::render', error, principal);
         AuthService.getUserInfo()
-                .then((principal) => setPrincipal(principal))
-                .catch((error) => {
-                    setError(error);
+                .then((res) => setPrincipal(res))
+                .catch((res) => {
+                    setError(res);
                     history.push(`/error`);
                 });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [history.location]);
 
     return (error || principal) ?
       <Switch>
