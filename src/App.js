@@ -10,7 +10,7 @@
  */
 
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 // App Routes
 // Vendor dependencies
 import "./Vendor";
@@ -44,9 +44,9 @@ const App = () => {
                 <ErrorProvider>
                     <ValidationSchemaProvider>
                         <FormContext {...methods} >
-                            <BrowserRouter>
+                            <HashRouter>
                                 <AppRouting/>
-                            </BrowserRouter>
+                            </HashRouter>
                         </FormContext>
                     </ValidationSchemaProvider>
                 </ErrorProvider>
