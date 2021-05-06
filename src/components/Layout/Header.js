@@ -37,6 +37,10 @@ class Header extends Component {
         this.props.actions.toggleSetting('asideToggled');
     }
 
+    getPathFromHash = (hash) => {
+        return hash?.split("#")?.[1]
+    }
+
     resize () {
         // all IE friendly dispatchEvent
         var evt = document.createEvent('UIEvents');
@@ -66,7 +70,7 @@ class Header extends Component {
 
                     { /* START Left navbar */ }
                     <ul className="navbar-nav mr-auto flex-row">
-                        <li className="nav-item">
+                        <li className="nav-item" style={{cursor: "pointer"}}>
                             { /* Button used to collapse the left sidebar. Only visible on tablet and desktops */ }
                             <div className="nav-link d-none d-md-block d-lg-block d-xl-block" onClick={ this.toggleCollapsed }>
                                 <em className="fas fa-bars"></em>
@@ -77,7 +81,7 @@ class Header extends Component {
                             </div>
                         </li>
                         { /* START User avatar toggle */ }
-                        <li className="nav-item d-none d-md-block">
+                        <li className="nav-item d-none d-md-block" style={{cursor: "pointer"}}>
                             <div  className="nav-link" onClick={ this.toggleUserblock }>
                                 <em className="icon-user"></em>
                             </div>
@@ -85,7 +89,7 @@ class Header extends Component {
                         { /* END User avatar toggle */ }
                         { /* START lock screen */ }
                         <li className="nav-item d-none d-md-block">
-                            <NavLink to={{pathname: '/lock', state: {from: window.location.pathname}}} title="Lock screen" className="nav-link">
+                            <NavLink to={{pathname: '/lock', state: {from: this.getPathFromHash(window.location.hash)}}} title="Zablokuj ekran" className="nav-link">
                                 <em className="icon-lock"></em>
                             </NavLink>
                         </li>

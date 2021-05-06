@@ -10,27 +10,29 @@ const Lock = () => {
     const [error, setError] = useState(false);
 
     const {principal, setLock} = useContext(AuthContext);
+    const login = principal?.login || ""
     const history = useHistory();
 
     useEffect(() => {
         setLock(true);
+        AuthService.logout();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
     const unlock = (e) => {
         e.preventDefault();
-        AuthService.login(principal.login, password)
-                .then(principal => {
-                    if (principal?.login)
+        AuthService.login(login, password)
+                .then(res => {
+                    if (res?.login)
                     {
                         setLock(false);
                         setError(false);
-                        history.push(history?.location?.state?.from || `/dupa`)
+                        history.push(history?.location?.state?.from || `/`)
                     }
                     else
                     {
                         setError(true);
                     }
                 })
-                .catch(error => setError(true));
+                .catch(() => setError(true));
     };
 
     return (
@@ -80,7 +82,7 @@ const Lock = () => {
                 </div>
                 <div className="p-3 text-center">
                     <span className="mr-2">&copy;</span>
-                    <span>2020</span>
+                    <span>2021</span>
                     <span className="mx-2">-</span>
                     <span>Moja Winnica</span>
                     <br/>
