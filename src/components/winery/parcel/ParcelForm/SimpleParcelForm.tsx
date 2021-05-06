@@ -6,6 +6,7 @@ import InputElement from "../../../common/InputElement";
 import {ServiceError} from "../../../../services/types/Service";
 import {Parcel} from "../types/Parcel";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -14,9 +15,10 @@ interface Props
     parcel: Parcel;
     updateParcel: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    onClickBack: () => void;
 }
 
-const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loading}) => {
+const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, onClickBack, loading}) => {
 
     const {t} = useTranslation();
     console.log("updateParcel", updateParcel)
@@ -35,6 +37,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   onChange={updateParcel}
                                   defaultValue={parcel?.registrationNumber}
                                   error={error}
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t("parcel.AREA")}
                                   type={'number'}
@@ -43,6 +46,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   onChange={updateParcel}
                                   defaultValue={parcel?.area}
                                   error={error}
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t("parcel.DISTRICT")}
                                   type={'text'}
@@ -51,6 +55,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   onChange={updateParcel}
                                   defaultValue={parcel?.district}
                                   error={error}
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t("parcel.COUNTRY")}
                                   type={'text'}
@@ -60,6 +65,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   defaultValue={parcel?.country}
                                   error={error}
                                   optional
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t("parcel.CITY")}
                                   type={'text'}
@@ -69,6 +75,7 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   defaultValue={parcel?.city}
                                   error={error}
                                   optional
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t("parcel.ZIP_CODE")}
                                   type={'text'}
@@ -78,13 +85,20 @@ const SimpleParcelForm: FC<Props> = ({onSubmit, error, parcel, updateParcel, loa
                                   defaultValue={parcel?.zipCode}
                                   error={error}
                                   optional
+                                  disabled={parcel?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
-                    <Button color="primary" className="btn-square" onClick={onSubmit}>
-                        {parcel?.id ? t("common.SAVE") : t("common.ADD")}
-                    </Button>
+                    {parcel?.liveStatus === EntityLiveStatus.ARCHIVED ?
+                        <Button color="primary" className="btn-square" onClick={onClickBack}>
+                            {t("common.BACK")}
+                        </Button>
+                        :
+                        <Button color="primary" className="btn-square" onClick={onSubmit}>
+                            {parcel?.id ? t("common.SAVE") : t("common.ADD")}
+                        </Button>
+                    }
                 </CardFooter>
             </Card>
         </PageWrapper>

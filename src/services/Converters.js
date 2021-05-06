@@ -1,6 +1,7 @@
 import {StringValueValidator} from "./Validators";
 
 const convertParcelFromApi = (parcel) => ({
+    ...parcel,
     id: parcel.id && ('' + parcel.id),
     country: parcel.country || '',
     city: parcel.city || '',
@@ -24,6 +25,7 @@ const convertParcelToApi = (parcel) => ({
 });
 
 const convertGrapevineFromApi = (grapevine) => ({
+    ...grapevine,
     id: grapevine.id && ('' + grapevine.id),
     name: grapevine.name || '',
     numberOfPlants: grapevine.numberOfPlants || '',
@@ -47,6 +49,7 @@ const convertGrapevineToApi = (grapevine) => ({
 });
 
 const convertHarvestFromApi = (harvest) => ({
+    ...harvest,
     id: harvest.id && ('' + harvest.id),
     grapevine: harvest.grapevine || {},
     dateOfHarvest: harvest.dateOfHarvest || '',
@@ -74,6 +77,7 @@ const convertHarvestToApi = (harvest) => ({
 });
 
 const convertBoxFromApi = (box) => ({
+    ...box,
     id: box.id && ('' + box.id),
     weightOfEmptyBox: box.weightOfEmptyBox || '',
     weightOfFullBox: box.weightOfFullBox || '',
@@ -86,6 +90,7 @@ const convertBoxToApi = (box) => ({
 });
 
 const convertIngredientFromApi = (ingredient) => ({
+    ...ingredient,
     id: ingredient.id && ('' + ingredient.id),
     name: ingredient.name || '',
     info: ingredient.info || '',

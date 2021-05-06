@@ -14,10 +14,11 @@ const IngredientApp = () => {
                             <Redirect to="/mv/ingredient/all"/>
                         </Route>
                         <Route exact path="/mv/ingredient/all" component={IngredientList}/>
-                        <Route exact path="/mv/ingredient/:ingredientId?">
+                        <Route exact path="/mv/ingredient/:status?" component={IngredientList}/>
+                        <Route exact path="/mv/ingredient/e/:ingredientId?">
                             <IngredientForm />
                         </Route>
-                        <Route path="/mv/ingredient/:ingredientId?/info">
+                        <Route path="/mv/ingredient/info/:ingredientId?">
 
                         </Route>
                     </Switch>

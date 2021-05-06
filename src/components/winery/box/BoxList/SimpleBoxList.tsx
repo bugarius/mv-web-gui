@@ -4,7 +4,7 @@ import {Trans} from "react-i18next";
 import Pagination from "../../../common/pagination/Pagination";
 import {useHarvestContext} from "../../harvest/HarvestContext";
 import PageWrapper from "../../../common/PageWrapper";
-import { TPagination } from '../../common/pagination/useFetchEntityPage';
+import {TPagination} from '../../common/pagination/useFetchEntityPage';
 import {BoxWithGrapes} from "../types/BoxWithGrapes";
 
 const thead = [
@@ -23,7 +23,8 @@ const SimpleBoxList = ({
                            loading,
                            paginationActions: {changePage, onPrev, onNext},
                            entityActions: {remove},
-                           reloadHarvest
+                           reloadHarvest,
+                           children
                        }) => {
 
     const {harvest} = useHarvestContext();
@@ -40,7 +41,8 @@ const SimpleBoxList = ({
     }
 
     const buildRow = (box, index) => {
-        const fields = [<td style={{padding: '5px', textAlign: 'center'}} key={1}>{getRowNumber(pagination, index)}</td>,
+        const fields = [<td style={{padding: '5px', textAlign: 'center'}}
+                            key={1}>{getRowNumber(pagination, index)}</td>,
             <td style={{padding: '5px', textAlign: 'center'}} key={2}>{box?.weightOfEmptyBox || 0}</td>,
             <td style={{padding: '5px', textAlign: 'center'}} key={3}>{box?.weightOfFullBox}</td>,
             <td style={{padding: '5px', textAlign: 'center'}}
@@ -48,16 +50,16 @@ const SimpleBoxList = ({
             <td style={{padding: '5px', textAlign: 'center'}} key={5}>
                 {
                     !harvest?.allDisposedToWine ?
-                            <div className="card-body d-flex align-items-center" onClick={() => {
-                                remove(box);
-                                reloadHarvest();
-                            }}
-                                 style={{cursor: 'pointer'}}>
-                                <em className="fa-2x mr-2 far fa-trash-alt"/>
-                            </div> :
-                            <div className="card-body d-flex align-items-center">
-                                <em className="fa-2x mr-2 fas fa-ban"/>
-                            </div>
+                        <div className="card-body d-flex align-items-center" onClick={() => {
+                            remove(box);
+                            reloadHarvest();
+                        }}
+                             style={{cursor: 'pointer'}}>
+                            <em className="fa-2x mr-2 far fa-trash-alt"/>
+                        </div> :
+                        <div className="card-body d-flex align-items-center">
+                            <em className="fa-2x mr-2 fas fa-ban"/>
+                        </div>
                 }
             </td>];
         return <tr key={box.id}>
@@ -66,39 +68,40 @@ const SimpleBoxList = ({
     };
 
     return (
-            <PageWrapper loading={loading} disabled>
-                <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
-                    <CardBody>
-                        <Table hover>
-                            {
-                                createTHead()
-                            }
-                            <tbody>
-                            {(boxes || []).map((box, index) => buildRow(box, index))}
-                            {
-                                boxes && boxes.length === 0 &&
-                                <tr>
-                                    <td style={{textAlign: 'center'}} colSpan={100}>
-                                        <Trans i18nKey="common.NO_DATA"/>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
-                        </Table>
+        <PageWrapper loading={loading} disabled>
+            <Card className="card-default">
+                <CardHeader><Trans i18nKey="sidebar.nav.element.BOX_LIST"/></CardHeader>
+                <CardBody>
+                    <Table hover>
                         {
-                            (pagination.totalPages > 1) && <Pagination
-                                    page={page}
-                                    pagination={pagination}
-                                    actions={{
-                                        changePage: changePage,
-                                        prev: onPrev,
-                                        next: onNext
-                                    }}/>
+                            createTHead()
                         }
-                    </CardBody>
-                </Card>
-            </PageWrapper>
+                        <tbody>
+                        {(boxes || []).map((box, index) => buildRow(box, index))}
+                        {
+                            boxes && boxes.length === 0 &&
+                            <tr>
+                                <td style={{textAlign: 'center'}} colSpan={100}>
+                                    <Trans i18nKey="common.NO_DATA"/>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </Table>
+                    {children}
+                    {
+                        (pagination.totalPages > 1) && <Pagination
+                                page={page}
+                                pagination={pagination}
+                                actions={{
+                                    changePage: changePage,
+                                    prev: onPrev,
+                                    next: onNext
+                                }}/>
+                    }
+                </CardBody>
+            </Card>
+        </PageWrapper>
     );
 };
 

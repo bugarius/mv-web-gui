@@ -5,10 +5,13 @@ import SimpleBoxList from "./SimpleBoxList";
 import useBoxService from "../service/useBoxService";
 import {useEntityPageReceiver} from "../../common/pagination/useEntityPageReceiver";
 import {BoxWithGrapes} from "../types/BoxWithGrapes";
+import {useHarvestContext} from "../../harvest/HarvestContext";
+import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 
 const BoxList = (props) => {
 
     const service = useBoxService();
+    const {setError, error} = useHarvestContext();
     const {
         entities,
         currentPage,
@@ -17,7 +20,7 @@ const BoxList = (props) => {
         loading,
         paginationActions,
         entityActions
-    } = useEntityPageReceiver<BoxWithGrapes>(service, FromApiConverter.convertTankList, "box");
+    } = useEntityPageReceiver<BoxWithGrapes>(service, FromApiConverter.convertTankList, "box", setError);
 
     return (
         <SimpleBoxList {...props}
@@ -28,7 +31,9 @@ const BoxList = (props) => {
                        loading={loading}
                        paginationActions={paginationActions}
                        entityActions={entityActions}
-        />
+        >
+            <FormErrorMessage error={error} messageType={'details'}/>
+        </SimpleBoxList>
 
     )
 };

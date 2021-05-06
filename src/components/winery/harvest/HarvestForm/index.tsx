@@ -5,7 +5,7 @@ import SimpleHarvestForm from "./SimpleHarvestForm";
 const HarvestForm = () => {
 
     return (
-            <HarvestFormContainer render={(updateGrapevineInHarvest, onSubmit, error, harvest, updateHarvest, updateDate, loading) => (
+            <HarvestFormContainer render={(updateGrapevineInHarvest, onSubmit, error, harvest, updateHarvest, updateDate, loading, onClickBack) => (
                     <SimpleHarvestForm updateGrapevineInHarvest={updateGrapevineInHarvest}
                                        onSubmit={onSubmit}
                                        error={error}
@@ -13,6 +13,7 @@ const HarvestForm = () => {
                                        updateHarvest={updateHarvest}
                                        updateDate={updateDate}
                                        loading={loading}
+                                       onClickBack={onClickBack}
                     />
             )}/>
     )

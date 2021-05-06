@@ -16,6 +16,7 @@ interface Props
     optional?: boolean;
     disabled?: boolean;
     error?: ServiceError;
+    showExtraMessage?: boolean;
 }
 
 const SelectHarvest: React.FC<Props> = ({
@@ -25,7 +26,8 @@ const SelectHarvest: React.FC<Props> = ({
                                             label,
                                             optional,
                                             disabled,
-                                            error
+                                            error,
+                                            showExtraMessage
                                         }) => {
 
     const {selected: value, options: harvests} = useHarvestsReceiver(selected);
@@ -62,7 +64,7 @@ const SelectHarvest: React.FC<Props> = ({
                     />
                     <span className="invalid-feedback"
                           style={{display: (error?.hasError?.(name) ? "block" : "none")}}>{error?.getErrorMessage?.(name)}</span>
-                    {disabled &&
+                    {showExtraMessage &&
                     <span className="text-muted small">
                         Tego pola nie możesz edytować, ponieważ zbiór został zakmnięty i rozdysponowany.
                         <span className="text-info btn-link"

@@ -7,10 +7,13 @@ import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Grapevine} from "../../grapevine/types/Grapevine";
 import {Harvest} from "../types/Harvest";
+import {defaultError} from "../../parcel/ParcelContext";
+import {useWineContext} from "../../wine/WineContext";
 
 const HarvestInfoContainer = ({render}) => {
 
-    const {harvest, updateHarvest, setHarvestResult} = useHarvestContext();
+    const {harvest, setHarvestResult, setError: setHarvestError} = useHarvestContext();
+    const {setError: setWineError} = useWineContext();
     const [reload, setReload] = useState(false);
     const service = useHarvestService();
     const {harvestId} = useParams();
@@ -24,11 +27,10 @@ const HarvestInfoContainer = ({render}) => {
             })
             .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
         setReload(false);
-        return () => updateHarvest("reset", "");
     }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {
-        history.push(`/mv/harvest/${harvestId}/`, {from: history.location.pathname});
+        history.push(`/mv/harvest/e/${harvestId}/`, {from: history.location.pathname});
     };
 
     const dispose = (e) => {
@@ -41,7 +43,7 @@ const HarvestInfoContainer = ({render}) => {
                 .then(response => {
                     setHarvestResult({status: StatusType.loaded, payload: response});
                 })
-                .catch(error => setHarvestResult(new ResponseError<Grapevine>(error)));
+                .catch(error => setHarvestResult(new ResponseError<Harvest>(error)));
         }
     };
 
@@ -64,10 +66,12 @@ const HarvestInfoContainer = ({render}) => {
 
     const reloadHarvest = () => {
         setReload(true);
+        setHarvestError({...defaultError.error});
+        setWineError({...defaultError.error});
     };
 
     const addWineToHarvest = () => {
-        history?.push({pathname: `/mv/wine/0/info/${harvestId}`, state: {from: window.location.pathname}});
+        history?.push({pathname: `/mv/wine/info/0/${harvestId}`, state: {from: window.location.pathname}});
     }
 
     return render({addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest});

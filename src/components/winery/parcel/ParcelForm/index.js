@@ -5,8 +5,8 @@ import SimpleParcelForm from "./SimpleParcelForm";
 export const ParcelForm = (props) => {
 
     return (
-            <ParcelFormContainer {...props} render={(onSubmit, error, parcel, updateParcel, loading) => (
-                    <SimpleParcelForm onSubmit={onSubmit} error={error} parcel={parcel} updateParcel={updateParcel} loading={loading}
+            <ParcelFormContainer {...props} render={(onSubmit, error, parcel, updateParcel, onClickBack, loading) => (
+                    <SimpleParcelForm onSubmit={onSubmit} error={error} parcel={parcel} updateParcel={updateParcel} onClickBack={onClickBack} loading={loading}
                     />
             )}/>
     )

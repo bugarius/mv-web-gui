@@ -1,13 +1,25 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import PageWrapper from "../../../common/PageWrapper";
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
-const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleIngredientList = ({
+                                  ingredients,
+                                  page,
+                                  pagination,
+                                  limit,
+                                  loading,
+                                  paginationActions: {changePage, onPrev, onNext},
+                                  entityActions: {remove, proceed, archive, revertArchive},
+                                  children
+                              }) => {
 
     const {t} = useTranslation();
+    const {status} = useParams();
 
     const addTHead = function (label, hide) {
         !hide && this.push(<th className="text-center" key={this.length}>{label}</th>);
@@ -48,14 +60,16 @@ const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, pa
         fields.add(t(`ingredients.TYPE.${type}`));
         fields.add(information && information.split(".")[0] + "...");
         fields.add(<ListActions entity={ingredient}
-                                actions={{remove: remove, proceed: proceed}}/>);
+                                actions={{remove: remove, proceed: proceed, archive: archive, revertArchive: revertArchive}}
+                                status={status}
+        />);
         return <tr key={index}>{fields.filter((t, index) => index < limit || index === fields.length - 1)}</tr>;
     };
 
     return (
             <PageWrapper title={"ingredients.TITLE"} subtitle={'ingredients.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.INGREDIENTS_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('ingredients.list.archived.TITLE') : t('ingredients.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {
@@ -73,6 +87,7 @@ const SimpleIngredientList = ({ingredients, page, pagination, limit, loading, pa
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

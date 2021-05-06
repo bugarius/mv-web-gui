@@ -6,6 +6,10 @@ import {Ingredient} from "../../../../ingredient/types/Ingredient";
 import PageWrapper from "../../../../../common/PageWrapper";
 import {useWineContext} from "../../../WineContext";
 import {CommonListBox, ListBoxActions, ListBoxElementToShow} from "../shared/CommonListBox";
+import CardFooter from "../../../../../common/cards/CardFooter";
+import {FormErrorMessage} from "../../../../../common/notifications/FormErrorMessage";
+import {useIngredientContext} from "../../../../ingredient/IngredientContext";
+import {EntityLiveStatus} from "../../../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -22,6 +26,7 @@ const IngredientsListBox: React.FC<Props> = ({
 
     const {t} = useTranslation();
     const {loading, wine} = useWineContext();
+    const {error} = useIngredientContext();
 
     return (
         <PageWrapper loading={loading} disabled>
@@ -42,8 +47,9 @@ const IngredientsListBox: React.FC<Props> = ({
                                 i.amount + ' g/hl'
                             ]}
                                                   actions={actions}
+                                                  disableActions={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                                                   elementToSHow={ingredientToShow}
-                                                  path={`wine/${wine?.id}/ingredient`}
+                                                  path={`wine/ingredient/${wine?.id}`}
                                                   elementId={i?.id}
                                                   dropdownInfo={{
                                                       paragraph: i.notes || t('ingredients.INFO.no_data')
@@ -56,6 +62,9 @@ const IngredientsListBox: React.FC<Props> = ({
                     : <CardBody>
                         <div className={'text-center'}>{t('common.NO_DATA')}</div>
                     </CardBody>
+                }
+                {error?.error?.details &&
+                <CardFooter><FormErrorMessage error={error} messageType={'details'}/></CardFooter>
                 }
             </Card>
         </PageWrapper>

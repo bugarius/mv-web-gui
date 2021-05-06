@@ -10,6 +10,7 @@ import {Wine} from "../types/Wine";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
 import {InputDate} from "../../../common/form-elements/InputDate";
 import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -21,6 +22,7 @@ interface Props
     updateWine: (e: ChangeEvent<HTMLInputElement>) => void;
     updateDate: () => void;
     loading: boolean;
+    onClickBack: () => void;
 }
 
 export const SimpleWineForm: FC<Props> = ({
@@ -31,7 +33,8 @@ export const SimpleWineForm: FC<Props> = ({
                                               wine,
                                               updateWine,
                                               updateDate,
-                                              loading
+                                              loading,
+                                              onClickBack
                                           }) => {
 
     const {t} = useTranslation();
@@ -50,17 +53,19 @@ export const SimpleWineForm: FC<Props> = ({
                                   onChange={updateWine}
                                   defaultValue={wine?.name}
                                   error={error}
+                                  disabled={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputDate label={t("wine.DATE")}
                                name={'startDate'}
                                onChange={updateDate}
                                defaultValue={wine?.startDate}
                                error={error}
+                               disabled={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <SelectTank value={wine?.tank || {}}
                                 name={'tank'}
                                 label={t("wine.TANK")}
-                                disabled={wine?.harvest?.allDisposedToWine}
+                                disabled={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                                 onChange={updateTankInWine}
                                 error={error}
                     />
@@ -71,22 +76,30 @@ export const SimpleWineForm: FC<Props> = ({
                                   onChange={updateWine}
                                   defaultValue={wine?.liters}
                                   error={error}
+                                  disabled={wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    {!harvestId && wineId === '0' &&
+                    {((!harvestId && wineId === '0') || wine?.liveStatus === EntityLiveStatus.ARCHIVED) &&
                         <SelectHarvest value={wine?.harvest || {}}
                                        name={'harvest'}
                                        label={t("wine.HARVEST")}
-                                       disabled={wine?.harvest?.allDisposedToWine}
+                                       disabled={wine?.harvest?.allDisposedToWine || wine?.liveStatus === EntityLiveStatus.ARCHIVED}
                                        onChange={updateHarvestInWine}
                                        error={error}
+                                       showExtraMessage={wine?.harvest?.allDisposedToWine && wine?.liveStatus !== EntityLiveStatus.ARCHIVED}
                         />
                     }
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
-                    <Button color="primary" className="btn-square" onClick={onSubmit}>
-                        {wine?.id ? t("common.SAVE") : t("common.ADD")}
-                    </Button>
+                    {wine?.liveStatus === EntityLiveStatus.ARCHIVED ?
+                        <Button color="primary" className="btn-square" onClick={onClickBack}>
+                            {t("common.BACK")}
+                        </Button>
+                        :
+                        <Button color="primary" className="btn-square" onClick={onSubmit}>
+                            {wine?.id ? t("common.SAVE") : t("common.ADD")}
+                        </Button>
+                    }
                 </CardFooter>
             </Card>
         </PageWrapper>

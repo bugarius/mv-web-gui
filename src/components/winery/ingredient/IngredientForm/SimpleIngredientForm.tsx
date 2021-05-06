@@ -7,6 +7,7 @@ import {ServiceError} from "../../../../services/types/Service";
 import InputElement from "../../../common/InputElement";
 import {Ingredient} from "../types/Ingredient";
 import {FormErrorMessage} from "../../../common/notifications/FormErrorMessage";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 interface Props
 {
@@ -16,6 +17,7 @@ interface Props
     ingredient: Ingredient;
     updateIngredient: (e: ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    onClickBack: () => void;
 }
 
 export const SimpleIngredientForm: FC<Props> = ({
@@ -24,7 +26,8 @@ export const SimpleIngredientForm: FC<Props> = ({
                                                     error,
                                                     ingredient,
                                                     updateIngredient,
-                                                    loading
+                                                    loading,
+                                                    onClickBack
                                                 }) => {
 
     const {t} = useTranslation();
@@ -42,12 +45,14 @@ export const SimpleIngredientForm: FC<Props> = ({
                                   defaultValue={ingredient?.name}
                                   onChange={updateIngredient}
                                   error={error}
+                                  disabled={ingredient?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <SelectIngredientType value={ingredient?.type}
                                           name={'type'}
                                           label={t('ingredients.TYPE')}
                                           onChange={updateIngredientType}
                                           error={error}
+                                          disabled={ingredient?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
                     <InputElement label={t('ingredients.INFO')}
                                   name={"info"}
@@ -56,13 +61,20 @@ export const SimpleIngredientForm: FC<Props> = ({
                                   onChange={updateIngredient}
                                   error={error}
                                   optional
+                                  disabled={ingredient?.liveStatus === EntityLiveStatus.ARCHIVED}
                     />
-                    <FormErrorMessage error={error}/>
+                    <FormErrorMessage error={error} messageType={"details"}/>
                 </CardBody>
                 <CardFooter className="text-center">
-                    <Button color="primary" className="btn-square" onClick={onSubmit}>
-                        {ingredient?.id ? t("common.SAVE") : t("common.ADD")}
-                    </Button>
+                    {ingredient?.liveStatus === EntityLiveStatus.ARCHIVED ?
+                        <Button color="primary" className="btn-square" onClick={onClickBack}>
+                            {t("common.BACK")}
+                        </Button>
+                        :
+                        <Button color="primary" className="btn-square" onClick={onSubmit}>
+                            {ingredient?.id ? t("common.SAVE") : t("common.ADD")}
+                        </Button>
+                    }
                 </CardFooter>
             </Card>
         </PageWrapper>

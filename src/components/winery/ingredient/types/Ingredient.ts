@@ -1,4 +1,5 @@
 import {IngredientType} from "./IngredientType";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 export interface Ingredient
 {
@@ -10,4 +11,5 @@ export interface Ingredient
     amount?: number | null;
     notes?: string;
     appliedDate: Date | string | null;
+    liveStatus?: EntityLiveStatus;
 }

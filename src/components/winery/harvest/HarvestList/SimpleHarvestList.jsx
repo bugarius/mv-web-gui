@@ -1,9 +1,11 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Table} from "reactstrap";
 import PageWrapper from "../../../common/PageWrapper";
-import {Trans} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import ListActions from "../../../common/ListActions";
 import Pagination from "../../../common/pagination/Pagination";
+import {useParams} from "react-router-dom";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
 
 const thead = [
     <th style={{textAlign: 'center'}} key={1}>#</th>,
@@ -16,7 +18,19 @@ const thead = [
     <th style={{textAlign: 'center'}} key={8}><Trans i18nKey="common.ACTIONS"/></th>
 ];
 
-const SimpleHarvestList = ({harvests, page, pagination, limit, loading, paginationActions: {changePage, onPrev, onNext}, entityActions: {remove, proceed, info}}) => {
+const SimpleHarvestList = ({
+                               harvests,
+                               page,
+                               pagination,
+                               limit,
+                               loading,
+                               paginationActions: {changePage, onPrev, onNext},
+                               entityActions: {remove, proceed, info, archive, revertArchive},
+                               children
+                           }) => {
+
+    const {status} = useParams();
+    const {t} = useTranslation();
 
     const createTHead = () => {
         return <thead>
@@ -36,7 +50,9 @@ const SimpleHarvestList = ({harvests, page, pagination, limit, loading, paginati
             <td style={{textAlign: 'center'}} key={7}>{harvest?.weightOfEveryEmptyBox || 0}</td>,
             <td style={{textAlign: 'center'}} key={8}>
                 <ListActions entity={harvest}
-                             actions={{remove: remove, proceed: proceed, info: info}}/>
+                             actions={{remove: remove, proceed: proceed, info: info, archive: archive, revertArchive: revertArchive}}
+                             status={status}
+                />
             </td>];
         return <tr key={harvest.id}>
             {fields.filter((t, index) => index < limit || index === thead.length - 1)}
@@ -46,7 +62,7 @@ const SimpleHarvestList = ({harvests, page, pagination, limit, loading, paginati
     return (
             <PageWrapper title={"harvest.TITLE"} subtitle={'harvest.LIST'} loading={loading}>
                 <Card className="card-default">
-                    <CardHeader><Trans i18nKey="sidebar.nav.element.HARVEST_LIST"/></CardHeader>
+                    <CardHeader>{status === EntityLiveStatus.ARCHIVED.toLowerCase() ? t('harvest.list.archived.TITLE') : t('harvest.list.created.TITLE')}</CardHeader>
                     <CardBody>
                         <Table hover>
                             {
@@ -64,6 +80,7 @@ const SimpleHarvestList = ({harvests, page, pagination, limit, loading, paginati
                             }
                             </tbody>
                         </Table>
+                        {children}
                         {
                             (pagination.totalPages > 1) && <Pagination
                                     page={page}

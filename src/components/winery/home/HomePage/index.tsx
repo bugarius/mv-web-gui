@@ -28,7 +28,7 @@ export const BoardPage = () => {
     })
 
     const editWineInfo = (wineId) => {
-        history.push(`/mv/wine/${wineId}/info`, {from: history.location.pathname});
+        history.push(`/mv/wine/info/${wineId}`, {from: history.location.pathname});
     };
 
     return (

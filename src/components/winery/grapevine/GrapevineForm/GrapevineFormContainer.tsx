@@ -52,10 +52,14 @@ const GrapevineFormContainer = ({render}) => {
         action()
             .then(response => {
                 setGrapevineResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/grapevine/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/grapevine/all`);
             })
             .catch(response => setGrapevineResult(new ResponseError<Grapevine>(response) as ServiceError));
     };
+
+    const onClickBack = () => {
+        history?.push(history?.location?.state?.['from'] || `/mv/grapevine/archived`);
+    }
 
     const error = grapevineResult as ServiceError;
 
@@ -66,7 +70,8 @@ const GrapevineFormContainer = ({render}) => {
         error,
         grapevine,
         handleUpdateGrapevine,
-        grapevineResult.status === StatusType.loading);
+        grapevineResult.status === StatusType.loading,
+        onClickBack);
 };
 
 export default GrapevineFormContainer;

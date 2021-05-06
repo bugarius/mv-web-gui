@@ -1,7 +1,10 @@
 import {useEffect, useState} from "react";
-import {ResponseError} from "../../../error/ResponseError";
+import {defaultError} from "../../parcel/ParcelContext";
+import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
+import {useParams} from "react-router-dom";
 
-export interface TPagination<T> {
+export interface TPagination<T>
+{
     content: T[];
     empty: boolean;
     first: boolean;
@@ -15,7 +18,8 @@ export interface TPagination<T> {
     totalPages: number;
 }
 
-interface TPageable {
+interface TPageable
+{
     offset: number;
     pageNumber: number;
     pageSize: number;
@@ -24,42 +28,51 @@ interface TPageable {
     unpaged: boolean;
 }
 
-interface TSort {
+interface TSort
+{
     empty: boolean;
     sorted: boolean;
     unsorted: boolean;
 }
 
-export interface TService<T> {
-    getAll: (page: number) => Promise<TPagination<T>>
-    del: (id: number) => Promise<T>
+export interface TService<T>
+{
+    getAll: (page: number, status?: string) => Promise<TPagination<T>>;
+    del: (id: number) => Promise<T>;
+    archive: (id: number) => Promise<T>;
+    revertArchive: (id: number) => Promise<T>;
 }
 
-export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: ResponseError<T[]>) => void, newPage = 0) => {
+export const useFetchEntityPage = <T>(service: TService<T>, setError: (value: Error) => void, newPage = 0) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(newPage);
     const [pagination, setPagination] = useState<Partial<TPagination<T>>>({});
+    const {status} = useParams();
+    const [isErrorResponse, setIsErrorResponse] = useState(false);
 
     const reload = () => {
-        setPagination({})
+        setPagination({});
+        setError({...defaultError.error, name: ""});
     }
 
     useEffect(() => {
-        if (pagination?.content && pagination.number === page)
+        if ((pagination?.content && pagination.number === page) || isErrorResponse)
         {
             return;
         }
         setLoading(true);
-        service.getAll(page)
+        service.getAll(page, status ? status : EntityLiveStatus.CREATED)
             .then(p => {
                 setPagination(p);
                 setLoading(false);
+                setError({...defaultError.error, name: ""});
             })
             .catch(error => {
                 setError(error);
                 setLoading(false);
+                setIsErrorResponse(true);
             })
-    }, [pagination, setPagination, setLoading, service, setError, page])
+    }, [pagination, setPagination, setLoading, service, setError, page, status, isErrorResponse, setIsErrorResponse])
 
     const changePage = (e) => {
         e.preventDefault();
@@ -82,21 +95,51 @@ export const useFetchEntityPage = <T> (service: TService<T>, setError: (value: R
         onNext: onNext
     };
 
+    const recalculatePageAfterRemoveOrArchiveActions = () => {
+        if (pagination.numberOfElements === 1 && page > 0)
+        {
+            setPage(page - 1);
+        }
+    }
+
     const removeEntity = (entity) => {
         if (window.confirm("Czy jesteś pewien?"))
         {
-            if (pagination.numberOfElements === 1 && page > 0)
-            {
-                setPage(page - 1);
-            }
-
+            recalculatePageAfterRemoveOrArchiveActions();
             service.del(entity.id)
                 .then(() => {
                     reload();
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => setError(error));
         }
     };
 
-    return {pagination, pageResult: pagination?.content, loading, removeEntity, paginationActions, currentPage: page}
+    const archiveEntity = (entity) => {
+        recalculatePageAfterRemoveOrArchiveActions();
+        service.archive(entity.id)
+            .then(() => {
+                reload();
+            })
+            .catch((error) => setError(error));
+    };
+
+    const revertArchiveEntity = (entity) => {
+        recalculatePageAfterRemoveOrArchiveActions();
+        service.revertArchive(entity.id)
+            .then(() => {
+                reload();
+            })
+            .catch((error) => setError(error));
+    };
+
+    return {
+        pagination,
+        pageResult: pagination?.content,
+        loading,
+        removeEntity,
+        archiveEntity,
+        revertArchiveEntity,
+        paginationActions,
+        currentPage: page
+    }
 }
