@@ -39,7 +39,7 @@ const Lock = () => {
             <div className="abs-center wd-xl">
                 <div className="d-flex justify-content-center">
                     <div className="p-2">
-                        <img className="img-fluid img-thumbnail rounded-circle" src="img/user/02.jpg" alt="Avatar"
+                        <img className="img-fluid img-thumbnail rounded-circle" src={principal?.avatar} alt="Avatar"
                              width="60" height="60"/>
                     </div>
                 </div>
