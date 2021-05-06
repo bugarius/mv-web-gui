@@ -67,7 +67,7 @@ const WineFormContainer = ({render}) => {
     };
 
     const onClickBack = () => {
-        history?.push(history?.location?.state!['from'] || `/mv/wine/archived`);
+        history?.push(history?.location?.state?.['from'] || `/mv/wine/archived`);
     }
 
     const error = wineResult as ServiceError;

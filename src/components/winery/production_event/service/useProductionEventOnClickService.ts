@@ -53,7 +53,7 @@ export const useProductionEventOnClickService = () => {
         {
             setResult({status: StatusType.loading});
             service.editEvent(parseInt(productionEventId), ToApiConverter.convertEvent(event))
-                .then(() => history.push(history?.location?.state!['from'] || `/mv/wine/all`))
+                .then(() => history.push(history?.location?.state?.['from'] || `/mv/wine/all`))
                 .catch(response => {
                     log.debug(response);
                     setWineResult({status: StatusType.loaded});

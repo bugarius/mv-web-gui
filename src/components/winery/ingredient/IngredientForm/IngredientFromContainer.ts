@@ -51,13 +51,13 @@ export const IngredientFormContainer = ({render}) => {
         action()
             .then(response => {
                 setIngredientResult(response);
-                history?.push(history?.location?.state!['from'] || `mv/ingredient/all`);
+                history?.push(history?.location?.state?.['from'] || `/mv/ingredient/all`);
             })
             .catch(response => setIngredientResult(new ResponseError<Ingredient>(response) as ServiceError));
     };
 
     const onClickBack = () => {
-        history?.push(history?.location?.state!['from'] || `/mv/ingredient/archived`);
+        history?.push(history?.location?.state?.['from'] || `/mv/ingredient/archived`);
     }
 
     const error = ingredientResult as ServiceError;

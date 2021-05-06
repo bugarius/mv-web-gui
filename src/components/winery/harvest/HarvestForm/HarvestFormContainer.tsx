@@ -56,7 +56,7 @@ const HarvestFormContainer = ({render}) => {
     };
 
     const onClickBack = () => {
-        history?.push(history?.location?.state!['from'] || `/mv/harvest/archived`);
+        history?.push(history?.location?.state?.['from'] || `/mv/harvest/archived`);
     }
 
     const error = harvestResult as ServiceError;

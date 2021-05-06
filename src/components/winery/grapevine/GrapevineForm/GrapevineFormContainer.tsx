@@ -58,7 +58,7 @@ const GrapevineFormContainer = ({render}) => {
     };
 
     const onClickBack = () => {
-        history?.push(history?.location?.state!['from'] || `/mv/grapevine/archived`);
+        history?.push(history?.location?.state?.['from'] || `/mv/grapevine/archived`);
     }
 
     const error = grapevineResult as ServiceError;
