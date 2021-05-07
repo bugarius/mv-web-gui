@@ -38,9 +38,9 @@ class Header extends Component {
         this.props.actions.toggleSetting('asideToggled');
     }
 
-    getPathFromHash = (hash) => {
-        return hash?.split("#")?.[1]
-    }
+    // getPathFromHash = (hash) => {
+    //     return hash?.split("#")?.[1]
+    // }
 
     collapse = () => {
         // e.preventDefault()
@@ -96,7 +96,7 @@ class Header extends Component {
                         { /* END User avatar toggle */ }
                         { /* START lock screen */ }
                         <li className="nav-item d-none d-md-block">
-                            <NavLink to={{pathname: '/lock', state: {from: this.getPathFromHash(window.location.hash)}}} title="Zablokuj ekran" className="nav-link">
+                            <NavLink to={{pathname: '/lock', state: {from: window.location.pathname}}} title="Zablokuj ekran" className="nav-link">
                                 <em className="icon-lock"></em>
                             </NavLink>
                         </li>

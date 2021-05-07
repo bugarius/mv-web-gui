@@ -56,7 +56,7 @@ export const useFetchEntityPage = <T>(service: TService<T>, setError: (value: Er
     }
 
     useEffect(() => {
-        if ((pagination?.content && pagination.number === page) || isErrorResponse)
+        if ((pagination?.content && pagination.number === page) || isErrorResponse || loading)
         {
             return;
         }
@@ -72,7 +72,7 @@ export const useFetchEntityPage = <T>(service: TService<T>, setError: (value: Er
                 setLoading(false);
                 setIsErrorResponse(true);
             })
-    }, [pagination, setPagination, setLoading, service, setError, page, status, isErrorResponse, setIsErrorResponse])
+    }, [pagination, setPagination, setLoading, service, setError, page, status, isErrorResponse, setIsErrorResponse, loading])
 
     const changePage = (e) => {
         e.preventDefault();

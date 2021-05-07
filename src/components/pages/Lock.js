@@ -10,13 +10,23 @@ const Lock = () => {
     const [error, setError] = useState(false);
 
     const {principal, setLock} = useContext(AuthContext);
-    const login = principal?.login || ""
+    const login = principal?.login
+    const avatar = principal?.avatarUrl;
     const history = useHistory();
+
+    useEffect(() => {
+        if (!login)
+        {
+            history.push("/welcome/login")
+        }
+    }, [login, history])
 
     useEffect(() => {
         setLock(true);
         AuthService.logout();
+        return () => setLock(false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
     const unlock = (e) => {
         e.preventDefault();
         AuthService.login(login, password)
@@ -39,7 +49,7 @@ const Lock = () => {
             <div className="abs-center wd-xl">
                 <div className="d-flex justify-content-center">
                     <div className="p-2">
-                        <img className="img-fluid img-thumbnail rounded-circle" src={principal?.avatar} alt="Avatar"
+                        <img className="img-fluid img-thumbnail rounded-circle" src={avatar} alt="Avatar"
                              width="60" height="60"/>
                     </div>
                 </div>

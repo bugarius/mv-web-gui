@@ -32,7 +32,7 @@ const AppRouting = ({location: {pathname}, history}) => {
                     history.push(`/error`);
                 });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [history.location]);
+    }, [lock]);
 
     return (error || principal) ?
       <Switch>

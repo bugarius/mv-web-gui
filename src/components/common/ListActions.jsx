@@ -59,7 +59,6 @@ class ListActions extends Component {
         const {entity, actions: {proceed, remove, info, archive, revertArchive}, triggerRemoveCallback} = this.props;
 
         const mainButtonAction = info ? info : proceed;
-        console.log(entity)
         return (
                 <>
                     <div id="split-button-basic-1" className={"btn-group" + (isOpened ? " show" : "")} ref={this.setWrapperRef}>
