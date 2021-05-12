@@ -1,11 +1,11 @@
 import {Service, StatusType} from "../../../services/types/Service";
 import {ResponseError} from "../../error/ResponseError";
-import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {usePushHistory} from "./usePushHistory";
 
 export const useGenericCRUDEntityService = <T> (serviceCallback: (id: number) => Promise<T>, setResult: (value: Service<T>) => void, setError?: (value: Error) => void) => {
 
-    const history = useHistory();
+    const {pushHistory} = usePushHistory();
     const {t} = useTranslation();
 
     const removeElement = (elementId) => {
@@ -24,7 +24,7 @@ export const useGenericCRUDEntityService = <T> (serviceCallback: (id: number) =>
     };
 
     const editElement = (entityName, elementId) => {
-        history.push(`/mv/${entityName}/${elementId}/`, {from: history.location.pathname});
+        pushHistory(`/mv/${entityName}/${elementId}/`);
     }
 
   return {removeElement, editElement}

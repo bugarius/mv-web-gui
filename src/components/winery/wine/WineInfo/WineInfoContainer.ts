@@ -1,18 +1,19 @@
 import {useEffect} from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useWineContext} from "../WineContext";
 import useWineService from "../service/useWineService";
 import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Wine} from "../types/Wine";
 import {EntityLiveStatus} from "../../../common/enums/EntityLiveStatus";
+import {usePushHistory} from "../../common/usePushHistory";
 
 const WineInfoContainer = ({render}) => {
 
     const {updateWine, setWineResult, wine} = useWineContext();
     const service = useWineService();
     const {wineId} = useParams();
-    const history = useHistory();
+    const {pushHistory} = usePushHistory();
 
     useEffect(() => {
         setWineResult({status: StatusType.loading});
@@ -26,7 +27,7 @@ const WineInfoContainer = ({render}) => {
     }, [wineId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const editWine = () => {
-        history.push(`/mv/wine/e/${wineId}/`,{from: history.location.pathname});
+        pushHistory(`/mv/wine/e/${wineId}/`);
     };
 
     const button = {

@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {useHistory} from "react-router-dom";
 import useWineService from "../../wine/service/useWineService";
 import {useWineContext} from "../../wine/WineContext";
 import WineInfoBox from "../../wine/WineInfo/WineInfoBox";
@@ -8,10 +7,11 @@ import {StatusType} from "../../../../services/types/Service";
 import {ResponseError} from "../../../error/ResponseError";
 import {Wine} from "../../wine/types/Wine";
 import {Card, CardBody} from "reactstrap";
+import {usePushHistory} from "../../common/usePushHistory";
 
 export const BoardPage = () => {
 
-    const history = useHistory();
+    const {pushHistory} = usePushHistory();
     const service = useWineService();
     const {wineResult: result, setWineResult: setResult, wines, loading, setWines} = useWineContext();
 
@@ -28,7 +28,7 @@ export const BoardPage = () => {
     })
 
     const editWineInfo = (wineId) => {
-        history.push(`/mv/wine/info/${wineId}`, {from: history.location.pathname});
+        pushHistory(`/mv/wine/info/${wineId}`);
     };
 
     return (

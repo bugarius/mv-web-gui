@@ -1,17 +1,17 @@
-import {useHistory} from "react-router-dom";
+import {usePushHistory} from "../usePushHistory";
 
 interface Entity {
     id: number;
 }
 
 export const useEntityActions =  (entityName: string) => {
-    const history = useHistory();
+    const {pushHistory} = usePushHistory();
     const proceed = (entity: Entity) => {
-        history.push(`/mv/${entityName}/e/${entity.id}/`, {from: history.location.pathname});
+        pushHistory(`/mv/${entityName}/e/${entity.id}/`);
     };
 
     const info = (entity: Entity) => {
-        history.push(`/mv/${entityName}/info/${entity.id}`, {from: history.location.pathname});
+        pushHistory(`/mv/${entityName}/info/${entity.id}`);
     };
 
     return {proceed, info}

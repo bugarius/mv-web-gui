@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import log from "loglevel";
 import {useHarvestContext} from "../HarvestContext";
 import useHarvestService from "../service/useHarvestService";
@@ -9,6 +9,7 @@ import {Grapevine} from "../../grapevine/types/Grapevine";
 import {Harvest} from "../types/Harvest";
 import {defaultError} from "../../parcel/ParcelContext";
 import {useWineContext} from "../../wine/WineContext";
+import {usePushHistory} from "../../common/usePushHistory";
 
 const HarvestInfoContainer = ({render}) => {
 
@@ -17,7 +18,7 @@ const HarvestInfoContainer = ({render}) => {
     const [reload, setReload] = useState(false);
     const service = useHarvestService();
     const {harvestId} = useParams();
-    const history = useHistory();
+    const {pushHistory} = usePushHistory();
 
     useEffect(() => {
         setHarvestResult({status: StatusType.loading});
@@ -30,7 +31,7 @@ const HarvestInfoContainer = ({render}) => {
     }, [harvestId, reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const edit = () => {
-        history.push(`/mv/harvest/e/${harvestId}/`, {from: history.location.pathname});
+        pushHistory(`/mv/harvest/e/${harvestId}/`);
     };
 
     const dispose = (e) => {
@@ -55,7 +56,7 @@ const HarvestInfoContainer = ({render}) => {
         service.addBox(harvest.box || {})
             .then(response => {
                 setHarvestResult({status: StatusType.loaded, payload: response});
-                history?.push(`/mv/harvest/${harvestId}/info`);
+                pushHistory(`/mv/harvest/${harvestId}/info`);
             })
             .catch(error => {
                 log.debug(error);
@@ -71,7 +72,7 @@ const HarvestInfoContainer = ({render}) => {
     };
 
     const addWineToHarvest = () => {
-        history?.push({pathname: `/mv/wine/info/0/${harvestId}`, state: {from: window.location.pathname}});
+        pushHistory(`/mv/wine/info/0/${harvestId}`);
     }
 
     return render({addBoxToHarvest, edit, dispose, reloadHarvest, addWineToHarvest});
